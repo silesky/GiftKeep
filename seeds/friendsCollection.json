@@ -1,0 +1,36 @@
+[
+	{
+
+		"name" : "Nick",
+		"gifts" : [
+			{
+				"giftType": "Book",
+				"giftName": "The Once and Future King" 
+			}
+		]
+	},
+
+
+	{
+
+		"name" : "Dan",
+		"gifts" : [
+			{
+				"giftType": "Record",
+				"giftName": "The Beatles Revolver"  
+			}
+		]
+	},
+
+
+	{
+
+		"name" : "Stephen",
+		"gifts" : [
+			{
+				"giftType": "Gadget",
+				"giftName": "Serfas Bike Light" 
+			}
+		]
+	}
+]
