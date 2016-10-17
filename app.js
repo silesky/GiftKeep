@@ -1,7 +1,9 @@
 const express = require('express');
 const MongoClient = require('mongodb').MongoClient;
-//http://mongodb.github.io/node-mongodb-native/2.2/quick-start/
-//https://docs.mongodb.com/v3.2/reference/method/db.collection.find/
+const bodyParser = require('body-parser');
+const app = express();
+app.use(bodyParser.json())
+
 let all, friends, gifts;
 MongoClient.connect('mongodb://127.0.0.1:27017/giftr', (err, db) => {
     if (err) throw err;
@@ -15,7 +17,7 @@ MongoClient.connect('mongodb://127.0.0.1:27017/giftr', (err, db) => {
 });
 
 
-const app = express();
+
 app.get('/api/', (req, res) => res.json(all));
 app.get('/api/friends', (req, res) => res.json(friends));
 /*
@@ -49,4 +51,13 @@ app.get('/api/gifts', (req, res) => res.json(gifts));
   ]
 ]
 */
+
+
+  const newUser  = (name) => ({name})
+  //send a newUser as a json object
+  app.post('/api/friends', (req, res) => {
+   if (!req.body) return res.sendStatus(400)
+      console.log(req.body);
+  });
+
 app.listen(3000);       
