@@ -1,10 +1,11 @@
 {
   "name": "giftr",
   "version": "1.0.0",
-  "description": "docker exec -it mongo bash https://www.evernote.com/shard/s557/nl/2147483647/2f1e4300-2ef1-4534-a0c0-ce824f053bb6/",
+  "description": "an app for m.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "nodemon ./app.js"
   },
   "author": "",
   "license": "ISC",

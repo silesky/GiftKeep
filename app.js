@@ -4,16 +4,18 @@ const bodyParser = require('body-parser');
 const app = express();
 app.use(bodyParser.json())
 
-let all, friends, gifts;
+let all, friends, gifts, myCollection;
 MongoClient.connect('mongodb://127.0.0.1:27017/giftr', (err, db) => {
     if (err) throw err;
     console.log('...connected to mongoDB!');
-    const myCollection = db.collection('friendsCollection'); 
+    myCollection = db.collection('friendsCollection'); 
     myCollection.find().toArray((err, docs) => {
         all = docs;
         friends = docs.map(el => el.name);
         gifts = docs.map(el => el.gifts);
     }); 
+
+   
 });
 
 
@@ -52,12 +54,16 @@ app.get('/api/gifts', (req, res) => res.json(gifts));
 ]
 */
 
-
-  const newUser  = (name) => ({name})
   //send a newUser as a json object
   app.post('/api/friends', (req, res) => {
-   if (!req.body) return res.sendStatus(400)
-      console.log(req.body);
+      if (!req.body) return res.sendStatus(400)
+      try {
+        myCollection.insert(req.body);
+      } catch(e) {
+        res.json({success: false, error: e })
+      }
+      res.json({success: true})
+     
   });
 
 app.listen(3000);       
