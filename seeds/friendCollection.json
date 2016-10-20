@@ -1,15 +1,37 @@
-[
-	{
-		"name" : "Nick",
-		"gifts" : [{"giftName": "The Once and Future King" }]
-	},
+[	
+	{	"userName": "Seth",
+		"data": [
+			{
+				"friendName" : "Nick",
+				"gifts" : [{"giftName": "The Once and Future King" }]
+			},
 
-	{
-		"name" : "Dan",
-		"gifts" : [{"giftName": "The Beatles Revolver"}]
+			{
+				"friendName" : "Dan",
+				"gifts" : [{ "giftName": "The Beatles Revolver" }]
+			},
+			{
+				"friendName" : "Stephen",
+				"gifts" : [{ "giftName": "Serfas Bike Light" }]
+			}
+		]
 	},
-	{
-		"name" : "Stephen",
-		"gifts" : [{ "giftName": "Serfas Bike Light" }]
+	{	"userName": "myUserName",
+		"data": [
+			{
+				"friendName" : "Gorb",
+				"gifts" : [{"giftName": "giftA" }]
+			},
+
+			{
+				"friendName" : "Glarb",
+				"gifts" : [{"giftName": "giftB"}]
+			},
+			{
+				"friendName" : "Gorj",
+				"gifts" : [{ "giftName": "giftC" }]
+			}
+		]
 	}
+
 ]
