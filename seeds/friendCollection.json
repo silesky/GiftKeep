@@ -1,0 +1,15 @@
+[
+	{
+		"name" : "Nick",
+		"gifts" : [{"giftName": "The Once and Future King" }]
+	},
+
+	{
+		"name" : "Dan",
+		"gifts" : [{"giftName": "The Beatles Revolver"}]
+	},
+	{
+		"name" : "Stephen",
+		"gifts" : [{ "giftName": "Serfas Bike Light" }]
+	}
+]
