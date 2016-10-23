@@ -8,17 +8,17 @@ let all, friends, gifts, friendCollection, giftCollection;
 MongoClient.connect('mongodb://127.0.0.1:27017/giftr', (err, db) => {
     if (err) throw err;
     console.log('...connected to mongoDB!');
-    friendCollection = db.collection('friendCollection'); 
-    giftCollection = db.collection('giftCollection'); 
+    friendCollection = db.collection('friendCollection');
+    giftCollection = db.collection('giftCollection');
     friendCollection.find().toArray((err, docs) => {
         all = docs;
         //friends = docs.map(el => el.friendName);
         //gifts = docs.map(el => el.gifts);
-    }); 
+    });
 });
 
 
-
+app.use(express.static('./public'));
 app.get('/api/', (req, res) => res.json(all));
 app.get('/api/friends', (req, res) => res.json(friends));
 app.get('/api/gifts', (req, res) => res.json(gifts));
@@ -31,7 +31,7 @@ app.get('/api/gifts', (req, res) => res.json(gifts));
         res.json({success: false, error: e })
       }
       res.json({success: true, msg: 'friend created.'})
-     
+
   });
  //send a newGift as a json object {"giftName":"Toothpaste","friends":["Stephen"]}
 
@@ -48,4 +48,4 @@ app.get('/api/gifts', (req, res) => res.json(gifts));
   )
 
 
-app.listen(3000);       
+app.listen(3000);
