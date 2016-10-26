@@ -1,11 +1,12 @@
 const fetchPost = (route, data) => {
+  console.log(typeof data);
     return fetch(route, {
-    method: 'POST',
-    headers: new Headers({
-      'Content-Type': 'application/json'
-    }),
-    body: JSON.stringify(data)
-  })
+      method: 'POST',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify({data: data}),
+    })
 }
 const server_url = "http://gifter.sethsilesky.com:3000/oauthcallback";
 
@@ -15,5 +16,6 @@ function onSignIn(googleUser) {
   console.log('Name: ' + profile.getName());
   console.log('Image URL: ' + profile.getImageUrl());
   console.log('Email: ' + profile.getEmail());
-  fetchPost(server_url, profile).then(res => console.log(res));
+  let idToken = googleUser.getAuthResponse().id_token;
+  fetchPost(server_url, idToken).then(res => console.log(res.statusText));
 }
