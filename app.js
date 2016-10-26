@@ -3,9 +3,9 @@ const MongoClient = require('mongodb').MongoClient;
 const bodyParser = require('body-parser');
 const app = express();
 app.use(bodyParser.json())
-
+const fetch = require('node-fetch');
 const config = require('./config');
-console.log('config is', config);
+
 let all, friends, gifts, friendCollection, giftCollection;
 MongoClient.connect('mongodb://127.0.0.1:27017/giftr', (err, db) => {
     if (err) throw err;
@@ -51,8 +51,13 @@ app.get("/oauthcallback", (req, res) => {
 // gifter.sethsilesky.com:3000/oauthcallback
 app.post('/oauthcallback', (req, res) => {
   if (!req.body) return res.sendStatus(400);
+  const token = 123;
+  const validateThisToken = `https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${token}`;
+  fetch(validateThisToken).then((el, err) => {
+    if(el) console.log('success!');
+  });
   try {
-    console.log('authcallback posted!');
+
     console.log('post req body', req.body);
   } catch(e) {
     res.json({success: false, error: e})
