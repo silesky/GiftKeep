@@ -55,12 +55,16 @@ app.post('/oauthcallback', (req, res) => {
     let token = req.body.data;
     const validateThisToken = `https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${token}`;
     fetch(validateThisToken).then((el) => {
+      //'Content-Type', 'application/x-www-form-urlencoded'
       if (el.status < 300) {
        console.log('token validated! statusText:', el.statusText);
+       console.log(el);
      } else {
         console.log('token invalid! statusText:', el.statusText);
       }})
   })
+
+
 
 
 app.listen(3000);
