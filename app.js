@@ -1,39 +1,26 @@
 const express = require('express');
-const MongoClient = require('mongodb').MongoClient;
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const fetch = require('node-fetch');
-
+const Storage  = require('./storage');
 const app = express();
 app.use(bodyParser.json())
 app.use(cookieParser());
 app.use(express.static('./public'));
 
-let friendCollection;
-let giftCollection;
-MongoClient.connect('mongodb://127.0.0.1:27017/giftr', (err, db) => {
-    if (err) throw err;
-    console.log('...connected to mongoDB!');
-    friendCollection = db.collection('friendCollection');
-    giftCollection = db.collection('giftCollection');
-});
+
+Storage.connect();
 
 app.get('/api/', (req, res) => {
-  friendCollection.find().toArray((err, docs) => res.json(docs));
+  console.log('api get req hit');
+  Storage.getAllData(res) 
 });
-app.get('/api/:token', (req, res) => { // takes a token, returns the user object
-  let token = req.params.token;
-  console.log('idToken from url:', token);
-  friendCollection.find().toArray((err, docs) => {
-    let result = docs.find(el => {
-      if (token === el.googleIdToken) {
-        return el
-      } else {
-        res.json({success: false, error: 'token not found'})
-      }
-    });
-    if (result) res.json(result);
-  });
+// takes a user id token, returns the user object
+app.get('/api/:token', (req, res) => { 
+    let token = req.params.token;
+    console.log('idToken from url:', token);
+    // sends res which is the callback (res.json)
+    Storage.getUserData(res, token);
 });
 
 //send a newUser as a json object { "name": "bilssl"}
