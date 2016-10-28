@@ -9,7 +9,6 @@ module.exports = {
             db = database;
         });
     },
-
     connected: () => typeof database !== 'undefined',
     // get all
     getAllData: (res) => {
@@ -20,21 +19,27 @@ module.exports = {
     // create user
     createUser: (reqObj, res) => {
         console.log('post request to create user...');
-        const userObj = { 
+        const userObj = {
             userName: reqObj.body.userName,
             googleIdToken: reqObj.body.googleIdToken,
             data: reqObj.body.data
         }
-         try {
+        try {
             userCollection().insert(userObj);
-            res.json({success: true, msg: 'user created'})
-        } catch(e) {
-            res.json({success: false, error: e })
+            res.json({
+                success: true,
+                msg: 'user created'
+            })
+        } catch (e) {
+            res.json({
+                success: false,
+                error: e
+            })
         }
     },
     // get user by token
     getUser: (reqObj, res) => {
-         console.log('get request for user...');
+        console.log('get request for user...');
         let results;
         let requestedIdToken = reqObj.params.token;
         userCollection().find().toArray((err, docs) => {
@@ -48,8 +53,8 @@ module.exports = {
         let results;
         let requestedIdToken = reqObj.params.token;
         userCollection().find().toArray((err, docs) => {
-             results = docs.find(el => requestedIdToken === el.googleIdToken)
-             res.json(results['data']);
+            results = docs.find(el => requestedIdToken === el.googleIdToken)
+            res.json(results['data']);
         })
     },
     //update user data by token
@@ -57,32 +62,29 @@ module.exports = {
         console.log('put for new user..!');
         const requestedIdToken = reqObj.params.token;
         const requestedUserData = reqObj.body;
-        const _writeConcernCb = (err, {result}) => {
+        const _writeConcernCb = (err, {
+            result
+        }) => {
             if (err || !result.nModified) {
                 res.json({
-                    success: false,  
+                    success: false,
                     statusText: 'error or 0 rows modified',
-                    msg: result, 
+                    msg: result,
                 })
             } else {
-                
                 res.json({
-                    success: true,  
+                    success: true,
                     msg: result,
                     statusText: `success. ${result.nModified} row(s) modified`
-                }) 
+                })
             }
         }
         userCollection().update({
             googleIdToken: requestedIdToken
-        },
-        { 
-           $set: {
-                data: requestedUserData 
+        }, {
+            $set: {
+                data: requestedUserData
             }
-        },
-            _writeConcernCb 
-         )}
-        
-
+        }, _writeConcernCb)
+    }
 }
