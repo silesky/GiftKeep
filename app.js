@@ -11,39 +11,17 @@ app.use(express.static('./public'));
 
 Storage.connect();
 
-app.get('/api/', (req, res) => {
-  console.log('api get req hit');
-  Storage.getAllData(res) 
-});
+app.get('/api/', (req, res) => Storage.getAllData(res));
 // takes a user id token, returns the user object
-app.get('/api/:token', (req, res) => { 
-    let token = req.params.token;
-    console.log('idToken from url:', token);
-    // sends res which is the callback (res.json)
-    Storage.getUserData(res, token);
-});
+app.get('/api/:token', (req, res) => Storage.getUserData(req, res));
 
 //send a newUser as a json object { "name": "bilssl"}
-app.post('/api/friends', (req, res) => {
-  if (!req.body) return res.sendStatus(400)
-  try {
-    friendCollection.insert(req.body);
-  } catch(e) {
-    res.json({success: false, error: e })
-  }
-  res.json({success: true, msg: 'friend created.'})
-});
-//send a newGift as a json object {"giftName":"Toothpaste","friends":["Stephen"]}
-app.post('/api/gifts', (req, res) => {
-  if (!req.body) return res.sendStatus(400)
-  try {
-    // also needs a friendCollection insert?
-    giftCollection.insert(req.body);
-  } catch(e) {
-    res.json({success: false, error: e })
-  }
-  res.json({success: true, msg: 'gift created.'})
-});
+app.post('/api/user', (req, res) => Storage.createUser(req, res)); //parameters are reversed
+
+// app.post('/api/friends', (req, res) => Storage.createUserFriend(req, res));
+// send a newGift as a json object {"giftName":"Toothpaste","friends":["Stephen"]}
+// app.post('/api/gifts', (req, res) => Storage.createUserGift(req, res));
+
 app.get("/oauthcallback", (req, res) => {
   console.log('req success', req.body);
   res.send("Authcallback get");
