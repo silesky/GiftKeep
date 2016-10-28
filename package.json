@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "post": "newman run Gifter.postman_test_run.json",
     "watch": "nodemon ./app.js"
   },
   "author": "",

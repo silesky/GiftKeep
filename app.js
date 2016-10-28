@@ -11,16 +11,21 @@ app.use(express.static('./public'));
 
 Storage.connect();
 
+// get all
 app.get('/api/', (req, res) => Storage.getAllData(res));
-// takes a user id token, returns the user object
-app.get('/api/:token', (req, res) => Storage.getUserData(req, res));
 
-//send a newUser as a json object { "name": "bilssl"}
+
 app.post('/api/user', (req, res) => Storage.createUser(req, res)); //parameters are reversed
 
-// app.post('/api/friends', (req, res) => Storage.createUserFriend(req, res));
-// send a newGift as a json object {"giftName":"Toothpaste","friends":["Stephen"]}
-// app.post('/api/gifts', (req, res) => Storage.createUserGift(req, res));
+// get user by token
+app.get('/api/user/:token', (req, res) => Storage.getUser(req, res));
+
+// get user data by token
+app.get('/api/user/data/:token', (req, res) => Storage.getUserData(req, res));
+
+// update user data by token
+app.put('/api/user/data/:token', (req, res) =>  Storage.updateUserData(req, res));
+
 
 app.get("/oauthcallback", (req, res) => {
   console.log('req success', req.body);
