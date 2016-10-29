@@ -1,53 +1,49 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
-import React, { Component } from 'react';
+import React, {
+    Component
+} from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
+    AppRegistry,
+    StyleSheet,
+    View,
 } from 'react-native';
+import {
+    Container,
+    Header,
+    Title,
+    Content,
+    Footer,
+    FooterTab,
+    Button,
+    Icon,
+    Text
+} from 'native-base';
+export default class AppContainer extends Component {
+    render() {
+        return (
+              <Container> 
+                <Header>
+                    <Button transparent>
+                        <Icon name='ios-arrow-back' />
+                    </Button>
+                    <Title>Header</Title>
+                         <Button transparent>
+                        <Icon name='ios-menu' />
+                    </Button>
+                </Header>
+               
+                <Content>
+                    <Text>Hello World</Text>
+                </Content>
 
-export default class mobile extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-              Sup
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
-    );
-  }
+                <Footer>
+                    <FooterTab>
+                        <Button transparent>
+                            <Icon name='ios-call' />
+                              <Text>Footer HERE</Text>
+                        </Button>  
+                    </FooterTab>
+                </Footer>
+            </Container>);
+    }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
-
-AppRegistry.registerComponent('mobile', () => mobile);
+AppRegistry.registerComponent('mobile', () => AppContainer);
