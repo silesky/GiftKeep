@@ -5,9 +5,15 @@ import {
     AppRegistry,
     StyleSheet,
     View,
+    ScrollView
+  /*  ScrollView,
+    TouchableOpacity,
+    PropTypes*/
 } from 'react-native';
 import {
     Container,
+    Card,
+    CardItem,
     Header,
     Title,
     Content,
@@ -18,9 +24,85 @@ import {
     Text
 } from 'native-base';
 
-const lipsum = 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Nulla quis lorem ut libero malesuada feugiat. Sed porttitor lectus nibh. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.'
+import { lipsum } from './util';
 
-import { Card, CardItem } from 'native-base';
+import Drawer from 'react-native-drawer';
+
+
+
+
+
+const ControlPanelStyles = StyleSheet.create({
+
+    })
+    // const DrawerStyles = StyleSheet.create({
+    //   container: {
+    //     flex: 1,
+    //     padding: 20,
+    //     backgroundColor: 'black',
+    //   },
+    //   controlText: {
+    //     color: 'white',
+    //   },
+    //   button: {
+    //     backgroundColor: 'white',
+    //     borderWidth: 1,
+    //     borderColor: 'black',
+    //     padding: 10,
+    //   }
+    // })
+
+// export class ControlPanel extends Component {
+
+//   render() {
+//     let {closeDrawer} = this.props
+//     return (
+//       <ScrollView style={ControlPanelStyles.container}>
+//         <Text style={ControlPanelStyles.controlText}>Control Panel</Text>
+//         <TouchableOpacity style={ControlPanelStyles.button} onPress={closeDrawer}>
+//           <Text>Close Drawer</Text>
+//         </TouchableOpacity>
+//       </ScrollView>
+//     )
+//   }
+// }
+
+// const ControlPanelStyles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     padding: 20,
+//     backgroundColor: 'black',
+//   },
+//   controlText: {
+//     color: 'white',
+//   },
+//   button: {
+//     backgroundColor: 'yellow',
+//     borderWidth: 1,
+//     borderColor: 'red',
+//     padding: 10,
+//   }
+// })
+
+// class Application extends Component {  
+//   closeControlPanel = () => {
+//     this._drawer.close()
+//   };
+//   openControlPanel = () => {
+//     this._drawer.open()
+//   };
+//   render () {
+//     return (
+//       <Drawer
+//         ref={(ref) => this._drawer = ref}
+//         content={<ControlPanel />}
+//         >
+
+//       </Drawer>
+//     )
+//   }
+// }
+
 export class CardExample extends Component {
     render() {
         return (
@@ -39,27 +121,46 @@ export class CardExample extends Component {
         );
     }
 }
-export default class AppContainer extends Component {
+
+export class ControlPanel extends Component {
+
     render() {
-        return (
-              <Container> 
-                <Header>
-                    <Button transparent>
-                        <Icon name='ios-arrow-back' />
+      return (
+        <Container>
+             <Header>
+                    <Button onPress={() => this.props.closeDrawer()} transparent>
+                          <Icon name='ios-menu' />
                     </Button>
                     <Title>Header</Title>
-                         <Button transparent>
+                </Header>
+ 
+        </Container>
+        );
+    }
+}
+
+class AppContainer extends Component {
+
+    render() {
+        return (
+            <Drawer
+                ref={(ref) => this._drawer = ref}
+                content={<ControlPanel closeDrawer={() => this._drawer.close()}
+                type="static"
+              />
+            }>
+              <Container> 
+                <Header>
+                    <Button onPress={() => this._drawer.open()} transparent>
                         <Icon name='ios-menu' />
                     </Button>
+                    <Title>Header</Title>
                 </Header>
-
                 <Content>
-                   <Text>CONTENT:</Text>
+                 
                     <CardExample />
                     <CardExample />
                     <CardExample />
-
-
                 </Content>
                 <Footer>
                     <FooterTab>
@@ -69,7 +170,8 @@ export default class AppContainer extends Component {
                         </Button>  
                     </FooterTab>
                 </Footer>
-            </Container>);
+            </Container>
+          </Drawer>);
     }
 }
 AppRegistry.registerComponent('mobile', () => AppContainer);
