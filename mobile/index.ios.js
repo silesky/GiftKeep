@@ -1,14 +1,6 @@
-import React, {
-    Component
-} from 'react';
-import {
-    AppRegistry,
-    StyleSheet,
-    View,
-    ScrollView
-  /*  ScrollView,
-    TouchableOpacity,
-    PropTypes*/
+import React, { Component } from 'react';
+import { 
+    AppRegistry, PropTypes
 } from 'react-native';
 import {
     Container,
@@ -23,10 +15,9 @@ import {
     Icon,
     Text
 } from 'native-base';
-
+import Drawer from 'react-native-drawer';
 import { lipsum } from './util';
 
-import Drawer from 'react-native-drawer';
 
 
 export class CardExample extends Component {
@@ -53,15 +44,21 @@ class AppContainer extends Component {
         return (
             <Drawer
                 tapToClose={true}
-                openDrawerOffset={0.2}
-                panCloseMask={0.2}
+                openDrawerOffset={0.6 /* % gap on right side of drawer */}
+                panCloseMask={0.6 /* tightly coupled ^. % of screen can be used to close (if tapToClose=true} */}
                 closedDrawerOffset={-3}
                 ref={(ref) => this._drawer = ref}
                 type='static'
                 content={  
-                    <View>
-                        <Text>{lipsum}</Text>
-                     </View>}
+                    <Container>
+                    <Header>
+                        <Title>Friends</Title>
+                        </Header>
+                    <Content>
+
+                            <Text>{lipsum}</Text>
+                        </Content>
+                     </Container>}
                 >
                 <Container> 
                     <Header>
