@@ -7,6 +7,8 @@ import {
     Card,
     CardItem,
     Header,
+    List,
+    ListItem,
     Title,
     Content,
     Footer,
@@ -23,21 +25,47 @@ import { lipsum } from './util';
 export class CardExample extends Component {
     render() {
         return (
-            <Container>
-                  <Content>
-                    <Card>
-                          <CardItem header>                        
-                            <Text>Card Header</Text>
-                          </CardItem> 
-                          <CardItem>                    
-                            <Text>{lipsum}</Text>
-                          </CardItem>
-                    </Card>
-                    </Content>
-          </Container>
+           <Container>
+               <Content>
+                   <Card>
+                       <CardItem header>
+                           <Text>Card Header</Text>
+                       </CardItem>
+                       <CardItem>
+                           <Text>{lipsum}</Text>
+                       </CardItem>
+                   </Card>
+               </Content>
+           </Container>
+
         );
     }
 }
+const FriendListItem = ({friendName}) => {
+    return (
+           <ListItem button onPress={() => console.log('click')}>
+                <Text>{friendName}</Text>
+            </ListItem>    
+        )
+}
+
+const FriendList = () => {
+    return (
+    <Container>
+        <Header>
+            <Title>Friends</Title>
+        </Header>
+        <Content>
+            <List>
+                <FriendListItem friendName='Daniel Johnston'/>
+                <FriendListItem friendName='Rick Ross'/>
+                <FriendListItem friendName='Jim Jameson'/>
+            </List>
+        </Content>
+    </Container>
+        )
+}
+
 
 class AppContainer extends Component {
     render() {
@@ -45,20 +73,11 @@ class AppContainer extends Component {
             <Drawer
                 tapToClose={true}
                 openDrawerOffset={0.6 /* % gap on right side of drawer */}
-                panCloseMask={0.6 /* tightly coupled ^. % of screen can be used to close (if tapToClose=true} */}
+                panCloseMask={0.6 /* tightly coupled ^. % of screen can be used to close (if tapToClose=true}    */}
                 closedDrawerOffset={-3}
                 ref={(ref) => this._drawer = ref}
                 type='static'
-                content={  
-                    <Container>
-                    <Header>
-                        <Title>Friends</Title>
-                        </Header>
-                    <Content>
-
-                            <Text>{lipsum}</Text>
-                        </Content>
-                     </Container>}
+                content={<FriendList />}
                 >
                 <Container> 
                     <Header>
