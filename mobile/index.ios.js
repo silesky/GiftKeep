@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { 
-    AppRegistry, PropTypes
+    AppRegistry
 } from 'react-native';
 import {
     Container,
@@ -19,13 +19,15 @@ import {
 } from 'native-base';
 import Drawer from 'react-native-drawer';
 import { lipsum } from './util';
+import { store } from './store';
+import * as actions from './actions';
 
 
 
 export class CardExample extends Component {
     render() {
         return (
-           <Container>
+           <Container >
                <Content>
                    <Card>
                        <CardItem header>
@@ -43,7 +45,7 @@ export class CardExample extends Component {
 }
 const FriendListItem = ({friendName}) => {
     return (
-           <ListItem button onPress={() => console.log('click')}>
+           <ListItem button onPress={() => store.dispatch(actions.increment())}>
                 <Text>{friendName}</Text>
             </ListItem>    
         )
@@ -68,6 +70,10 @@ const FriendList = () => {
 
 
 class AppContainer extends Component {
+    constructor(props) {
+      super(props);
+    
+    }
     render() {
         return (
             <Drawer
@@ -79,7 +85,7 @@ class AppContainer extends Component {
                 type='static'
                 content={<FriendList />}
                 >
-                <Container> 
+                <Container style={{backgroundColor: 'white'}}   > 
                     <Header>
                         <Button 
                         onPress={() => this._drawer.open()} 

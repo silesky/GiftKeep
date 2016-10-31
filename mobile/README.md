@@ -1,5 +1,4 @@
-* react-native run-ios
-* basically a google keep design 
-* crossed with pinterest 
+# Giftr
+* `react-native run-ios`
+* [Trello](https://trello.com/b/kOwrKDAC/giftr)
 
-* 
