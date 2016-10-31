@@ -4,8 +4,6 @@ import {
 } from 'react-native';
 import {
     Container,
-    Card,
-    CardItem,
     Header,
     List,
     ListItem,
@@ -14,44 +12,61 @@ import {
     Footer,
     FooterTab,
     Button,
-    Icon,
-    Text
+    Text,
+    Icon
 } from 'native-base';
 import Drawer from 'react-native-drawer';
 import { lipsum } from './util';
 import { store } from './store';
 import * as actions from './actions';
 
+import { GiftCard } from './components/GiftCard';
+import { FriendListItem } from './components/FriendListItem';
 
 
-export class CardExample extends Component {
-    render() {
+const TopBar = ({drawerOpen}) => {
         return (
-           <Container >
-               <Content>
-                   <Card>
-                       <CardItem header>
-                           <Text>Card Header</Text>
-                       </CardItem>
-                       <CardItem>
-                           <Text>{lipsum}</Text>
-                       </CardItem>
-                   </Card>
-               </Content>
-           </Container>
-
-        );
-    }
+            <Header>
+                <Button 
+                onPress={() => drawerOpen()} 
+                transparent>
+                    <Icon name='ios-menu' />
+                </Button>
+                <Title>Gifter</Title>
+                <Button transparent>
+                    <Icon name='ios-add' />
+                </Button>
+            </Header>
+                )
 }
-const FriendListItem = ({friendName}) => {
+const BottomBar = () => {
     return (
-           <ListItem button onPress={() => store.dispatch(actions.increment())}>
-                <Text>{friendName}</Text>
-            </ListItem>    
+        <Footer>
+            <FooterTab>
+                <Button transparent>
+                    <Icon name='ios-call' />
+                      <Text>Footer HERE</Text>
+                </Button>  
+            </FooterTab>
+        </Footer>
         )
 }
 
-const FriendList = () => {
+class CardContainer extends Component {
+    render() {
+        return(
+        <Container style={{backgroundColor: 'white'}}   > 
+            <Content>
+                <GiftCard />
+                <GiftCard />
+                <GiftCard />
+            </Content>
+        </Container>
+        )
+    }
+}
+class FriendListContainer extends Component {
+    render() {
     return (
     <Container>
         <Header>
@@ -59,21 +74,22 @@ const FriendList = () => {
         </Header>
         <Content>
             <List>
-                <FriendListItem friendName='Daniel Johnston'/>
-                <FriendListItem friendName='Rick Ross'/>
-                <FriendListItem friendName='Jim Jameson'/>
+                <FriendListItem 
+                   increment={() => store.dispatch(actions.increment())} 
+                   friendName='Daniel Johnston'/>
+                <FriendListItem 
+                   increment={() => store.dispatch(actions.increment())} 
+                   friendName='Rick Ross'/>
+                <FriendListItem 
+                   increment={() => store.dispatch(actions.increment())} 
+                   friendName='Jim Jameson'/>
             </List>
         </Content>
     </Container>
         )
-}
-
-
-class AppContainer extends Component {
-    constructor(props) {
-      super(props);
-    
     }
+}
+class AppContainer extends Component {
     render() {
         return (
             <Drawer
@@ -83,31 +99,11 @@ class AppContainer extends Component {
                 closedDrawerOffset={-3}
                 ref={(ref) => this._drawer = ref}
                 type='static'
-                content={<FriendList />}
+                content={<FriendListContainer />}
                 >
-                <Container style={{backgroundColor: 'white'}}   > 
-                    <Header>
-                        <Button 
-                        onPress={() => this._drawer.open()} 
-                        transparent>
-                            <Icon name='ios-menu' />
-                        </Button>
-                        <Title>Header</Title>
-                    </Header>
-                    <Content>
-                        <CardExample />
-                        <CardExample />
-                        <CardExample />
-                    </Content>
-                    <Footer>
-                        <FooterTab>
-                            <Button transparent>
-                                <Icon name='ios-call' />
-                                  <Text>Footer HERE</Text>
-                            </Button>  
-                        </FooterTab>
-                    </Footer>
-                </Container>
+                    <TopBar drawerOpen={() => this._drawer.open()} />
+                    <CardContainer />
+                    <BottomBar />
             </Drawer>);
     }
 }
