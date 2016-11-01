@@ -81,15 +81,18 @@ class FriendListContainer extends Component {
     <Container>
         <Content>
             <List>
-                <FriendListItem 
-                   increment={() => store.dispatch(actions.increment())} 
-                   friendName='Daniel Johnston'/>
-                <FriendListItem 
-                   increment={() => store.dispatch(actions.increment())} 
-                   friendName='Rick Ross'/>
-                <FriendListItem 
-                   increment={() => store.dispatch(actions.increment())} 
-                   friendName='Jim Jameson'/>
+            {store.getState().data.map((el, index)=> {
+                return (
+                    <FriendListItem 
+                        increment={() => store.dispatch(actions.increment())} 
+                        friendId={el.friendId}
+                        friendName={el.friendName}
+                        key={index}
+                        />
+                    )
+            }) 
+        }
+             
             </List>
         </Content>
     </Container>
@@ -97,11 +100,7 @@ class FriendListContainer extends Component {
     }
 }
 class AppContainer extends Component {
-    constructor() {
-      super();
-      this.ComponentWillMount = () => store.dispatch(actions.addFriend("John"))
-      
-    }
+    
     render() {
         return (
             <Drawer
@@ -112,7 +111,7 @@ class AppContainer extends Component {
                 ref={(ref) => this._drawer = ref}
                 type='static'
                 content={<FriendListContainer />}
-                >
+                >   
                     <TopBar drawerOpen={() => this._drawer.open()} />
                     <FriendInfo name='Nick' bday='12/25' />
                     <CardContainer />
