@@ -1,5 +1,6 @@
 export const increment = () => ({'type': 'INCREMENT'})
 export const addFriend = (name) => {
+    console.log('addfriend Called');
    return {
     type: 'ADD_FRIEND',
     payload: { name },
