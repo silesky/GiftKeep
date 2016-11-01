@@ -33,12 +33,21 @@ const TopBar = ({drawerOpen}) => {
                     <Icon name='ios-menu' />
                 </Button>
                 <Title>Gifter</Title>
-                <Button transparent>
+                <Button 
+                    onPress={() => store.dispatch(actions.addGift(123))}
+                        transparent>
                     <Icon name='ios-add' />
                 </Button>
-            </Header>
+            </Header>     
                 )
 }
+const FriendInfo = ({name, bday}) => {
+        return (
+            <Header>
+                <Text>{`${name} | ${bday}`}</Text>
+            </Header> 
+            )    
+       }
 const BottomBar = () => {
     return (
         <Footer>
@@ -66,12 +75,10 @@ class CardContainer extends Component {
     }
 }
 class FriendListContainer extends Component {
+
     render() {
     return (
     <Container>
-        <Header>
-            <Title>Friends</Title>
-        </Header>
         <Content>
             <List>
                 <FriendListItem 
@@ -90,6 +97,11 @@ class FriendListContainer extends Component {
     }
 }
 class AppContainer extends Component {
+    constructor() {
+      super();
+      this.ComponentWillMount = () => store.dispatch(actions.addFriend("John"))
+      
+    }
     render() {
         return (
             <Drawer
@@ -102,6 +114,7 @@ class AppContainer extends Component {
                 content={<FriendListContainer />}
                 >
                     <TopBar drawerOpen={() => this._drawer.open()} />
+                    <FriendInfo name='Nick' bday='12/25' />
                     <CardContainer />
                     <BottomBar />
             </Drawer>);
