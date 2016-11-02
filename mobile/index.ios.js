@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { 
     AppRegistry
 } from 'react-native';
@@ -22,7 +23,8 @@ import { lipsum } from './util';
 import { store } from './store';
 import * as actions from './actions';
 import { GiftCard } from './components/GiftCard';
-import { FriendListItem } from './components/FriendListItem';
+import { DrawerContainer } from './containers/DrawerContainer';
+
 
 
 const TopBar = ({drawerOpen}) => {
@@ -70,30 +72,7 @@ const BottomBar = ({addFriend, addGift}) => {
 
 
 //addFriendButton
-class FriendListContainer extends Component {
-    render() {
-    return (
-    <Container>
-        <Content>
-            <List>
-            { store.getState().data.map((el, index)=> {
-                return (
 
-                    <FriendListItem 
-                        key={index}
-                        addFriend={() => store.dispatch(actions.addFriend())} 
-                        friendId={el.friendId}
-                        friendName={el.friendName}
-                        />
-                    )
-            }) 
-        }
-            </List>
-        </Content>
-    </Container>
-        )
-    }
-}
 const Body = ({friendId}) => {
     let bday = store.getState().data.find((el => el.friendId === friendId)).bday;
     let friendName = store.getState().data.find((el) => el.friendId === friendId).friendName;
@@ -128,7 +107,7 @@ class AppContainer extends Component {
                 closedDrawerOffset={-3}
                 ref={(ref) => this._drawer = ref}
                 type='static'
-                content={<FriendListContainer />}
+                content={<DrawerContainer />}
                 >   
                     <TopBar drawerOpen={() => this._drawer.open()} />                
                     <Body friendId={123} />
@@ -139,4 +118,5 @@ class AppContainer extends Component {
             </Drawer>);
     }
 }
+
 AppRegistry.registerComponent('mobile', () => AppContainer);
