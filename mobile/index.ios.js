@@ -3,6 +3,8 @@ import {
     AppRegistry
 } from 'react-native';
 import {
+    Card,
+    CardItem,
     Container,
     Header,
     List,
@@ -19,7 +21,6 @@ import Drawer from 'react-native-drawer';
 import { lipsum } from './util';
 import { store } from './store';
 import * as actions from './actions';
-
 import { GiftCard } from './components/GiftCard';
 import { FriendListItem } from './components/FriendListItem';
 
@@ -27,25 +28,28 @@ import { FriendListItem } from './components/FriendListItem';
 const TopBar = ({drawerOpen}) => {
         return (
             <Header>
-                <Button 
-                onPress={() => drawerOpen()} 
-                transparent>
+                <Button transparent
+                onPress={() => drawerOpen()}>
                     <Icon name='ios-menu' />
                 </Button>
                 <Title>Gifter</Title>
-                <Button 
-        
-                        transparent>
+
+                <Button transparent>
                     <Icon name='ios-settings' />
                 </Button>
+                <Text>GiftCard</Text>
             </Header>     
                 )
 }
-const FriendInfo = ({name, bday}) => {
+const FriendInfo = ({friendName, bday}) => {
         return (
-            <Header>
-                <Text>{`${name} | ${bday}`}</Text>
-            </Header> 
+                 <List>
+                    <ListItem>
+                        <Text>{`2 months until ${friendName}'s birthday on ${bday}.`} </Text>
+                    </ListItem>
+               
+                </List>
+
             )    
        }
 const BottomBar = ({addFriend, addGift}) => {
@@ -55,7 +59,7 @@ const BottomBar = ({addFriend, addGift}) => {
                 <Button onPress={() => addFriend()} transparent>
                     <Icon name='ios-person-add' />
                 </Button>  
-                    <Button onPress={() => addGift() } transparent>
+                <Button onPress={() => addGift()} transparent>
                     <Icon name='ios-add' />
                 </Button>  
             </FooterTab>
@@ -63,48 +67,57 @@ const BottomBar = ({addFriend, addGift}) => {
         )
 }
 
-class CardContainer extends Component {
-    render() {
-        return(
-        <Container style={{backgroundColor: 'white'}}   > 
-            <Content>
-                <GiftCard />
-                <GiftCard />
-                <GiftCard />
-            </Content>
-        </Container>
-        )
-    }
-}
+
 
 //addFriendButton
 class FriendListContainer extends Component {
-
     render() {
     return (
     <Container>
         <Content>
             <List>
-            {store.getState().data.map((el, index)=> {
+            { store.getState().data.map((el, index)=> {
                 return (
                     <FriendListItem 
+                        key={index}
                         increment={() => store.dispatch(actions.increment())} 
                         friendId={el.friendId}
                         friendName={el.friendName}
-                        key={index}
                         />
                     )
             }) 
         }
-             
             </List>
         </Content>
     </Container>
         )
     }
 }
+const Body = ({friendId}) => {
+    let bday = store.getState().data.find((el => el.friendId === friendId)).bday;
+    let friendName = store.getState().data.find((el) => el.friendId === friendId).friendName;
+    return (
+        <Container style={{backgroundColor: 'white'}}>
+            <Content>
+            <FriendInfo friendName={friendName} bday={bday} />
+           {
+            store.getState().data.find((el) => el.friendId === friendId)
+                .gifts.map((el, index) => {
+                    return (
+                        <GiftCard
+                        giftName={el.giftName} 
+                        key={index}
+                         />
+
+                 )
+              
+            })
+
+        }
+        </Content>
+    </Container>)
+}
 class AppContainer extends Component {
-    
     render() {
         return (
             <Drawer
@@ -116,9 +129,8 @@ class AppContainer extends Component {
                 type='static'
                 content={<FriendListContainer />}
                 >   
-                    <TopBar drawerOpen={() => this._drawer.open()} />
-                    <FriendInfo name='Nick' bday='12/25' />
-                    <CardContainer />
+                    <TopBar drawerOpen={() => this._drawer.open()} />                
+                    <Body friendId={123} />
                     <BottomBar 
                     addGift={() => store.dispatch(actions.addGift(123))} 
                     addFriend={() => store.dispatch(actions.addFriend())} 

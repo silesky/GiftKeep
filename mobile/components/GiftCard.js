@@ -7,14 +7,14 @@ import {
     Text,
 } from 'native-base';
 import { lipsum } from '../util';
-export const GiftCard = () => {
+export const GiftCard = ({giftName}) => {
   // should take a name, birthday and text prop, along with being editable and so forth
         return (
            <Container >
                <Content>
                    <Card>
                        <CardItem header>
-                           <Text>Card Header</Text>
+                           <Text>{giftName}</Text>
                        </CardItem>
                        <CardItem>
                            <Text>{lipsum}</Text>
