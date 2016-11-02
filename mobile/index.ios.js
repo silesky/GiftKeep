@@ -78,9 +78,10 @@ class FriendListContainer extends Component {
             <List>
             { store.getState().data.map((el, index)=> {
                 return (
+
                     <FriendListItem 
                         key={index}
-                        increment={() => store.dispatch(actions.increment())} 
+                        addFriend={() => store.dispatch(actions.addFriend())} 
                         friendId={el.friendId}
                         friendName={el.friendName}
                         />

@@ -1,9 +1,9 @@
 export const increment = () => ({'type': 'INCREMENT'})
-export const addFriend = (name) => {
+export const addFriend = ( friendName = "New Friend" ) => {
     console.log('addfriend Called');
    return {
     type: 'ADD_FRIEND',
-    payload: { name },
+    payload: { friendName },
     }
 }
 // friendId

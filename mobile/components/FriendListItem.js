@@ -4,9 +4,9 @@ import {
     Text,
 } from 'native-base';
 
-export const FriendListItem = ({friendName, increment}) => {
+export const FriendListItem = ({friendName, addFriend}) => {
     return (
-           <ListItem button onPress={() => increment()}>
+           <ListItem button onPress={() => addFriend()}>
                 <Text>{friendName}</Text>
             </ListItem>    
         )
