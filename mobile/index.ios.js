@@ -24,7 +24,10 @@ import { store } from './store';
 import * as actions from './actions';
 import { GiftCard } from './components/GiftCard';
 import { DrawerContainer } from './containers/DrawerContainer';
-import { AppContainer } from './containers/AppContainer';
+
+// needs to be default imports
+import AppContainer from './containers/AppContainer';
+
 import { TopBar } from './components/TopBar';
 
 export const FriendInfo = ({friendName, bday}) => {
@@ -83,7 +86,13 @@ export const Body = ({friendId}) => {
 }
 
 
-const Root = () => <AppContainer state={store.getState()} />
+const Root = () => {
+    return (
+        <Provider store={store}>
+            <AppContainer />
+        </Provider>
+    )
+}
 
 store.subscribe(Root);
 

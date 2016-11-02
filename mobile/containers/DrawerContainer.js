@@ -24,7 +24,7 @@ export class DrawerContainer extends Component {
     <Container>
         <Content>
             <List>
-            { this.props.state.data.map((el, index)=> {
+            { store.getState().data.map((el, index)=> {
                 return (
 
                     <FriendListItem 
