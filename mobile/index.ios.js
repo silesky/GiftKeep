@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import { 
     AppRegistry
 } from 'react-native';
@@ -24,26 +24,10 @@ import { store } from './store';
 import * as actions from './actions';
 import { GiftCard } from './components/GiftCard';
 import { DrawerContainer } from './containers/DrawerContainer';
+import { AppContainer } from './containers/AppContainer';
+import { TopBar } from './components/TopBar';
 
-
-
-const TopBar = ({drawerOpen}) => {
-        return (
-            <Header>
-                <Button transparent
-                onPress={() => drawerOpen()}>
-                    <Icon name='ios-menu' />
-                </Button>
-                <Title>Gifter</Title>
-
-                <Button transparent>
-                    <Icon name='ios-settings' />
-                </Button>
-                <Text>GiftCard</Text>
-            </Header>     
-                )
-}
-const FriendInfo = ({friendName, bday}) => {
+export const FriendInfo = ({friendName, bday}) => {
         return (
                  <List>
                     <ListItem>
@@ -54,7 +38,7 @@ const FriendInfo = ({friendName, bday}) => {
 
             )    
        }
-const BottomBar = ({addFriend, addGift}) => {
+export const BottomBar = ({addFriend, addGift}) => {
     return (
         <Footer>
             <FooterTab>
@@ -73,7 +57,7 @@ const BottomBar = ({addFriend, addGift}) => {
 
 //addFriendButton
 
-const Body = ({friendId}) => {
+export const Body = ({friendId}) => {
     let bday = store.getState().data.find((el => el.friendId === friendId)).bday;
     let friendName = store.getState().data.find((el) => el.friendId === friendId).friendName;
     return (
@@ -97,26 +81,10 @@ const Body = ({friendId}) => {
         </Content>
     </Container>)
 }
-class AppContainer extends Component {
-    render() {
-        return (
-            <Drawer
-                tapToClose={true}
-                openDrawerOffset={0.6 /* % gap on right side of drawer */}
-                panCloseMask={0.6 /* tightly coupled ^. % of screen can be used to close (if tapToClose=true}    */}
-                closedDrawerOffset={-3}
-                ref={(ref) => this._drawer = ref}
-                type='static'
-                content={<DrawerContainer />}
-                >   
-                    <TopBar drawerOpen={() => this._drawer.open()} />                
-                    <Body friendId={123} />
-                    <BottomBar 
-                    addGift={() => store.dispatch(actions.addGift(123))} 
-                    addFriend={() => store.dispatch(actions.addFriend())} 
-                    />
-            </Drawer>);
-    }
-}
 
-AppRegistry.registerComponent('mobile', () => AppContainer);
+
+const Root = () => <AppContainer state={store.getState()} />
+
+store.subscribe(Root);
+
+AppRegistry.registerComponent('mobile', () => Root);

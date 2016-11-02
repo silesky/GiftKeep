@@ -12,12 +12,19 @@ import { store } from './../store';
 import { FriendListItem } from './../components/FriendListItem';
 
 export class DrawerContainer extends Component {
+    constructor(props) {
+      super(props);
+    
+    }
+
     render() {
+         console.log('store changed--  DrawerContainer inerheriting props!!', this.props);
     return (
+   
     <Container>
         <Content>
             <List>
-            { store.getState().data.map((el, index)=> {
+            { this.props.state.data.map((el, index)=> {
                 return (
 
                     <FriendListItem 
@@ -36,5 +43,3 @@ export class DrawerContainer extends Component {
     }
     
 }
-const mapStateToProps = (state) => ({state})
-export default connect(mapStateToProps)(DrawerContainer)
