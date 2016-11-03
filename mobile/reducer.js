@@ -25,7 +25,7 @@ import {
  */
 export const reducer = (state = initialState, action) => {
 
-    console.log("oldState: ", state)
+    //console.log("oldState: ", state)
     switch (action.type) {
         case 'INCREMENT':
             console.log('INCREMENT CALLED, state: ', state)
