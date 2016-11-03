@@ -19,6 +19,7 @@ class AppContainer extends Component {
       super()
     }
 render() {
+    const { selectedFriendId } = this.props.state.visible;
     return (
     <Drawer
         tapToClose={true}
@@ -30,9 +31,9 @@ render() {
         content={<DrawerContainer />}
         >   
             <TopBar drawerOpen={() => this._drawer.open()} />                
-            <Body friendId={this.props.state.visible} />
+            <Body friendId={selectedFriendId} />
             <BottomBar 
-            addGift={() => store.dispatch(actions.addGift(123))} 
+            addGift={() => store.dispatch(actions.addGift(selectedFriendId))} 
             addFriend={() => store.dispatch(actions.addFriend())} 
             />
     </Drawer>

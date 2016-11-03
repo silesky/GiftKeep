@@ -18,18 +18,9 @@ render() {
         <Container style={{backgroundColor: 'white'}}>
             <Content>
             <FriendInfo friendName={friendName} bday={bday} />
-           { gifts.map((el, index) => {
-                    return (
-                        <GiftCard
-                        giftName={el.giftName} 
-                        key={index}
-                         />
-
-                 )
-              
-            })
-
-        }
+               { gifts.map((el, ind) => (
+                    <GiftCard giftName={el.giftName} key={ind} />
+                ))}
         </Content>
     </Container>)
 }

@@ -22,28 +22,27 @@ const user = (state = initialStateUser, action) => {
             })
         case 'ADD_GIFT':
             const friendId = action.payload.friendId;
-            const updatedFriendState = state.data.map(el => {
+               const newData = state.data.map(el => {
                 if (el.friendId === friendId) {
                     el.gifts = [...el.gifts, {
                         giftName: 'new gift',
                         giftId: createUuid()
                     }]
-                }
+                } 
                 return el
             })
-            return state.data[updatedFriendState];
+            return Object.assign({}, {data: newData})
         default:
             return state;
     }
 
 }
 
-const initialStateFirstUser = initialStateUser.data[0].friendId;
+const initialStateFirstUser = {selectedFriendId: initialStateUser.data[0].friendId};
 const visible = (state = initialStateFirstUser, action) => {
-    console.log('visible reducer called');
     switch (action.type) {
         case 'SELECT_FRIEND':
-        return action.payload.friendId;
+        return {selectedFriendId: action.payload.friendId}
     default:
         return state;
     }
