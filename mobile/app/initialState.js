@@ -1,4 +1,5 @@
-{"data": [
+export const initialStateUser = {
+        "data": [
             {   "order": 1,
                 "friendName" : "Nick",
                 "bday": "12/25",
@@ -30,3 +31,4 @@
             }
          ]
 }
+

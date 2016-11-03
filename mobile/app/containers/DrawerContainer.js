@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import * as actions from './../actions/actions';
-import { Container, List, Content } from 'native-base';
+import { Container, List, Content, Header, Title } from 'native-base';
 import { store } from './../stores/store';
 import { FriendListItem } from './../components/FriendListItem';
 
@@ -14,16 +14,16 @@ export class DrawerContainer extends Component {
       <Container>
         <Content>
             <List>
-            { this.props.state.data.map((el, index)=> {
-                return (
+              <Header>
+                <Title>Friends</Title>
+              </Header>
+            { this.props.state.user.data.map((el, index) => (
                     <FriendListItem 
                         key={index}
-                        addFriend={() => store.dispatch(actions.addFriend())} 
-                        friendId={el.friendId}
+                        selectFriend={() => store.dispatch(actions.selectFriend(el.friendId))} 
                         friendName={el.friendName}
-                        />
-                    )
-            }) 
+                      />
+              )) 
         }
             </List>
         </Content>

@@ -6,7 +6,7 @@ import * as actions from './../actions/actions';
 
 // Components
 import { TopBar } from './../components/TopBar';
-import {  BottomBar } from './../components/BottomBar';
+import { BottomBar } from './../components/BottomBar';
 
 //Containers (not named exports)
 import DrawerContainer from './../containers/DrawerContainer';
@@ -19,7 +19,6 @@ class AppContainer extends Component {
       super()
     }
 render() {
-    console.log(this.props);
     return (
     <Drawer
         tapToClose={true}
@@ -31,7 +30,7 @@ render() {
         content={<DrawerContainer />}
         >   
             <TopBar drawerOpen={() => this._drawer.open()} />                
-            <Body friendId={123} />
+            <Body friendId={this.props.state.visible} />
             <BottomBar 
             addGift={() => store.dispatch(actions.addGift(123))} 
             addFriend={() => store.dispatch(actions.addFriend())} 

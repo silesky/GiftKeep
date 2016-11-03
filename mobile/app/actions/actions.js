@@ -15,3 +15,11 @@ export const addGift = (friendId) => {
         payload: {friendId}
     }
 }
+
+export const selectFriend = (friendId) => {
+    console.log(friendId, "->friendId");
+    return {
+        type: 'SELECT_FRIEND',
+        payload: {friendId}
+    }
+}

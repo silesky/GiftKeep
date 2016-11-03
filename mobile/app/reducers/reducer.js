@@ -1,29 +1,10 @@
-import initialState from './../initialState.json'
+import { initialStateUser } from './../initialState.js'
+import { combineReducers } from 'redux'
 import {
     createUuid
 } from './../utils/util';
-/*
- var state = {"data": [
-            {   "order": 1,
-                "friendName" : "Nick",
-                "gifts" : [{"giftName": "The Once and Future King" }],
-                "friendId": 123
-            },
 
-            {   "order": 2,
-                "friendName" : "Dan",
-                "gifts" : [{ "giftName": "The Beatles Revolver" }],
-                "friendId": 456
-            },
-            {   "order": 3,
-                "friendName" : "Stephen",
-                "gifts" : [{ "giftName": "Serfas Bike Light" }],
-                "friendId": 789
-            }
-         ]
-}
- */
-export const reducer = (state = initialState, action) => {
+const user = (state = initialStateUser, action) => {
 
     //console.log("oldState: ", state)
     switch (action.type) {
@@ -56,3 +37,39 @@ export const reducer = (state = initialState, action) => {
     }
 
 }
+
+const initialStateFirstUser = initialStateUser.data[0].friendId;
+const visible = (state = initialStateFirstUser, action) => {
+    console.log('visible reducer called');
+    switch (action.type) {
+        case 'SELECT_FRIEND':
+        return action.payload.friendId;
+    default:
+        return state;
+    }
+}
+
+export const rootReducer = combineReducers({
+    user, 
+    visible
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -4,9 +4,9 @@ import {
     Text,
 } from 'native-base';
 
-export const FriendListItem = ({friendName, addFriend}) => {
+export const FriendListItem = ({friendName, selectFriend}) => {
     return (
-           <ListItem button onPress={() => addFriend()}>
+           <ListItem button onPress={() => selectFriend()}>
                 <Text>{friendName}</Text>
             </ListItem>    
         )
