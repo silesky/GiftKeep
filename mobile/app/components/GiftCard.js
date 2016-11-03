@@ -6,7 +6,7 @@ import {
     Content,
     Text,
 } from 'native-base';
-import { lipsum } from '../util';
+import { lipsum } from './../utils/util';
 export const GiftCard = ({giftName}) => {
   // should take a name, birthday and text prop, along with being editable and so forth
         return (

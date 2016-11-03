@@ -1,7 +1,7 @@
-import initialState from './initialState.json'
+import initialState from './../initialState.json'
 import {
     createUuid
-} from './util';
+} from './../utils/util';
 /*
  var state = {"data": [
             {   "order": 1,

@@ -4,10 +4,10 @@ import {
     AppRegistry
 } from 'react-native';
 
-import { store } from './store';
+import { store } from './app/stores/store';
 
 // needs to be default imports
-import AppContainer from './containers/AppContainer';
+import AppContainer from './app/containers/AppContainer';
 
 const Root = () => {
     return (

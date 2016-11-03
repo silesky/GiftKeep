@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Drawer from 'react-native-drawer';
-import { store } from '../store';
-import * as actions from '../actions';
+import { store } from './../stores/store';
+import * as actions from './../actions/actions';
 
 // Components
 import { TopBar } from './../components/TopBar';
@@ -10,7 +10,7 @@ import {  BottomBar } from './../components/BottomBar';
 
 //Containers (not named exports)
 import DrawerContainer from './../containers/DrawerContainer';
-import Body from './Body';
+import Body from './../containers/Body';
 
 
 
