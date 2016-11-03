@@ -1,32 +1,21 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import * as actions from './../actions';
-import {
-    Container,
-    List,
-    ListItem,
-    Content,
-} from 'native-base';
-
+import { Container, List, Content } from 'native-base';
 import { store } from './../store';
 import { FriendListItem } from './../components/FriendListItem';
 
 export class DrawerContainer extends Component {
-    constructor(props) {
-      super(props);
-    
-    }
-
-    render() {
-         console.log('store changed--  DrawerContainer inerheriting props!!', this.props);
+  constructor(props) {
+    super(props);
+  }
+  render() {
     return (
-   
-    <Container>
+      <Container>
         <Content>
             <List>
-            { store.getState().data.map((el, index)=> {
+            { this.props.state.data.map((el, index)=> {
                 return (
-
                     <FriendListItem 
                         key={index}
                         addFriend={() => store.dispatch(actions.addFriend())} 
@@ -39,7 +28,9 @@ export class DrawerContainer extends Component {
             </List>
         </Content>
     </Container>
-        )
-    }
-    
+    )
+  }
+
 }
+const mstp = (state) => ({state});
+export default connect(mstp)(DrawerContainer)

@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import Drawer from 'react-native-drawer';
-
 import { store } from '../store';
 import * as actions from '../actions';
-import { GiftCard } from './../components/GiftCard';
-import { DrawerContainer } from './../containers/DrawerContainer';
-import { FriendInfo, BottomBar, Body } from '../index.ios';
+
+// Components
 import { TopBar } from './../components/TopBar';
+import {  BottomBar } from './../components/BottomBar';
+
+//Containers (not named exports)
+import DrawerContainer from './../containers/DrawerContainer';
+import Body from './Body';
+
+
 
 class AppContainer extends Component {
     constructor() {
@@ -36,11 +40,11 @@ render() {
     
 )}}
 
-const mstp = (state) => {
+
+const mstp = (state) => { 
     return {
         state: state
     }
 }
-
 export default connect(mstp)(AppContainer)
     
