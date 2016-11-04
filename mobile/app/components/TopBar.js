@@ -17,11 +17,9 @@ export const TopBar = ({drawerOpen}) => {
                     <Icon name='ios-menu' />
                 </Button>
                 <Title>Gifter</Title>
-
                 <Button transparent>
                     <Icon name='ios-settings' />
                 </Button>
-                <Text>GiftCard</Text>
             </Header>     
                 )
 }

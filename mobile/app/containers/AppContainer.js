@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Drawer from 'react-native-drawer';
-import { store } from './../stores/store';
+import { bindActionCreators } from 'redux'
 import * as actions from './../actions/actions';
-
+import AddFriendForm from './../components/AddFriendForm';
 // Components
 import { TopBar } from './../components/TopBar';
 import { BottomBar } from './../components/BottomBar';
@@ -19,7 +19,8 @@ class AppContainer extends Component {
       super()
     }
 render() {
-    const { selectedFriendId } = this.props.state.visible;
+    console.log(this.props);
+    const { selectedFriendId, addFriendModalVisible } = this.props.state.visible;
     return (
     <Drawer
         tapToClose={true}
@@ -32,19 +33,20 @@ render() {
         >   
             <TopBar drawerOpen={() => this._drawer.open()} />                
             <Body friendId={selectedFriendId} />
+            <AddFriendForm addFriendToggleModalVisible={() => this.props.actions.addFriendToggleModalVisible()} visible={addFriendModalVisible} />
             <BottomBar 
-            addGift={() => store.dispatch(actions.addGift(selectedFriendId))} 
-            addFriend={() => store.dispatch(actions.addFriend())} 
+            addGift={() => this.props.actions.addGift(selectedFriendId)} 
+            addFriend={() => this.props.actions.addFriend()} 
             />
     </Drawer>
     
 )}}
 
 
-const mstp = (state) => { 
-    return {
-        state: state
-    }
+const mstp = (state) => ({state});
+// no more store.dispatch(actions.addFriend())
+const mdtp = (dispatch) => {
+  return { actions: bindActionCreators(actions, dispatch) }
 }
-export default connect(mstp)(AppContainer)
+export default connect(mstp, mdtp)(AppContainer)
     

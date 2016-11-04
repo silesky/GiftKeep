@@ -38,11 +38,17 @@ const user = (state = initialStateUser, action) => {
 
 }
 
-const initialStateFirstUser = {selectedFriendId: initialStateUser.data[0].friendId};
+const initialStateFirstUser = {
+    selectedFriendId: initialStateUser.data[0].friendId,
+    addFriendModalVisible: false };
 const visible = (state = initialStateFirstUser, action) => {
     switch (action.type) {
         case 'SELECT_FRIEND':
-        return {selectedFriendId: action.payload.friendId}
+        console.log('selectFriend reducer');
+            return {selectedFriendId: action.payload.friendId}
+        case 'ADDFRIEND_TOGGLE_MODAL_VISIBLE':
+        console.log('modal reducer');
+            return Object.assign({}, state, {addFriendModalVisible: !state.addFriendModalVisible});
     default:
         return state;
     }

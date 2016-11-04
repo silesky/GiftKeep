@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
 import * as actions from './../actions/actions';
 import { Container, List, Content, Header, Title } from 'native-base';
-import { store } from './../stores/store';
 import { FriendListItem } from './../components/FriendListItem';
 
 export class DrawerContainer extends Component {
@@ -20,7 +20,7 @@ export class DrawerContainer extends Component {
             { this.props.state.user.data.map((el, index) => (
                     <FriendListItem 
                         key={index}
-                        selectFriend={() => store.dispatch(actions.selectFriend(el.friendId))} 
+                        selectFriend={() => this.props.actions.selectFriend(el.friendId)} 
                         friendName={el.friendName}
                       />
               )) 
@@ -32,5 +32,8 @@ export class DrawerContainer extends Component {
   }
 
 }
+
+
+const mdtp = (dispatch) => ({ actions: bindActionCreators(actions, dispatch) })
 const mstp = (state) => ({state});
-export default connect(mstp)(DrawerContainer)
+export default connect(mstp, mdtp)(DrawerContainer)
