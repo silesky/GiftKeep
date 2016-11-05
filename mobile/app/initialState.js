@@ -24,7 +24,7 @@ export const initialStateUser = {
                 "friendId": 456
             },
             {   "order": 3,
-                 "bday": "08-18",
+                 "bday": "07-19",
                 "friendName" : "Stephen",
                 "gifts" : [{ "giftName": "Serfas Bike Light", "giftId": 331 }],
                 "friendId": 789

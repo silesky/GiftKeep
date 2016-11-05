@@ -33,6 +33,7 @@ render() {
             <TopBar drawerOpen={() => this._drawer.open()} />                
             <Body friendId={selectedFriendId} />
             <CreateFriendForm 
+                selectFriend={this.props.actions.selectFriend}
                 createFriend={this.props.actions.createFriend}
                 createFriendToggleModalVisible={this.props.actions.createFriendToggleModalVisible}  
                 createFriendModalVisibility={createFriendModalVisibility} />

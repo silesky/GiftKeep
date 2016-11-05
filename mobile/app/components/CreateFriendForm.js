@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {
   StyleSheet,
   Modal
@@ -20,20 +20,30 @@ import {
 } from 'native-base';
 import DatePicker from 'react-native-datepicker';
 
-/* onRequestClose={() => createFriendToggleModalVisible()}  mandatory android prop*/
-const CreateFriendForm = ({
-  createFriendToggleModalVisible,
-  createFriendModalVisibility,
-  createFriend
-}) => {
-  let nameInput, bdayInput = '';
+export default class CreateFriendForm extends Component {
+  constructor() {
+    super();
+    this.state = {
+      nameInput: null,
+      bdayInput: null,
+    }
+    // need to use this.state in order for the bdayInput to know to rerender once a date is picked. 
+    // Redux is a bit overkill just to handle temporary form data.
+    this.setName = (input) => this.setState({nameInput: input});
+    this.setBday = (input) => this.setState({bdayInput: input});
+  }
+
+  render() {
+    const { 
+      createFriendToggleModalVisible,
+      createFriendModalVisibility,
+      createFriend } = this.props;
   return (
       <Modal 
         visible={createFriendModalVisibility} 
         animationType={'slide'} 
         transparent={false}
         >
-
         <Container style={{ height: 50 }}>
             <Header>
               <Button transparent>
@@ -47,17 +57,23 @@ const CreateFriendForm = ({
                       <InputGroup>
                           <Icon name='ios-person' />
                           <Input 
-                            onChangeText={(input) => nameInput = input} 
-                            placeholder='Name' />
+                            onChangeText={(input) => this.setName(input)} 
+                            placeholder='Name' 
+                            placeholderTextColor='#c9c9c9'/>
                       </InputGroup>
                     </ListItem>
                         <ListItem>
                           <Icon name='md-calendar' />
                           <DatePicker 
                             showIcon={false}
-                            onDateChange={(input) => bdayInput = input}
+                            onDateChange={(input) => this.setBday(input)}
                             style={{width: 200}}
                             mode="date"
+                            date={this.state.bdayInput}
+                            format="MM-DD"
+                            placeholder="Birthday"
+                            confirmBtnText="Confirm"
+                            cancelBtnText="Cancel"
                             customStyles={{
                               dateInput: {
                                   flexDirection: 'row',
@@ -66,17 +82,11 @@ const CreateFriendForm = ({
                                   paddingLeft: 10, /* double name */
                                   paddingRight: 5, /* does nothing, same as name */
                                   borderWidth: null,
-                              
-
                                 }
                            
                             }}
-                            placeholder="Birthday"
-                            format="YYYY-MM-DD"
-                            minDate="2016-05-01"
-                            maxDate="2016-06-01"
-                            confirmBtnText="Confirm"
-                            cancelBtnText="Cancel" />
+                
+                        />
                          </ListItem>
                 </List>
                 
@@ -88,14 +98,17 @@ const CreateFriendForm = ({
                       name='ios-close'
                       style={{color: 'white'}} />
                   </Button>   
-                <Button onPress={() => createFriend(nameInput, bdayInput)}>Create</Button>
+                <Button onPress={() => {
+                  createFriend(this.state.nameInput, this.state.bdayInput);
+                  console.log('bday input created.', this.state.bdayInput);
+                }}>Create</Button>
               </FooterTab>
             </Footer>
         </Container>
       </Modal>
-
-
-  )
+    );
+  }
 }
 
-export default CreateFriendForm;
+/* onRequestClose={() => createFriendToggleModalVisible()}  mandatory android prop*/
+

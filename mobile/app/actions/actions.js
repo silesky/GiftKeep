@@ -6,14 +6,22 @@ export const createFriendToggleModalVisible = () => {
     }
 }
 
+export const _createFriend = (friendName, bday) => ({type: 'CREATE_FRIEND', payload: {friendName, bday}});
 // modal visibility toggle called
 export const createFriend = (friendName, bday) => {
     console.log('bday input:', bday);
     bday = (bday) ? bday : '???';
     return function(dispatch, getState) {
-        dispatch({type: 'CREATE_FRIEND', payload: {friendName, bday}});
-        dispatch(createFriendToggleModalVisible());
+       dispatch(_createFriend(friendName, bday));
+       let state = getState();
+       const latestFriendId = state.user.data[state.user.data.length - 1].friendId;
+       dispatch(selectFriend(latestFriendId));
+       dispatch(createFriendToggleModalVisible());
+          
     }
+
+
+    
 }
 // friendId
 export const addGift = (friendId) => {
