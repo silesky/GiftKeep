@@ -1,7 +1,7 @@
 # OSX
 #
 .DS_Store
-
+typings/*
 # Xcode
 #
 build/

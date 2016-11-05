@@ -7,8 +7,9 @@ export const createFriendToggleModalVisible = () => {
 }
 
 // modal visibility toggle called
-export const createFriend = (friendName = 'new friend', bday = 'today') => {
-    console.log(`createFriend dispatched... friendName: ${friendName} bday: ${bday}`, );
+export const createFriend = (friendName, bday) => {
+    console.log('bday input:', bday);
+    bday = (bday) ? bday : '???';
     return function(dispatch, getState) {
         dispatch({type: 'CREATE_FRIEND', payload: {friendName, bday}});
         dispatch(createFriendToggleModalVisible());
