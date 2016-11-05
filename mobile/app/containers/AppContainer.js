@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Drawer from 'react-native-drawer';
 import { bindActionCreators } from 'redux'
 import * as actions from './../actions/actions';
-import AddFriendForm from './../components/AddFriendForm';
+import CreateFriendForm from './../components/CreateFriendForm';
 // Components
 import { TopBar } from './../components/TopBar';
 import { BottomBar } from './../components/BottomBar';
@@ -19,8 +19,7 @@ class AppContainer extends Component {
       super()
     }
 render() {
-    console.log(this.props);
-    const { selectedFriendId, addFriendModalVisible } = this.props.state.visible;
+    const { selectedFriendId, createFriendModalVisibility } = this.props.state.visible;
     return (
     <Drawer
         tapToClose={true}
@@ -33,10 +32,13 @@ render() {
         >   
             <TopBar drawerOpen={() => this._drawer.open()} />                
             <Body friendId={selectedFriendId} />
-            <AddFriendForm addFriendToggleModalVisible={() => this.props.actions.addFriendToggleModalVisible()} visible={addFriendModalVisible} />
+            <CreateFriendForm 
+                createFriend={this.props.actions.createFriend}
+                createFriendToggleModalVisible={this.props.actions.createFriendToggleModalVisible}  
+                createFriendModalVisibility={createFriendModalVisibility} />
             <BottomBar 
-            addGift={() => this.props.actions.addGift(selectedFriendId)} 
-            addFriend={() => this.props.actions.addFriend()} 
+                addGift={this.props.actions.addGift.bind(this, selectedFriendId)} 
+                createFriendToggleModalVisible={this.props.actions.createFriendToggleModalVisible} 
             />
     </Drawer>
     
@@ -44,7 +46,7 @@ render() {
 
 
 const mstp = (state) => ({state});
-// no more store.dispatch(actions.addFriend())
+// no more store.dispatch(actions.createFriend())
 const mdtp = (dispatch) => {
   return { actions: bindActionCreators(actions, dispatch) }
 }

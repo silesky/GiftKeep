@@ -1,24 +1,17 @@
-export const increment = () => ({'type': 'INCREMENT'})
-export const submitFriend = ( friendName = "New Friend" ) => {
-    console.log('addfriend action called');
-   return {
-    type: 'ADD_FRIEND',
-    payload: { friendName },
-    }
-}
-
-export const addFriendToggleModalVisible = () => {
+import moment from 'moment';
+export const createFriendToggleModalVisible = () => {
     console.log('modal visibility toggle action called');
     return {
-        type: 'ADDFRIEND_TOGGLE_MODAL_VISIBLE'
+        type: 'CREATE_FRIEND_TOGGLE_MODAL_VISIBLE'
     }
 }
 
 // modal visibility toggle called
-export const addFriend = (friendName) => {
+export const createFriend = (friendName = 'new friend', bday = 'today') => {
+    console.log(`createFriend dispatched... friendName: ${friendName} bday: ${bday}`, );
     return function(dispatch, getState) {
-        dispatch(submitFriend(friendName));
-        dispatch(addFriendToggleModalVisible());
+        dispatch({type: 'CREATE_FRIEND', payload: {friendName, bday}});
+        dispatch(createFriendToggleModalVisible());
     }
 }
 // friendId
@@ -32,7 +25,6 @@ export const addGift = (friendId) => {
 }
 
 export const selectFriend = (friendId) => {
-    console.log(friendId, "->friendId");
     return {
         type: 'SELECT_FRIEND',
         payload: {friendId}

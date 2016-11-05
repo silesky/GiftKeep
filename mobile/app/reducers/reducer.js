@@ -1,80 +1,67 @@
-import { initialStateUser } from './../initialState.js'
-import { combineReducers } from 'redux'
 import {
-    createUuid
+  initialStateUser
+} from './../initialState.js'
+import {
+  combineReducers
+} from 'redux'
+import {
+  createUuid
 } from './../utils/util';
 
 const user = (state = initialStateUser, action) => {
+  //console.log("oldState: ", state)
+  switch (action.type) {
+    case 'CREATE_FRIEND':
+      return Object.assign({}, {
+        data: [...state.data, {
+          friendId: createUuid(),
+          friendName: action.payload.friendName,
+          bday: action.payload.bday,
+          gifts: []
+        }]
+      })
+    case 'ADD_GIFT':
+      const newData = state.data.map(el => {
+        if (el.friendId === action.payload.friendId) {
+          el.gifts = [...el.gifts, {
+            giftName: 'new gift',
+            giftId: createUuid()
+          }]
+        }
+        return el
+      })
+      return Object.assign({}, {
+        data: newData
+      });
+    
 
-    //console.log("oldState: ", state)
-    switch (action.type) {
-        case 'INCREMENT':
-            console.log('INCREMENT CALLED, state: ', state)
-            return state
-        case 'ADD_FRIEND':
-            const friendName = action.payload.friendName;
-            return Object.assign({}, {
-                data: [...state.data, {
-                    friendId: createUuid(),
-                    friendName: friendName,
-                    gifts: []
-                }]
-            })
-        case 'ADD_GIFT':
-            const friendId = action.payload.friendId;
-               const newData = state.data.map(el => {
-                if (el.friendId === friendId) {
-                    el.gifts = [...el.gifts, {
-                        giftName: 'new gift',
-                        giftId: createUuid()
-                    }]
-                } 
-                return el
-            })
-            return Object.assign({}, {data: newData})
-        default:
-            return state;
-    }
+
+    default:
+      return state;
+  }
 
 }
 
 const initialStateFirstUser = {
-    selectedFriendId: initialStateUser.data[0].friendId,
-    addFriendModalVisible: false };
+  selectedFriendId: initialStateUser.data[0].friendId,
+  createFriendModalVisibility: false
+};
 const visible = (state = initialStateFirstUser, action) => {
-    switch (action.type) {
-        case 'SELECT_FRIEND':
-        console.log('selectFriend reducer');
-            return {selectedFriendId: action.payload.friendId}
-        case 'ADDFRIEND_TOGGLE_MODAL_VISIBLE':
-        console.log('modal reducer');
-            return Object.assign({}, state, {addFriendModalVisible: !state.addFriendModalVisible});
+  switch (action.type) {
+    case 'SELECT_FRIEND':
+      return Object.assign({}, state, {
+        selectedFriendId: action.payload.friendId
+      });
+    case 'CREATE_FRIEND_TOGGLE_MODAL_VISIBLE':
+      return Object.assign({}, state, {
+        createFriendModalVisibility: !state.createFriendModalVisibility
+      });
     default:
-        return state;
-    }
+      return state;
+  }
 }
 
 export const rootReducer = combineReducers({
-    user, 
-    visible
+  user,
+  visible
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

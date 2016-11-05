@@ -20,7 +20,7 @@ export class DrawerContainer extends Component {
             { this.props.state.user.data.map((el, index) => (
                     <FriendListItem 
                         key={index}
-                        selectFriend={() => this.props.actions.selectFriend(el.friendId)} 
+                        selectFriend={this.props.actions.selectFriend.bind(this, el.friendId)} 
                         friendName={el.friendName}
                       />
               )) 
