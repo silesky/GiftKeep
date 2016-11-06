@@ -8,10 +8,6 @@ import { FriendInfo } from './../components/FriendInfo';
 class Body extends Component {
     constructor(props) {
       super(props);
-     
-      // this.updateGift = //
-      // this.saveGift ??
-      // pass the updateGift function to friendInfo here
     }
 
     render() {
@@ -27,7 +23,8 @@ class Body extends Component {
                     { gifts.map((el, ind) => {
                         return ( 
                             <GiftCard 
-                                updateGift={this.props.actions.updateGift} 
+                                giftDesc={el.giftDesc}
+                                updateGiftDesc={this.props.actions.updateGiftDesc.bind(this, friendId, el.giftId)} 
                                 giftId={el.giftId} 
                                 giftName={el.giftName} 
                                 key={ind} />

@@ -9,7 +9,8 @@ import {
     Text,
 } from 'native-base';
 import { lipsum } from './../utils/util';
-export const GiftCard = ({giftName}) => {
+export const GiftCard = ({giftName, friendId, friendName, updateGiftDesc, giftDesc}) => {
+  console.log('rerender', 'current giftname:', giftName);
   // should take a name, birthday and text prop, along with being editable and so forth
         return (
            <Container >
@@ -20,7 +21,11 @@ export const GiftCard = ({giftName}) => {
                        </CardItem>
                        <CardItem>
                           <InputGroup borderType='underline' >             
-                        <Input />
+                        <Input value={giftDesc} onChangeText={(input) => {
+                          updateGiftDesc(input)
+                          console.log('you are typing into friendName:', friendName) 
+                          }}
+                        />
                     </InputGroup>
                        </CardItem>
                    </Card>
