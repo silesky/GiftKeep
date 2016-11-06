@@ -25,9 +25,17 @@ render() {
         tapToClose={true}
         openDrawerOffset={0.6 /* % gap on right side of drawer */}
         panCloseMask={0.6 /* tightly coupled ^. % of screen can be used to close (if tapToClose=true}    */}
-        closedDrawerOffset={-3}
         ref={(ref) => this._drawer = ref}
-        type='static'
+        tweenDuration={70 /* speed */}
+        tweenHandler={(ratio) => { /* transparency effects */
+          return {
+            drawer: { shadowRadius: ratio < 0.2 ? ratio * 5 * 5 : 5 },
+            main: {
+              opacity: (2 - ratio) / 2,
+            },
+          };
+        }}
+        negotiatePan
         content={<DrawerContainer />}
         >   
             <TopBar drawerOpen={() => this._drawer.open()} />                
