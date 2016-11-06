@@ -11,6 +11,8 @@ import {
 const user = (state = initialStateUser, action) => {
   //console.log("oldState: ", state)
   switch (action.type) {
+    case 'UPDATE_GIFT':
+    return Object.assign({}, {...state});
     case 'CREATE_FRIEND':
       return Object.assign({}, {
         data: [...state.data, {

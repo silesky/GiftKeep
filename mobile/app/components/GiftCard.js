@@ -4,6 +4,8 @@ import {
     Card,
     CardItem,
     Content,
+    Input,
+    InputGroup,
     Text,
 } from 'native-base';
 import { lipsum } from './../utils/util';
@@ -17,7 +19,9 @@ export const GiftCard = ({giftName}) => {
                            <Text>{giftName}</Text>
                        </CardItem>
                        <CardItem>
-                           <Text>{lipsum}</Text>
+                          <InputGroup borderType='underline' >             
+                        <Input />
+                    </InputGroup>
                        </CardItem>
                    </Card>
                </Content>

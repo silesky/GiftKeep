@@ -9,6 +9,7 @@ export class DrawerContainer extends Component {
   constructor(props) {
     super(props);
   }
+  const
   render() {
     return (
       <Container>

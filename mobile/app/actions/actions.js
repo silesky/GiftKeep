@@ -1,10 +1,5 @@
-import moment from 'moment';
-export const createFriendToggleModalVisible = () => {
-    console.log('modal visibility toggle action called');
-    return {
-        type: 'CREATE_FRIEND_TOGGLE_MODAL_VISIBLE'
-    }
-}
+
+export const createFriendToggleModalVisible = () => ({type: 'CREATE_FRIEND_TOGGLE_MODAL_VISIBLE'})
 
 export const _createFriend = (friendName, bday) => ({type: 'CREATE_FRIEND', payload: {friendName, bday}});
 // modal visibility toggle called
@@ -17,11 +12,7 @@ export const createFriend = (friendName, bday) => {
        const latestFriendId = state.user.data[state.user.data.length - 1].friendId;
        dispatch(selectFriend(latestFriendId));
        dispatch(createFriendToggleModalVisible());
-          
     }
-
-
-    
 }
 // friendId
 export const addGift = (friendId) => {
@@ -32,6 +23,13 @@ export const addGift = (friendId) => {
         payload: {friendId}
     }
 }
+
+export const updateGift = (friendId, inputText) => {
+    return {
+      type: 'UPDATE_GIFT',
+      payload: {friendId, inputText}
+    }
+  }
 
 export const selectFriend = (friendId) => {
     return {

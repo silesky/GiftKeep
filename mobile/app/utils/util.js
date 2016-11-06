@@ -6,3 +6,6 @@ export const createUuid = () => {
       return v.toString(16);
   });
 }
+export const getByItemId = (state = this.props.state.user, target, friendId) => {
+  return state.find((el) => el.friendId === friendId).target
+}
