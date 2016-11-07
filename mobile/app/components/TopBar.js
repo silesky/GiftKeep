@@ -9,7 +9,7 @@ import {
 } from 'native-base';
 
 
-export const TopBar = ({drawerOpen, friendName}) => {
+export const TopBar = ({drawerOpen, friendName, testClick}) => {
         return (
             <Header>
                 <Button transparent
@@ -17,7 +17,8 @@ export const TopBar = ({drawerOpen, friendName}) => {
                     <Icon name='ios-menu' />
                 </Button>
                 <Title>{friendName}</Title>
-                <Button transparent>
+                <Button transparent
+                onPress={() => testClick()}>
                     <Icon name='ios-settings' />
                 </Button>
             </Header>     

@@ -16,12 +16,13 @@ import { getFriendNameById } from '../utils/util';
 
 
 class AppContainer extends Component {
-    constructor() {
-      super()
+    constructor(props) {
+      super(props)
     }
+
 render() {
     const { selectedFriendId, createFriendModalVisibility } = this.props.state.visible;
-    let currentFriendName = getFriendNameById(this.props.state, selectedFriendId)
+    
     console.log(this.props.state);
     return (
     <Drawer
@@ -40,14 +41,21 @@ render() {
         }}
         negotiatePan
         content={<DrawerContainer />}
-        >   
-            <TopBar friendName={currentFriendName} drawerOpen={() => this._drawer.open()} />                
-            <Body friendId={selectedFriendId} />
+    >   
+            <TopBar 
+                testClick={this.props.actions.testClick} 
+                friendName={getFriendNameById(this.props.state, selectedFriendId)} 
+                drawerOpen={() => this._drawer.open()} 
+            />                
+            <Body 
+                friendId={selectedFriendId} 
+            />
             <CreateFriendForm 
                 selectFriend={this.props.actions.selectFriend}
                 createFriend={this.props.actions.createFriend}
                 createFriendToggleModalVisible={this.props.actions.createFriendToggleModalVisible}  
-                createFriendModalVisibility={createFriendModalVisibility} />
+                createFriendModalVisibility={createFriendModalVisibility} 
+            />
             <BottomBar 
                 addGift={this.props.actions.addGift.bind(this, selectedFriendId)} 
                 createFriendToggleModalVisible={this.props.actions.createFriendToggleModalVisible} 
