@@ -22,7 +22,7 @@ const user = (state = initialStateUser, action) => {
 
   switch (action.type) {
 
-    case 'UPDATE_GIFT_DESC':
+    case 'UPDATE_GIFT_TITLE':
         friendId = action.payload.friendId;
         giftTitle = action.payload.giftTitle;
         giftId = action.payload.giftId;

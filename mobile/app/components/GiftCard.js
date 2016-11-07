@@ -12,7 +12,7 @@ import {
     Title
 } from 'native-base';
 import { lipsum } from './../utils/util';
-export const GiftCard = ({deleteGift, updateGiftDesc, giftDesc, giftTitle}) => {
+export const GiftCard = ({deleteGift, updateGiftDesc, giftDesc, updateGiftTitle, giftTitle}) => {
   console.log('rerender', 'current giftTitle:', giftTitle);
   // should take a name, birthday and text prop, along with being editable and so forth
         return (
@@ -20,7 +20,12 @@ export const GiftCard = ({deleteGift, updateGiftDesc, giftDesc, giftTitle}) => {
                <Content>
                    <Card>
                        <CardItem header>
-                           <Title>{giftTitle}</Title>
+                        <Input 
+                          value={giftTitle} 
+                          onChangeText={(input) => {
+                            updateGiftTitle(input)
+                          }}
+                        />
                           <Button transparent>
                             <Icon 
                               name='ios-close' 

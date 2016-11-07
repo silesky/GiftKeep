@@ -5,6 +5,13 @@ export const updateGiftDesc = (friendId, giftId, giftDesc) => {
       payload: {friendId, giftId, giftDesc}
     }
   }
+export const updateGiftTitle = (friendId, giftId, giftTitle) => {
+  console.log('updateGift', friendId, giftId, giftTitle);
+    return {
+      type: 'UPDATE_GIFT_TITLE',
+      payload: {friendId, giftId, giftTitle}
+    }
+  }
 export const deleteGift = (friendId, giftId) => {
   console.log('deleteGift:', friendId, giftId);
   return {
@@ -12,6 +19,7 @@ export const deleteGift = (friendId, giftId) => {
     payload: {friendId, giftId}
     }
   }
+
 export const createFriendToggleModalVisible = () => ({type: 'CREATE_FRIEND_TOGGLE_MODAL_VISIBLE'})
 
 export const _createFriend = (friendName, bday) => ({type: 'CREATE_FRIEND', payload: {friendName, bday}});
@@ -32,7 +40,7 @@ export const addGift = (friendId) => {
     console.log(friendId, 'addgift called');
     return {
         type: 'ADD_GIFT',
-        // e.g {giftName: 'new gift'}
+        // e.g {giftTitle: 'new gift'}
         payload: {friendId}
     }
 }

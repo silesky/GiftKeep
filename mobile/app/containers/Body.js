@@ -25,6 +25,7 @@ class Body extends Component {
                             <GiftCard 
                                 deleteGift={this.props.actions.deleteGift.bind(this, friendId, el.giftId)}
                                 giftDesc={el.giftDesc}
+                                updateGiftTitle={this.props.actions.updateGiftTitle.bind(this, friendId, el.giftId)}
                                 updateGiftDesc={this.props.actions.updateGiftDesc.bind(this, friendId, el.giftId)} 
                                 giftId={el.giftId} 
                                 giftTitle={el.giftTitle} 
