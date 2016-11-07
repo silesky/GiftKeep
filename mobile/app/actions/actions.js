@@ -2,13 +2,16 @@ export const updateGiftDesc = (friendId, giftId, giftDesc) => {
   console.log('updateGift', friendId, giftId, giftDesc);
     return {
       type: 'UPDATE_GIFT_DESC',
-      payload: {
-        friendId: friendId, 
-        giftId: giftId,
-        giftDesc: giftDesc}
+      payload: {friendId, giftId, giftDesc}
     }
   }
-
+export const deleteGift = (friendId, giftId) => {
+  console.log('deleteGift:', friendId, giftId);
+  return {
+    type: 'DELETE_GIFT',
+    payload: {friendId, giftId}
+    }
+  }
 export const createFriendToggleModalVisible = () => ({type: 'CREATE_FRIEND_TOGGLE_MODAL_VISIBLE'})
 
 export const _createFriend = (friendName, bday) => ({type: 'CREATE_FRIEND', payload: {friendName, bday}});

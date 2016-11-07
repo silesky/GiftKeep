@@ -4,9 +4,9 @@
                 "friendName" : "Nick",
                 "bday": "12-25",
                 "gifts" : [
-                    {"giftName": "Nick Gift!", "giftDesc": "...nick desc", "giftId": 111 },
-                    {"giftName": "Tennis Racket", "giftDesc": "...nick desc", "giftId": 112},
-                    {"giftName": "The Once", "giftDesc": "..nick desc", "giftId": 113 },
+                    {"giftTitle": "Nick Gift!", "giftDesc": "...nick desc", "giftId": 111 },
+                    {"giftTitle": "Tennis Racket", "giftDesc": "...nick desc", "giftId": 112},
+                    {"giftTitle": "The Once", "giftDesc": "..nick desc", "giftId": 113 },
                 ],
               
             },
@@ -17,16 +17,16 @@
                 "friendName" : "Dan",
                 "bday": "07-01",
                 "gifts" : [
-                    { "giftName": "Dan Gift!",  "giftDesc": "...dan desc", "giftId": 221},
-                    { "giftName": "The Wall", "giftDesc": "...dan desc", "giftId": 222},
-                    { "giftName": "Riot Geat", "giftDesc": "...dan desc", "giftId": 223},
+                    { "giftTitle": "Dan Gift!",  "giftDesc": "...dan desc", "giftId": 221},
+                    { "giftTitle": "The Wall", "giftDesc": "...dan desc", "giftId": 222},
+                    { "giftTitle": "Riot Geat", "giftDesc": "...dan desc", "giftId": 223},
                 ]
             },
             {   "friendId": 789,
                 "order": 3,
                 "bday": "07-19",
                 "friendName" : "Stephen",
-                "gifts" : [{ "giftName": "Stephen Gift!",  "giftDesc": "...steve desc", "giftId": 331 }],
+                "gifts" : [{ "giftTitle": "Stephen Gift!",  "giftDesc": "...steve desc", "giftId": 331 }],
                 
             }
          ]

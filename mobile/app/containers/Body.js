@@ -23,10 +23,11 @@ class Body extends Component {
                     { gifts.map((el, ind) => {
                         return ( 
                             <GiftCard 
+                                deleteGift={this.props.actions.deleteGift.bind(this, friendId, el.giftId)}
                                 giftDesc={el.giftDesc}
                                 updateGiftDesc={this.props.actions.updateGiftDesc.bind(this, friendId, el.giftId)} 
                                 giftId={el.giftId} 
-                                giftName={el.giftName} 
+                                giftTitle={el.giftTitle} 
                                 key={ind} />
                         )
                     })}

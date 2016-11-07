@@ -1,29 +1,39 @@
 import React from 'react';
 import {
+    Button,
     Container,
     Card,
     CardItem,
     Content,
+    Icon,
     Input,
     InputGroup,
     Text,
+    Title
 } from 'native-base';
 import { lipsum } from './../utils/util';
-export const GiftCard = ({giftName, friendId, friendName, updateGiftDesc, giftDesc}) => {
-  console.log('rerender', 'current giftname:', giftName);
+export const GiftCard = ({deleteGift, updateGiftDesc, giftDesc, giftTitle}) => {
+  console.log('rerender', 'current giftTitle:', giftTitle);
   // should take a name, birthday and text prop, along with being editable and so forth
         return (
            <Container >
                <Content>
                    <Card>
                        <CardItem header>
-                           <Text>{giftName}</Text>
+                           <Title>{giftTitle}</Title>
+                          <Button transparent>
+                            <Icon 
+                              name='ios-close' 
+                              onPress={() => deleteGift()} 
+                            />
+                          </Button>
                        </CardItem>
                        <CardItem>
-                          <InputGroup borderType='underline' >             
-                        <Input value={giftDesc} onChangeText={(input) => {
-                          updateGiftDesc(input)
-                          console.log('you are typing into friendName:', friendName) 
+                        <InputGroup borderType='underline'>             
+                        <Input 
+                          value={giftDesc} 
+                          onChangeText={(input) => {
+                            updateGiftDesc(input)
                           }}
                         />
                     </InputGroup>

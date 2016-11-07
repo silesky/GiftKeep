@@ -12,13 +12,47 @@ const user = (state = initialStateUser, action) => {
     newData, 
     oldgiftArr, 
     newGiftArr, 
-    giftDesc, 
     friendId, 
-    giftId;
-  const _getGiftArrByFriendId = (friendId) => state.data.find((el) => el.friendId === friendId).gifts
+    giftDesc, 
+    giftId,
+    giftTitle
+    ;
+  const _getGiftArrByFriendId = (friendId) => state.data.find(el => el.friendId === friendId).gifts;
   const _getSingleGiftObj = (friendId, giftId) => _getGiftArrByFriendId(friendId).find((el) => el.giftId === giftId)
 
   switch (action.type) {
+
+    case 'UPDATE_GIFT_DESC':
+        friendId = action.payload.friendId;
+        giftTitle = action.payload.giftTitle;
+        giftId = action.payload.giftId;
+        newGiftArr = _getGiftArrByFriendId(friendId).map(el => {
+           if (el.giftId === giftId) el.giftTitle = giftTitle
+           return el
+      })
+      newData = state.data.map(el => {
+          if (el.friendId === friendId) el.gifts = newGiftArr
+          return el
+      })
+      newState = Object.assign({}, state, {data: newData})
+      return newState;
+        
+    case 'DELETE_GIFT':
+       friendId = action.payload.friendId;
+       giftId = action.payload.giftId;
+
+       newGiftArr = _getGiftArrByFriendId(friendId)
+       .filter(el => el.giftId !== giftId)
+
+      console.log('newGiftArr with thing removed', newGiftArr);
+      newData = state.data.map(el => {
+        if (el.friendId === friendId) el.gifts = newGiftArr
+        return el
+      })
+      newState = Object.assign({}, state, {data: newData})
+      console.log('newState!', newState);
+      return newState;
+
 
     case 'UPDATE_GIFT_DESC':
       friendId = action.payload.friendId;
@@ -51,7 +85,7 @@ const user = (state = initialStateUser, action) => {
       newData = state.data.map(el => {
         if (el.friendId === action.payload.friendId) {
           el.gifts = [...el.gifts, {
-            giftName: 'new gift',
+            giftTitle: 'new gift',
             giftId: createUuid()
           }]
         }
