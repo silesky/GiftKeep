@@ -12,6 +12,7 @@ import { BottomBar } from './../components/BottomBar';
 import DrawerContainer from './../containers/DrawerContainer';
 import Body from './../containers/Body';
 
+import { getFriendNameById } from '../utils/util';
 
 
 class AppContainer extends Component {
@@ -20,6 +21,8 @@ class AppContainer extends Component {
     }
 render() {
     const { selectedFriendId, createFriendModalVisibility } = this.props.state.visible;
+    let currentFriendName = getFriendNameById(this.props.state, selectedFriendId)
+    console.log(this.props.state);
     return (
     <Drawer
         tapToClose={true}
@@ -38,7 +41,7 @@ render() {
         negotiatePan
         content={<DrawerContainer />}
         >   
-            <TopBar drawerOpen={() => this._drawer.open()} />                
+            <TopBar friendName={currentFriendName} drawerOpen={() => this._drawer.open()} />                
             <Body friendId={selectedFriendId} />
             <CreateFriendForm 
                 selectFriend={this.props.actions.selectFriend}

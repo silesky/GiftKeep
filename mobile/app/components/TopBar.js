@@ -9,14 +9,14 @@ import {
 } from 'native-base';
 
 
-export const TopBar = ({drawerOpen}) => {
+export const TopBar = ({drawerOpen, friendName}) => {
         return (
             <Header>
                 <Button transparent
                 onPress={() => drawerOpen()}>
                     <Icon name='ios-menu' />
                 </Button>
-                <Title>Gifter</Title>
+                <Title>{friendName}</Title>
                 <Button transparent>
                     <Icon name='ios-settings' />
                 </Button>
