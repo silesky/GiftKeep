@@ -50,14 +50,14 @@ const user = (state = initialStateUser, action) => {
         return el
       })
       newState = Object.assign({}, state, {data: newData})
-      console.log('newState!', newState);
+    
       return newState;
 
     case 'DELETE_FRIEND':
       friendId = action.payload.friendId;
       newData = state.data.filter(el => el.friendId !== friendId)
       newState = Object.assign({}, state, {data: newData})
-      console.log('deleteFriendReducer->newState!', newState);
+
       return newState;
       
     case 'UPDATE_GIFT_DESC':
@@ -112,6 +112,7 @@ const initialStateFirstUser = {
 };
 const visible = (state = initialStateFirstUser, action) => {
   switch (action.type) {
+
     case 'SELECT_FRIEND':
       return Object.assign({}, state, {
         selectedFriendId: action.payload.friendId

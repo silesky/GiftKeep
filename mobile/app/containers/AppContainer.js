@@ -23,7 +23,7 @@ class AppContainer extends Component {
 render() {
     const { selectedFriendId, createFriendModalVisibility } = this.props.state.visible;
     
-    console.log(this.props.state);
+
     return (
     <Drawer
         tapToClose={true}
