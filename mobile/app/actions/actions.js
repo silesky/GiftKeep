@@ -19,6 +19,14 @@ export const deleteGift = (friendId, giftId) => {
     payload: {friendId, giftId}
     }
   }
+export const deleteFriend = (friendId) => {
+  console.log('deleteFriend called:', friendId);
+  return {
+    type: 'DELETE_FRIEND',
+    payload: {friendId}
+    }
+  }
+
 
 export const createFriendToggleModalVisible = () => ({type: 'CREATE_FRIEND_TOGGLE_MODAL_VISIBLE'})
 
@@ -53,3 +61,9 @@ export const selectFriend = (friendId) => {
     }
 }
 
+export const testClick = () => {
+  console.log('Action->TEST CLICK...')
+  return function(dispatch, getState) {
+    //
+  }
+}

@@ -53,7 +53,13 @@ const user = (state = initialStateUser, action) => {
       console.log('newState!', newState);
       return newState;
 
-
+    case 'DELETE_FRIEND':
+      friendId = action.payload.friendId;
+      newData = state.data.filter(el => el.friendId !== friendId)
+      newState = Object.assign({}, state, {data: newData})
+      console.log('deleteFriendReducer->newState!', newState);
+      return newState;
+      
     case 'UPDATE_GIFT_DESC':
       friendId = action.payload.friendId;
       giftDesc = action.payload.giftDesc;
