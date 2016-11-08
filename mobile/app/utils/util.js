@@ -1,4 +1,4 @@
-import defaultFriend from './../defaultFriend.json';
+import defaultFriend from './../json/defaultFriend.json';
 export const lipsum = 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.'
 export const compose = (f1, f2) => value => f1(f2(value));
 export const createUuid = () => {
