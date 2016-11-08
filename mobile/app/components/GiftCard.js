@@ -19,8 +19,11 @@ export const GiftCard = ({deleteGift, updateGiftDesc, giftDesc, updateGiftTitle,
            <Container >
                <Content>
                    <Card>
-                       <CardItem header>
+                       <CardItem style={{backgroundColor: 'rgb(77, 144, 254)'}} header>
                         <Input 
+                          
+
+                          style={{color: 'white', fontWeight: '700'}}
                           value={giftTitle} 
                           onChangeText={(input) => {
                             updateGiftTitle(input)
@@ -28,21 +31,22 @@ export const GiftCard = ({deleteGift, updateGiftDesc, giftDesc, updateGiftTitle,
                         />
                           <Button transparent>
                             <Icon 
-                              name='ios-close' 
+                              name='ios-close-circle-outline'
+                              style={{color: 'white',fontSize: 30 }}
                               onPress={() => deleteGift()} 
                             />
                           </Button>
                        </CardItem>
-                       <CardItem>
-                        <InputGroup borderType='underline'>             
+                       <CardItem cardBody>     
                         <Input 
+                          placeholder="your gift description..."
+                          multiline={true}
                           value={giftDesc} 
                           onChangeText={(input) => {
                             updateGiftDesc(input)
                           }}
                         />
-                    </InputGroup>
-                       </CardItem>
+                     </CardItem>
                    </Card>
                </Content>
            </Container>
