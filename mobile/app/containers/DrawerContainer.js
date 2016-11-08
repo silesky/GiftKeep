@@ -8,18 +8,16 @@ import { FriendListItem } from './../components/FriendListItem';
 export class DrawerContainer extends Component {
   constructor(props) {
     super(props);
-    const dataArr = this.props.state.user.data;
-
-
   }
+  
   render() {
     return (
       <Container>
-        <Content>
-            <List>
-              <Header>
-                <Title>Friends</Title>
-              </Header>
+          <Header>
+              <Title>Friends</Title>
+          </Header>
+          <Content>
+              <List>
             { this.props.state.user.data.map((el, index) => (
                     <FriendListItem 
                         deleteFriend={this.props.actions.deleteFriend.bind(this, el.friendId)}
@@ -31,7 +29,8 @@ export class DrawerContainer extends Component {
         }
             </List>
         </Content>
-    </Container>
+      </Container>
+
     )
   }
 

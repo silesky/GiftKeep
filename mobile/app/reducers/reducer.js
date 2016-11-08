@@ -1,5 +1,6 @@
 import * as initialStateUser from './../json/initialState.json'
 import * as defaultFriend from './../json/defaultFriend.json'
+import * as emptyState from './../json/emptyState.json'
 import {
   combineReducers
 } from 'redux'
@@ -22,6 +23,8 @@ const user = (state = initialStateUser, action) => {
   const _getSingleGiftObj = (friendId, giftId) => _getGiftArrByFriendId(friendId).find((el) => el.giftId === giftId)
 
   switch (action.type) {
+    case 'CLEAR':
+      return emptyState;
 
     case 'UPDATE_GIFT_TITLE':
         friendId = action.payload.friendId;
@@ -92,7 +95,7 @@ const user = (state = initialStateUser, action) => {
       newData = state.data.map(el => {
         if (el.friendId === action.payload.friendId) {
           el.gifts = [...el.gifts, {
-            giftTitle: 'new gift',
+            giftTitle: '',
             giftId: createUuid()
           }]
         }

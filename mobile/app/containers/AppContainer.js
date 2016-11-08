@@ -3,16 +3,15 @@ import { connect } from 'react-redux';
 import Drawer from 'react-native-drawer';
 import { bindActionCreators } from 'redux'
 import * as actions from './../actions/actions';
-import CreateFriendForm from './../components/CreateFriendForm';
+import { Container } from 'native-base';
 // Components
 import { TopBar } from './../components/TopBar';
 import { BottomBar } from './../components/BottomBar';
-
+import CreateFriendForm from './../components/CreateFriendForm';
 //Containers (not named exports)
 import DrawerContainer from './../containers/DrawerContainer';
 import Body from './../containers/Body';
-
-import { getFriendNameById } from '../utils/util';
+import { getFriendItemById } from './../utils/util';
 
 
 class AppContainer extends Component {
@@ -25,6 +24,7 @@ render() {
     
 
     return (
+
     <Drawer
         tapToClose={true}
         openDrawerOffset={0.6 /* % gap on right side of drawer */}
@@ -41,10 +41,12 @@ render() {
         }}
         negotiatePan
         content={<DrawerContainer />}
-    >   
+    >  
+
+
             <TopBar 
                 testClick={this.props.actions.testClick} 
-                friendName={getFriendNameById(this.props.state, selectedFriendId)} 
+                friendName={getFriendItemById(this.props.state, selectedFriendId, 'friendName')} 
                 drawerOpen={() => this._drawer.open()} 
             />                
             <Body 
@@ -56,11 +58,14 @@ render() {
                 createFriendToggleModalVisible={this.props.actions.createFriendToggleModalVisible}  
                 createFriendModalVisibility={createFriendModalVisibility} 
             />
+
             <BottomBar 
                 addGift={this.props.actions.addGift.bind(this, selectedFriendId)} 
                 createFriendToggleModalVisible={this.props.actions.createFriendToggleModalVisible} 
             />
+            
     </Drawer>
+
     
 )}}
 

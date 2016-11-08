@@ -9,7 +9,27 @@ export const createUuid = () => {
 }
 export const getFriendById = (state, friendId) => {
    const fid = state.user.data.find(el => el.friendId === friendId);
-   return (fid) ? fid : defaultFriend
+   return (fid) ? fid :  null;
+}
+export const getFriendItemById = (state, friendId, key) => {
+   
+   const friend = state.user.data.find(el => el.friendId === friendId);
+
+    // my fallback return should depends on what is being asked for. 
+    // null breaks the app if 
+    let defItem;
+    switch (key) {
+        case 'gifts':
+            defItem = [];
+            break;
+        case 'bday':
+            defItem = '';
+            break;
+        default:
+            defItem = null;
+    }
+
+   return (friend && friend.hasOwnProperty(key)) ? friend[key] :  defItem;
 }
 
 export const getFriendNameById = (state, friendId) => getFriendById(state, friendId).friendName;

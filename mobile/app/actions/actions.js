@@ -1,4 +1,4 @@
-import {getFriendById} from './../utils/util'
+import {getFriendById,} from './../utils/util'
 export const updateGiftDesc = (friendId, giftId, giftDesc) => {
   console.log('updateGift', friendId, giftId, giftDesc);
     return {
@@ -28,7 +28,7 @@ export const selectFriend = (friendId) => {
     }
 }
 
-const _deleteFriend = (friendId) => ({type: 'DELETE_FRIEND',payload: {friendId}})
+const _deleteFriend = (friendId) => ({type: 'DELETE_FRIEND', payload: {friendId}})
 
 const _selectLastFriend = () => {
   return (dispatch, getState) => {
@@ -42,8 +42,9 @@ const _selectNextFriend = (currentFriendId) => {
   return (dispatch, getState) => {
     const state = getState().user.data;
     const nextInd = state.findIndex(el => el.friendId === currentFriendId) + 1; // get index
-    const nextId = state[nextInd].friendId;
-    dispatch(selectFriend(nextId));
+    if (state[nextInd]) dispatch(selectFriend(state[nextInd].friendId))
+
+      
   }
 }
 
@@ -60,7 +61,6 @@ export const deleteFriend = (friendId) => {
           dispatch(_selectNextFriend(friendId));
       } 
       dispatch(_deleteFriend(friendId))
-    
     }
   }
 
@@ -92,6 +92,6 @@ export const addGift = (friendId) => {
 export const testClick = () => {
   console.log('Action->TEST CLICK...')
   return function(dispatch, getState) {
-    //
+    dispatch({type: 'CLEAR'}); 
   }
 }
