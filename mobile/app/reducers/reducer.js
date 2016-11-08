@@ -1,4 +1,5 @@
-import * as initialStateUser from './../initialState.json'
+import * as initialStateUser from './../json/initialState.json'
+import * as defaultFriend from './../json/defaultFriend.json'
 import {
   combineReducers
 } from 'redux'
