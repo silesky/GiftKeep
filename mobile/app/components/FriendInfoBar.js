@@ -1,12 +1,17 @@
 import React from 'react';
 import moment from 'moment';
 import {
+    Icon,
     Text,
     List, 
-    ListItem
+    ListItem,
+    Header,
+    Card,
+    CardItem,
+    Title
 } from 'native-base';
 
-export const FriendInfo = ({friendName, bday}) => {
+export const FriendInfoBar = ({friendName, bday}) => {
     const parsedBday = moment(bday, 'MM-DD')
     const friendBdayStringLong = `${parsedBday.format('MMMM')} ${parsedBday.format('D')}`;
     const parsedCurrentDate = moment(moment(), 'MM-DD')
@@ -15,13 +20,21 @@ export const FriendInfo = ({friendName, bday}) => {
     const monthString = (monthDiff > 1) ? 'months' : 'month';
     const dayDiff = myDiff.format('D');
     const dayString = (dayDiff > 1) ? 'days' : 'day';
+
     const howMuchTimeStringLong = `${monthDiff} ${monthString}, ${dayDiff} ${dayString}`; return (
-             <List>
-                <ListItem>
-                    <Text>{`${howMuchTimeStringLong} until ${friendName}'s birthday on ${friendBdayStringLong}!`} </Text>
-                </ListItem>
+             <Card>
+                <CardItem>
+                    <Title> {
+                    (friendName && bday) 
+                        ? `${howMuchTimeStringLong} until ${friendName}'s birthday on ${friendBdayStringLong}!` 
+                        : 'No Friends Added.'
+                    } 
+
+                    </Title>
+                    </CardItem>
            
-            </List>
+           
+            </Card>
 
         )    
    }

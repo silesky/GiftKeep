@@ -4,22 +4,28 @@ import { bindActionCreators } from 'redux';
 import * as actions from './../actions/actions';
 import { Container, Content } from 'native-base';
 import { GiftCard } from './../components/GiftCard';
-import { FriendInfo } from './../components/FriendInfo';
+import { FriendInfoBar } from './../components/FriendInfoBar';
+import { getFriendItemById } from './../utils/util';
 class Body extends Component {
     constructor(props) {
       super(props);
     }
 
+    
     render() {
+        console.log('rerender');
         const { friendId } = this.props;
         const { data } = this.props.state.user;
-        const bday = data.find((el => el.friendId === friendId)).bday;
-        const friendName = data.find((el) => el.friendId === friendId).friendName;
-        const gifts = data.find((el) => el.friendId === friendId).gifts
+        const bday = getFriendItemById(this.props.state, friendId, 'bday');
+        const friendName = getFriendItemById(this.props.state, friendId, 'friendName');
+        const gifts =  getFriendItemById(this.props.state, friendId, 'gifts');
+        console.log('bday', bday);
+
+
         return (
-            <Container style={{backgroundColor: 'white'}}>
+
                 <Content>
-                     <FriendInfo friendName={friendName} bday={bday} />
+                     <FriendInfoBar friendName={friendName} bday={bday} />
                     { gifts.map((el, ind) => {
                         return ( 
                             <GiftCard 
@@ -33,7 +39,7 @@ class Body extends Component {
                         )
                     })}
                  </Content>
-            </Container>)
+         )
     }
 }
 
