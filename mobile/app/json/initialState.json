@@ -4,10 +4,10 @@
                 "friendName" : "Nick",
                 "bday": "12-25",
                 "gifts" : [
-                    {"giftTitle": "Nick Gift!", "giftDesc": "...nick desc", "giftId": 111 },
-                    {"giftTitle": "Tennis Racket", "giftDesc": "...nick desc", "giftId": 112},
-                    {"giftTitle": "The Once", "giftDesc": "..nick desc", "giftId": 113 },
-                ],
+                    {"giftTitle": "Nick Gift!", "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.", "giftId": 111 },
+                    {"giftTitle": "Tennis Racket", "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.", "giftId": 112},
+                    {"giftTitle": "The Once", "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.", "giftId": 113 }
+                ]
               
             },
 
@@ -17,16 +17,16 @@
                 "friendName" : "Dan",
                 "bday": "07-01",
                 "gifts" : [
-                    { "giftTitle": "Dan Gift!",  "giftDesc": "...dan desc", "giftId": 221},
-                    { "giftTitle": "The Wall", "giftDesc": "...dan desc", "giftId": 222},
-                    { "giftTitle": "Riot Geat", "giftDesc": "...dan desc", "giftId": 223},
+                    { "giftTitle": "Dan Gift!",  "giftDesc": "Vestibulum ante ipsum primis in faucibus.", "giftId": 221},
+                    { "giftTitle": "The Wall", "giftDesc": "Vestibulum ante ipsum primis in faucibus.", "giftId": 222},
+                    { "giftTitle": "Riot Geat", "giftDesc": "Vestibulum ante ipsum primis in faucibus.", "giftId": 223}
                 ]
             },
             {   "friendId": 789,
                 "order": 3,
                 "bday": "07-19",
                 "friendName" : "Stephen",
-                "gifts" : [{ "giftTitle": "Stephen Gift!",  "giftDesc": "...steve desc", "giftId": 331 }],
+                "gifts" : [{ "giftTitle": "Stephen Gift!",  "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.", "giftId": 331 }]
                 
             }
          ]
