@@ -13,12 +13,12 @@ export const TopBar = ({drawerOpen, friendName, testClick}) => {
         return (
             <Header>
                 <Button transparent
-                onPress={() => drawerOpen()}>
+                    onPress={() => drawerOpen()}>
                     <Icon name='ios-menu' />
                 </Button>
-                <Title>{friendName}</Title>
+                <Title>{(friendName) ? friendName : 'Gifter'}</Title>
                 <Button transparent
-                onPress={() => testClick()}>
+                    onPress={() => testClick()}>
                     <Icon name='ios-settings' />
                 </Button>
             </Header>     
