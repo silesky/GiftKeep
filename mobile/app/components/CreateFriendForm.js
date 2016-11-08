@@ -57,7 +57,7 @@ export default class CreateFriendForm extends Component {
                       <InputGroup>
                           <Icon name='ios-person' />
                           <Input 
-                            onChangeText={(input) => this.setName(input)} 
+                            onChangeText={(input) => this.setName(input.trim())} 
                             placeholder='Name' 
                             placeholderTextColor='#c9c9c9'/>
                       </InputGroup>
