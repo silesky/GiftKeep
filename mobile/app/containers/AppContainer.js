@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Drawer from 'react-native-drawer';
 import { bindActionCreators } from 'redux'
 import * as actions from './../actions/actions';
-import { Container } from 'native-base';
 // Components
 import { TopBar } from './../components/TopBar';
 import { BottomBar } from './../components/BottomBar';
@@ -13,6 +12,7 @@ import DrawerContainer from './../containers/DrawerContainer';
 import Body from './../containers/Body';
 import { getFriendItemById } from './../utils/util';
 
+import { FbLogin } from './../components/FbLogin';
 
 class AppContainer extends Component {
     constructor(props) {
@@ -48,10 +48,12 @@ render() {
                 testClick={this.props.actions.testClick} 
                 friendName={getFriendItemById(this.props.state, selectedFriendId, 'friendName')} 
                 drawerOpen={() => this._drawer.open()} 
-            />                
+            />    
+                 
             <Body 
                 friendId={selectedFriendId} 
             />
+              <FbLogin />     
             <CreateFriendForm 
                 selectFriend={this.props.actions.selectFriend}
                 createFriend={this.props.actions.createFriend}
