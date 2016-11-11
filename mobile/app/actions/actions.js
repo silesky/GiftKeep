@@ -1,4 +1,4 @@
-import {getFriendById,} from './../utils/util'
+import { fetchPost } from './../utils/util'
 export const updateGiftDesc = (friendId, giftId, giftDesc) => {
   console.log('updateGift', friendId, giftId, giftDesc);
     return {
@@ -88,10 +88,24 @@ export const addGift = (friendId) => {
 }
 
 
-
+export const sendAccessToken = (token) => {
+    const route = 'http://localhost:3000/api/auth/fb';
+    return fetch(route, 
+    { method: 'POST', 
+      body:  JSON.stringify({data: token}),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
+  })
+}
 export const testClick = () => {
   console.log('Action->TEST CLICK...')
-  return function(dispatch, getState) {
-    dispatch({type: 'CLEAR'}); 
-  }
+  sendAccessToken(12345).then(function(res, err) {
+    if (res) console.log(res)
+    if (err) console.error(err)
+  })
+   return {
+     type: {}
+    }
 }

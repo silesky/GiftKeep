@@ -21,6 +21,14 @@ app.get("/oauthcallback", (req, res) => {
     console.log('req success', req.body);
     res.send("Authcallback get");
 });
+
+app.post("/api/auth/fb", (req, res) => {
+    let token = req.body.data;
+    console.log('fb auth post route hit... token', token);
+    res.send('Authcallback get success');
+});
+
+
 // gifter.sethsilesky.com:3000/oauthcallback
 app.post('/oauthcallback', (req, res) => {
     console.log('post request recieved...');

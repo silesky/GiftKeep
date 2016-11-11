@@ -14,6 +14,7 @@ import { getFriendItemById } from './../utils/util';
 class AppContainer extends Component {
     constructor(props) {
       super(props)
+      
     }
 
 render() {
