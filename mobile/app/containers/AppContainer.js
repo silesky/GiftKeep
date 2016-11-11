@@ -11,9 +11,6 @@ import CreateFriendForm from './../components/CreateFriendForm';
 import DrawerContainer from './../containers/DrawerContainer';
 import Body from './../containers/Body';
 import { getFriendItemById } from './../utils/util';
-
-import { FbLogin } from './../components/FbLogin';
-
 class AppContainer extends Component {
     constructor(props) {
       super(props)
@@ -27,8 +24,8 @@ render() {
 
     <Drawer
         tapToClose={true}
-        openDrawerOffset={0.6 /* % gap on right side of drawer */}
-        panCloseMask={0.6 /* tightly coupled ^. % of screen can be used to close (if tapToClose=true}    */}
+        openDrawerOffset={0.4 /* % gap on right side of drawer */}
+        panCloseMask={0.4 /* tightly coupled ^. % of screen can be used to close (if tapToClose=true}    */}
         ref={(ref) => this._drawer = ref}
         tweenDuration={70 /* speed */}
         tweenHandler={(ratio) => { /* transparency effects */
@@ -53,7 +50,7 @@ render() {
             <Body 
                 friendId={selectedFriendId} 
             />
-              <FbLogin />     
+      
             <CreateFriendForm 
                 selectFriend={this.props.actions.selectFriend}
                 createFriend={this.props.actions.createFriend}
