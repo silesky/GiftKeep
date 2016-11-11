@@ -3,10 +3,12 @@ import {
   View,
 } from 'react-native';
 import {
-  Button
+  Button,
 } from 'native-base'
-
-import { LoginButton } from 'react-native-fbsdk';
+import { 
+  LoginButton, 
+  AccessToken,
+} from 'react-native-fbsdk';
 
 export class FbLogin extends Component {
   render() {
@@ -23,6 +25,11 @@ export class FbLogin extends Component {
                       alert("Login was cancelled");
                     } else {
                       alert("Login was successful with permissions: " + result.grantedPermissions)
+                      // result doesn't work because'
+                      console.log('FBlogin', result);
+                      AccessToken.getCurrentAccessToken().then((data) => {
+                        console.log('data access token acquired.', data.accessToken.toString())
+                      })
                     }
                   }
                 }
