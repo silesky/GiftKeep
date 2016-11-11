@@ -15,7 +15,6 @@ class Body extends Component {
     render() {
         console.log('rerender');
         const { friendId } = this.props;
-        const { data } = this.props.state.user;
         const bday = getFriendItemById(this.props.state, friendId, 'bday');
         const friendName = getFriendItemById(this.props.state, friendId, 'friendName');
         const gifts =  getFriendItemById(this.props.state, friendId, 'gifts');
