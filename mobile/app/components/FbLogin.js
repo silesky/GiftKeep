@@ -9,7 +9,7 @@ export const FbLogin = React.createClass({
   render: function() {
     return (
         <LoginButton
-          publishPermissions={["publish_actions"]}
+          readPermissions={["public_profile", "user_friends"]}
           onLoginFinished={
             (error, result) => {
               if (error) {
