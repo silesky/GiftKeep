@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from './../actions/actions';
-import { Container, Content } from 'native-base';
+import { Content } from 'native-base';
 import { GiftCard } from './../components/GiftCard';
 import { FriendInfoBar } from './../components/FriendInfoBar';
 import { getFriendItemById } from './../utils/util';
@@ -10,17 +10,13 @@ class Body extends Component {
     constructor(props) {
       super(props);
     }
-
-    
     render() {
         const { friendId } = this.props;
         const bday = getFriendItemById(this.props.state, friendId, 'bday');
         const friendName = getFriendItemById(this.props.state, friendId, 'friendName');
         const gifts =  getFriendItemById(this.props.state, friendId, 'gifts');
 
-
         return (
-
                 <Content>
                      <FriendInfoBar friendName={friendName} bday={bday} />
                     { gifts.map((el, ind) => {
@@ -36,7 +32,7 @@ class Body extends Component {
                         )
                     })}
                  </Content>
-         )
+        )
     }
 }
 

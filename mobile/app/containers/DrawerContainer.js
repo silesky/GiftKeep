@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as actions from './../actions/actions';
+import * as actions from './../actions/actions'
 import {
   Button,
   Container,
@@ -11,9 +11,8 @@ import {
   List,
   Title
 } from 'native-base';
-import { View } from 'react-native';
 import { FbLogin } from './../components/FbLogin'
-import { FriendListItem } from './../components/FriendListItem';
+import { FriendListItem } from './../components/FriendListItem'
 
 export class DrawerContainer extends Component {
   constructor(props) {

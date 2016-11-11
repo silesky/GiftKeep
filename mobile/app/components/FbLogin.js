@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as Util from './../utils/util'
 import { 
   View,
 } from 'react-native';
@@ -25,10 +26,9 @@ export class FbLogin extends Component {
                       alert("Login was cancelled");
                     } else {
                       alert("Login was successful with permissions: " + result.grantedPermissions)
-                      // result doesn't work because'
-                      console.log('FBlogin', result);
                       AccessToken.getCurrentAccessToken().then((data) => {
-                        console.log('data access token acquired.', data.accessToken.toString())
+                        console.log('data access token acquired... sending to node...');
+                        Util.sendFbAccessTokenToNode(data.accessToken.toString())
                       })
                     }
                   }

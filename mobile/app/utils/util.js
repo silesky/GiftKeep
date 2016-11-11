@@ -33,3 +33,25 @@ export const getFriendItemById = (state, friendId, key) => {
 }
 
 export const getFriendNameById = (state, friendId) => getFriendById(state, friendId).friendName;
+
+const serverUrl ='http://localhost:3000';
+export const fetchPost = (route, data) => {
+  const fullRoute = `${serverUrl}/${route}`
+  return fetch(fullRoute, {
+    method: 'POST',
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    }),
+    body: JSON.stringify({data: data}),
+  })
+}
+export const sendFbAccessTokenToNode = (token) => {
+    const fullRoute = `${serverUrl}/api/auth/fb`;
+    return fetch(fullRoute, {
+        method: 'POST', 
+        body:  JSON.stringify({data: token}),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+}
