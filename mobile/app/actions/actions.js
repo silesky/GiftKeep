@@ -1,4 +1,4 @@
-import { fetchPost } from './../utils/util'
+import * as Util from './../utils/util'
 export const updateGiftDesc = (friendId, giftId, giftDesc) => {
   console.log('updateGift', friendId, giftId, giftDesc);
     return {
@@ -101,10 +101,7 @@ export const sendAccessToken = (token) => {
 }
 export const testClick = () => {
   console.log('Action->TEST CLICK...')
-  sendAccessToken(12345).then(function(res, err) {
-    if (res) console.log(res)
-    if (err) console.error(err)
-  })
+ Util.getTokenFromAsyncStorage();
    return {
      type: {}
     }
