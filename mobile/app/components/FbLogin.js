@@ -17,7 +17,7 @@ export class FbLogin extends Component {
           <View style={{justifyContent: 'center'}}>
             <Button transparent>
               <LoginButton
-                readPermissions={["public_profile", "user_friends"]}
+                readPermissions={["public_profile"]}
                 onLoginFinished={
                   (error, result) => {
                     if (error) {
@@ -25,10 +25,15 @@ export class FbLogin extends Component {
                     } else if (result.isCancelled) {
                       alert("Login was cancelled");
                     } else {
+                      // save access token to AsyncStorage
+                      // send Access token to nodejs and save it there
+                      // 
                       alert("Login was successful with permissions: " + result.grantedPermissions)
                       AccessToken.getCurrentAccessToken().then((data) => {
+                        const token = data.accessToken.toString()
                         console.log('data access token acquired... sending to node...');
-                        Util.sendFbAccessTokenToNode(data.accessToken.toString())
+                        Util.sendFbAccessTokenToNode(token)
+                        Util.saveTokenToAsyncStorage(token)
                       })
                     }
                   }
