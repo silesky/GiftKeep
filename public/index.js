@@ -19,6 +19,7 @@ function onSignIn(googleUser) {
   console.log('Image URL: ' + profile.getImageUrl());
   console.log('Email: ' + profile.getEmail());
   let idToken = googleUser.getAuthResponse().id_token;
+  console.log('idToken', idToken);
   fetchPost(server_url, idToken).then(res => console.log(res.statusText));
 }
 function signOut() {

@@ -21,14 +21,14 @@ export class FbLogin extends Component {
                 onLoginFinished={
                   (error, result) => {
                     if (error) {
-                      alert("Login failed with error: " + result.error);
+                      console.log("Login failed with error: " + result.error);
                     } else if (result.isCancelled) {
-                      alert("Login was cancelled");
-                    } else {
+                      console.log("Login was cancelled");
+                    } else{
                       // save access token to AsyncStorage
                       // send Access token to nodejs and save it there
                       // 
-                      alert("Login was successful with permissions: " + result.grantedPermissions)
+                      console.log("Login was successful with permissions: " + result.grantedPermissions)
                       AccessToken.getCurrentAccessToken().then((data) => {
                         const token = data.accessToken.toString()
                         console.log('data access token acquired... sending to node...');
@@ -38,7 +38,7 @@ export class FbLogin extends Component {
                     }
                   }
                 }
-                onLogoutFinished={() => alert("User logged out")}/>
+                onLogoutFinished={() => console.log("User logged out")}/>
             </Button>
           </View>
     );
