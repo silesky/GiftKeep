@@ -22,27 +22,53 @@ app.get("/oauthcallback", (req, res) => {
     res.send("Authcallback get");
 });
 
-app.post("/api/auth/fb", (req, res) => {
+app.post("/api/auth/fb", (req, resCb) => {
     let token = req.body.data;
     console.log('fb auth post route hit... token', token);
-    res.send('Authcallback get success');
+    fetch(`https://graph.facebook.com/me?access_token=${token}`)
+        .then((res) => {
+            if (res.status >= 200 && res.status < 300) return res.json();
+            // no err, res.json() is always fulfilled
+        })
+        .catch(err => console.log('_____EEError: fetch failed', err.message))
+        .then(res => {
+            console.log('___res____', res);
+            return Storage.createUserFromFb({ 
+                userName: res.name,
+                fbAccessToken: token, 
+            }, resCb);
+            //handles any fetch errors
+        })
+        .catch(err => console.log('_____EEError: mongo failed', err))
+   
 });
 
 
+
 // gifter.sethsilesky.com:3000/oauthcallback
-app.post('/oauthcallback', (req, res) => {
+app.post('/oauthcallback', (req, resCb) => {
     console.log('post request recieved...');
-    if (!req.body) return res.sendStatus(400);
+    if (!req.body) return resCb.sendStatus(400);
     let token = req.body.data;
     const validateThisToken = `https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${token}`;
-    fetch(validateThisToken).then((el) => {
+    fetch(validateThisToken).then((res) => {
         //'Content-Type', 'application/x-www-form-urlencoded'
-        if (el.status < 300) {
-            console.log('token validated! statusText:', el.statusText);
+        if (res.status < 300) {
+            console.log('token validated! statusText:', res.statusText);
+            return res.json()
         } else {
-            console.log('token invalid! statusText:', el.statusText);
+            console.log('token invalid! statusText:', res.statusText);
         }
-    })
+    }).then(res => {
+        console.log('res.json().name', res.name);
+        Storage.createUserFromGoogle({
+            userName: `google:${res.name}`,
+            googleIdToken: token,
+             // Right now, it deletes the current data if a user logs in
+        }, resCb)
+        .catch(err => console.log('_____EEError: google failed', err))
+    });
 })
+
 app.listen(3000);
 console.log("listening on http://gifter.sethsilesky.com:3000");

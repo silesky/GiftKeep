@@ -17,14 +17,59 @@ module.exports = {
         });
     },
     // create user
-    createUser: (reqObj, res) => {
+    // temp? for debugging
+    createUser: ({body: {userName, googleIdToken, data}}, res) => {
         console.log('post request to create user...');
         const userObj = {
-            userName: reqObj.body.userName,
-            googleIdToken: reqObj.body.googleIdToken,
-            data: reqObj.body.data
+            userName: userName,
+            fbAccessToken: null,
+            googleIdToken: googleIdToken,
+            data: data,
         }
         try {
+            userCollection().insert(userObj);
+            res.json({
+                success: true,
+                msg: 'user created'
+            })
+        } catch (e) {
+            res.json({
+                success: false,
+                error: e
+            })
+        }
+    },
+    createUserFromGoogle: ({userName, googleIdToken}, res) => {
+        console.log('create user from google!');
+        const userObj = {
+            userName: userName,
+            fbAccessToken: null,
+            googleIdToken: googleIdToken,
+            data: [],
+        }
+        try {
+            userCollection().insert(userObj);
+            res.json({
+                success: true,
+                msg: 'user created'
+            })
+        } catch (e) {
+            res.json({
+                success: false,
+                error: e
+            })
+        }
+    },
+     createUserFromFb: ({userName, fbAccessToken}, res)  => {
+        console.log('create user from fb!');
+        const userObj = {
+            userName: userName,
+            fbAccessToken: fbAccessToken,
+            googleIdToken: null,
+            data: []
+        }
+        try {
+            //check if user exists with access
             userCollection().insert(userObj);
             res.json({
                 success: true,

@@ -1,6 +1,7 @@
 [
 	{	"userName": "Seth",
-		"googleIdToken": "58124042da83f0ad7492a7f2",
+		"googleIdToken": "seeded.",
+		"fbAccessToken": "seeded.",
 		"data": [
 			{
 				"friendName" : "Nick",
@@ -18,6 +19,8 @@
 		]
 	},
 	{	"userName": "myUserName",
+		"googleIdToken": "seeded.",
+		"fbAccessToken": "seeded.",
 		"data": [
 			{
 				"friendName" : "Gorb",
