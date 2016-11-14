@@ -23,7 +23,7 @@ app.get("/oauthcallback", (req, res) => {
 });
 
 app.post("/api/auth/fb", (req, resCb) => {
-    let token = req.body.data;
+    let token = req.body.token;
     console.log('fb auth post route hit... token', token);
     fetch(`https://graph.facebook.com/me?access_token=${token}`)
         .then((res) => {
@@ -39,7 +39,7 @@ app.post("/api/auth/fb", (req, resCb) => {
             }, resCb);
             //handles any fetch errors
         })
-        .catch(err => console.log('_____EEError: mongo failed', err))
+        .catch(err => console.log('_____Error: either the accesstoken is invalid (more likely), or mongo failed (less likely)', err))
    
 });
 
