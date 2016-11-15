@@ -1,0 +1,42 @@
+[
+		{	"userName": "John McSeed",
+			"googleIdToken": "g1",
+			"fbAccessToken": "f1",
+			"data": [
+				{
+					"friendName" : "Gorb",
+					"gifts" : [{"giftName": "giftA" }]
+				},
+
+				{
+					"friendName" : "Glarb",
+					"gifts" : [{"giftName": "giftB"}]
+				},
+				{
+					"friendName" : "Gorj",
+					"gifts" : [{ "giftName": "giftC" }]
+				}
+			]
+	},
+	{	"userName": "Seth",
+		"googleIdToken": "g2",
+		"fbAccessToken": "EAAEx80tZBA14BAIcft7kVR5xZAYLwgYZAdgTMbO0MitN7VoSRM0ZAcIZBDvl4rksur2983EuaPzZBZBlKwJ7pyp3vZCu4ZAlNDZAzm3xHkfpAyGKK6ZC7yGSp9CMB2JUNWvt0LxgdPTG3r4VQljfEvFQMZA8bHiNZBbivBRKRh8UlDIq8R31jXPZAe1ZBfIbyK0TYlZCZCbuV1haSKJ12rDiJ3wjaRMPCEXq6MIcuQfYZD",
+		"data": [
+			{
+				"friendName" : "Nick",
+				"gifts" : [{"giftName": "The Once and Future King" }]
+			},
+
+			{
+				"friendName" : "Dan",
+				"gifts" : [{ "giftName": "The Beatles Revolver" }]
+			},
+			{
+				"friendName" : "Stephen",
+				"gifts" : [{ "giftName": "Serfas Bike Light" }]
+			}
+		]
+	}
+
+
+]

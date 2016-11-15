@@ -38,7 +38,7 @@ export class FbLogin extends Component {
                     } else{
                       // save access token to AsyncStorage
                       // send Access token to nodejs and save it there
-                      // 
+                      //  
                       console.log("Login was successful with permissions: " + result.grantedPermissions)
                       AccessToken.getCurrentAccessToken().then((data) => {
                         const token = data.accessToken.toString()

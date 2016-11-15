@@ -16,7 +16,8 @@ app.get('/api/user/:token', (req, res) => Storage.getUser(req, res));
 // get user data by token
 app.get('/api/user/data/:token', (req, res) => Storage.getUserData(req, res));
 // update user data by token
-app.put('/api/user/data/:token', (req, res) => Storage.updateUserData(req, res));
+app.put('/api/user/:token', (req, res) => Storage.updateUserByAccessToken(req, res));
+app.put('/api/user/data/:token', (req, res) => Storage.updateUserDataByAccessToken(req, res));
 app.get("/oauthcallback", (req, res) => {
     console.log('req success', req.body);
     res.send("Authcallback get");
@@ -40,10 +41,7 @@ app.post("/api/auth/fb", (req, resCb) => {
             //handles any fetch errors
         })
         .catch(err => console.log('_____Error: either the accesstoken is invalid (more likely), or mongo failed (less likely)', err))
-   
-});
-
-
+}); 
 
 // gifter.sethsilesky.com:3000/oauthcallback
 app.post('/oauthcallback', (req, resCb) => {

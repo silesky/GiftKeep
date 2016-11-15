@@ -1,12 +1,13 @@
 const MongoClient = require('mongodb').MongoClient;
 let db;
-const userCollection = () => db.collection('friendCollection');
+const userCollection = () => db.collection('userCollection');
 module.exports = {
     connect: () => {
         MongoClient.connect('mongodb://127.0.0.1:27017/giftr', (err, database) => {
             if (err) throw err;
             console.log('...connected to mongoDB!');
             db = database;
+            return db
         });
     },
     connected: () => typeof database !== 'undefined',
@@ -103,10 +104,14 @@ module.exports = {
         })
     },
     //update user data by token
-    updateUserData: (reqObj, res) => {
-        console.log('put for new user..!');
-        const requestedIdToken = reqObj.params.token;
-        const requestedUserData = reqObj.body;
+    //db.userCollection.update({fbAccessToken: 1},{ $set: {'data': ["hello"]}})
+
+    updateUserDataByAccessToken: (reqObj, res) => {
+        const { data } = reqObj.body;
+        const { token } = reqObj.params;
+        console.log(data, token)
+        console.log('updateUserData called... token->', token, 'data->', data);
+    
         const _writeConcernCb = (err, {
             result
         }) => {
@@ -122,14 +127,11 @@ module.exports = {
                     msg: result,
                     statusText: `success. ${result.nModified} row(s) modified`
                 })
-            }
+            }  
         }
-        userCollection().update({
-            googleIdToken: requestedIdToken
-        }, {
-            $set: {
-                data: requestedUserData
-            }
-        }, _writeConcernCb)
-    }
+        // TODO: take in fbAccessToken and data as params
+        userCollection().update({fbAccessToken: token},{ $set: {'data': data}}, _writeConcernCb)
+        // checks if access token is either googleor facebook
+    },
+
 }

@@ -5,9 +5,10 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha test/*",
-    "testwatch": "mocha --watch test/*",
+    "testwatch": "mocha --watch --growl test/*",
     "post": "newman run Gifter.postman_test_run.json",
-    "watch": "nodemon ./app.js --delay 5"
+    "watch": "nodemon ./*.js --delay 5",
+    "seed": "seed"
   },
   "author": "",
   "license": "ISC",
@@ -23,6 +24,7 @@
     "chai-http": "^3.0.0",
     "livereload": "^0.6.0",
     "mocha": "^3.1.2",
+    "mocha-mongodb": "^0.1.2",
     "nodemon": "^1.11.0"
   }
 }
