@@ -1,16 +1,15 @@
 console.log('index.js loaded.');
-const fetchPost = (route, data) => {
-  console.log(typeof data);
-  return fetch(route, {
+
+const server_url = "http://gifter.sethsilesky.com:3000/oauthcallback";
+const postGoogleIdTokenToFb = (route, token) => {
+  return fetch(server_url, {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json'
     }),
-    body: JSON.stringify({data: data}),
+    body: JSON.stringify({token}),
   })
 }
-const server_url = "http://gifter.sethsilesky.com:3000/oauthcallback";
-
 
 function onSignIn(googleUser) {
   let profile = googleUser.getBasicProfile();
@@ -20,7 +19,7 @@ function onSignIn(googleUser) {
   console.log('Email: ' + profile.getEmail());
   let idToken = googleUser.getAuthResponse().id_token;
   console.log('idToken', idToken);
-  fetchPost(server_url, idToken).then(res => console.log(res.statusText));
+  postGoogleIdTokenToFb(server_url, idToken).then(res => console.log(res.statusText));
 }
 function signOut() {
   const auth2 = gapi.auth2.getAuthInstance();

@@ -5,9 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha test/*",
-    "mochateswatch": "mocha --watch test/*",
+    "testwatch": "mocha --watch test/*",
     "post": "newman run Gifter.postman_test_run.json",
-    "watch": "nodemon ./app.js --exec 'npm test'"
+    "watch": "nodemon ./app.js --delay 5"
   },
   "author": "",
   "license": "ISC",

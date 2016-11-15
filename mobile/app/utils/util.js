@@ -1,5 +1,7 @@
 import defaultFriend from './../json/defaultFriend.json';
 import { AsyncStorage } from 'react-native';
+const _serverUrl = 'http://localhost:3000';
+
 export const lipsum = 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.'
 export const compose = (f1, f2) => value => f1(f2(value));
 export const createUuid = () => {
@@ -35,9 +37,8 @@ export const getFriendItemById = (state, friendId, key) => {
 
 export const getFriendNameById = (state, friendId) => getFriendById(state, friendId).friendName;
 
-const serverUrl = 'http://localhost:3000';
 export const fetchPost = (route, data) => {
-    const fullRoute = `${serverUrl}/${route}`
+    const fullRoute = `${_serverUrl}/${route}`
     return fetch(fullRoute, {
         method: 'POST',
         headers: new Headers({
@@ -47,10 +48,10 @@ export const fetchPost = (route, data) => {
     })
 }
 export const sendFbAccessTokenToNode = (token) => {
-    const fullRoute = `${serverUrl}/api/auth/fb`;
+    const fullRoute = `${_serverUrl}/api/auth/fb`;
     return fetch(fullRoute, {
         method: 'POST',
-        body: JSON.stringify({ data: token }),
+        body: JSON.stringify({token}),
         headers: {
             'Content-Type': 'application/json'
         }

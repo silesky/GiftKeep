@@ -10,8 +10,19 @@ import {
   LoginButton, 
   AccessToken,
 } from 'react-native-fbsdk';
+const _serverUrl = 'http://localhost:3000';
 
 export class FbLogin extends Component {
+ sendFbAccessTokenToNode = (token) => {
+    const fullRoute = `${_serverUrl}/api/auth/fb`;
+    return fetch(fullRoute, {
+        method: 'POST',
+        body: JSON.stringify({token}),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+}
   render() {
     return (
           <View style={{justifyContent: 'center'}}>

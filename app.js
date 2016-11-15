@@ -23,7 +23,7 @@ app.get("/oauthcallback", (req, res) => {
 });
 
 app.post("/api/auth/fb", (req, resCb) => {
-    let token = req.body.token;
+    const { token } = req.body;
     console.log('fb auth post route hit... token', token);
     fetch(`https://graph.facebook.com/me?access_token=${token}`)
         .then((res) => {
@@ -47,9 +47,9 @@ app.post("/api/auth/fb", (req, resCb) => {
 
 // gifter.sethsilesky.com:3000/oauthcallback
 app.post('/oauthcallback', (req, resCb) => {
+    const { token } = req.body;
     console.log('post request recieved...');
     if (!req.body) return resCb.sendStatus(400);
-    let token = req.body.data;
     const validateThisToken = `https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${token}`;
     fetch(validateThisToken).then((res) => {
         //'Content-Type', 'application/x-www-form-urlencoded'
