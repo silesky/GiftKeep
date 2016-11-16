@@ -1,6 +1,6 @@
 const chai = require('chai')
 const chaiHttp = require('chai-http');
-let db = require('mocha-mongodb');
+const MongoClient = require('mongodb').MongoClient
 
 chai.use(chaiHttp);
 const { expect, request } = chai;
@@ -10,10 +10,18 @@ const userCollectionJSON = require('./../seeds/userCollection.json')
 // const serverUrl = require('../config.json').serverUrl;
 describe('Get behavior', () => {
     before(() => { 
-        db.connect('mongodb://127.0.0.1:27017/giftr')
-        // isn't exactly the right tool for the job, might just use vanilla mongo'
-        console.log('i run before')
+        MongoClient.connect('mongodb://127.0.0.1:27017/giftr', (err, db) => {
+            userCollection.drop();
+            db.createCollection('userCollection')
+            const userCollection = db.collection('userCollection');
+            userCollection.insert(userCollectionJSON)
+        })
     });
+    it('db should connect to gifter db', () => {
+          MongoClient.connect('mongodb://127.0.0.1:27017/giftr', (err, db) => {
+             expect(db).to.be.ok
+          })
+    }),
     it('get: get_all_data should work', (done) => {
         request(serverUrl)
         .get('/api')
