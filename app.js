@@ -12,9 +12,9 @@ Storage.connect();
 app.get('/api/', (req, res) => Storage.getAllData(res));
 app.post('/api/user', (req, res) => Storage.createUser(req, res)); //parameters are reversed
 // get user by token
-app.get('/api/user/:token', (req, res) => Storage.getUser(req, res));
+app.get('/api/user/:token', (req, res) => Storage.getUserByAccessToken(req, res));
 // get user data by token
-app.get('/api/user/data/:token', (req, res) => Storage.getUserData(req, res));
+app.get('/api/user/data/:token', (req, res) => Storage.getUserDataByAccessToken(req, res));
 // update user data by token
 app.put('/api/user/:token', (req, res) => Storage.updateUserByAccessToken(req, res));
 app.put('/api/user/data/:token', (req, res) => Storage.updateUserDataByAccessToken(req, res));

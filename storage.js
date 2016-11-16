@@ -84,22 +84,22 @@ module.exports = {
         }
     },
     // get user by token
-    getUser: (reqObj, res) => {
+    getUserByAccessToken: (reqObj, res) => {
         console.log('get request for user...');
         let results;
         let requestedIdToken = reqObj.params.token;
         userCollection().find().toArray((err, docs) => {
-            results = docs.find(el => requestedIdToken === el.googleIdToken)
+            results = docs.find(el => requestedIdToken === el.fbAccessToken);
             res.json(results);
         })
     },
-    // get userData by token 
-    getUserData: (reqObj, res) => {
+    // get userData by fBAccessToken 
+    getUserDataByAccessToken: (reqObj, res) => {
         console.log('get request for user data...!');
         let results;
         let requestedIdToken = reqObj.params.token;
         userCollection().find().toArray((err, docs) => {
-            results = docs.find(el => requestedIdToken === el.googleIdToken)
+            results = docs.find(el => requestedIdToken === el.fbAccessToken);
             res.json(results['data']);
         })
     },
