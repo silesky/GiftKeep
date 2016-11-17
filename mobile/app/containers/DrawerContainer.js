@@ -39,7 +39,9 @@ export class DrawerContainer extends Component {
           </List>
         </Content>
         <Footer>
-          <FbLogin />
+          <FbLogin 
+          hydrate={this.props.actions.hydrate}
+          />
         </Footer>
       </Container>
 

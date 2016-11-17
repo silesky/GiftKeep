@@ -10,15 +10,19 @@ const userCollectionJSON = require('./../seeds/userCollection.json')
 const dummyFbAccessToken = Config.fb.dummyAccessToken;
 
 describe('Get behavior', () => {
+    let userCollection;
     before(() => { 
         MongoClient.connect('mongodb://127.0.0.1:27017/giftr', (err, db) => {
             db.createCollection('userCollection')
-
-            const userCollection = db.collection('userCollection');
+            userCollection = db.collection('userCollection');
             userCollection.drop();
             userCollection.insert(userCollectionJSON)
         })
     });
+    after(() => {
+            userCollection.drop();
+       userCollection.insert(userCollectionJSON);
+    })
     it('db should connect to gifter db', () => {
           MongoClient.connect('mongodb://127.0.0.1:27017/giftr', (err, db) => {
              expect(db).to.be.ok

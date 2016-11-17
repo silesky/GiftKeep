@@ -88,6 +88,13 @@ export const addGift = (friendId) => {
 }
 
 
+export const hydrate = (data) => {
+  console.log('action: hydrate','..data..', data);
+  return {
+    type: 'HYDRATE',
+    payload: {data}
+  }
+}
 export const sendAccessToken = (token) => {
     const route = 'http://localhost:3000/api/auth/fb';
     return fetch(route, 

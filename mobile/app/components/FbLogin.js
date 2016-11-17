@@ -23,6 +23,22 @@ export class FbLogin extends Component {
         }
     })
 }
+ getUserDataByAccessToken = (token) => {
+    const fullRoute = `${_serverUrl}/api/user/data/f1`;
+    return fetch(fullRoute).then(res => res.json());
+}
+handleToken = (token) => {
+  Util.saveTokenToAsyncStorage(token)
+  this.sendFbAccessTokenToNode(token).then(res =>  {
+    if (res.status !== 200) console.error(res)
+  })
+  this.getUserDataByAccessToken(token)
+  .then(res => {
+    console.log('userAccessData', res)
+    this.props.hydrate(res);
+  })
+
+}
   render() {
     return (
           <View style={{justifyContent: 'center'}}>
@@ -43,8 +59,8 @@ export class FbLogin extends Component {
                       AccessToken.getCurrentAccessToken().then((data) => {
                         const token = data.accessToken.toString()
                         console.log('data access token acquired... sending to node...');
-                        Util.sendFbAccessTokenToNode(token)
-                        Util.saveTokenToAsyncStorage(token)
+                        this.handleToken(token)
+                  
                       })
                     }
                   }

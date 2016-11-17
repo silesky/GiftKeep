@@ -23,6 +23,8 @@ const user = (state = initialStateUser, action) => {
   const _getSingleGiftObj = (friendId, giftId) => _getGiftArrByFriendId(friendId).find((el) => el.giftId === giftId)
 
   switch (action.type) {
+    case 'HYDRATE':
+      return {data: action.payload.data}
     case 'CLEAR':
       return emptyState;
 
