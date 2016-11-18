@@ -9,10 +9,8 @@ const store = require('./../app/stores/store')
 //const actions = require('./../app/actions/actions');
 module.exports = () => {
     describe('CLIENT: Actions', () => { 
-        it ('mocha should work', () => {
-            expect(true).to.be.true;
-        });
-    });
+            it ('mocha should work', () => expect(true).to.be.true)
+    }   );
     it('when I login successfully, my redux store should populate', () => {
                expect(true).to.be.true;
     })

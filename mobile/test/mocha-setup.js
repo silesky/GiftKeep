@@ -13,5 +13,5 @@ m._load = function hookedLoader(request, parent, isMain) {
 };
 
 require("babel-register")({
-  ignore: /node_modules\/(?!react-native-share)/
+  ignore: /node_modules\//
 });

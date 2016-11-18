@@ -6,7 +6,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "jest": "jest",
     "test": "mocha --require ./test/mocha-setup.js --compilers js:babel-core/register --recursive test",
-    "testwatch": "mocha --watch --require ./test/mocha-setup.js --compilers js:babel-core/register --recursive test"
+    "testwatch": "mocha --growl --watch --require ./test/mocha-setup.js --compilers js:babel-core/register --recursive test"
   },
   "dependencies": {
     "moment": "^2.15.2",
