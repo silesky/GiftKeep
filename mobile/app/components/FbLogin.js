@@ -10,35 +10,34 @@ import {
   LoginButton, 
   AccessToken,
 } from 'react-native-fbsdk';
-const _serverUrl = 'http://localhost:3000';
+
 
 export class FbLogin extends Component {
- sendFbAccessTokenToNode = (token) => {
+
+handleToken = (token) => {
+  const _serverUrl = 'http://localhost:3000';
+  const _getUserDataByAccessToken = (token) => {
+    const fullRoute = `${_serverUrl}/api/user/data/${token}}`;
+    return fetch(fullRoute).then(res => res.json());
+  }
+   const _sendFbAccessTokenToNode = (token) => {
     const fullRoute = `${_serverUrl}/api/auth/fb`;
-    return fetch(fullRoute, {
+    return fetch(fullRoute, { 
         method: 'POST',
         body: JSON.stringify({token}),
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        headers: {'Content-Type': 'application/json'}
     })
 }
- getUserDataByAccessToken = (token) => {
-    const fullRoute = `${_serverUrl}/api/user/data/f1`;
-    return fetch(fullRoute).then(res => res.json());
-}
-handleToken = (token) => {
   Util.saveTokenToAsyncStorage(token)
   // check if user exists
-  // if access token exists, return data 
+  // if access token exists, return data -
     // otherwise return error
   // if user doesn't exist, check if user is valid on facebook
   // if facebook says success, then create a new user with the token
-  this.sendFbAccessTokenToNode(token).then(res =>  {
+  _sendFbAccessTokenToNode(token).then(res =>  {
     if (res.status !== 200) console.error(res)
   })
-
-  this.getUserDataByAccessToken(token)
+  _getUserDataByAccessToken(token)
   .then(res => {
     if (res.success) {
       this.props.hydrate(res.data);
