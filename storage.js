@@ -90,7 +90,15 @@ module.exports = {
         let requestedIdToken = reqObj.params.token;
         userCollection().find().toArray((err, docs) => {
             results = docs.find(el => requestedIdToken === el.fbAccessToken);
-            res.json(results);
+            if (err) {
+                res.json(err)
+            } 
+            else if (results) {
+                res.json(results);
+            } else {
+                res.json({success: false, message: 'Unable to return user. No user found with that access token.'})
+            }
+            
         })
     },
     // get userData by fBAccessToken 
@@ -99,8 +107,14 @@ module.exports = {
         let results;
         let requestedIdToken = reqObj.params.token;
         userCollection().find().toArray((err, docs) => {
-            results = docs.find(el => requestedIdToken === el.fbAccessToken);
-            res.json(results['data']);
+             results = docs.find(el => requestedIdToken === el.fbAccessToken);
+            if (err) { 
+                res.json({success: false, message: 'mongo error', error: err })
+            } else if (results) {
+                res.json({success: true, data: results['data']});
+            } else {
+                 res.json({success: false, message: 'Unable to return user data. No user found with that access token.'})
+            }
         })
     },
     //update user data by token

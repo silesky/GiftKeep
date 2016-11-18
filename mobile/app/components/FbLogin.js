@@ -29,13 +29,22 @@ export class FbLogin extends Component {
 }
 handleToken = (token) => {
   Util.saveTokenToAsyncStorage(token)
+  // check if user exists
+  // if access token exists, return data 
+    // otherwise return error
+  // if user doesn't exist, check if user is valid on facebook
+  // if facebook says success, then create a new user with the token
   this.sendFbAccessTokenToNode(token).then(res =>  {
     if (res.status !== 200) console.error(res)
   })
+
   this.getUserDataByAccessToken(token)
   .then(res => {
-    console.log('userAccessData', res)
-    this.props.hydrate(res);
+    if (res.success) {
+      this.props.hydrate(res.data);
+    } else {
+      console.error(res);
+    }
   })
 
 }

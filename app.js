@@ -23,24 +23,30 @@ app.get("/oauthcallback", (req, res) => {
     res.send("Authcallback get");
 });
 
+
+// check if user is in database... if true, return data.
+// if user is not in database, ask facebook if token is valid. 
+// if token is valid, create new user. if token is invalid, error message.
 app.post("/api/auth/fb", (req, resCb) => {
     const { token } = req.body;
     console.log('fb auth post route hit... token', token);
+
     fetch(`https://graph.facebook.com/me?access_token=${token}`)
         .then((res) => {
             if (res.status >= 200 && res.status < 300) return res.json();
-            // no err, res.json() is always fulfilled
         })
-        .catch(err => console.log('_____EEError: fetch failed', err.message))
         .then(res => {
             console.log('___res____', res);
             return Storage.createUserFromFb({ 
                 userName: res.name,
                 fbAccessToken: token, 
             }, resCb);
-            //handles any fetch errors
+       
         })
-        .catch(err => console.log('_____Error: either the accesstoken is invalid (more likely), or mongo failed (less likely)', err))
+        .catch(err => {
+            console.log('_____Error: either the accesstoken is invalid (more likely), or mongo failed (less likely)', err)
+            resCb.json({success: false, message: 'user access token is invalid'});
+        })
 }); 
 
 // gifter.sethsilesky.com:3000/oauthcallback

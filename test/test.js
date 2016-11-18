@@ -20,7 +20,7 @@ describe('Get behavior', () => {
         })
     });
     after(() => {
-            userCollection.drop();
+       userCollection.drop();
        userCollection.insert(userCollectionJSON);
     })
     it('db should connect to gifter db', () => {
@@ -28,7 +28,7 @@ describe('Get behavior', () => {
              expect(db).to.be.ok
           })
     }),
-    it('get: get_all_data should work', (done) => {
+    it('get: getAllData should get all the data', (done) => {
         request(serverUrl)
         .get('/api')
         .end((err, res) => {
@@ -37,7 +37,8 @@ describe('Get behavior', () => {
             done()
         })
     }),
-    it('get: getUserByAccessToken (fb)', (done) => {
+
+    it('get: getUserByAccessToken should return user data (e.g username) if fb access token is valid.', (done) => {
         request(serverUrl)
         .get(`/api/user/${dummyFbAccessToken}`)
         .end((err, res) => {
@@ -52,22 +53,43 @@ describe('Get behavior', () => {
             done();
         })
     }),
-    it('get: getUserDataByAccessToken (fb)', (done) => {
+
+      it('get: getUserByAccessToken should fail if an access token is invalid', (done) => {
+        request(serverUrl)
+        .get(`/api/user/iNVALiDAXXToken`)
+        .end((err, res) => {
+            expect(res).to.have.status(200);
+            expect(err).to.be.falsy;
+            expect(res.body.success).to.be.false;
+            done();
+        })
+    }),
+       it('get: getUserDataByAccessToken should return user data (i.e friends) if fb access token is valid.', (done) => {
         request(serverUrl)
         .get(`/api/user/data/${dummyFbAccessToken}`)
         .end((err, res) => {
             expect(res).to.have.status(200);
-            expect(err).to.not.be.ok
-            expect(res.body).to.not.be.empty;
-            expect(res.body).to.be.an.array; // array of friends
-            expect(res.body[0]).to.have.property('friendName');
-            expect(res.body[0]).to.have.property('gifts');
-            expect(res.body[0].gifts[0]).to.have.property('giftName');
+            expect(err).to.be.falsy;
+            expect(res.body.success).to.be.true;
+            expect(res.body.data).to.be.an.array // array of friends
+            expect(res.body.data[0]).to.have.property('friendName');
+            expect(res.body.data[0]).to.have.property('gifts');
+            expect(res.body.data[0].gifts[0]).to.have.property('giftName');
+            done();
+        })
+    }),
+      it('get: getUserDataByAccessToken should fail if an access token is invalid', (done) => {
+        request(serverUrl)
+        .get(`/api/user/data/iNVALiDAXXToken`)
+        .end((err, res) => {
+            expect(res).to.have.status(200);
+            expect(err).to.be.falsy;
+            expect(res.body.success).to.be.false;
             done();
         })
     }),
     
-    it('create new user from fb token', (done) => {
+    it('post: request to create new user from facebook token should create user if fb access token is valid.', (done) => {
         request(serverUrl)
         .post('/api/auth/fb')
         .send({token: Config.fb.accessToken})
@@ -80,14 +102,26 @@ describe('Get behavior', () => {
         })
     }),
 
-    it('update user data by fb access token', (done) => {
+        it('post: request to create new user from facebook token should fail if access token is invalid.', (done) => {
+        request(serverUrl)
+        .post('/api/auth/fb')
+        .send({token: 'fakeACCESSTOKEN'})
+        .end((err, res) => {
+            expect(err).to.be.falsy;
+            expect(res).to.have.status(200);
+            expect(res.body).to.be.a('object');
+            expect(res.body.success).to.be.false;
+            done();
+        })
+    })
+    it('put: update user data by fb access token should work if access token is valid. ', (done) => {
         request(serverUrl)
         // put might not work
         .put(`/api/user/data/${dummyFbAccessToken}`)
         .send({data: Math.random()})
         .end((err, res) => {
+            expect(err).to.be.falsy;
             expect(res).to.have.status(200);
-            expect(err).to.not.be.ok
             expect(res.body).to.exist;
             expect(res.body).to.be.a('object');
             expect(res.body.success).to.be.true
