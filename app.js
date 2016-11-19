@@ -8,6 +8,8 @@ app.use(bodyParser.json())
 app.use(cookieParser());
 app.use(express.static('./public'));
 Storage.connect();
+
+let localUrl = "http://localhost:3000";
 // get all
 app.get('/api/', (req, res) => Storage.getAllData(res));
 app.post('/api/user', (req, res) => Storage.createUser(req, res)); //parameters are reversed
@@ -18,6 +20,7 @@ app.get('/api/user/data/:token', (req, res) => Storage.getUserDataByAccessToken(
 // update user data by token
 app.put('/api/user/:token', (req, res) => Storage.updateUserByAccessToken(req, res));
 app.put('/api/user/data/:token', (req, res) => Storage.updateUserDataByAccessToken(req, res));
+// google id
 app.get("/oauthcallback", (req, res) => {
     console.log('req success', req.body);
     res.send("Authcallback get");
@@ -29,26 +32,27 @@ app.get("/oauthcallback", (req, res) => {
 // if token is valid, create new user. if token is invalid, error message.
 app.post("/api/auth/fb", (req, resCb) => {
     const { token } = req.body;
-    console.log('fb auth post route hit... token', token);
-
-    fetch(`https://graph.facebook.com/me?access_token=${token}`)
-        .then((res) => {
-            if (res.status >= 200 && res.status < 300) return res.json();
+    console.log('post: api/auth/fb... token: ', token);
+    const validateThisToken = `https://graph.facebook.com/me?access_token=${token}`;
+    fetch(validateThisToken)
+        .then((fbRes) => fbRes.json()).then(fbResJson => {
+            // nothing found in facebook
+            if (fbResJson.error) resCb.json({success: false, error: fbResJson.error.message})
+            return {success: true, data: fbResJson};
         })
-        .then(res => {
-            console.log('___res____', res);
-            return Storage.createUserFromFb({ 
-                userName: res.name,
-                fbAccessToken: token, 
-            }, resCb);
-       
+        .then(fbResJson => {
+            if (fbResJson.success) {
+                fetch(`${localUrl}/api/user/${token}`)
+                    .then(dbRes => dbRes.json()).then(dbResJson => {
+                        if (dbResJson.error) resCb.json({success: false, message: 'no user found', error: dbResJson.error.message})
+                        if (dbResJson.data.name)  return Storage.createUserFromFb({ userName: dbResJson.name, fbAccessToken: token }, resCb)
+                        resCb.json({ success: true, "message": "data gotten from db", data: dbResJson })
+                        return dbResJson
+                      })
+            }
         })
-        .catch(err => {
-            console.log('_____Error: either the accesstoken is invalid (more likely), or mongo failed (less likely)', err)
-            resCb.json({success: false, message: 'user access token is invalid'});
-        })
-}); 
-
+        .catch(err => resCb.json({success: false, message: 'caught! mongo could have failed.', error: err}))
+})
 // gifter.sethsilesky.com:3000/oauthcallback
 app.post('/oauthcallback', (req, resCb) => {
     const { token } = req.body;
@@ -68,9 +72,9 @@ app.post('/oauthcallback', (req, resCb) => {
         Storage.createUserFromGoogle({
             userName: `google:${res.name}`,
             googleIdToken: token,
-             // Right now, it deletes the current data if a user logs in
+            // Right now, it deletes the current data if a user logs in
         }, resCb)
-        .catch(err => console.log('_____EEError: google failed', err))
+            .catch(err => console.log('_____EEError: google failed', err))
     });
 })
 

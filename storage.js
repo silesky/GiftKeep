@@ -62,7 +62,7 @@ module.exports = {
         }
     },
      createUserFromFb: ({userName, fbAccessToken}, res)  => {
-        console.log('create user from fb!');
+        console.log('storage.createUserFromFb()');
         const userObj = {
             userName: userName,
             fbAccessToken: fbAccessToken,
@@ -83,13 +83,13 @@ module.exports = {
             })
         }
     },
+  
     // get user by token
-    getUserByAccessToken: (reqObj, res) => {
-        console.log('get request for user...');
+    getUserByAccessToken: ({params: {token}}, res) => {
+        console.log('getUserByAccessToken() checking database for user...');
         let results;
-        let requestedIdToken = reqObj.params.token;
         userCollection().find().toArray((err, docs) => {
-            results = docs.find(el => requestedIdToken === el.fbAccessToken);
+            results = docs.find(el => token === el.fbAccessToken);
             if (err) {
                 res.json(err)
             } 
@@ -103,7 +103,7 @@ module.exports = {
     },
     // get userData by fBAccessToken 
     getUserDataByAccessToken: (reqObj, res) => {
-        console.log('get request for user data...!');
+        console.log('getUserDataByAccessToken()...');
         let results;
         let requestedIdToken = reqObj.params.token;
         userCollection().find().toArray((err, docs) => {
