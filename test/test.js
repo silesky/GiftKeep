@@ -48,10 +48,11 @@ describe('HTTP METHODS', () => {
                         expect(res).to.have.status(200);
                         expect(err).to.not.be.ok
                         expect(res.body).to.not.be.empty;
-                        expect(res.body).to.have.property('_id');
-                        expect(res.body).to.have.property('userName')
-                        expect(res.body).to.have.property('data')
-                        expect(res.body).to.have.property('fbAccessToken')
+                        expect(res.body.success).to.be.true;
+                        expect(res.body.data).to.have.property('_id');
+                        expect(res.body.data).to.have.property('userName')
+                        expect(res.body.data).to.have.property('data')
+                        expect(res.body.data).to.have.property('fbAccessToken')
                         expect(res.body.data).to.be.an.array;
                         done();
                     })

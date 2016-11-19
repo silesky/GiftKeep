@@ -74,7 +74,9 @@ module.exports = {
             userCollection().insert(userObj);
             res.json({
                 success: true,
-                msg: 'user created'
+                msg: 'user created',
+                payload: userObj
+
             })
         } catch (e) {
             res.json({
@@ -85,18 +87,21 @@ module.exports = {
     },
   
     // get user by token
-    getUserByAccessToken: ({params: {token}}, res) => {
+    getUserByAccessToken: ({params: {token}}, resCb) => {
         console.log('getUserByAccessToken() checking database for user...');
         let results;
         userCollection().find().toArray((err, docs) => {
             results = docs.find(el => token === el.fbAccessToken);
             if (err) {
-                res.json(err)
+                if (err) console.warn('error!', err)
+                resCb.json({success: false, message: 'some error', error: err})
             } 
             else if (results) {
-                res.json(results);
+                console.log('results found!', results)
+                resCb.json({success: true, data: results});
             } else {
-                res.json({success: false, message: 'Unable to return user. No user found with that access token.'})
+                console.log(' no user found!', results)
+                resCb.json({success: false, message: 'Unable to return user. No user found with that access token.'})
             }
             
         })

@@ -40,7 +40,7 @@ export class DrawerContainer extends Component {
         </Content>
         <Footer>
           <FbLogin 
-          hydrate={this.props.actions.hydrate}
+          authTokenAndTryToGetUser={this.props.actions.authTokenAndTryToGetUser}
           />
         </Footer>
       </Container>

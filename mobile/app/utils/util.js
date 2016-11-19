@@ -2,6 +2,7 @@ import defaultFriend from './../json/defaultFriend.json';
 import { AsyncStorage } from 'react-native';
 const _serverUrl = 'http://localhost:3000';
 
+
 export const lipsum = 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.'
 export const compose = (f1, f2) => value => f1(f2(value));
 export const createUuid = () => {
@@ -69,6 +70,7 @@ export const getTokenFromAsyncStorage = () => {
     AsyncStorage.getItem('@MyStore:FbToken').then((res, err) => {
         if (res) console.log('success.', res);
         if (err) console.log('error', err)
-    });
-
+    })
 }
+
+

@@ -44,8 +44,8 @@ app.post("/api/auth/fb", (req, resCb) => {
             if (fbResJson.success) {
                 fetch(`${localUrl}/api/user/${token}`)
                     .then(dbRes => dbRes.json()).then(dbResJson => {
-                        if (dbResJson.error) resCb.json({success: false, message: 'no user found', error: dbResJson.error.message})
-                        if (dbResJson.data.name)  return Storage.createUserFromFb({ userName: dbResJson.name, fbAccessToken: token }, resCb)
+                        if (!dbResJson.success) resCb.json({success: false, message: 'no user found', error: dbResJson.error.message})
+                        if (dbResJson.data)  return Storage.createUserFromFb({ userName: dbResJson.name, fbAccessToken: token }, resCb)
                         resCb.json({ success: true, "message": "data gotten from db", data: dbResJson })
                         return dbResJson
                       })

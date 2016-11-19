@@ -6,6 +6,7 @@ export const updateGiftDesc = (friendId, giftId, giftDesc) => {
       payload: {friendId, giftId, giftDesc}
     }
   }
+ 
 export const updateGiftTitle = (friendId, giftId, giftTitle) => {
   console.log('updateGift', friendId, giftId, giftTitle);
     return {
@@ -113,3 +114,32 @@ export const testClick = () => {
      type: {}
     }
 }
+
+export const authTokenAndTryToGetUser = (token) => {
+    console.log('auth token action called', token)
+    const _localServerUrl = 'http://localhost:3000';
+    const _sendFbAccessTokenToServerAndTryToGetUserObj = (token) => {
+        console.log('_sendFbAccessTokenToServerAndTryToGetUserObj called!')
+        return fetch(`${_localServerUrl}/api/auth/fb`, { method: 'POST',
+          body: JSON.stringify({ token }),
+          headers: { 'Content-Type': 'application/json' }
+      })
+    .then(res => res.json());
+    }
+  
+  return (dispatch) => {
+    console.log('dispatch1')
+    _sendFbAccessTokenToServerAndTryToGetUserObj(token)
+      .then(res => {
+        console.log(res, 'fbRes')
+        if (res.success) {
+          console.log('res', res.data)
+          dispatch(hydrate(res.data))
+          // should come like {res: success}
+        } else {
+          console.error('sendFbA error', res);
+        }
+      })
+  }
+}
+
