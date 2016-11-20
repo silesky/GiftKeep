@@ -13,8 +13,11 @@ module.exports = {
     connected: () => typeof database !== 'undefined',
     // get all
     getAllData: (res) => {
-        userCollection().find().toArray((err, docs) => {
-            res.json(docs);
+        return userCollection().find().toArray((err, docs) => {
+             res.json({
+                 success: true,
+                 payload: docs
+                });
         });
     },
     // create user
@@ -63,11 +66,12 @@ module.exports = {
     },
      createUserFromFb: ({userName, fbAccessToken}, res)  => {
         console.log('storage.createUserFromFb()');
+        // should also return data
         const userObj = {
             userName: userName,
             fbAccessToken: fbAccessToken,
             googleIdToken: null,
-            data: []
+            data: "I AM EMPTY"
         }
         try {
             //check if user exists with access
@@ -76,7 +80,6 @@ module.exports = {
                 success: true,
                 msg: 'user created',
                 payload: userObj
-
             })
         } catch (e) {
             res.json({
@@ -87,7 +90,7 @@ module.exports = {
     },
   
     // get user by token
-    getUserByAccessToken: ({params: {token}}, resCb) => {
+    getUserByAccessToken: (token, resCb) => {
         console.log('getUserByAccessToken() checking database for user...');
         let results;
         userCollection().find().toArray((err, docs) => {
@@ -98,7 +101,7 @@ module.exports = {
             } 
             else if (results) {
                 console.log('results found!', results)
-                resCb.json({success: true, data: results});
+                resCb.json({success: true, payload: results});
             } else {
                 console.log(' no user found!', results)
                 resCb.json({success: false, message: 'Unable to return user. No user found with that access token.'})
@@ -107,16 +110,15 @@ module.exports = {
         })
     },
     // get userData by fBAccessToken 
-    getUserDataByAccessToken: (reqObj, res) => {
+    getUserDataByAccessToken: (token, res) => {
         console.log('getUserDataByAccessToken()...');
         let results;
-        let requestedIdToken = reqObj.params.token;
         userCollection().find().toArray((err, docs) => {
-             results = docs.find(el => requestedIdToken === el.fbAccessToken);
+             results = docs.find(el => token === el.fbAccessToken);
             if (err) { 
                 res.json({success: false, message: 'mongo error', error: err })
             } else if (results) {
-                res.json({success: true, data: results['data']});
+                res.json({success: true, payload: results['data']});
             } else {
                  res.json({success: false, message: 'Unable to return user data. No user found with that access token.'})
             }
@@ -125,10 +127,7 @@ module.exports = {
     //update user data by token
     //db.userCollection.update({fbAccessToken: 1},{ $set: {'data': ["hello"]}})
 
-    updateUserDataByAccessToken: (reqObj, res) => {
-        const { data } = reqObj.body;
-        const { token } = reqObj.params;
-        console.log(data, token)
+    updateUserDataByAccessToken: (token, data, res) => {
         console.log('updateUserData called... token->', token, 'data->', data);
     
         const _writeConcernCb = (err, {

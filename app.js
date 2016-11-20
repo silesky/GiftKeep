@@ -14,12 +14,13 @@ let localUrl = "http://localhost:3000";
 app.get('/api/', (req, res) => Storage.getAllData(res));
 app.post('/api/user', (req, res) => Storage.createUser(req, res)); //parameters are reversed
 // get user by token
-app.get('/api/user/:token', (req, res) => Storage.getUserByAccessToken(req, res));
+app.get('/api/user/:token', ({params:{token}}, res) => Storage.getUserByAccessToken(token, res));
 // get user data by token
-app.get('/api/user/data/:token', (req, res) => Storage.getUserDataByAccessToken(req, res));
+app.get('/api/user/data/:token', ({params:{token}}, res) => Storage.getUserDataByAccessToken(token, res));
 // update user data by token
-app.put('/api/user/:token', (req, res) => Storage.updateUserByAccessToken(req, res));
-app.put('/api/user/data/:token', (req, res) => Storage.updateUserDataByAccessToken(req, res));
+app.put('/api/user/data/:token', ({params: {token}, body: {data}}, res) => {
+    Storage.updateUserDataByAccessToken(token, data, res);
+})
 // google id
 app.get("/oauthcallback", (req, res) => {
     console.log('req success', req.body);
@@ -40,13 +41,15 @@ app.post("/api/auth/fb", (req, resCb) => {
             if (fbResJson.error) resCb.json({success: false, error: fbResJson.error.message})
             return {success: true, data: fbResJson};
         })
+        // once authneticated, grab userId too
         .then(fbResJson => {
             if (fbResJson.success) {
-                fetch(`${localUrl}/api/user/${token}`)
+                //getFacebookId
+                // can
+                fetch(`${localUrl}/api/user/f1`)
                     .then(dbRes => dbRes.json()).then(dbResJson => {
                         if (!dbResJson.success) resCb.json({success: false, message: 'no user found', error: dbResJson.error.message})
-                        if (dbResJson.data)  return Storage.createUserFromFb({ userName: dbResJson.name, fbAccessToken: token }, resCb)
-                        resCb.json({ success: true, "message": "data gotten from db", data: dbResJson })
+                        if (dbResJson.success)  Storage.createUserFromFb({ userName: dbResJson.name, fbAccessToken: token }, resCb)
                         return dbResJson
                       })
             }

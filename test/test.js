@@ -9,9 +9,11 @@ const Config = require('../config.json');
 const userCollectionJSON = require('./../seeds/userCollection.json')
 const dummyFbAccessToken = Config.fb.dummyAccessToken;
 
-describe('HTTP METHODS', () => {
+describe('HTTP METHODS', function() {
+
     let userCollection;
     before(() => {
+ 
         MongoClient.connect('mongodb://127.0.0.1:27017/giftr', (err, db) => {
             db.createCollection('userCollection')
             userCollection = db.collection('userCollection');
@@ -35,12 +37,10 @@ describe('HTTP METHODS', () => {
                     .get('/api')
                     .end((err, res) => {
                         expect(res).to.have.status(200);
-                        expect(res.body).to.be.a('array'); //each user is an object
-                        done()
+                        expect(res.body.payload).to.be.an.array; //each user is an object
+                        done();
                     })
-            })
-
-
+            }),
             it('get: getUserByAccessToken should return user data (e.g username) if fb access token is valid.', (done) => {
                 request(serverUrl)
                     .get(`/api/user/${dummyFbAccessToken}`)
@@ -49,11 +49,11 @@ describe('HTTP METHODS', () => {
                         expect(err).to.not.be.ok
                         expect(res.body).to.not.be.empty;
                         expect(res.body.success).to.be.true;
-                        expect(res.body.data).to.have.property('_id');
-                        expect(res.body.data).to.have.property('userName')
-                        expect(res.body.data).to.have.property('data')
-                        expect(res.body.data).to.have.property('fbAccessToken')
-                        expect(res.body.data).to.be.an.array;
+                        expect(res.body.payload).to.have.property('_id');
+                        expect(res.body.payload).to.have.property('userName')
+                        expect(res.body.payload).to.have.property('data')
+                        expect(res.body.payload).to.have.property('fbAccessToken')
+                        expect(res.body.payload).to.be.an.array;
                         done();
                     })
             }),
@@ -77,10 +77,10 @@ describe('HTTP METHODS', () => {
                             expect(res).to.have.status(200);
                             expect(err).to.be.falsy;
                             expect(res.body.success).to.be.true;
-                            expect(res.body.data).to.be.an.array // array of friends
-                            expect(res.body.data[0]).to.have.property('friendName');
-                            expect(res.body.data[0]).to.have.property('gifts');
-                            expect(res.body.data[0].gifts[0]).to.have.property('giftName');
+                            expect(res.body.payload).to.be.an.array // array of friends
+                            expect(res.body.payload[0]).to.have.property('friendName');
+                            expect(res.body.payload[0]).to.have.property('gifts');
+                            expect(res.body.payload[0].gifts[0]).to.have.property('giftName');
                             done();
                         })
                 }),
@@ -123,6 +123,7 @@ describe('HTTP METHODS', () => {
                 })
         })
     describe('Put: update user data by fb access token', () => {
+        
         it('should update user data if access token is valid', (done) => {
             request(serverUrl)
                 // put might not work

@@ -1,3 +1,4 @@
+import fetch from 'isomorphic-fetch'
 import * as Util from './../utils/util'
 export const updateGiftDesc = (friendId, giftId, giftDesc) => {
   console.log('updateGift', friendId, giftId, giftDesc);
@@ -116,30 +117,33 @@ export const testClick = () => {
 }
 
 export const authTokenAndTryToGetUser = (token) => {
-    console.log('auth token action called', token)
     const _localServerUrl = 'http://localhost:3000';
-    const _sendFbAccessTokenToServerAndTryToGetUserObj = (token) => {
-        console.log('_sendFbAccessTokenToServerAndTryToGetUserObj called!')
-        return fetch(`${_localServerUrl}/api/auth/fb`, { method: 'POST',
-          body: JSON.stringify({ token }),
-          headers: { 'Content-Type': 'application/json' }
-      })
-    .then(res => res.json());
+  return (dispatch, getState) => {
+    let action = {};
+     console.log('auth token action called... we should see a res:')
+     fetch(`${_localServerUrl}/api/auth/fb`, { method: 'POST',
+            body: JSON.stringify({ token }),
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(res => res.json())
+        .then(res => {
+          if (res.success) {
+            console.log('server res', res)
+            action = dispatch({
+                type: 'HYDRATE',
+                payload: {
+                  userName: res.payload.userName,
+                  data: res.payload.data
+                }
+            }
+            )
+            // should come like {res: success}
+          } else {
+            console.error('sendFbA error', res);
+          }
+        })  
+        console.log('if no res, fetch method failed.')
+        console.log('>>> not the result, just a test... userName:', getState().user.userName)
     }
-  
-  return (dispatch) => {
-    console.log('dispatch1')
-    _sendFbAccessTokenToServerAndTryToGetUserObj(token)
-      .then(res => {
-        console.log(res, 'fbRes')
-        if (res.success) {
-          console.log('res', res.data)
-          dispatch(hydrate(res.data))
-          // should come like {res: success}
-        } else {
-          console.error('sendFbA error', res);
-        }
-      })
-  }
 }
 

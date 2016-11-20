@@ -24,7 +24,9 @@ const user = (state = initialStateUser, action) => {
 
   switch (action.type) {
     case 'HYDRATE':
-      return {data: action.payload.data}
+       console.log('reducer->hydrated!, newState:', action.payload);
+
+      return action.payload
     case 'CLEAR':
       return emptyState;
 
