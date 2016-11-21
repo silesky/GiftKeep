@@ -14,8 +14,12 @@ let localUrl = "http://localhost:3000";
 app.get('/api', (undefined, resCb, next) => {
      Storage.getAllData()
      .then(allData => {
-          resCb.json(allData)
+          resCb.json({
+              success: true,
+              payload: allData
+            })
      })
+     .catch(err => resCb.json({success: false, error: err}))
      .catch(next)
 })
 app.post('/api/user', (req, res) => Storage.createUser(req, res)); //parameters are reversed
@@ -62,30 +66,50 @@ app.get("/oauthcallback", (req, res) => {
 // check if user is in database... if true, return data.
 // if user is not in database, ask facebook if token is valid. 
 // if token is valid, create new user. if token is invalid, error message.
-app.post("/api/auth/fb", (req, resCb) => {
+app.post("/api/auth/fb", (req, resCb, done) => {
     const { token } = req.body;
     console.log('post: api/auth/fb... token: ', token);
     const validateThisToken = `https://graph.facebook.com/me?access_token=${token}`;
     fetch(validateThisToken)
-        .then((fbRes) => fbRes.json()).then(fbResJson => {
+        .then((fbRes) => fbRes.json()).then(fbRes => {
             // nothing found in facebook
-            if (fbResJson.error) resCb.json({success: false, error: fbResJson.error.message})
-            return {success: true, data: fbResJson};
-        })
-        // once authneticated, grab userId too
-        .then(fbResJson => {
-            if (fbResJson.success) {
-                //getFacebookId
-                // can
-                fetch(`${localUrl}/api/user/f1`)
-                    .then(dbRes => dbRes.json()).then(dbResJson => {
-                        if (!dbResJson.success) resCb.json({success: false, message: 'no user found', error: dbResJson.error.message})
-                        if (dbResJson.success)  Storage.createUserFromFb({ userName: dbResJson.name, fbAccessToken: token }, resCb)
-                        return dbResJson
-                      })
+            if (fbRes.error) {
+                resCb.json({ success: false, error: fbRes.error.message })
+            } else {
+                return { success: true, payload: fbRes };
             }
         })
+        // once authneticated, grab userId too
+        .then(fbRes => {
+            if (fbRes.success) {
+                const { id } = fbRes.payload;
+                Storage.getUserByFbId(id)
+                    .then(dbUserObj => {
+                        if (dbUserObj) {
+                            resCb.json({
+                                success: true, 
+                                message: 'user exists',
+                                payload: dbUserObj}) // if user exists in db
+                        } else {
+                            Storage.createUserFromFb(fbRes.name, token, fbRes.id);
+                            // TODO: if success = true
+                            resCb.json({
+                                success: true, 
+                                message: 'user created',
+                                payload: {
+                                    userName: fbRes.name, 
+                                    fbId: fbRes.id, 
+                                    data: []
+                                }
+                            })
+                        }
+                    })
+                    .catch(err => resCb.json({ success: false, message: 'no user found', error: err }))
+            
+        }
+        })
         .catch(err => resCb.json({success: false, message: 'caught! mongo could have failed.', error: err}))
+        .catch(done);
 })
 // gifter.sethsilesky.com:3000/oauthcallback
 app.post('/oauthcallback', (req, resCb) => {

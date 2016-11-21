@@ -28,10 +28,11 @@ module.exports = {
     },
     // create user
     // temp? for debugging
-    createUser: ({body: {userName, googleIdToken, data}}, res) => {
+    createUser: ({body: {userName, fbId, googleIdToken, data}}, res) => {
         console.log('post request to create user...');
         const userObj = {
             userName: userName,
+            fbId: fbId,
             fbAccessToken: null,
             googleIdToken: googleIdToken,
             data: data,
@@ -70,29 +71,27 @@ module.exports = {
             })
         }
     },
-     createUserFromFb: ({userName, fbAccessToken}, res)  => {
+     createUserFromFb: (userName, fbAccessToken, fbId)  => {
         console.log('storage.createUserFromFb()');
         // should also return data
         const userObj = {
             userName: userName,
             fbAccessToken: fbAccessToken,
+            fbId: fbId,
             googleIdToken: null,
             data: [] // no data
         }
-        try {
-            //check if user exists with access
-            return userCollection().insert(userObj).then(() =>
-                res.json({
-                    success: true,
-                    msg: 'user created',
-                })
-            )
-        } catch (e) {
-            res.json({
-                success: false,
-                error: e
+        return new Promise((resolve, reject) => {
+            userCollection().insert(userObj, (err, records) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(records)
+                }
             })
-        }
+            
+        })
+     
     },
   
     // get user by token
@@ -115,10 +114,26 @@ module.exports = {
               
             })
     },
-
+    
+    getUserByFbId: (fbId) => {
+    // TODO: refactor to use promises, like in getAlData
+        console.log('getUserByAccessToken() checking database for user...');
+        return new Promise((resolve, reject) => {
+            userCollection().find().toArray((err, docs) => {
+                const results = docs.find(el => fbId === el.fbId);
+                if (results) {
+                    resolve(results);
+                } else if (err) {
+                    reject(err)
+                } else {
+                    reject('no results found')
+                }
+            })
+              
+            })
+    },
     updateUserDataByAccessToken: (token, data, res) => {
         console.log('updateUserData called... token->', token, 'data->', data);
-    
         const _writeConcernCb = (err, {
             result
         }) => {

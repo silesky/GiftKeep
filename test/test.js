@@ -13,17 +13,13 @@ describe('HTTP METHODS', function() {
 
     let userCollection;
     before(() => {
- 
         MongoClient.connect('mongodb://127.0.0.1:27017/giftr', (err, db) => {
             db.createCollection('userCollection')
             userCollection = db.collection('userCollection');
+            userCollection.remove({});
+            userCollection.insert(userCollectionJSON);
         })
     });
-    after(() => {
-        // clean up dummy data 
-        userCollection.drop();
-        userCollection.insert(userCollectionJSON);
-    })
     describe('Db connection', () => {
         it('should connect to gifter db', () => {
             MongoClient.connect('mongodb://127.0.0.1:27017/giftr', (err, db) => {
@@ -42,7 +38,7 @@ describe('HTTP METHODS', function() {
                         done();
                     })
             }),
-            it('get: getUserByAccessToken should return user data (e.g username) if fb access token is valid.', (done) => {
+            it('get: getUserByAccessToken should return user data (e.g username).', (done) => {
                 request(serverUrl)
                     .get(`/api/user/${dummyFbAccessToken}`)
                     .end((err, res) => {
@@ -59,59 +55,63 @@ describe('HTTP METHODS', function() {
                     })
             }),
 
-                it('get: getUserByAccessToken should fail if an access token is invalid', (done) => {
-                    request(serverUrl)
-                        .get(`/api/user/iNVALiDAXXToken`)
-                        .end((err, res) => {
-                            expect(res).to.have.status(200);
-                            expect(err).to.be.falsy;
-                            expect(res.body.success).to.be.false;
-                            done();
+                // it('get: getUserByAccessToken should succeed if an access token is good ', (done) => {
+                //     request(serverUrl)
+                //         .get(`/api/user/f1`)
+                //         .end((err, res) => {
+                //              expect(res).to.have.status(200);
+                //                 expect(err).to.be.falsy;
+                //                 expect(res.body.success).to.be.true;
+                //                 expect(res.body.payload).to.have.property('fbAccessToken')
+                //                 expect(res.body.payload).to.have.property('fbId')
+
+                //         })
+                // }),
+
+            it('get: getUserByAccessToken should fail if an access token is bad', (done) => {
+                            request(serverUrl)
+                                .get(`/api/user/iNVALiDAXXToken`)
+                                .end((err, res) => {
+                                    expect(res).to.have.status(200);
+                                    expect(err).to.be.falsy;
+                                    expect(res.body.success).to.be.false;
+                                    done();
+                             
+                                })
                         })
                 }),
-
-
-                it('get: getUserDataByAccessToken should return user data (i.e friends) if fb access token is valid.', (done) => {
-                    request(serverUrl)
-                        .get(`/api/user/data/${dummyFbAccessToken}`)
-                        .end((err, res) => {
-                            expect(res).to.have.status(200);
-                            expect(err).to.be.falsy;
-                            expect(res.body.success).to.be.true;
-                            expect(res.body.payload).to.be.an.array // array of friends
-                            expect(res.body.payload[0]).to.have.property('friendName');
-                            expect(res.body.payload[0]).to.have.property('gifts');
-                            expect(res.body.payload[0].gifts[0]).to.have.property('giftName');
-                            done();
-                        })
-                }),
-                it('get: getUserDataByAccessToken should fail if an access token is invalid', (done) => {
-                    request(serverUrl)
-                        .get(`/api/user/data/iNVALiDAXXToken`)
-                        .end((err, res) => {
-                            expect(res).to.have.status(200);
-                            expect(err).to.be.falsy;
-                            expect(res.body.success).to.be.false;
-                            done();
-                        })
-                })
-        }),
+    
         describe('Post: Request to create new user', () => {
-            it('post: request to create new user should create user if fb access token is valid AND no user is the database.', (done) => {
+            it('post: should create user + return a fresh object if user is new (and token is good).', (done) => {
+                request(serverUrl)
+                    .post('/api/auth/fb')
+                    .send({ token: Config.fb.accessToken })
+                    .end((err, res) => {
+                        console.log(res.body)
+                        expect(res).to.have.status(200);
+                        expect(res.body).to.not.be.empty;
+                        expect(res.body.success).to.be.true;
+                        expect(res.body.payload).to.have.property('userName');
+                        expect(err).to.not.be.ok
+                        done();
+                    })
+            })
+        }),
+            it('post: should return existing user object user if user in db (and token is good)', (done) => {
                 request(serverUrl)
                     .post('/api/auth/fb')
                     .send({ token: Config.fb.accessToken })
                     .end((err, res) => {
                         expect(res).to.have.status(200);
                         expect(res.body).to.not.be.empty;
-                        expect(res.body).to.be.a('object');
+                        expect(res.body.success).to.be.true;
+                        expect(res.body.payload).to.have.property('userName');
                         expect(err).to.not.be.ok
                         done();
                     })
             })
         }),
-
-        it('post: request to create new user should fail if access token is invalid.', (done) => {
+        it('post: should fail if token is bad.', (done) => {
             request(serverUrl)
                 .post('/api/auth/fb')
                 .send({ token: 'fakeACCESSTOKEN' })
@@ -122,9 +122,8 @@ describe('HTTP METHODS', function() {
                     expect(res.body.success).to.be.false;
                     done();
                 })
-        })
+        }),
     describe('Put: update user data by fb access token', () => {
-        
         it('should update user data if access token is valid', (done) => {
             request(serverUrl)
                 // put might not work
@@ -141,4 +140,3 @@ describe('HTTP METHODS', function() {
         })
     })
     // check if user exists
-})
