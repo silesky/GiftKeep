@@ -15,10 +15,13 @@ module.exports = {
     getAllData: () => {
         return new Promise((resolve, reject) => {
             userCollection().find().toArray((err, docs) => {
-                if (err) {
-                    reject({ success: false, error: err })
+                if (docs) {
+                    resolve(docs)
+                }
+                else if (err) {
+                    reject(err)
                 } else {
-                    resolve({ success: true, payload: docs })
+                    reject('no data found')
                 }
             })
         })
@@ -94,43 +97,24 @@ module.exports = {
   
     // get user by token
     
-    getUserByAccessToken: (token, resCb) => {
+    getUserByAccessToken: (token) => {
     // TODO: refactor to use promises, like in getAlData
         console.log('getUserByAccessToken() checking database for user...');
-        let results;
-        userCollection().find().toArray((err, docs) => {
-            results = docs.find(el => token === el.fbAccessToken);
-            if (err) {
-                if (err) console.warn('error!', err)
-                resCb.json({success: false, message: 'some error', error: err})
-            } 
-            else if (results) {
-                console.log('results found!', results)
-                resCb.json({success: true, payload: results});
-            } else {
-                console.log(' no user found!', results)
-                resCb.json({success: false, message: 'Unable to return user. No user found with that access token.'})
-            }
-            
-        })
+        return new Promise((resolve, reject) => {
+            userCollection().find().toArray((err, docs) => {
+                const results = docs.find(el => token === el.fbAccessToken);
+                if (results) {
+                    console.log('results found!', results)
+                    resolve(results);
+                } else if (err) {
+                    reject(err)
+                } else {
+                    reject('no results found')
+                }
+            })
+              
+            })
     },
-    // get userData by fBAccessToken 
-    getUserDataByAccessToken: (token, res) => {
-        console.log('getUserDataByAccessToken()...');
-        let results;
-        userCollection().find().toArray((err, docs) => {
-             results = docs.find(el => token === el.fbAccessToken);
-            if (err) { 
-                res.json({success: false, message: 'mongo error', error: err })
-            } else if (results) {
-                res.json({success: true, payload: results['data']});
-            } else {
-                 res.json({success: false, message: 'Unable to return user data. No user found with that access token.'})
-            }
-        })
-    },
-    //update user data by token
-    //db.userCollection.update({fbAccessToken: 1},{ $set: {'data': ["hello"]}})
 
     updateUserDataByAccessToken: (token, data, res) => {
         console.log('updateUserData called... token->', token, 'data->', data);

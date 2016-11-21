@@ -11,7 +11,7 @@ Storage.connect();
 
 let localUrl = "http://localhost:3000";
 // get all
-app.get('/api/', (undefined, resCb, next) => {
+app.get('/api', (undefined, resCb, next) => {
      Storage.getAllData()
      .then(allData => {
           resCb.json(allData)
@@ -19,10 +19,35 @@ app.get('/api/', (undefined, resCb, next) => {
      .catch(next)
 })
 app.post('/api/user', (req, res) => Storage.createUser(req, res)); //parameters are reversed
-// get user by token
-app.get('/api/user/:token', ({params:{token}}, res) => Storage.getUserByAccessToken(token, res));
+// get user by token 
+
+app.get('/api/user/:token', ({params:{token}}, resCb, next) => {
+    Storage.getUserByAccessToken(token)
+    .then((user) => {
+        resCb.json({success: true, payload: user})
+    })
+    .catch(err => {
+        resCb.json({
+            success: false, 
+            error: err
+            })
+    })
+    .catch(next)
+})
 // get user data by token
-app.get('/api/user/data/:token', ({params:{token}}, res) => Storage.getUserDataByAccessToken(token, res));
+app.get('/api/user/data/:token', ({params:{token}}, resCb, next) => {
+    Storage.getUserByAccessToken(token).then((user) => {
+        resCb.json({success: true, payload: user['data']})
+    })
+    .catch(err => {
+          resCb.json({
+            success: false, 
+            message: 'Unable to return user Data.', 
+            error: err
+            })
+    })
+    .catch(next);
+});
 // update user data by token
 app.put('/api/user/data/:token', ({params:{token}, body: {data}}, res) => {
     Storage.updateUserDataByAccessToken(token, data, res);
