@@ -11,14 +11,20 @@ Storage.connect();
 
 let localUrl = "http://localhost:3000";
 // get all
-app.get('/api/', (req, res) => Storage.getAllData(res));
+app.get('/api/', (undefined, resCb, next) => {
+     Storage.getAllData()
+     .then(allData => {
+          resCb.json(allData)
+     })
+     .catch(next)
+})
 app.post('/api/user', (req, res) => Storage.createUser(req, res)); //parameters are reversed
 // get user by token
 app.get('/api/user/:token', ({params:{token}}, res) => Storage.getUserByAccessToken(token, res));
 // get user data by token
 app.get('/api/user/data/:token', ({params:{token}}, res) => Storage.getUserDataByAccessToken(token, res));
 // update user data by token
-app.put('/api/user/data/:token', ({params: {token}, body: {data}}, res) => {
+app.put('/api/user/data/:token', ({params:{token}, body: {data}}, res) => {
     Storage.updateUserDataByAccessToken(token, data, res);
 })
 // google id

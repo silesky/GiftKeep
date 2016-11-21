@@ -125,8 +125,7 @@ export const authTokenAndTryToGetUser = (token) => {
             body: JSON.stringify({ token }),
             headers: { 'Content-Type': 'application/json' }
         })
-        .then(res => res.json())
-        .then(res => {
+        .then(res => res.json()).then(res => {
           if (res.success) {
             console.log('server res', res)
             action = dispatch({

@@ -37,6 +37,7 @@ describe('HTTP METHODS', function() {
                     .get('/api')
                     .end((err, res) => {
                         expect(res).to.have.status(200);
+                        expect(res.body.success).to.be.true;
                         expect(res.body.payload).to.be.an.array; //each user is an object
                         done();
                     })
@@ -134,7 +135,7 @@ describe('HTTP METHODS', function() {
                     expect(res).to.have.status(200);
                     expect(res.body).to.exist;
                     expect(res.body).to.be.a('object');
-                    expect(res.body.success).to.be.true
+                    expect(res.body.success).to.be.true;
                     done();
                 })
         })

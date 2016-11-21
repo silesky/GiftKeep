@@ -12,13 +12,16 @@ module.exports = {
     },
     connected: () => typeof database !== 'undefined',
     // get all
-    getAllData: (res) => {
-        return userCollection().find().toArray((err, docs) => {
-             res.json({
-                 success: true,
-                 payload: docs
-                });
-        });
+    getAllData: () => {
+        return new Promise((resolve, reject) => {
+            userCollection().find().toArray((err, docs) => {
+                if (err) {
+                    reject({ success: false, error: err })
+                } else {
+                    resolve({ success: true, payload: docs })
+                }
+            })
+        })
     },
     // create user
     // temp? for debugging
@@ -71,16 +74,16 @@ module.exports = {
             userName: userName,
             fbAccessToken: fbAccessToken,
             googleIdToken: null,
-            data: "I AM EMPTY"
+            data: [] // no data
         }
         try {
             //check if user exists with access
-            userCollection().insert(userObj);
-            res.json({
-                success: true,
-                msg: 'user created',
-                payload: userObj
-            })
+            return userCollection().insert(userObj).then(() =>
+                res.json({
+                    success: true,
+                    msg: 'user created',
+                })
+            )
         } catch (e) {
             res.json({
                 success: false,
@@ -90,7 +93,9 @@ module.exports = {
     },
   
     // get user by token
+    
     getUserByAccessToken: (token, resCb) => {
+    // TODO: refactor to use promises, like in getAlData
         console.log('getUserByAccessToken() checking database for user...');
         let results;
         userCollection().find().toArray((err, docs) => {
