@@ -84,29 +84,32 @@ app.post("/api/auth/fb", (req, resCb, done) => {
             if (fbRes.success) {
                 const { id, name } = fbRes.payload;
                 Storage.getUserByFbId(id)
-                    .then(dbUserObj => {
-                        if (dbUserObj) {
+                    .then((dbUserObj) => {
                             resCb.json({
                                 success: true, 
                                 message: 'user exists',
                                 payload: dbUserObj}) // if user exists in db
-                        } else {
-                            Storage.createUserFromFb(name, token, id);
-                            // TODO: if success = true
-                            resCb.json({
-                                success: true, 
-                                message: 'user created',
-                                payload: {
-                                    userName: fbRes.name, 
-                                    fbId: fbRes.id, 
-                                    data: []
-                                }
-                            })
-                        }
+                        
                     })
-                    .catch(err => resCb.json({ success: false, message: 'no user found', error: err }))
-            
-        }
+                    .catch((err) => {
+                            // TODO: if success = true
+                            if (err === 'no db result found') {
+                                Storage.createUserFromFb(name, token, id);
+                                resCb.json({
+                                    success: true, 
+                                    message: 'user created',
+                                    payload: {
+                                        userName: fbRes.name, 
+                                        fbId: fbRes.id, 
+                                        data: []
+                                    }
+                                })
+                            } else {
+                               resCb.json({success: false, error: err})
+                            
+                            }
+                    })
+            }
         })
         .catch(err => resCb.json({success: false, message: 'caught! mongo could have failed.', error: err}))
         .catch(done);

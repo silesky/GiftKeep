@@ -126,7 +126,7 @@ module.exports = {
                 } else if (err) {
                     reject(err)
                 } else {
-                    reject('no results found')
+                    reject('no db result found')
                 }
             })
               
