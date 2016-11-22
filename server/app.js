@@ -3,8 +3,10 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const fetch = require('node-fetch');
 const Storage = require('./storage');
+const fs = require('fs');
+const https = require('https');
 const app = express();
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static('./public'));
 Storage.connect();
@@ -135,6 +137,9 @@ app.post('/oauthcallback', (req, resCb) => {
             .catch(err => console.log('_____EEError: google failed', err))
     });
 })
-
+// https.createServer({
+//     key: fs.readFileSync('./server.key'),
+//     cert: fs.readFileSync('./server.crt')
+// }, app).listen(3000);
 app.listen(3000);
 console.log("listening on http://gifter.sethsilesky.com:3000");

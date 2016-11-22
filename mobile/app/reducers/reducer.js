@@ -21,12 +21,11 @@ const user = (state = initialStateUser, action) => {
     ;
   const _getGiftArrByFriendId = (friendId) => state.data.find(el => el.friendId === friendId).gifts;
   const _getSingleGiftObj = (friendId, giftId) => _getGiftArrByFriendId(friendId).find((el) => el.giftId === giftId)
-
   switch (action.type) {
     case 'HYDRATE':
-       console.log('reducer->hydrated!, newState:', action.payload);
-
-      return action.payload
+    console.log(state, action.payload);
+      newState = Object.assign({}, action.payload)
+      return newState;
     case 'CLEAR':
       return emptyState;
 

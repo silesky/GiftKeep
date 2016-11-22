@@ -9,6 +9,7 @@
     "testwatch": "mocha --growl --watch --require ./test/mocha-setup.js --compilers js:babel-core/register --recursive test"
   },
   "dependencies": {
+    "json-loader": "^0.5.4",
     "moment": "^2.15.2",
     "native-base": "^0.5.11",
     "react": "15.3.2",

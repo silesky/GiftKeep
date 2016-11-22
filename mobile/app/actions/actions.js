@@ -1,4 +1,9 @@
 import * as Util from './../utils/util'
+const config = require('./../../mobileconfig.json');
+const { 
+  serverUrl 
+  } = config
+
 export const updateGiftDesc = (friendId, giftId, giftDesc) => {
   console.log('updateGift', friendId, giftId, giftDesc);
     return {
@@ -90,10 +95,9 @@ export const addGift = (friendId) => {
 
 
 export const hydrate = (data) => {
-  console.log('action: hydrate','..data..', data);
   return {
     type: 'HYDRATE',
-    payload: {data}
+    payload: data
   }
 }
 export const sendAccessToken = (token) => {
@@ -115,33 +119,21 @@ export const testClick = () => {
     }
 }
 
-export const authTokenAndTryToGetUser = (token) => {
-    const _localServerUrl = 'http://localhost:3000';
-  return (dispatch, getState) => {
-    let action = {};
-     console.log('auth token action called... we should see a res:')
-     fetch(`${_localServerUrl}/api/auth/fb`, { method: 'POST',
+export const sendTokenToServer = (token) => {
+  return fetch(`${serverUrl}/api/auth/fb`, 
+          { method: 'POST',
             body: JSON.stringify({ token }),
             headers: { 'Content-Type': 'application/json' }
         })
+}
+export const authTokenAndTryToGetUser = (token) => {
+    return (dispatch) => {
+      console.log('auth token action called... we should see a res:')
+      return sendTokenToServer(token)
         .then(res => res.json()).then(res => {
-          if (res.success) {
             console.log('server res', res)
-            action = dispatch({
-                type: 'HYDRATE',
-                payload: {
-                  userName: res.payload.userName,
-                  data: res.payload.data
-                }
-            }
-            )
-            // should come like {res: success}
-          } else {
-            console.error('sendFbA error', res);
-          }
-        })  
-        console.log('if no res, fetch method failed.')
-        console.log('>>> not the result, just a test... userName:', getState().user.userName)
-    }
+            dispatch(hydrate(res.payload))
+        }).catch(err => console.log('error', err))
+  }
 }
 
