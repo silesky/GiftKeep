@@ -1,4 +1,3 @@
-import fetch from 'isomorphic-fetch'
 import * as Util from './../utils/util'
 export const updateGiftDesc = (friendId, giftId, giftDesc) => {
   console.log('updateGift', friendId, giftId, giftDesc);

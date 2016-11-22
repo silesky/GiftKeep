@@ -9,7 +9,6 @@ app.use(cookieParser());
 app.use(express.static('./public'));
 Storage.connect();
 
-let localUrl = "http://localhost:3000";
 // get all
 app.get('/api', (undefined, resCb, next) => {
      Storage.getAllData()
@@ -68,7 +67,6 @@ app.get("/oauthcallback", (req, res) => {
 // if token is valid, create new user. if token is invalid, error message.
 app.post("/api/auth/fb", (req, resCb, done) => {
     const { token } = req.body;
-    console.log('post: api/auth/fb... token: ', token);
     const validateThisToken = `https://graph.facebook.com/me?access_token=${token}`;
     fetch(validateThisToken)
         .then((fbRes) => fbRes.json()).then(fbRes => {
@@ -106,7 +104,6 @@ app.post("/api/auth/fb", (req, resCb, done) => {
                                 })
                             } else {
                                resCb.json({success: false, error: err})
-                            
                             }
                     })
             }

@@ -6,7 +6,7 @@ chai.use(chaiHttp);
 const { expect, request } = chai;
 const serverUrl = "http://localhost:3000"
 const Config = require('../config.json');
-const userCollectionJSON = require('./../seeds/userCollection.json')
+const userCollectionJSON = require('../seeds/userCollection.json')
 
 
 const existingUserToken = Config.fb.dummy.existing.token;

@@ -133,7 +133,7 @@ module.exports = {
             })
     },
     updateUserDataByAccessToken: (token, data, res) => {
-        console.log('updateUserData called... token->', token, 'data->', data);
+        console.log('updateUserData called... token->');
         const _writeConcernCb = (err, {
             result
         }) => {
