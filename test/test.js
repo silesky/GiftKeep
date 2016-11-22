@@ -7,8 +7,10 @@ const { expect, request } = chai;
 const serverUrl = "http://localhost:3000"
 const Config = require('../config.json');
 const userCollectionJSON = require('./../seeds/userCollection.json')
-const dummyFbAccessToken = Config.fb.dummyAccessToken;
 
+
+const existingUserToken = Config.fb.dummy.existing.token;
+const newUserToken = Config.fb.dummy.new.token;
 describe('HTTP METHODS', function() {
 
     let userCollection;
@@ -40,7 +42,7 @@ describe('HTTP METHODS', function() {
             }),
             it('get: getUserByAccessToken should return user data (e.g username).', (done) => {
                 request(serverUrl)
-                    .get(`/api/user/${dummyFbAccessToken}`)
+                    .get(`/api/user/${existingUserToken}`)
                     .end((err, res) => {
                         expect(res).to.have.status(200);
                         expect(err).to.not.be.ok
@@ -81,13 +83,13 @@ describe('HTTP METHODS', function() {
                         })
                 }),
     
-        describe('Post: Request to create new user', () => {
+
+        describe('A new user wants to log in', () => {
             it('post: should create user + return a fresh object if user is new (and token is good).', (done) => {
                 request(serverUrl)
                     .post('/api/auth/fb')
-                    .send({ token: Config.fb.accessToken })
+                    .send({ token: newUserToken })
                     .end((err, res) => {
-                        console.log(res.body)
                         expect(res).to.have.status(200);
                         expect(res.body).to.not.be.empty;
                         expect(res.body.success).to.be.true;
@@ -97,10 +99,11 @@ describe('HTTP METHODS', function() {
                     })
             })
         }),
+        describe('An existing user logs back in', () => {
             it('post: should return existing user object user if user in db (and token is good)', (done) => {
                 request(serverUrl)
                     .post('/api/auth/fb')
-                    .send({ token: Config.fb.accessToken })
+                    .send({token: existingUserToken})
                     .end((err, res) => {
                         expect(res).to.have.status(200);
                         expect(res.body).to.not.be.empty;
@@ -110,7 +113,9 @@ describe('HTTP METHODS', function() {
                         done();
                     })
             })
-        }),
+        })
+    }),
+    describe('A user tries to log in after being rejected by facebook', () => {
         it('post: should fail if token is bad.', (done) => {
             request(serverUrl)
                 .post('/api/auth/fb')
@@ -122,12 +127,13 @@ describe('HTTP METHODS', function() {
                     expect(res.body.success).to.be.false;
                     done();
                 })
-        }),
+        })
+    })
     describe('Put: update user data by fb access token', () => {
         it('should update user data if access token is valid', (done) => {
             request(serverUrl)
                 // put might not work
-                .put(`/api/user/data/${dummyFbAccessToken}`)
+                .put(`/api/user/data/${existingUserToken}`)
                 .send({ data: Math.random() })
                 .end((err, res) => {
                     expect(err).to.be.falsy;

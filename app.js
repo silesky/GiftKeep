@@ -82,7 +82,7 @@ app.post("/api/auth/fb", (req, resCb, done) => {
         // once authneticated, grab userId too
         .then(fbRes => {
             if (fbRes.success) {
-                const { id } = fbRes.payload;
+                const { id, name } = fbRes.payload;
                 Storage.getUserByFbId(id)
                     .then(dbUserObj => {
                         if (dbUserObj) {
@@ -91,7 +91,7 @@ app.post("/api/auth/fb", (req, resCb, done) => {
                                 message: 'user exists',
                                 payload: dbUserObj}) // if user exists in db
                         } else {
-                            Storage.createUserFromFb(fbRes.name, token, fbRes.id);
+                            Storage.createUserFromFb(name, token, id);
                             // TODO: if success = true
                             resCb.json({
                                 success: true, 
