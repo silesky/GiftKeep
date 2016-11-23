@@ -1,2 +1,5 @@
 config.json
+*.key
+*.csr
+*.crt
 Gifter.postman_test_run.json
