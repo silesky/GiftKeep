@@ -4,11 +4,12 @@ const MongoClient = require('mongodb').MongoClient
 chai.use(chaiHttp);
 const { expect, request } = chai;
 const serverUrl = "http://localhost:3000"
-const Config = require('../../config.json');
 const userCollectionJSON = require('../../seeds/userCollection.json')
+const Config = require('../../config.json');
+const existingUserToken = Config.fb.dummy.new.token;
+
 const FbTestUser = require('../lib/FbTestUser');
-const existingUserToken = Config.fb.dummy.existing.token;
-const newUserToken = Config.fb.dummy.new.token;
+
 
 module.exports = () => describe('API (INTEGRATION)', function () {
   let userCollection;
@@ -21,6 +22,8 @@ module.exports = () => describe('API (INTEGRATION)', function () {
       console.log(FbTestUser.getInfo());
 
     })
+    const existingUserToken = FbTestUser.getAllUsers();
+    console.log(existingUserToken);
   });
   
   describe('Db connection', () => {
@@ -90,7 +93,7 @@ module.exports = () => describe('API (INTEGRATION)', function () {
       it('post: should create user + return a fresh object if user is new (and token is good).', (done) => {
         request(serverUrl)
           .post('/api/auth/fb')
-          .send({ token: newUserToken })
+          .send({ token: existingUserToken })
           .end((err, res) => {
             expect(res).to.have.status(200);
             expect(res.body).to.not.be.empty;
