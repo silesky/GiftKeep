@@ -7,7 +7,7 @@
     "test": "mocha test",
     "testwatch": "mocha --watch --growl test",
     "post": "newman run Gifter.postman_test_run.json",
-    "watch": "nodemon ./server/*.js --delay 3",
+    "watch": "nodemon *.js --delay 3",
     "debug": "node-debug",
     "seed": "seed"
   },

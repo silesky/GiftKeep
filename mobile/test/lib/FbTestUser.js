@@ -1,7 +1,9 @@
-const fetch = require('node-fetch');
-const Config = require('../../config.json'), 
-client_id = Config.fb.clientId, 
-client_secret = Config.fb.clientSecret;
+import fetch from 'isomorphic-fetch';
+
+const Config = require('./appInfo.json'), // used as default parameters
+client_id = Config.clientId, 
+client_secret = Config.clientSecret;
+const existing_fb_user_id = 105456176609093;
 
 const FbTestUser = (() => {
   const _getAppAccessToken = (clientId, clientSecret) => {
@@ -28,8 +30,8 @@ const FbTestUser = (() => {
             })
         })
     },
-    getNewAccessTokenByFbUserId: (fbId) => {
-      return this.getAllUsers().then(testUsersObj => {
+    getNewAccessTokenByFbUserId: (fbId = existing_fb_user_id) => {
+      return FbTestUser.getAllUsers().then(testUsersObj => {
         //testUserObj.data.find //???
         console.log(testUsersObj)
       })

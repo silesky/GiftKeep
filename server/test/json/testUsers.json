@@ -1,0 +1,19 @@
+ {
+            "_url":"https://developers.facebook.com/apps/336395990074206/roles/test-users/",
+            "existing": {
+                "token": "EAAEx80tZBA14BADJmWpyy4PE5DsK6Ekz2w7Q5rjZC5M8Upbzofnm7C8dlELKiI3fP2nVc4YUvQI8MAIYXNpilEUQSYri2CgtTp5rqnn7WPRw2mlcDJ0CalzXTm8fz149S8j62vvaILWcfyLVZBVuMfZCCMswCuipfIPOWhjWZBQZDZD",
+                "_info": "user exists in the database",
+                "name":"Linda Aladcdacbegce Thurnsen",
+                "pw":"abcdef123456",
+                "fbId": "105456176609093",
+                "email": "cnbgvkkclq_1479773395@tfbnw.net"
+            },
+            
+            "new": {
+                "_info": "user is new",
+                "name":"Mike Aladbihaehhch Moidustein",
+                "pw": "abcdef123456",
+                "fbId":"109796496173622",
+                "email": "eeoimrvacx_1479773392@tfbnw.net"
+            }
+ }

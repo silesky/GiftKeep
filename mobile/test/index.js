@@ -1,2 +1,2 @@
-const testActions = require('./test_actions');
+const testActions = require('./redux/test_actions');
 testActions();

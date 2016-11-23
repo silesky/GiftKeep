@@ -1,0 +1,5 @@
+{
+	"undefined": "localhost/giftr/server",
+	"dev": "localhost/giftr/server",
+	"prod": "localhost/giftr/server"
+}

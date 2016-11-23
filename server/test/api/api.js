@@ -4,12 +4,10 @@ const MongoClient = require('mongodb').MongoClient
 chai.use(chaiHttp);
 const { expect, request } = chai;
 const serverUrl = "http://localhost:3000"
-const userCollectionJSON = require('../../seeds/userCollection.json')
-const Config = require('../../config.json');
-const existingUserToken = Config.fb.dummy.new.token;
+const userCollectionJSON = require('./../../seeds/userCollection.json')
+// for get
 
-const FbTestUser = require('../lib/FbTestUser');
-
+const existingUserToken = require('../json/TestUsers.json').existing.token;
 
 module.exports = () => describe('API (INTEGRATION)', function () {
   let userCollection;
@@ -19,12 +17,12 @@ module.exports = () => describe('API (INTEGRATION)', function () {
       userCollection = db.collection('userCollection');
       userCollection.remove({});
       userCollection.insert(userCollectionJSON);
-      console.log(FbTestUser.getInfo());
+      
+    //console.log(FbTestUser.getNewAccessTokenByFbUserId());
 
     })
-    const existingUserToken = FbTestUser.getAllUsers();
-    console.log(existingUserToken);
-  });
+    
+  }); 
   
   describe('Db connection', () => {
     it('should connect to gifter db', () => {
@@ -45,9 +43,9 @@ module.exports = () => describe('API (INTEGRATION)', function () {
             done();
           })
       }),
-        it('get: getUserByAccessToken should return user data (e.g username).', (done) => {
+        it('get: getUserByAccessToken should return existing user', (done) => {
           request(serverUrl)
-            .get(`/api/user/${existingUserToken}`)
+            .get(`/api/user/f1`)
             .end((err, res) => {
               expect(res).to.have.status(200);
               expect(err).to.not.be.ok
@@ -138,7 +136,7 @@ describe('Put: update user data by fb access token', () => {
   it('should update user data if access token is valid', (done) => {
     request(serverUrl)
       // put might not work
-      .put(`/api/user/data/${existingUserToken}`)
+      .put(`/api/user/data/f1`)
       .send({ data: Math.random() })
       .end((err, res) => {
         expect(err).to.be.falsy;
