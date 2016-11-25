@@ -1,5 +1,6 @@
  {
-        "clientID": 336395990074206,
-        "clientSecret": "6a464f2ace5affbf5d162bf8eff81f83"
+        "client_id": 336395990074206,
+        "app_access_token":"336395990074206|LBpViKHmiNu86iDSpiNOUGT0QnM",
+        "client_secret": "6a464f2ace5affbf5d162bf8eff81f83"
         
  }

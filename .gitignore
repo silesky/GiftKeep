@@ -4,3 +4,4 @@ config.json
 *.csr
 *.crt
 Gifter.postman_test_run.json
+*.json
