@@ -30,5 +30,8 @@ module.exports = () => {
       // get dummy user so it gets the most recently added item... right now I have no way of knowing whether this is the most recent 
       
     })
+    it('when I log out, clear localStorage', () => {
+      
+    });
   })
 }

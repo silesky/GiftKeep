@@ -40,6 +40,7 @@ export class DrawerContainer extends Component {
         </Content>
         <Footer>
           <FbLogin 
+          clear={this.props.actions.clear}
           authTokenAndTryToGetUser={this.props.actions.authTokenAndTryToGetUser}
           />
         </Footer>

@@ -113,11 +113,9 @@ export const sendAccessToken = (token) => {
 }
 export const testClick = () => {
   console.log('Action->TEST CLICK...')
- Util.getTokenFromAsyncStorage();
-   return {
-     type: {}
-    }
+  return clear();
 }
+export const clear = () => ({type: 'CLEAR'})
 
 export const sendTokenToServer = (token) => {
   return fetch(`${serverUrl}/api/auth/fb`, 

@@ -59,18 +59,24 @@ export const sendFbAccessTokenToNode = (token) => {
     })
 }
 
-export const saveTokenToAsyncStorage = (token) => {
+
+export const saveToAsyncStorage = async(key, value, callback) => {
+    const valueStr = (typeof value === 'object' || 'array') ? JSON.stringify(value) : value;
     try {
-        AsyncStorage.setItem('@MyStore:FbToken', token);
-    } catch (error) {
-        console.log(error)
+      return await AsyncStorage.setItem(key, valueStr, callback);
+    } catch(err) {
+        return console.log('error caught!', err)
     }
 }
-export const getTokenFromAsyncStorage = () => {
-    AsyncStorage.getItem('@MyStore:FbToken').then((res, err) => {
-        if (res) console.log('success.', res);
-        if (err) console.log('error', err)
-    })
+
+export const getFromAsyncStorage = async(key) => {
+      try {
+        return await AsyncStorage.getItem(key);
+    }
+    catch(e) {
+        console.log('caught error', e);
+
+    }
 }
 
 

@@ -23,12 +23,12 @@ const user = (state = initialStateUser, action) => {
   const _getSingleGiftObj = (friendId, giftId) => _getGiftArrByFriendId(friendId).find((el) => el.giftId === giftId)
   switch (action.type) {
     case 'HYDRATE':
-    console.log(state, action.payload);
+    // fromat should be { data: [], fbId: ..., userName: }
+    console.log('new hydrate action coming in', action);
       newState = Object.assign({}, action.payload)
       return newState;
     case 'CLEAR':
       return emptyState;
-
     case 'UPDATE_GIFT_TITLE':
         friendId = action.payload.friendId;
         giftTitle = action.payload.giftTitle;
@@ -119,7 +119,10 @@ const initialStateFirstUser = {
 };
 const visible = (state = initialStateFirstUser, action) => {
   switch (action.type) {
-
+    case 'HYDRATE_VISIBLE':
+    console.log('new hydrate VISIBLE action coming in', action);
+      const newState = Object.assign({}, action.payload)
+      return newState
     case 'SELECT_FRIEND':
       return Object.assign({}, state, {
         selectedFriendId: action.payload.friendId

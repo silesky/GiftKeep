@@ -12,7 +12,7 @@ import {
 } from 'react-native-fbsdk';
 
 
-export const FbLogin = ({authTokenAndTryToGetUser}) => {
+export const FbLogin = ({authTokenAndTryToGetUser, clear}) => {
     return (
           <View style={{justifyContent: 'center'}}>
             <Button transparent>
@@ -38,7 +38,10 @@ export const FbLogin = ({authTokenAndTryToGetUser}) => {
                     }
                   }
                 }
-                onLogoutFinished={() => console.log("User logged out")}/>
+                onLogoutFinished={() => {
+                  clear()
+                  console.log("User logged out")
+                }}/>
             </Button>
           </View>
     );
