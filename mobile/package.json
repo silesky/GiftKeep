@@ -6,10 +6,10 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "jest": "jest",
     "test": "mocha --require babel-polyfill ./test/mocha-setup.js --compilers js:babel-core/register --recursive test",
-    "testwatch": "mocha --growl --watch --require babel-polyfill ./test/mocha-setup.js --compilers js:babel-core/register --recursive test"
+    "testwatch": "mocha --growl --watch --require babel-polyfill ./test/mocha-setup.js --compilers js:babel-core/register --recursive test",
+    "postinstall": "remotedev-debugger --injectserver"
   },
   "dependencies": {
-
     "json-loader": "^0.5.4",
     "moment": "^2.15.2",
     "native-base": "^0.5.11",
@@ -30,9 +30,9 @@
     "preset": "jest-react-native"
   },
   "devDependencies": {
-    "babel-polyfill": "^6.16.0",
     "babel-core": "^6.18.2",
     "babel-jest": "16.0.0",
+    "babel-polyfill": "^6.16.0",
     "babel-preset-react-native": "1.9.0",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
@@ -45,7 +45,9 @@
     "react-dom": "^15.4.0",
     "react-native-mock": "^0.2.7",
     "react-test-renderer": "15.3.2",
-    "remote-redux-devtools": "^0.5.1",
+    "remote-redux-devtools": "^0.5.4",
+    "remote-redux-devtools-on-debugger": "^0.7.0",
+    "remotedev": "^0.2.3",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0"
   }

@@ -2,8 +2,9 @@ import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk';
 import { AsyncStorage } from 'react-native'
 import { rootReducer } from './../reducers/reducer';
+import { composeWithDevTools } from 'remote-redux-devtools';
 import { saveToAsyncStorage, getFromAsyncStorage } from './../utils/util';
-export const store = createStore(rootReducer, applyMiddleware(thunk));
+export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 console.log('store created.');
 
 
