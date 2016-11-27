@@ -5,10 +5,11 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "jest": "jest",
-    "test": "mocha --require ./test/mocha-setup.js --compilers js:babel-core/register --recursive test",
-    "testwatch": "mocha --growl --watch --require ./test/mocha-setup.js --compilers js:babel-core/register --recursive test"
+    "test": "mocha --require babel-polyfill ./test/mocha-setup.js --compilers js:babel-core/register --recursive test",
+    "testwatch": "mocha --growl --watch --require babel-polyfill ./test/mocha-setup.js --compilers js:babel-core/register --recursive test"
   },
   "dependencies": {
+
     "json-loader": "^0.5.4",
     "moment": "^2.15.2",
     "native-base": "^0.5.11",
@@ -29,6 +30,7 @@
     "preset": "jest-react-native"
   },
   "devDependencies": {
+    "babel-polyfill": "^6.16.0",
     "babel-core": "^6.18.2",
     "babel-jest": "16.0.0",
     "babel-preset-react-native": "1.9.0",

@@ -106,8 +106,8 @@ module.exports = () =>
               .end((err, res) => {
                 expect(res).to.have.status(200);
                 expect(res.body).to.not.be.empty;
-                expect(res.body.message).to.equal('user created');
-                expect(res.body.payload).to.have.property('userName');
+                expect(res.body.payload).to.be.an.array;
+                expect(res.body.message).to.be.oneOf(['user created', 'user exists']);
                 expect(err).to.not.be.ok
                 done();
               })
