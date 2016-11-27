@@ -144,7 +144,7 @@ module.exports = () =>
       }),
 
       describe('/api/user/data/ PUT --> update user data by fb access token', () => {
-        it('should update user data if access token is valid', (done) => {
+        it('should update the user with the given token', (done) => {
           request(serverUrl)
             // put might not work
             .put(`/api/user/data/f1`)

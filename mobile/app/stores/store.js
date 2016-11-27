@@ -1,14 +1,19 @@
+
+
+// TODO: The NEW Access Token is not being saved to the DB on login
+
+
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk';
 import { AsyncStorage } from 'react-native'
 import { rootReducer } from './../reducers/reducer';
 import { composeWithDevTools } from 'remote-redux-devtools';
-import { saveToAsyncStorage, getFromAsyncStorage } from './../utils/util';
+import { saveToAsyncStorage, getFromAsyncStorage, updateUserDataByAccessToken, updateUserByBody } from './../utils/util';
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 console.log('store created.');
 
 
-export const persist = () => {
+export const storeStateInAsyncStorage = () => {
   // whenever the store changes, save it to async storage
   try {
     saveToAsyncStorage("store", store.getState());
@@ -17,19 +22,27 @@ export const persist = () => {
   }
 }
 
-// on first load
+export const storeStateInDb = () => {
+  const state = store.getState();
+  console.log('store.js', state);
+  updateUserByBody({user: state.user})
+  .then(successOrFail => console.log('success or fail', successOrFail))
+  .catch(err => console.log('store.js', err));
+}
 
-export const hydrate = () => { 
-  return getFromAsyncStorage("store")  
+// on first load
+export const hydrateFromAsyncStorage = () => { 
+  return getFromAsyncStorage('store')  
       .then(res => {
+        
         const { user, visible } = JSON.parse(res);
-        store.dispatch({type: 'HYDRATE', payload: user})
+        store.dispatch({type: 'HYDRATE_USER', payload: user})
         store.dispatch({type: 'HYDRATE_VISIBLE', payload: visible}); 
       })
   }
   
-store.subscribe(persist)
-hydrate();
-
+hydrateFromAsyncStorage();
+store.subscribe(storeStateInAsyncStorage)
+store.subscribe(storeStateInDb)
 
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { authTokenAndTryToGetUser } from './../utils/util';
 import { 
   View,
 } from 'react-native';

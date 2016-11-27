@@ -96,7 +96,7 @@ export const addGift = (friendId) => {
 
 export const hydrate = (data) => {
   return {
-    type: 'HYDRATE',
+    type: 'HYDRATE_USER',
     payload: data
   }
 }
@@ -129,7 +129,6 @@ export const authTokenAndTryToGetUser = (token) => {
       console.log('auth token action called... we should see a res:')
       return sendTokenToServer(token)
         .then(res => res.json()).then(res => {
-            console.log('server res', res)
             dispatch(hydrate(res.payload))
         }).catch(err => console.log('error', err))
   }

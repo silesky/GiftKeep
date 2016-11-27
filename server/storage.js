@@ -132,6 +132,8 @@ module.exports = {
 
     })
   },
+
+  // PUT
   updateUserDataByAccessToken: (token, data, res) => {
     console.log('updateUserData called... token->');
     const _writeConcernCb = (err, {
@@ -151,9 +153,32 @@ module.exports = {
         })
       }
     }
+
     // TODO: take in fbAccessToken and data as params
     userCollection().update({ fbAccessToken: token }, { $set: { 'data': data } }, _writeConcernCb)
     // checks if access token is either googleor facebook
   },
+  // PUT
+  updateUserByAccessToken: (user) => {
+    return new Promise((resolve, reject) => {
+      let { fbAccessToken, fbId, userName, googleIdToken, data } = user;
+      userCollection().update({ fbAccessToken: fbAccessToken }, 
+      {$set: { 
+          username: userName,
+          fbAccessToken: fbAccessToken,
+          fbId: fbId,
+          data: data,
+      }
+      }, (err, records) => {
+        if (err) {
+          reject(err)
+        } else if (!records.result.nModified && !records.result.n) {
+          reject('db ok, but no records modified or created. probably a wrong access token.')
+        } else {
+          resolve(records.result)
+        }
+      })
+    })
+  }
 
 }

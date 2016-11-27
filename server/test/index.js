@@ -1,2 +1,2 @@
-const api = require('./api/api');
+const api = require('./misc/test_api');
 api();

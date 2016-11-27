@@ -22,10 +22,10 @@ const user = (state = initialStateUser, action) => {
   const _getGiftArrByFriendId = (friendId) => state.data.find(el => el.friendId === friendId).gifts;
   const _getSingleGiftObj = (friendId, giftId) => _getGiftArrByFriendId(friendId).find((el) => el.giftId === giftId)
   switch (action.type) {
-    case 'HYDRATE':
+    case 'HYDRATE_USER':
     // fromat should be { data: [], fbId: ..., userName: }
-    console.log('new hydrate action coming in', action);
-      newState = Object.assign({}, action.payload)
+    console.log('state', state, 'payload', action.payload);
+      newState = action.payload
       return newState;
     case 'CLEAR':
       return emptyState;
@@ -79,20 +79,19 @@ const user = (state = initialStateUser, action) => {
           if (el.friendId === friendId) el.gifts = newGiftArr
           return el
       })
-      newState = Object.assign({}, state, {data: newData})
+      newState = { ...state, data: newData }
       return newState;
 
 
     case 'CREATE_FRIEND':
-      return Object.assign({}, {
-        data: [...state.data, {
+      return { ...state,  data: [...state.data, {
           friendId: createUuid(),
           friendName: action.payload.friendName,
           bday: action.payload.bday,
           gifts: []
         }]
-      })
-
+        }
+      
 
     case 'ADD_GIFT':
       newData = state.data.map(el => {
@@ -104,8 +103,7 @@ const user = (state = initialStateUser, action) => {
         }
         return el
       })
-      return Object.assign({}, {data: newData});
-
+      return { ...state, data: newData };
 
     default:
       return state;
@@ -120,17 +118,14 @@ const initialStateFirstUser = {
 const visible = (state = initialStateFirstUser, action) => {
   switch (action.type) {
     case 'HYDRATE_VISIBLE':
-    console.log('new hydrate VISIBLE action coming in', action);
       const newState = Object.assign({}, action.payload)
       return newState
     case 'SELECT_FRIEND':
-      return Object.assign({}, state, {
-        selectedFriendId: action.payload.friendId
-      });
+      return { ...state, selectedFriendId: action.payload.friendId }
     case 'CREATE_FRIEND_TOGGLE_MODAL_VISIBLE':
-      return Object.assign({}, state, {
+      return { ...state,
         createFriendModalVisibility: !state.createFriendModalVisibility
-      });
+      };
     default:
       return state;
   }

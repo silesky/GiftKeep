@@ -54,15 +54,22 @@ app.get('/api/user/data/:token', ({params: {token}}, resCb, next) => {
     .catch(next);
 });
 // update user data by token
-app.put('/api/user/data/:token', ({params: {token}, body: {data}}, res) => {
+app.put('/api/user/data/:token', (req, res) => {
+  const { token } = req.params;
+  const { data } = req.body;
   Storage.updateUserDataByAccessToken(token, data, res);
 })
-// google id
-app.get("/oauthcallback", (req, res) => {
-  console.log('req success', req.body);
-  res.send("Authcallback get");
-});
 
+// update user by token
+app.put('/api/user/', (req, resCb) => {
+  // given the current user update it
+  const { user } = req.body;
+  Storage.updateUserByAccessToken(user)
+  .then(successMsg => {
+     resCb.json({success: true, message: successMsg})
+  })
+  .catch(err => resCb.json({success: false, error: err, yourObj: user}))
+})
 
 
 // check if user is in database... if true, return data.
@@ -104,6 +111,7 @@ app.post("/api/auth/fb", (req, resCb, done) => {
                 payload: {
                   userName: fbRes.name,
                   fbId: fbRes.id,
+                  fbAccessToken: token,
                   data: []
                 }
               })

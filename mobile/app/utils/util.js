@@ -58,6 +58,26 @@ export const sendFbAccessTokenToNode = (token) => {
         }
     })
 }
+export const updateUserDataByAccessToken = (token, data) => {
+    const fullRoute = `${_serverUrl}/api/user/data/${token}`;
+    return fetch(fullRoute, {
+        method: 'PUT',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(res => res.json())
+}
+export const updateUserByBody = (user) => {
+    const fullRoute = `${_serverUrl}/api/user/`;
+    return fetch(fullRoute, {
+        method: 'PUT',
+        body: JSON.stringify(user),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(res => res.json())
+}
 
 
 export const saveToAsyncStorage = async(key, value, callback) => {

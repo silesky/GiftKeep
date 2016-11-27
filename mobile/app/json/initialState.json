@@ -1,4 +1,6 @@
 {   "userName": "Seth",
+    "fbId": "initialState",
+    "fbAccessToken": "initialState",
     "data": [
             {   "friendId": 123,
                 "order": 1,
