@@ -6,13 +6,13 @@ import configureMockStore from 'redux-mock-store';
 const initialState = require('../../app/json/initialState.json')
 chai.use(chaiHttp);
 const { getNewAccessTokenByFbUserId } = require('./../lib/FbTestUser');
-import { store } from '../../app/stores/store';
+// import { store } from '../../app/stores/store';
 const { 
   authTokenAndTryToGetUser 
   } = require('./../../app/actions/actions');
 
 const mockStore = configureMockStore([thunk]);
-
+const store = mockStore(initialState);
 
 module.exports = () => {
   describe('CLIENT: Store, Actions', function() {
@@ -33,7 +33,7 @@ module.exports = () => {
       
     })
     it('when I log out, clear localStorage', () => {
-      
+      //console.log(store.getState());
     });
   })
 }
