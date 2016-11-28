@@ -1,8 +1,8 @@
 const chai = require('chai')
 const chaiHttp = require('chai-http');
 const { expect, request } = chai
-const MongoClient = require('mongodb').MongoClient
-const sinon = require('sinon');
+import thunk from 'redux-thunk';
+import configureMockStore from 'redux-mock-store';
 chai.use(chaiHttp);
 const { getNewAccessTokenByFbUserId } = require('./../lib/FbTestUser');
 import { store } from '../../app/stores/store';
@@ -10,6 +10,7 @@ const {
   authTokenAndTryToGetUser 
   } = require('./../../app/actions/actions');
 
+const mockStore = configureMockStore([thunk]);
 
 
 module.exports = () => {
