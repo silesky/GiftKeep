@@ -3,6 +3,7 @@ const chaiHttp = require('chai-http');
 const { expect, request } = chai
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
+const initialState = require('../../app/json/initialState.json')
 chai.use(chaiHttp);
 const { getNewAccessTokenByFbUserId } = require('./../lib/FbTestUser');
 import { store } from '../../app/stores/store';
@@ -23,10 +24,10 @@ module.exports = () => {
       getNewAccessTokenByFbUserId().then(id => {  
         store.dispatch(authTokenAndTryToGetUser(123));
         expect(store.getState().user).to.have.property('data');
-      expect(store.getState().user.userName).to.be.ok;
-      expect(store.getState().user.data[0]).to.have.property('friendName');
-      expect(store.getState().user.data[0]).to.have.property('bday');
-      expect(store.getState().user.data[0]).to.have.property('gifts');
+        expect(store.getState().user.userName).to.be.ok;
+        expect(store.getState().user.data[0]).to.have.property('friendName');
+        expect(store.getState().user.data[0]).to.have.property('bday');
+        expect(store.getState().user.data[0]).to.have.property('gifts');
       })
       // get dummy user so it gets the most recently added item... right now I have no way of knowing whether this is the most recent 
       
