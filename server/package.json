@@ -31,6 +31,7 @@
     "livereload": "^0.6.0",
     "mocha": "^3.1.2",
     "node-inspector": "^0.12.8",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "redux-mock-store": "^1.2.1"
   }
 }
