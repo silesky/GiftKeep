@@ -53,12 +53,7 @@ app.get('/api/user/data/:token', ({params: {token}}, resCb, next) => {
     })
     .catch(next);
 });
-// update user data by token
-app.put('/api/user/data/:token', (req, res) => {
-  const { token } = req.params;
-  const { data } = req.body;
-  Storage.updateUserDataByAccessToken(token, data, res);
-})
+
 
 // update user by token
 app.put('/api/user/', (req, resCb) => {

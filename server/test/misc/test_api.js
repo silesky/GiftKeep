@@ -25,7 +25,6 @@ module.exports = () =>
       })
 
     });
-
     describe('Database Connection -->', () => {
       it('should connect to gifter db', () => {
         MongoClient.connect('mongodb://127.0.0.1:27017/giftr', (err, db) => {
@@ -142,22 +141,21 @@ module.exports = () =>
               })
           })
       }),
-
-      describe('/api/user/data/ PUT --> update user data by fb access token', () => {
-        it('should update the user with the given token', (done) => {
+      describe('/api/user/ PUT --> update user data by fb access token', () => {
+        it('should find and update the user with the given token', (done) => {
           request(serverUrl)
             // put might not work
-            .put(`/api/user/data/f1`)
-            .send({ data: Math.random() })
+            .put(`/api/user/`)
+            .send({"user": {"fbAccessToken": "f1","name": "updated!"}})
             .end((err, res) => {
+              if (err) console.log(err)
               expect(err).to.be.falsy;
               expect(res).to.have.status(200);
-              expect(res.body).to.exist;
-              expect(res.body).to.be.a('object');
               expect(res.body.success).to.be.true;
               done();
             })
-        })
+     
+        }) 
       })
   })
 

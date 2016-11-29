@@ -19,6 +19,7 @@ const store = mockStore(initialState);
 
 module.exports = () => {
   describe('CLIENT: Store, Actions', function () {
+    after(() => store.clearActions());
     // this.timeout(() => console.log('done'), 2000)
     it('store should exist', () => {
       const state = store.getState();
@@ -27,43 +28,40 @@ module.exports = () => {
       expect(state).to.have.property('fbId');
       expect(state).to.have.property('fbAccessToken');
       expect(state).to.have.property('data');
-    }),
-      describe('lib: FbTestUser().getExistingUserToken()', () => {
-        after(() => store.clearActions());
-        it('should retrieve a super-long accesss token string', (done) => {
-          FbTestUser().getExistingUserToken()
-            .then(res => {
-              expect(res).to.be.a('string'); // token
-              expect(res.length).to.be.above(20);
-              done();
-            }).catch(done)
-        })
-      })
-    it('when authTokenAndTryToGetUser() is called, hydrate_user action should be dispatched', (done) => {
-      const callback = sinon.spy();
-      FbTestUser().getExistingUserToken()
-      .then(existingUserToken => {
-        store.dispatch(actions.authTokenAndTryToGetUser(existingUserToken))
-        .then(() => {
-            const actions = store.getActions();
-            // all this means that it it dispatched a certain actions
-            const resUserObj = actions[0].payload;
-            expect(actions[0].type).to.equal('HYDRATE_USER');
-            expect(resUserObj).to.be.an.object;
-
-            expect(resUserObj['fbAccessToken']).to.equal(existingUserToken);
-            expect(resUserObj['userName']).to.equal('Existing User');
-            callback();
-            done();
-          }).catch(err => console.log(err))
-          .then(() => { expect(callback.called).to.be.true })
-      })
-        .catch(done)
-    })
-
-    it('when I log out, clear localStorage', () => {
-      //    console.log(store.getState());
-
     });
+    describe('authTokenAndTryToGetUser() ', () => {
+      it('lib: FbTestUser().getExistingUserToken() should retrieve a super-long accesss token string', (done) => {
+        FbTestUser().getExistingUserToken()
+          .then(res => {
+            expect(res).to.be.a('string'); // token
+            expect(res.length).to.be.above(20);
+            done();
+          }).catch(done)
+      })
+      it('hydrate_user action should be dispatched, and response should carry with it the new access token (and user data)', (done) => {
+        const callback = sinon.spy();
+        FbTestUser().getExistingUserToken()
+          .then(existingUserToken => {
+            store.dispatch(actions.authTokenAndTryToGetUser(existingUserToken))
+              .then(() => {
+                const actions = store.getActions();
+                // all this means that it it dispatched a certain actions
+                const resUserObj = actions[0].payload;
+                expect(actions[0].type).to.equal('HYDRATE_USER');
+                expect(resUserObj).to.be.an.object;
+                expect(resUserObj['fbAccessToken']).to.equal(existingUserToken);
+                expect(resUserObj['userName']).to.equal('Existing User');
+                callback();
+                done();
+              })
+              .then(() => { expect(callback.called).to.be.true })
+              .catch(done)
+          })
+      })
+      it('when I log out, clear localStorage', () => {
+        //    console.log(store.getState());
+
+      });
+    })
   })
-}
+  }

@@ -114,7 +114,6 @@ module.exports = {
 
     })
   },
-
   getUserByFbId: (fbId) => {
     // TODO: refactor to use promises, like in getAlData
     console.log('getUserByAccessToken() checking database for user...');
@@ -134,31 +133,6 @@ module.exports = {
   },
 
   // PUT
-  updateUserDataByAccessToken: (token, data, res) => {
-    console.log('updateUserData called... token->');
-    const _writeConcernCb = (err, {
-      result
-    }) => {
-      if (err || !result.nModified) {
-        res.json({
-          success: false,
-          statusText: 'error or 0 rows modified',
-          msg: result,
-        })
-      } else {
-        res.json({
-          success: true,
-          msg: result,
-          statusText: `success. ${result.nModified} row(s) modified`
-        })
-      }
-    }
-
-    // TODO: take in fbAccessToken and data as params
-    userCollection().update({ fbAccessToken: token }, { $set: { 'data': data } }, _writeConcernCb)
-    // checks if access token is either googleor facebook
-  },
-  // PUT
   updateUserByAccessToken: (user) => {
     return new Promise((resolve, reject) => {
       let { fbAccessToken, fbId, userName, googleIdToken, data } = user;
@@ -168,6 +142,23 @@ module.exports = {
           fbAccessToken: fbAccessToken,
           fbId: fbId,
           data: data,
+      }
+      }, (err, records) => {
+        if (err) {
+          reject(err)
+        } else if (!records.result.nModified && !records.result.n) {
+          reject('db ok, but no records modified or created. probably a wrong access token.')
+        } else {
+          resolve(records.result)
+        }
+      })
+    })
+  },
+    updateAccessToken: (oldT, newT) => {
+    return new Promise((resolve, reject) => {
+      userCollection().update({ fbAccessToken: oldT }, 
+      {$set: { 
+          fbAccessToken: newT,
       }
       }, (err, records) => {
         if (err) {
