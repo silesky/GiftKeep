@@ -9,7 +9,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static('./public'));
-Storage.connect();
+
+const { connect } = require('./db');
+connect();
 
 // get all
 app.get('/api', (undefined, resCb, next) => {

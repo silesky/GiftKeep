@@ -1,16 +1,6 @@
-const MongoClient = require('mongodb').MongoClient;
-let db;
-const userCollection = () => db.collection('userCollection');
+const { userCollection, connect } = require('./db');
+connect();
 module.exports = {
-  connect: () => {
-    MongoClient.connect('mongodb://127.0.0.1:27017/giftr', (err, database) => {
-      if (err) throw err;
-      console.log('...connected to mongoDB!');
-      db = database;
-      return db
-    });
-  },
-  connected: () => typeof database !== 'undefined',
   // get all
   getAllData: () => {
     return new Promise((resolve, reject) => {
@@ -29,7 +19,6 @@ module.exports = {
   // create user
   // temp? for debugging
   createUser: ({body: {userName, fbId, googleIdToken, data}}, res) => {
-    console.log('post request to create user...');
     const userObj = {
       userName: userName,
       fbId: fbId,
@@ -51,7 +40,6 @@ module.exports = {
     }
   },
   createUserFromGoogle: ({userName, googleIdToken}, res) => {
-    console.log('create user from google!');
     const userObj = {
       userName: userName,
       fbAccessToken: null,
@@ -72,7 +60,6 @@ module.exports = {
     }
   },
   createUserFromFb: (userName, fbAccessToken, fbId) => {
-    console.log('storage.createUserFromFb()');
     // should also return data
     const userObj = {
       userName: userName,
@@ -98,7 +85,6 @@ module.exports = {
 
   getUserByAccessToken: (token) => {
     // TODO: refactor to use promises, like in getAlData
-    console.log('getUserByAccessToken() checking database for user...');
     return new Promise((resolve, reject) => {
       userCollection().find().toArray((err, docs) => {
         const results = docs.find(el => token === el.fbAccessToken);
@@ -116,7 +102,6 @@ module.exports = {
   },
   getUserByFbId: (fbId) => {
     // TODO: refactor to use promises, like in getAlData
-    console.log('getUserByAccessToken() checking database for user...');
     return new Promise((resolve, reject) => {
       userCollection().find().toArray((err, docs) => {
         const results = docs.find(el => fbId === el.fbId);
@@ -155,6 +140,7 @@ module.exports = {
     })
   },
     updateAccessToken: (oldT, newT) => {
+      console.log('##############')
     return new Promise((resolve, reject) => {
       userCollection().update({ fbAccessToken: oldT }, 
       {$set: { 
