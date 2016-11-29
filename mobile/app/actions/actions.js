@@ -94,7 +94,7 @@ export const addGift = (friendId) => {
 }
 
 
-export const hydrate = (data) => {
+export const hydrateUser = (data) => {
   return {
     type: 'HYDRATE_USER',
     payload: data
@@ -117,19 +117,20 @@ export const testClick = () => {
 }
 export const clear = () => ({type: 'CLEAR'})
 
-export const sendTokenToServer = (token) => {
+export const _sendTokenToServer = (token) => {
   return fetch(`${serverUrl}/api/auth/fb`, 
           { method: 'POST',
             body: JSON.stringify({ token }),
             headers: { 'Content-Type': 'application/json' }
         })
+        .then(res => res.json())
 }
 export const authTokenAndTryToGetUser = (token) => {
-    return (dispatch) => {
+    return dispatch => {
       console.log('auth token action called... we should see a res:')
-      return sendTokenToServer(token)
-        .then(res => res.json()).then(res => {
-            dispatch(hydrate(res.payload))
+      return _sendTokenToServer(token)
+        .then(res => {
+            dispatch(hydrateUser(res.payload))
         }).catch(err => console.log('error', err))
   }
 }
