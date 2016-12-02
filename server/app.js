@@ -72,6 +72,7 @@ app.put('/api/user/', (req, resCb) => {
 // check if user is in database... if true, return data.
 // if user is not in database, ask facebook if token is valid. 
 // if token is valid, create new user. if token is invalid, error message.
+// authTokenAndTryToGetUser()
 app.post("/api/auth/fb", (req, resCb, done) => {
   const { token } = req.body;
 
@@ -89,15 +90,19 @@ app.post("/api/auth/fb", (req, resCb, done) => {
     .then(fbRes => {
       if (fbRes.success) {
         const { id, name } = fbRes.payload;
-        Storage.getUserByFbId(id)
+        // now that we have the token, we should update it in the db before returning the db obj
+        Storage.updateAccessTokenByFbId(id, token)
+        .then((res) => { 
+        
+          Storage.getUserByFbId(id)
           .then((dbUserObj) => {
             resCb.json({
               success: true,
               message: 'user exists',
               payload: dbUserObj
             }) // if user exists in db
-
           })
+        })
           .catch((err) => {
             // TODO: if success = true
             if (err === 'no db result found') {

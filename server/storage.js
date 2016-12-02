@@ -156,6 +156,23 @@ module.exports = {
         }
       })
     })
-  }
+  },
+    updateAccessTokenByFbId: (fbId, newT) => {
+    return new Promise((resolve, reject) => {
+      userCollection().update({ fbId: `${fbId}` }, 
+      {$set: { 
+          fbAccessToken: newT,
+      }
+      }, (err, records) => {
+        if (err) {
+          reject(err)
+        } else if (!records.result.nModified && !records.result.n) {
+          reject('db ok, but no records modified or created. probably a wrong access token.')
+        } else {
+          resolve(records.result)
+        }
+      })
+    })
+  },
 
 }
