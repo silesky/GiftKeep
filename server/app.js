@@ -91,18 +91,21 @@ app.post("/api/auth/fb", (req, resCb, done) => {
       if (fbRes.success) {
         const { id, name } = fbRes.payload;
         // now that we have the token, we should update it in the db before returning the db obj
-        Storage.updateAccessTokenByFbId(id, token)
-        .then((res) => { 
-        
           Storage.getUserByFbId(id)
-          .then((dbUserObj) => {
-            resCb.json({
-              success: true,
-              message: 'user exists',
-              payload: dbUserObj
-            }) // if user exists in db
-          })
-        })
+            .then(({data, fbId, googleIdToken, userName}) => {
+              resCb.json({
+                success: true,
+                message: 'user exists',
+                payload: {
+                  fbAccessToken: token, // return new access token, not the old one
+                  data,
+                  fbId,
+                  googleIdToken,
+                  userName
+                }
+              }).then(() => Storage.updateAccessTokenByFbId(id, token)) // we're returning the new token, but we haven't actually updated it yet
+                .catch(err => resCb({message: 'update access token failed'}))
+            })
           .catch((err) => {
             // TODO: if success = true
             if (err === 'no db result found') {
@@ -123,7 +126,7 @@ app.post("/api/auth/fb", (req, resCb, done) => {
           })
       }
     })
-    .catch(err => resCb.json({ success: false, message: 'caught! mongo could have failed.', error: err }))
+    .catch(err => resCb.json({ success: false, message: 'MongoDB may have failed.', error: err }))
     .catch(done);
 })
 // gifter.sethsilesky.com:3000/oauthcallback

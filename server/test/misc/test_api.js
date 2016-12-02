@@ -12,6 +12,7 @@ const FbTestUser = require('./../lib/FbTestUser');
 module.exports = () =>
 
   describe('API -->', () => {
+
     let userCollection;
     before(() => {
       MongoClient.connect('mongodb://127.0.0.1:27017/giftr', (err, db) => {
@@ -19,13 +20,11 @@ module.exports = () =>
         userCollection = db.collection('userCollection');
         userCollection.remove({});
         userCollection.insert(userCollectionJSON);
-
-        //console.log(FbTestUser.getNewAccessTokenByFbUserId());
-
       })
-
     });
+
     describe('Database Connection -->', () => {
+
       it('should connect to gifter db', () => {
         MongoClient.connect('mongodb://127.0.0.1:27017/giftr', (err, db) => {
           expect(db).to.be.ok
@@ -34,7 +33,9 @@ module.exports = () =>
     }),
 
       describe('/api/ -->', () => {
+
         it('get: getAllData should get all the data', (done) => {
+
           request(serverUrl)
             .get('/api')
             .end((err, res) => {
@@ -44,7 +45,9 @@ module.exports = () =>
               done();
             })
         }),
+
         describe('/api/user/ -->', () => {
+
           it('get: getUserByAccessToken should return existing user', (done) => {
             request(serverUrl)
               .get(`/api/user/f1`)
@@ -62,20 +65,6 @@ module.exports = () =>
               })
           })
         }),
-
-          // it('get: getUserByAccessToken should succeed if an access token is good ', (done) => {
-          //     request(serverUrl)
-          //         .get(`/api/user/f1`)
-          //         .end((err, res) => {
-          //              expect(res).to.have.status(200);
-          //                 expect(err).to.be.falsy;
-          //                 expect(res.body.success).to.be.true;
-          //                 expect(res.body.payload).to.have.property('fbAccessToken')
-          //                 expect(res.body.payload).to.have.property('fbId')
-
-          //         })
-          // }),
-
           it('get: getUserByAccessToken should fail if an access token is bad', (done) => {
             request(serverUrl)
               .get(`/api/user/iNVALiDAXXToken`)
@@ -92,11 +81,6 @@ module.exports = () =>
 
       describe('login --> /api/auth/fb POST --> ', () => {
      
-        beforeEach(() => {
-        
-    // ???
-        })
-      
         it('if user is new, should 1.) create user, 2.) return a user object (assuming token is ok).', (done) => {
           FbTestUser().getNewUserToken().then(newUserToken => {
             request(serverUrl)
@@ -105,9 +89,22 @@ module.exports = () =>
               .end((err, res) => {
                 expect(res).to.have.status(200);
                 expect(res.body).to.not.be.empty;
+                expect(res.body.success).to.be.true
                 expect(res.body.payload).to.be.an.array;
-                expect(res.body.message).to.be.oneOf(['user created', 'user exists']);
+                expect(res.body.message).to.equal('user created');
                 expect(err).to.not.be.ok
+                done();
+              })
+            })
+        }),
+        it('if the just created tries to log in again, it should say user exists', (done) => {
+          FbTestUser().getNewUserToken().then(newUserToken => {
+            request(serverUrl)
+              .post('/api/auth/fb')
+              .send({ token: newUserToken })
+              .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res.body.message).to.equal('user exists');
                 done();
               })
             })
@@ -128,6 +125,7 @@ module.exports = () =>
 
                 })
           }),
+
           it('should fail if token is bad.', (done) => {
             request(serverUrl)
               .post('/api/auth/fb')
@@ -141,7 +139,9 @@ module.exports = () =>
               })
           })
       }),
+
       describe('/api/user/ PUT --> update user data by fb access token', () => {
+
         it('should find and update the user with the given token', (done) => {
           request(serverUrl)
             // put might not work

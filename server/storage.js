@@ -139,6 +139,7 @@ module.exports = {
       })
     })
   },
+  // I probably don't need this method anymore
     updateAccessToken: (oldT, newT) => {
       console.log('##############')
     return new Promise((resolve, reject) => {
@@ -157,6 +158,7 @@ module.exports = {
       })
     })
   },
+   // I probably don't need this method anymore
     updateAccessTokenByFbId: (fbId, newT) => {
     return new Promise((resolve, reject) => {
       userCollection().update({ fbId: `${fbId}` }, 
