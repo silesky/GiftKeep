@@ -32,6 +32,7 @@
     "gulp": "^3.9.1",
     "gulp-mocha": "^3.0.1",
     "gulp-nodemon": "^2.2.1",
+    "gulp-run-sequence": "^0.3.2",
     "livereload": "^0.6.0",
     "mocha": "^3.1.2",
     "node-inspector": "^0.12.8",
