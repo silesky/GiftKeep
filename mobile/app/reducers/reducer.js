@@ -22,6 +22,7 @@ const user = (state = initialStateUser, action) => {
   const _getGiftArrByFriendId = (friendId) => state.data.find(el => el.friendId === friendId).gifts;
   const _getSingleGiftObj = (friendId, giftId) => _getGiftArrByFriendId(friendId).find((el) => el.giftId === giftId)
   switch (action.type) {
+    
     case 'HYDRATE_USER':
     // fromat should be { data: [], fbId: ..., userName: }
     console.log('state', state, 'payload', action.payload);
@@ -82,7 +83,6 @@ const user = (state = initialStateUser, action) => {
       newState = { ...state, data: newData }
       return newState;
 
-
     case 'CREATE_FRIEND':
       return { ...state,  data: [...state.data, {
           friendId: createUuid(),
@@ -92,7 +92,6 @@ const user = (state = initialStateUser, action) => {
         }]
         }
       
-
     case 'ADD_GIFT':
       newData = state.data.map(el => {
         if (el.friendId === action.payload.friendId) {
@@ -108,15 +107,17 @@ const user = (state = initialStateUser, action) => {
     default:
       return state;
   }
-
 }
 
 const initialStateFirstUser = {
   selectedFriendId: initialStateUser.data[0].friendId,
-  createFriendModalVisibility: false
+  createFriendModalVisibility: false,
+  allGiftsVisibility: false,
 };
 const visible = (state = initialStateFirstUser, action) => {
   switch (action.type) {
+    case 'ALL_GIFTS_VISIBILITY_TOGGLE':
+      return {...state, allGiftsVisibility: !state.allGiftsVisibility}
     case 'HYDRATE_VISIBLE':
       const newState = Object.assign({}, action.payload)
       return newState

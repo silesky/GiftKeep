@@ -4,6 +4,8 @@ const {
   serverUrl 
   } = config
 
+export const allGiftsVisibilityToggle = () => ({type: "ALL_GIFTS_VISIBILITY_TOGGLE"})
+
 export const updateGiftDesc = (friendId, giftId, giftDesc) => {
   console.log('updateGift', friendId, giftId, giftDesc);
     return {
@@ -69,7 +71,6 @@ export const deleteFriend = (friendId) => {
       dispatch(_deleteFriend(friendId))
     }
   }
-
 export const createFriendToggleModalVisible = () => ({type: 'CREATE_FRIEND_TOGGLE_MODAL_VISIBLE'})
 
 export const _createFriend = (friendName, bday) => ({type: 'CREATE_FRIEND', payload: {friendName, bday}});

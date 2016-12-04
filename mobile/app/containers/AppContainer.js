@@ -43,6 +43,7 @@ render() {
 
 
             <TopBar 
+                allGiftsVisibilityToggle={this.props.actions.allGiftsVisibilityToggle}
                 testClick={this.props.actions.testClick} 
                 friendName={getFriendItemById(this.props.state, selectedFriendId, 'friendName')} 
                 drawerOpen={() => this._drawer.open()} 
