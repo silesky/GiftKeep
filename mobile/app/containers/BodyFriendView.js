@@ -6,9 +6,9 @@ import { Content } from 'native-base';
 import { GiftCard } from './../components/GiftCard';
 import { FriendInfoBar } from './../components/FriendInfoBar';
 import { getFriendItemById } from './../utils/utils';
-class Body extends Component {
-    constructor(props) {
-      super(props);
+class BodyFriendView extends Component {
+    constructor() {
+      super();
     }
     render() {
         const { friendId } = this.props;
@@ -39,4 +39,4 @@ class Body extends Component {
 
 const mdtp = (dispatch) => ({ actions: bindActionCreators(actions, dispatch) })
 const mstp = (state) => ({state});
-export default connect(mstp, mdtp)(Body)
+export default connect(mstp, mdtp)(BodyFriendView)

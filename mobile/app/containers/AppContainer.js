@@ -53,7 +53,7 @@ render() {
                         isSelected={true}
                         friendId={selectedFriendId} 
                     />
-                    <BodyAllGiftsView  tabLabel='Gifts'
+                    <BodyAllGiftsView  tabLabel='All Gifts'
                         isSelected={false}
                        />
                  
