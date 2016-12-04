@@ -9,14 +9,14 @@ import {
 
 export default class BodyAllGiftsView extends React.Component {
   static propTypes = {
-      allGiftsVisibilityToggle: React.PropTypes.func
+      isSelected: React.PropTypes.bool
   }
   render() {
     return (
       <Container>
         <Content>
           <Text>Hello</Text>
-            <Button transparent onPress={()=> this.props.allGiftsVisibilityToggle()}>
+            <Button transparent>
                 <Icon name='ios-globe-outline' />
             </Button>
           </Content>

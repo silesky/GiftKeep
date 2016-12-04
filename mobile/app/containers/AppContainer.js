@@ -23,8 +23,6 @@ class AppContainer extends Component {
 
 render() {
     const { selectedFriendId, createFriendModalVisibility } = this.props.state.visible;
-    
-
     return (
 
     <Drawer
@@ -45,19 +43,19 @@ render() {
         content={<DrawerContainer />}
     >  
             <TopBar 
-             
                 testClick={this.props.actions.testClick} 
                 friendName={getFriendItemById(this.props.state, selectedFriendId, 'friendName')} 
                 drawerOpen={() => this._drawer.open()} 
             /> 
             <Content>
-                <Tabs>
+                <Tabs onChangeTab={(selectedTab) => this.props.actions.allGiftsVisibilityToggle(selectedTab)}>
                     <BodyFriendView tabLabel='Friends'
+                        isSelected={true}
                         friendId={selectedFriendId} 
                     />
-                    <BodyAllGiftsView  
-                        allGiftsVisibilityToggle={this.props.actions.allGiftsVisibilityToggle} 
-                        tabLabel='Gifts' />
+                    <BodyAllGiftsView  tabLabel='Gifts'
+                        isSelected={false}
+                       />
                  
                 </Tabs>
             </Content>
