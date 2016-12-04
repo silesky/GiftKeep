@@ -4,13 +4,17 @@ import Drawer from 'react-native-drawer';
 import { bindActionCreators } from 'redux'
 import * as actions from './../actions/actions';
 // Components
+
 import { TopBar } from './../components/TopBar';
 import { BottomBar } from './../components/BottomBar';
 import CreateFriendForm from './../components/CreateFriendForm';
 //Containers (not named exports)
 import DrawerContainer from './../containers/DrawerContainer';
-import Body from './../containers/Body';
+import BodyFriendView from './../containers/BodyFriendView';
+import BodyAllGiftsView from './../containers/BodyAllGiftsView';
 import { getFriendItemById } from './../utils/utils';
+
+import { Tabs, Container, Content } from 'native-base';
 class AppContainer extends Component {
     constructor(props) {
       super(props)
@@ -40,18 +44,23 @@ render() {
         negotiatePan
         content={<DrawerContainer />}
     >  
-
-
             <TopBar 
-                allGiftsVisibilityToggle={this.props.actions.allGiftsVisibilityToggle}
+             
                 testClick={this.props.actions.testClick} 
                 friendName={getFriendItemById(this.props.state, selectedFriendId, 'friendName')} 
                 drawerOpen={() => this._drawer.open()} 
-            />    
+            /> 
+            <Content>
+                <Tabs>
+                    <BodyFriendView tabLabel='Friends'
+                        friendId={selectedFriendId} 
+                    />
+                    <BodyAllGiftsView  
+                        allGiftsVisibilityToggle={this.props.actions.allGiftsVisibilityToggle} 
+                        tabLabel='Gifts' />
                  
-            <Body 
-                friendId={selectedFriendId} 
-            />
+                </Tabs>
+            </Content>
       
             <CreateFriendForm 
                 selectFriend={this.props.actions.selectFriend}

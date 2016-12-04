@@ -9,7 +9,7 @@ import {
 } from 'native-base';
 
 
-export const TopBar = ({drawerOpen, friendName, testClick, allGiftsVisibilityToggle}) => {
+export const TopBar = ({drawerOpen, friendName, testClick}) => {
       return (
             <Header>
                 <Button transparent
@@ -17,10 +17,6 @@ export const TopBar = ({drawerOpen, friendName, testClick, allGiftsVisibilityTog
                     <Icon name='ios-menu' />
                 </Button>
                 <Title>{(friendName) ? friendName : 'Gifter'}</Title>
-                  <Button transparent
-                    onPress={() => allGiftsVisibilityToggle()}>
-                    <Icon name='ios-globe-outline' />
-                    </Button>
                 <Button transparent
                     onPress={() => testClick()}>
                     <Icon name='ios-settings' />
