@@ -1,7 +1,7 @@
 const {
   getFromAsyncStorage,
   saveToAsyncStorage
-} = require('../../app/utils/util');
+} = require('../../app/utils/utils');
 import { AsyncStorage } from 'react-native'
 const { expect } = require('chai');
 const sinon = require('sinon');

@@ -5,7 +5,7 @@ import * as actions from './../actions/actions';
 import { Content } from 'native-base';
 import { GiftCard } from './../components/GiftCard';
 import { FriendInfoBar } from './../components/FriendInfoBar';
-import { getFriendItemById } from './../utils/util';
+import { getFriendItemById } from './../utils/utils';
 class Body extends Component {
     constructor(props) {
       super(props);

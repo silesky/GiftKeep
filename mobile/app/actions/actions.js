@@ -1,4 +1,4 @@
-import * as Util from './../utils/util'
+import * as Util from './../utils/utils'
 const config = require('./../../mobileconfig.json');
 const { 
   serverUrl 

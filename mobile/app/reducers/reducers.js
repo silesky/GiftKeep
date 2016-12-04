@@ -6,7 +6,7 @@ import {
 } from 'redux'
 import {
   createUuid
-} from './../utils/util';
+} from './../utils/utils';
 // hello
 
 const user = (state = initialStateUser, action) => {

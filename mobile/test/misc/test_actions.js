@@ -13,7 +13,7 @@ const initialState = require('../../app/json/initialState.json')
 const FbTestUser = require('./../lib/FbTestUser');
 // import { store } from '../../app/stores/store';
 import * as actions from './../../app/actions/actions';
-import * as Util from './../../app/utils/util';
+import * as Util from './../../app/utils/utils';
 const mockStore = configureMockStore([thunk]);
 const store = mockStore(initialState);
 

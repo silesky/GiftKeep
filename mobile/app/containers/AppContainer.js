@@ -10,7 +10,7 @@ import CreateFriendForm from './../components/CreateFriendForm';
 //Containers (not named exports)
 import DrawerContainer from './../containers/DrawerContainer';
 import Body from './../containers/Body';
-import { getFriendItemById } from './../utils/util';
+import { getFriendItemById } from './../utils/utils';
 class AppContainer extends Component {
     constructor(props) {
       super(props)

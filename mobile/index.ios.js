@@ -4,7 +4,7 @@ import {
     AppRegistry
 } from 'react-native';
 
-import { store } from './app/stores/store';
+import { store } from './app/stores/stores';
 
 // needs to be default imports
 import AppContainer from './app/containers/AppContainer';

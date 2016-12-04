@@ -6,9 +6,9 @@
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk';
 import { AsyncStorage } from 'react-native'
-import { rootReducer } from './../reducers/reducer';
+import { rootReducer } from './../reducers/reducers';
 import { composeWithDevTools } from 'remote-redux-devtools';
-import { saveToAsyncStorage, getFromAsyncStorage, updateUserDataByAccessToken, updateUserByBody } from './../utils/util';
+import { saveToAsyncStorage, getFromAsyncStorage, updateUserDataByAccessToken, updateUserByBody } from './../utils/utils';
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 console.log('store created.');
 
@@ -24,10 +24,10 @@ export const storeStateInAsyncStorage = () => {
 
 export const storeStateInDb = () => {
   const state = store.getState();
-  console.log('store.js', state);
+  console.log('stores.js', state);
   updateUserByBody({user: state.user})
   .then(successOrFail => console.log('success or fail', successOrFail))
-  .catch(err => console.log('store.js', err));
+  .catch(err => console.log('stores.js', err));
 }
 
 // on first load
