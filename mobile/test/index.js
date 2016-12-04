@@ -1,5 +1,5 @@
 const testActions = require('./misc/test_actions'),
-testAsync = require('./misc/test_async');
+testUtils = require('./misc/test_utils');
 
 testActions();
-testAsync()
+testUtils();

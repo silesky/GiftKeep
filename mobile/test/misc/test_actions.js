@@ -8,15 +8,13 @@ const { expect, request } = chai
 import thunk from 'redux-thunk';
 import nock from 'nock'
 import configureMockStore from 'redux-mock-store';
-const initialState = require('../../app/json/initialState.json')
-
+import state from './../json/state.json'
 const FbTestUser = require('./../lib/FbTestUser');
 // import { store } from '../../app/stores/store';
 import * as actions from './../../app/actions/actions';
 import * as Util from './../../app/utils/utils';
 const mockStore = configureMockStore([thunk]);
-const store = mockStore(initialState);
-
+const store = mockStore(state);
 module.exports = () => {
   describe('CLIENT: Store, Actions', function () {
     after(() => store.clearActions());
@@ -24,10 +22,10 @@ module.exports = () => {
     it('store should exist', () => {
       const state = store.getState();
       expect(state).to.be.an.object
-      expect(state).to.have.property('userName');
-      expect(state).to.have.property('fbId');
-      expect(state).to.have.property('fbAccessToken');
-      expect(state).to.have.property('data');
+      expect(state.user).to.have.property('userName');
+      expect(state.user).to.have.property('fbId');
+      expect(state.user).to.have.property('fbAccessToken');
+      expect(state.user).to.have.property('data');
     });
     describe('authTokenAndTryToGetUser() ', () => {
       it('lib: FbTestUser().getExistingUserToken() should retrieve a super-long accesss token string', (done) => {
