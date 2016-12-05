@@ -73,7 +73,7 @@ app.put('/api/user/', (req, resCb) => {
 // if user is not in database, ask facebook if token is valid. 
 // if token is valid, create new user. if token is invalid, error message.
 // authTokenAndTryToGetUser()
-app.post("/api/auth/fb", (req, resCb, done) => {
+app.post("/api/auth/fb", (req, resCb) => {
   const { token } = req.body;
 
   const validateThisToken = `https://graph.facebook.com/me?access_token=${token}`;
@@ -109,9 +109,8 @@ app.post("/api/auth/fb", (req, resCb, done) => {
               })
             }).then(() => { 
               // we're returning the new token, but we haven't actually updated it yet
-            
               Storage.updateAccessTokenByFbId(id, token)   // should be replaced with findAndModify;
-                .catch(err => resCb({message: 'update access token failed'}))
+                .catch(err => resCb({message: 'update access token failed', error: err}))
             }) 
           .catch((err) => {
             // TODO: if success = true
@@ -134,7 +133,6 @@ app.post("/api/auth/fb", (req, resCb, done) => {
       }
     })
     .catch(err => resCb.json({ success: false, message: 'MongoDB may have failed.', error: err }))
-    .catch(done);
 })
 // gifter.sethsilesky.com:3000/oauthcallback
 app.post('/oauthcallback', (req, resCb) => {
