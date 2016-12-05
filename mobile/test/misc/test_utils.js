@@ -32,25 +32,25 @@ const testUtils = () => {
         })
     }),
       describe('misc functional tests', () => {
+         const _steve = state.user.data[2];
+         const dummyGiftId = _steve.gifts[0]['giftId'];
+         const dummygiftObjToReturn = _steve.gifts[0];
+         const dummyFriendId = _steve['friendId'];
+         const dummyFriendObjToReturn = _steve;         
         it('getGiftByGiftId', () => {
-          const dummyGiftId = state.user.data[1].gifts[0]['giftId'];
-          const dummygiftObjToReturn = state.user.data[1].gifts[0];
-          expect(Utils.getGiftByGiftId(state, dummyGiftId)).to.equal(dummygiftObjToReturn)
+            expect(Utils.getGiftByGiftId(state, dummyGiftId)).to.equal(dummygiftObjToReturn)
         }),
           it('getFriendByFriendId', () => {
-            const dummyFriendId = state.user.data[2]['friendId'];
-            const dummyFriendObjToReturn = state.user.data[2];
+
             expect(Utils.getFriendByFriendId(state, dummyFriendId)).to.equal(dummyFriendObjToReturn)
           }),
           it('getFriendNameById', () => {
-            const dummyFriendId = state.user.data[2]['friendId'];
-            const dummyFriendNameToReturn = state.user.data[2].friendName;
-            expect(Utils.getFriendNameById(state, dummyFriendId)).to.equal(dummyFriendNameToReturn)
+            expect(Utils.getFriendByGiftId(state, dummyFriendId)).to.be.a.string;
+            expect(Utils.getFriendNameById(state, dummyFriendId)).to.equal(dummyFriendObjToReturn['friendName'])
           }),
-          it('getFriendNameById', () => {
-            const dummyFriendId = state.user.data[2]['friendId'];
-            const dummyFriendNameToReturn = state.user.data[2].friendName;
-            expect(Utils.getFriendNameById(state, dummyFriendId)).to.equal(dummyFriendNameToReturn)
+          it('getFriendByGiftId', () => {
+            expect(Utils.getFriendByGiftId(state, dummyGiftId)).to.have.property('friendName');
+            expect(Utils.getFriendByGiftId(state, dummyGiftId)).to.equal(dummyFriendObjToReturn)
           })
       })
   });

@@ -8,12 +8,6 @@ const log = (el) => {
 };
 export const lipsum = 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.'
 export const compose = (f1, f2) => value => f1(f2(value));
-export const createUuid = () => {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-    let r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-    return v.toString(16);
-  });
-}
 
 export const getFriendItemById = (state, friendId, key) => {
 
@@ -35,11 +29,6 @@ export const getFriendItemById = (state, friendId, key) => {
   return (friend && friend.hasOwnProperty(key)) ? friend[key] : defItem;
 }
 
-export const getFriendNameById = (state, friendId) => getFriendByFriendId(state, friendId).friendName;
-export const getFriendByFriendId = (state, friendId) => {
-  const fid = state.user.data.find(el => el.friendId === friendId);
-  return (fid) ? fid : null;
-}
 export const fetchPost = (route, data) => {
   const fullRoute = `${_serverUrl}/${route}`
   return fetch(fullRoute, {
@@ -102,12 +91,31 @@ export const getFromAsyncStorage = async (key) => {
 }
 
 export const getGiftByGiftId = (state, giftId) => {
-  const gid = state.user.data
+  const giftObj = state.user.data
     .filter(el => el.gifts.length)
     .map(el => el.gifts)
     .reduce((p, n) => p.concat(n), [])
     .find(el => el.giftId === giftId)
-  return (gid) ? gid : null;
+  return (giftObj.giftId) ? giftObj : false;
+}
+
+export const getFriendNameById = (state, friendId) => {
+  let friendName = getFriendByFriendId(state, friendId).friendName;
+  return (friendName) ? friendName : false;
+}
+export const getFriendByFriendId = (state, friendId) => {
+  const friendObj = state.user.data.find(el => el.friendId === friendId);
+  return (friendObj.friendId) ? friendObj : false;
+}
+export const getFriendByGiftId = (state, gid) => {
+  let friendObj = {}
+  state.user.data.forEach((eachFriend, ind, arr) => {
+    const foundGift = eachFriend.gifts.find(eachGift => {
+      return eachGift.giftId === gid
+    })
+    if (foundGift) friendObj = arr[ind]
+  })
+  return (friendObj.friendId) ? friendObj : false;
 }
 
 
