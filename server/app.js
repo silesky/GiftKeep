@@ -93,19 +93,26 @@ app.post("/api/auth/fb", (req, resCb, done) => {
         // now that we have the token, we should update it in the db before returning the db obj
           Storage.getUserByFbId(id)
             .then(({data, fbId, googleIdToken, userName}) => {
+              // todo: refactor to use findAndModify so it only responds with the user object 
               resCb.json({
                 success: true,
                 message: 'user exists',
                 payload: {
-                  fbAccessToken: token, // return new access token, not the old one
+                  // this was the source of a bug: the application was grabbing the right token, 
+                  // but it wasn't being updated. This should return the value from findAndModify.
+                  fbAccessToken: token,
                   data,
                   fbId,
                   googleIdToken,
                   userName
                 }
-              }).then(() => Storage.updateAccessTokenByFbId(id, token)) // we're returning the new token, but we haven't actually updated it yet
+              })
+            }).then(() => { 
+              // we're returning the new token, but we haven't actually updated it yet
+            
+              Storage.updateAccessTokenByFbId(id, token)   // should be replaced with findAndModify;
                 .catch(err => resCb({message: 'update access token failed'}))
-            })
+            }) 
           .catch((err) => {
             // TODO: if success = true
             if (err === 'no db result found') {
