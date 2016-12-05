@@ -15,6 +15,7 @@ export class BodyAllGiftsView extends React.Component {
   }
   render() {
     const gifts = Utils.getAllGifts(this.props.state)
+   // console.warn('isSelected', this.props.isSelected);
     return (
       <Container>
         <Content>
@@ -25,6 +26,7 @@ export class BodyAllGiftsView extends React.Component {
                         const { friendId, friendName } = Utils.getFriendByGiftId(this.props.state, el.giftId);
                         return ( 
                             <GiftCard 
+                                footerIsVisible={this.props.state.visible.allGiftsVisibility}
                                 friendId={friendId}
                                 friendName={friendName}
                                 deleteGift={this.props.actions.deleteGift.bind(this, friendId, el.giftId)}

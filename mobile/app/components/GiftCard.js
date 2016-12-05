@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import {
     Button,
     Container,
@@ -12,6 +12,7 @@ import {
     Title
 } from 'native-base';
 //import * as Util  from './../utils/utils';
+
 export const GiftCard = ({
   deleteGift, 
   friendId,
@@ -20,6 +21,7 @@ export const GiftCard = ({
   giftTitle,
   updateGiftDesc, 
   updateGiftTitle, 
+  footerIsVisible,
   }) => {
 
   // should take a name, birthday and text prop, along with being editable and so forth
@@ -53,15 +55,26 @@ export const GiftCard = ({
                           }}
                         />
                      </CardItem>
-                         <CardItem>
+                      { footerIsVisible 
+                        ? (<CardItem>
                               <Button small style={{backgroundColor: 'purple'}} >
                               <Icon name='ios-people' style={{color:'white'}} />
                                 <Text>{ friendName ? friendName : ''}</Text>
                               </Button>             
-                        </CardItem>
+                          </CardItem>) 
+                        : false
+                      }
                    </Card>
                </Content>
            </Container>
 
         );
+}
+
+GiftCard.PropTypes = {
+  deleteGift: React.PropTypes.func,
+  friendName: React.PropTypes.string,
+  isVisible: React.PropTypes.bool,
+  updateGiftTitle: React.PropTypes.func,
+  updateGiftDesc: React.PropTypes.func,
 }

@@ -48,7 +48,7 @@ render() {
                 drawerOpen={() => this._drawer.open()} 
             /> 
             <Content>
-                <Tabs onChangeTab={(selectedTab) => this.props.actions.allGiftsVisibilityToggle(selectedTab)}>
+                <Tabs onChangeTab={(selectedTab) => this.props.actions.allGiftsVisibility(selectedTab)}>
                     <BodyFriendView tabLabel='Friends'
                         isSelected={true}
                         friendId={selectedFriendId} 

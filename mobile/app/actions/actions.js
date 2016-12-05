@@ -4,7 +4,7 @@ const {
   serverUrl 
   } = config
 
-export const allGiftsVisibilityToggle = () => ({type: "ALL_GIFTS_VISIBILITY_TOGGLE"})
+export const allGiftsVisibility = () => ({type: "ALL_GIFTS_VISIBILITY"})
 
 export const updateGiftDesc = (friendId, giftId, giftDesc) => {
   console.log('updateGift', friendId, giftId, giftDesc);
