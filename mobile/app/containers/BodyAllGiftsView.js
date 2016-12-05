@@ -7,15 +7,13 @@ import {
   Container,
   Content
 } from 'native-base'
+import * as Utils from './../utils/utils'
 // should get an array of all the gifts
 export class BodyAllGiftsView extends React.Component {
   constructor(props) {
     super(props);
     this.getAllGifts = () => {
-      return this.props.state.user.data
-      .filter(el => el.gifts.length)
-      .map(el => el.gifts)
-      .reduce((p, n) =>  p.concat(n), [])
+      return Utils.getAllGifts(this.props.state)
     }
   }
   static propTypes = {

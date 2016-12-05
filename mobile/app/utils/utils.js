@@ -98,14 +98,21 @@ export const getGiftByGiftId = (state, giftId) => {
     .find(el => el.giftId === giftId)
   return (giftObj.giftId) ? giftObj : false;
 }
-
-export const getFriendNameById = (state, friendId) => {
-  let friendName = getFriendByFriendId(state, friendId).friendName;
-  return (friendName) ? friendName : false;
+export const getAllGifts = (state) => {
+  const allGiftsList = state.user.data
+    .filter(el => el.gifts.length)
+    .map(el => el.gifts)
+    .reduce((p, n) => p.concat(n), [])
+  return (allGiftsList.length) ? allGiftsList : [];
 }
+
 export const getFriendByFriendId = (state, friendId) => {
   const friendObj = state.user.data.find(el => el.friendId === friendId);
   return (friendObj.friendId) ? friendObj : false;
+}
+export const getFriendNameById = (state, friendId) => {
+  let friendName = getFriendByFriendId(state, friendId).friendName;
+  return (friendName) ? friendName : false;
 }
 export const getFriendByGiftId = (state, gid) => {
   let friendObj = {}
