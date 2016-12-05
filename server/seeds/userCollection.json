@@ -76,7 +76,7 @@
 
 	{	"userName": "Existing User",
 		"googleIdToken": "g2",
-		"fbAccessToken":"EAAEx80tZBA14BANg8acMOb8ZCbnPufmnxnbAVIQjQvrTTQZB1lUj8oNvfe5dZAmYOYib10VmDqQ31Kbc2ii7agVrdACF1tEVlR8zz7dxTdUZBa8VMTDFxi1Gdsj3iVmebtpjuYUkHA1y1AjbZBnFZBcL3odCd7bxjqsZB9ZCyo1u1GDjGUsGCwRE2",
+		"fbAccessToken":"ExistingUserSeedToken",
 		"fbId":"105456176609093", 
 		    "data": [
             {   "friendId": 123,
