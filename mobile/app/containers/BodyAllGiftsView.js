@@ -22,9 +22,11 @@ export class BodyAllGiftsView extends React.Component {
              (gifts.length) 
                 ? 
                 gifts.map((el, ind) => {
-                        const { friendId } = Utils.getFriendByGiftId(this.props.state, el.giftId);
+                        const { friendId, friendName } = Utils.getFriendByGiftId(this.props.state, el.giftId);
                         return ( 
                             <GiftCard 
+                                friendId={friendId}
+                                friendName={friendName}
                                 deleteGift={this.props.actions.deleteGift.bind(this, friendId, el.giftId)}
                                 giftDesc={el.giftDesc}
                                 updateGiftTitle={this.props.actions.updateGiftTitle.bind(this, friendId, el.giftId)}

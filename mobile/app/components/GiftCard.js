@@ -11,18 +11,24 @@ import {
     Text,
     Title
 } from 'native-base';
-import { lipsum } from './../utils/utils';
-export const GiftCard = ({deleteGift, updateGiftDesc, giftDesc, updateGiftTitle, giftTitle}) => {
+//import * as Util  from './../utils/utils';
+export const GiftCard = ({
+  deleteGift, 
+  friendId,
+  friendName,
+  giftDesc,  
+  giftTitle,
+  updateGiftDesc, 
+  updateGiftTitle, 
+  }) => {
 
   // should take a name, birthday and text prop, along with being editable and so forth
         return (
-           <Container >
+           <Container>
                <Content>
                    <Card>
                        <CardItem style={{backgroundColor: 'rgb(77, 144, 254)'}} header>
                         <Input 
-                          
-
                           style={{color: 'white', fontWeight: '700'}}
                           value={giftTitle} 
                           onChangeText={(input) => {
@@ -47,6 +53,12 @@ export const GiftCard = ({deleteGift, updateGiftDesc, giftDesc, updateGiftTitle,
                           }}
                         />
                      </CardItem>
+                         <CardItem>
+                              <Button small style={{backgroundColor: 'purple'}} >
+                              <Icon name='ios-people' style={{color:'white'}} />
+                                <Text>{ friendName ? friendName : ''}</Text>
+                              </Button>             
+                        </CardItem>
                    </Card>
                </Content>
            </Container>
