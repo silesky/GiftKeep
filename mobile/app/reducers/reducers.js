@@ -1,6 +1,7 @@
 import * as initialStateUser from './../json/initialState.json'
 import * as defaultFriend from './../json/defaultFriend.json'
 import * as emptyState from './../json/emptyState.json'
+import UUID from 'uuid-js';
 import {
   combineReducers
 } from 'redux'
@@ -8,6 +9,7 @@ import {
   createUuid
 } from './../utils/utils';
 // hello
+
 
 const user = (state = initialStateUser, action) => {
   let newState, 
@@ -85,7 +87,7 @@ const user = (state = initialStateUser, action) => {
 
     case 'CREATE_FRIEND':
       return { ...state,  data: [...state.data, {
-          friendId: createUuid(),
+          friendId: UUID.create(),
           friendName: action.payload.friendName,
           bday: action.payload.bday,
           gifts: []
@@ -97,7 +99,7 @@ const user = (state = initialStateUser, action) => {
         if (el.friendId === action.payload.friendId) {
           el.gifts = [...el.gifts, {
             giftTitle: '',
-            giftId: createUuid()
+            giftId: UUID.create()
           }]
         }
         return el
