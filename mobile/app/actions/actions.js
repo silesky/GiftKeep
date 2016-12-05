@@ -4,7 +4,12 @@ const {
   serverUrl 
   } = config
 
-export const allGiftsVisibility = () => ({type: "ALL_GIFTS_VISIBILITY"})
+export const allGiftsVisibility = (tabNum) => {
+  return {
+    type: "ALL_GIFTS_VISIBILITY",
+    payload: {selectedTab: tabNum}
+  }
+}
 
 export const updateGiftDesc = (friendId, giftId, giftDesc) => {
   console.log('updateGift', friendId, giftId, giftDesc);

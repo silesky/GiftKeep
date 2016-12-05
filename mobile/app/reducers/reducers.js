@@ -114,12 +114,12 @@ const user = (state = initialStateUser, action) => {
 const initialStateFirstUser = {
   selectedFriendId: initialStateUser.data[0].friendId,
   createFriendModalVisibility: false,
-  allGiftsVisibility: true,
+  allGiftsVisibility: 0,
 };
 const visible = (state = initialStateFirstUser, action) => {
   switch (action.type) {
     case 'ALL_GIFTS_VISIBILITY':
-      return {...state, allGiftsVisibility: !state.allGiftsVisibility}
+      return {...state, allGiftsVisibility: action.payload.selectedTab }
     case 'HYDRATE_VISIBLE':
       const newState = Object.assign({}, action.payload)
       return newState

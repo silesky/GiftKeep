@@ -23,7 +23,6 @@ export const GiftCard = ({
   updateGiftTitle, 
   footerIsVisible,
   }) => {
-
   // should take a name, birthday and text prop, along with being editable and so forth
         return (
            <Container>
