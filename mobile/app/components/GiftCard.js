@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { StyleSheet } from 'react-native';
 import {
     Button,
     Container,
@@ -9,7 +10,7 @@ import {
     Input,
     InputGroup,
     Text,
-    Title
+    Title,
 } from 'native-base';
 //import * as Util  from './../utils/utils';
 
@@ -55,10 +56,12 @@ export const GiftCard = ({
                         />
                      </CardItem>
                       { footerIsVisible 
-                        ? (<CardItem>
-                              <Button small style={{backgroundColor: 'purple'}} >
-                              <Icon name='ios-people' style={{color:'white'}} />
-                                <Text>{ friendName ? friendName : ''}</Text>
+                        ? (<CardItem style={styles.footerCard}>
+                              <Button style={styles.button} 
+                               disabled small 
+                               textStyle={{color: 'white'}}  
+                              >    
+                              { friendName ? friendName.toUpperCase()  : ''}
                               </Button>             
                           </CardItem>) 
                         : false
@@ -70,6 +73,18 @@ export const GiftCard = ({
         );
 }
 
+const styles = StyleSheet.create({
+  footerCard: {
+      flex: 1,
+      alignItems: 'center',
+      paddingTop: 5,
+      paddingBottom: 5,
+      
+  },
+  button: {
+    backgroundColor: 'purple'
+  },
+})
 GiftCard.PropTypes = {
   deleteGift: React.PropTypes.func,
   friendName: React.PropTypes.string,

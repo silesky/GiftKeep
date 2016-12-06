@@ -4,9 +4,9 @@ const {
   serverUrl 
   } = config
 
-export const allGiftsVisibility = (tabNum) => {
+export const selectTab = (tabNum) => {
   return {
-    type: "ALL_GIFTS_VISIBILITY",
+    type: "SELECT_TAB",
     payload: {selectedTab: tabNum}
   }
 }

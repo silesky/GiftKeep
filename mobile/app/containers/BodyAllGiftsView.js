@@ -16,7 +16,7 @@ export class BodyAllGiftsView extends React.Component {
   render() {
     const gifts = Utils.getAllGifts(this.props.state)
     // I can use truthy or falsy, but I prefer to keep the logic explicit in case I want to add another tab
-    const footerIsVisible  = this.props.state.visible.allGiftsVisibility === 1 ? true : false 
+    const footerIsVisible  = this.props.state.visible.selectedTab === 1 ? true : false 
 
     return (
       <Container>
@@ -25,7 +25,6 @@ export class BodyAllGiftsView extends React.Component {
              (gifts.length) 
                 ? 
                 gifts.map((el, ind) => {
-                         
                         const { friendId, friendName } = Utils.getFriendByGiftId(this.props.state, el.giftId);
                         return ( 
                             <GiftCard 

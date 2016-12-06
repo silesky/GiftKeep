@@ -20,7 +20,6 @@ class AppContainer extends Component {
       super(props)
       
     }
-
 render() {
     const { selectedFriendId, createFriendModalVisibility } = this.props.state.visible;
     return (
@@ -48,13 +47,16 @@ render() {
                 drawerOpen={() => this._drawer.open()} 
             /> 
             <Content>
-                <Tabs onChangeTab={(selectTabEvent) => this.props.actions.allGiftsVisibility(selectTabEvent['i'])}>
+                <Tabs
+                initialPage={1}
+                //  currentPage={this.props.state.selectedTab} broken unforuntately
+                onChangeTab={(selectTabEvent) => this.props.actions.selectTab(selectTabEvent['i'])}>
                     <BodyFriendView tabLabel='Friends'
-                        isSelected={true}
+                        isSelected={!!this.props.state.selectedTab}
                         friendId={selectedFriendId} 
                     />
                     <BodyAllGiftsView  tabLabel='All Gifts'
-                        isSelected={false}
+                        isSelected={!!this.props.state.selectedTab}
                        />
                  
                 </Tabs>
