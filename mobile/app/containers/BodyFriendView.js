@@ -7,36 +7,38 @@ import { GiftCard } from './../components/GiftCard';
 import { FriendInfoBar } from './../components/FriendInfoBar';
 import { getFriendItemById } from './../utils/utils';
 class BodyFriendView extends Component {
-    constructor() {
-      super();
-    }
-    render() {
-        const { friendId } = this.props;
-        const bday = getFriendItemById(this.props.state, friendId, 'bday');
-        const friendName = getFriendItemById(this.props.state, friendId, 'friendName');
-        const gifts =  getFriendItemById(this.props.state, friendId, 'gifts');
-
-        return (
-                <Content>
-                     <FriendInfoBar friendName={friendName} bday={bday} />
-                    { gifts.map((el, ind) => {
-                        return ( 
-                            <GiftCard 
-                                deleteGift={this.props.actions.deleteGift.bind(this, friendId, el.giftId)}
-                                giftDesc={el.giftDesc}
-                                updateGiftTitle={this.props.actions.updateGiftTitle.bind(this, friendId, el.giftId)}
-                                updateGiftDesc={this.props.actions.updateGiftDesc.bind(this, friendId, el.giftId)} 
-                                giftId={el.giftId} 
-                                giftTitle={el.giftTitle} 
-                                key={ind} />
-                        )
-                    })}
-                 </Content>
-        )
-    }
+  constructor() {
+    super();
+  }
+  render() {
+    const { friendId, state } = this.props;
+    const bday = getFriendItemById(state, friendId, 'bday'),
+      friendName = getFriendItemById(state, friendId, 'friendName'),
+      gifts = getFriendItemById(state, friendId, 'gifts');
+    return (
+      <Content>
+        <FriendInfoBar
+          friendName={friendName}
+          bday={bday}
+          />
+        {gifts.map((el, ind) => {
+          return (
+            <GiftCard
+              deleteGift={this.props.actions.deleteGift.bind(this, friendId, el.giftId)}
+              giftDesc={el.giftDesc}
+              updateGiftTitle={this.props.actions.updateGiftTitle.bind(this, friendId, el.giftId)}
+              updateGiftDesc={this.props.actions.updateGiftDesc.bind(this, friendId, el.giftId)}
+              giftId={el.giftId}
+              giftTitle={el.giftTitle}
+              key={ind} />
+          )
+        })}
+      </Content>
+    )
+  }
 }
 
 
 const mdtp = (dispatch) => ({ actions: bindActionCreators(actions, dispatch) })
-const mstp = (state) => ({state});
+const mstp = (state) => ({ state });
 export default connect(mstp, mdtp)(BodyFriendView)
