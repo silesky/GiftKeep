@@ -123,7 +123,7 @@ export const testClick = () => {
 }
 export const clear = () => ({type: 'CLEAR'})
 
-export const _sendTokenToServer = (token) => {
+const _sendTokenToServer = (token) => {
   return fetch(`${serverUrl}/api/auth/fb`, 
           { method: 'POST',
             body: JSON.stringify({ token }),
@@ -131,12 +131,23 @@ export const _sendTokenToServer = (token) => {
         })
         .then(res => res.json())
 }
+ //
+ const _fbGetUserPhoto = (userId) => {
+  return fetch(`https://graph.facebook.com/v2.8/${userId}/picture`)
+ }
+        
+
 export const authTokenAndTryToGetUser = (token) => {
     return dispatch => {
       console.log('auth token action called... we should see a res:')
+      
       return _sendTokenToServer(token)
         .then(res => {
             dispatch(hydrateUser(res.payload))
+            _fbGetUserPhoto(res.payload.fbId)
+              .then(imgRes => {
+              console.log('img', imgRes);
+          })
         }).catch(err => console.log('error', err))
   }
 }

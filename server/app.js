@@ -5,6 +5,7 @@ const fetch = require('node-fetch');
 const Storage = require('./storage');
 const fs = require('fs');
 const https = require('https');
+const { fbGetUserPhoto } = require('./graphApi');
 const app = express();
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -76,7 +77,9 @@ app.put('/api/user/', (req, resCb) => {
 app.post("/api/auth/fb", (req, resCb) => {
   const { token } = req.body;
 
-  const validateThisToken = `https://graph.facebook.com/me?access_token=${token}`;
+  const validateThisToken = 
+    `https://graph.facebook.com/me?access_token=${token}`
+   + `&fields=id,name,picture`;
   fetch(validateThisToken)
     .then((fbRes) => fbRes.json()).then(fbRes => {
       // nothing found in facebook
@@ -89,7 +92,10 @@ app.post("/api/auth/fb", (req, resCb) => {
     // once authneticated, grab userId too
     .then(fbRes => {
       if (fbRes.success) {
-        const { id, name } = fbRes.payload;
+       
+        const { id, name, picture } = fbRes.payload;
+        const imgUrl = picture.data.url;
+        // fbGetUserPhoto(id)
         // now that we have the token, we should update it in the db before returning the db obj
           Storage.getUserByFbId(id)
             .then(({data, fbId, googleIdToken, userName}) => {
@@ -104,7 +110,7 @@ app.post("/api/auth/fb", (req, resCb) => {
                   data,
                   fbId,
                   googleIdToken,
-                  userName
+                  userName,
                 }
               })
             }).then(() => { 
