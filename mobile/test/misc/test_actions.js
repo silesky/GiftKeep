@@ -36,6 +36,12 @@ module.exports = () => {
             done();
           }).catch(done)
       })
+      it('internet should be connected', (done) => {
+        fetch('http://google.com').then(res => {
+          expect(res.status).to.equal(200)
+          done();
+        }).catch(done);
+      })
       it('hydrate_user action should be dispatched, and response should carry with it the new access token (and user data)', (done) => {
         const callback = sinon.spy();
         FbTestUser().getExistingUserToken()
@@ -50,11 +56,12 @@ module.exports = () => {
                 expect(resUserObj['fbAccessToken']).to.equal(existingUserToken);
                 expect(resUserObj['userName']).to.equal('Existing User');
                 callback();
-                done();
               })
-              .then(() => { expect(callback.called).to.be.true })
-              .catch(done)
-          })
+              .then(() => {
+                expect(callback.called).to.be.true 
+                done()
+              }).catch(done)
+          }).catch(done)
       })
       it('when I log out, clear localStorage', () => {
         //    console.log(store.getState());

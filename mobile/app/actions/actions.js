@@ -138,7 +138,7 @@ const _fbGetUserPhoto = (userId) => {
   // returns a base64Str
   return fetch(`https://graph.facebook.com/v2.8/${userId}/picture`)
     .then(imgRes => Utils.toDataURL(imgRes.url))
-    .catch(err => console.error('fetching img failed', err))
+    .catch(err => console.log({message: 'action->fetching img failed', error: err}))
 }
 
 export const saveFbPhoto = (base64Str) => {
