@@ -9,11 +9,12 @@ import {
   LoginButton, 
   AccessToken,
 } from 'react-native-fbsdk';
+import FbLoggedInImageBar from './FbLoggedInImageBar';
 
-
-export const FbLogin = ({authTokenAndTryToGetUser, clear}) => {
+export const FbLogin = ({authTokenAndTryToGetUser, clear, userName, fbImage}) => {
     return (
           <View style={{justifyContent: 'center'}}>
+           <FbLoggedInImageBar userName={userName} fbImage={fbImage} />
             <Button transparent>
               <LoginButton
                 readPermissions={["public_profile"]}
@@ -42,6 +43,7 @@ export const FbLogin = ({authTokenAndTryToGetUser, clear}) => {
                   console.log("User logged out")
                 }}/>
             </Button>
+       
           </View>
     );
   }

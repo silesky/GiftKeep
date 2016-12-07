@@ -25,5 +25,6 @@ config.json
 
 * CreateFriendForm -> Modal (react-native)
 * Swipeout
+* View (in FbLoggiedInImageBar)
 
 rnpm install will save you a step, but for my own components, I used `react-native link <NAME>`
