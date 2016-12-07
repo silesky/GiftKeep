@@ -6,3 +6,4 @@ config.json
 Gifter.postman_test_run.json
 *.json
 .env
+.env.*

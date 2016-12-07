@@ -144,7 +144,7 @@ const _fbGetUserPhoto = (userId) => {
 export const saveFbPhoto = (base64Str) => {
   return {
     type: 'SAVE_FB_PHOTO',
-    payload: {fbImage: base64Str }
+    payload: {fbImage: base64Str}
   }
 }
 export const authTokenAndTryToGetUser = (token) => {

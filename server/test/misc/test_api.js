@@ -15,7 +15,7 @@ module.exports = () =>
 
     let userCollection;
     before(() => {
-      MongoClient.connect('mongodb://127.0.0.1:27017/giftr', (err, db) => {
+      MongoClient.connect(process.env.DB_HOST, (err, db) => {
         db.createCollection('userCollection')
         userCollection = db.collection('userCollection');
         userCollection.remove({});
@@ -23,14 +23,7 @@ module.exports = () =>
       })
     });
 
-    describe('Database Connection -->', () => {
 
-      it('should connect to gifter db', () => {
-        MongoClient.connect('mongodb://127.0.0.1:27017/giftr', (err, db) => {
-          expect(db).to.be.ok
-        })
-      })
-    }),
 
       describe('/api/ -->', () => {
 

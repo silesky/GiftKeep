@@ -16,6 +16,16 @@
 /mobile/test/lib/appInfo.json
 config.json
 
+* server set up
+  * create a .env file in the server folder with the following properties:
+  CLIENT_ID=//e.g MYCLIENTID122r13f1 
+  APP_ACCESS_TOKEN=//e.g MYCLIENTID123|MYAXXTOKEN456
+  CLIENT_SECRET=//e.g. abc123456
+  NODE_ENV=//e.g development       
+  DB_HOST=//e.g mongodb://127.0.0.1:27017/giftr
+  DB_USER=//optional
+  DB_PASS=//optional
+  * create a .env.test file in the test folder with the following properties
 # Giftr
 
 * `react-native run-ios`

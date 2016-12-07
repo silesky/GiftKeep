@@ -1,6 +1,7 @@
+require('dotenv').config();
 const MongoClient = require('mongodb').MongoClient;
 module.exports = {
-    connect: () => MongoClient.connect('mongodb://127.0.0.1:27017/giftr', (err, database) => {
+    connect: () => MongoClient.connect(process.env.DB_HOST, (err, database) => {
             if (err) throw err;
             console.log('...connected to mongoDB!');
             this.db = database;
