@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as actions from './../actions/actions'
+import { Image } from 'react-native';
 import {
   Button,
+  Text,
   Container,
   Content,
   Footer,
@@ -18,14 +20,16 @@ export class DrawerContainer extends Component {
   constructor(props) {
     super(props);
   }
-
   render() {
+    const { userName, fbImage } = this.props.state.user;
     return (
       <Container>
         <Header>
           <Title>Friends</Title>
         </Header>
         <Content>
+          <Text>{ userName }</Text>
+          <Image source={{ uri: fbImage, width: 25, height: 25, scale: 3 }} />
           <List>
             {this.props.state.user.data.map((el, index) => (
               <FriendListItem
@@ -39,10 +43,10 @@ export class DrawerContainer extends Component {
           </List>
         </Content>
         <Footer>
-          <FbLogin 
-          clear={this.props.actions.clear}
-          authTokenAndTryToGetUser={this.props.actions.authTokenAndTryToGetUser}
-          />
+          <FbLogin
+            clear={this.props.actions.clear}
+            authTokenAndTryToGetUser={this.props.actions.authTokenAndTryToGetUser}
+            />
         </Footer>
       </Container>
 
