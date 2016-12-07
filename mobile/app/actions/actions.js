@@ -154,8 +154,10 @@ export const authTokenAndTryToGetUser = (token) => {
       .then(res => {
         dispatch(hydrateUser(res.payload))
         _fbGetUserPhoto(res.payload.fbId)
-          .then(base64Str => {dispatch(saveFbPhoto(base64Str))
+          .then(base64Str => {
+            dispatch(saveFbPhoto(base64Str))
           })
+          
       }).catch(err => console.log('error', err))
   }
 }

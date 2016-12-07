@@ -1,9 +1,13 @@
-import React, { Component } from 'react'
+import React,  { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as actions from './../actions/actions'
-import { Image } from 'react-native';
-import FbLoggedInImageBar from './../components/FbLoggedInImageBar'
+import { 
+  Image, 
+  StyleSheet, 
+  View
+} from 'react-native';
+
 import {
   Thumbnail,
   Button,
@@ -15,6 +19,7 @@ import {
   List,
   Title
 } from 'native-base';
+
 import { FbLogin } from './../components/FbLogin'
 import { FriendListItem } from './../components/FriendListItem'
 
@@ -48,7 +53,7 @@ export class DrawerContainer extends Component {
             clear={this.props.actions.clear}
             authTokenAndTryToGetUser={this.props.actions.authTokenAndTryToGetUser}
           />
-        </Footer>
+          </Footer>
       </Container>
 
     )

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { 
   View,
+  StyleSheet
 } from 'react-native';
 import {
   Button,
@@ -9,14 +10,18 @@ import {
   LoginButton, 
   AccessToken,
 } from 'react-native-fbsdk';
-import FbLoggedInImageBar from './FbLoggedInImageBar';
+import FbProfImage from './../components/FbProfImage';
+
 
 export const FbLogin = ({authTokenAndTryToGetUser, clear, userName, fbImage}) => {
     return (
-          <View style={{justifyContent: 'center'}}>
-           <FbLoggedInImageBar userName={userName} fbImage={fbImage} />
-            <Button transparent>
-              <LoginButton
+          <View style={{flexDirection: 'row'}}>
+            <Button style={{marginRight: 20}} transparent>
+              <LoginButton 
+                style={{
+                  height: 40, 
+                  width: 100
+                }}
                 readPermissions={["public_profile"]}
                 onLoginFinished={
                   (error, result) => {
@@ -43,7 +48,7 @@ export const FbLogin = ({authTokenAndTryToGetUser, clear, userName, fbImage}) =>
                   console.log("User logged out")
                 }}/>
             </Button>
-       
+            <FbProfImage fbImage={fbImage} />
           </View>
     );
   }
