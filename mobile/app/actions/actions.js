@@ -1,53 +1,53 @@
-import * as Util from './../utils/utils'
+import * as Utils from './../utils/utils'
 const config = require('./../../mobileconfig.json');
-const { 
-  serverUrl 
-  } = config
+const {
+  serverUrl
+} = config
 
 export const selectTab = (tabNum) => {
   return {
     type: "SELECT_TAB",
-    payload: {selectedTab: tabNum}
+    payload: { selectedTab: tabNum }
   }
 }
 
 export const updateGiftDesc = (friendId, giftId, giftDesc) => {
   console.log('updateGift', friendId, giftId, giftDesc);
-    return {
-      type: 'UPDATE_GIFT_DESC',
-      payload: {friendId, giftId, giftDesc}
-    }
+  return {
+    type: 'UPDATE_GIFT_DESC',
+    payload: { friendId, giftId, giftDesc }
   }
- 
+}
+
 export const updateGiftTitle = (friendId, giftId, giftTitle) => {
   console.log('updateGift', friendId, giftId, giftTitle);
-    return {
-      type: 'UPDATE_GIFT_TITLE',
-      payload: {friendId, giftId, giftTitle}
-    }
+  return {
+    type: 'UPDATE_GIFT_TITLE',
+    payload: { friendId, giftId, giftTitle }
   }
+}
 export const deleteGift = (friendId, giftId) => {
   console.log('deleteGift:', friendId, giftId);
   return {
     type: 'DELETE_GIFT',
-    payload: {friendId, giftId}
-    }
+    payload: { friendId, giftId }
   }
-
-export const selectFriend = (friendId) => {
-    return {
-        type: 'SELECT_FRIEND',
-        payload: {friendId}
-    }
 }
 
-const _deleteFriend = (friendId) => ({type: 'DELETE_FRIEND', payload: {friendId}})
+export const selectFriend = (friendId) => {
+  return {
+    type: 'SELECT_FRIEND',
+    payload: { friendId }
+  }
+}
+
+const _deleteFriend = (friendId) => ({ type: 'DELETE_FRIEND', payload: { friendId } })
 
 const _selectLastFriend = () => {
   return (dispatch, getState) => {
-      const state = getState().user.data;
-      const latestFriendId = state[state.length - 1].friendId;
-      dispatch(selectFriend(latestFriendId));
+    const state = getState().user.data;
+    const latestFriendId = state[state.length - 1].friendId;
+    dispatch(selectFriend(latestFriendId));
   }
 }
 const _selectNextFriend = (currentFriendId) => {
@@ -57,7 +57,7 @@ const _selectNextFriend = (currentFriendId) => {
     const nextInd = state.findIndex(el => el.friendId === currentFriendId) + 1; // get index
     if (state[nextInd]) dispatch(selectFriend(state[nextInd].friendId))
 
-      
+
   }
 }
 
@@ -69,34 +69,34 @@ export const deleteFriend = (friendId) => {
     // if you are deleting the same friend you're looking at, go to the next one.
     // if the friend you're looking at isn't the last one in the deck, you should go to the next one.
     // otherwise, it doesn't matter... just delete
-      if (friendArr.length > 1 && friendId === selectedFriendId) {
-          console.log(friendArr.length, 'friendArr');
-          dispatch(_selectNextFriend(friendId));
-      } 
-      dispatch(_deleteFriend(friendId))
+    if (friendArr.length > 1 && friendId === selectedFriendId) {
+      console.log(friendArr.length, 'friendArr');
+      dispatch(_selectNextFriend(friendId));
     }
+    dispatch(_deleteFriend(friendId))
   }
-export const createFriendToggleModalVisible = () => ({type: 'CREATE_FRIEND_TOGGLE_MODAL_VISIBLE'})
+}
+export const createFriendToggleModalVisible = () => ({ type: 'CREATE_FRIEND_TOGGLE_MODAL_VISIBLE' })
 
-export const _createFriend = (friendName, bday) => ({type: 'CREATE_FRIEND', payload: {friendName, bday}});
+export const _createFriend = (friendName, bday) => ({ type: 'CREATE_FRIEND', payload: { friendName, bday } });
 // modal visibility toggle called
 export const createFriend = (friendName, bday) => {
-    console.log('bday input:', bday);
-    bday = (bday) ? bday : '???';
-    return (dispatch) => {
-       dispatch(_createFriend(friendName, bday));
-       dispatch(_selectLastFriend());
-       dispatch(createFriendToggleModalVisible());
-    }
+  console.log('bday input:', bday);
+  bday = (bday) ? bday : '???';
+  return (dispatch) => {
+    dispatch(_createFriend(friendName, bday));
+    dispatch(_selectLastFriend());
+    dispatch(createFriendToggleModalVisible());
+  }
 }
 // friendId
 export const addGift = (friendId) => {
-    console.log(friendId, 'addgift called');
-    return {
-        type: 'ADD_GIFT',
-        // e.g {giftTitle: 'new gift'}
-        payload: {friendId}
-    }
+  console.log(friendId, 'addgift called');
+  return {
+    type: 'ADD_GIFT',
+    // e.g {giftTitle: 'new gift'}
+    payload: { friendId }
+  }
 }
 
 
@@ -107,48 +107,57 @@ export const hydrateUser = (data) => {
   }
 }
 export const sendAccessToken = (token) => {
-    const route = 'http://localhost:3000/api/auth/fb';
-    return fetch(route, 
-    { method: 'POST', 
-      body:  JSON.stringify({data: token}),
+  const route = 'http://localhost:3000/api/auth/fb';
+  return fetch(route,
+    {
+      method: 'POST',
+      body: JSON.stringify({ data: token }),
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-    }
-  })
+      }
+    })
 }
 export const testClick = () => {
   console.log('Action->TEST CLICK...')
   return clear();
 }
-export const clear = () => ({type: 'CLEAR'})
+export const clear = () => ({ type: 'CLEAR' })
 
 const _sendTokenToServer = (token) => {
-  return fetch(`${serverUrl}/api/auth/fb`, 
-          { method: 'POST',
-            body: JSON.stringify({ token }),
-            headers: { 'Content-Type': 'application/json' }
-        })
-        .then(res => res.json())
+  return fetch(`${serverUrl}/api/auth/fb`,
+    {
+      method: 'POST',
+      body: JSON.stringify({ token }),
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then(res => res.json())
 }
- //
- const _fbGetUserPhoto = (userId) => {
+//
+const _fbGetUserPhoto = (userId) => {
+  // returns a base64Str
   return fetch(`https://graph.facebook.com/v2.8/${userId}/picture`)
- }
-        
+    .then(imgRes => Utils.toDataURL(imgRes.url))
+    .catch(err => console.error('fetching img failed', err))
+}
 
+export const saveFbPhoto = (base64Str) => {
+  return {
+    type: 'SAVE_FB_PHOTO',
+    payload: {fbImage: base64Str }
+  }
+}
 export const authTokenAndTryToGetUser = (token) => {
-    return dispatch => {
-      console.log('auth token action called... we should see a res:')
-      
-      return _sendTokenToServer(token)
-        .then(res => {
-            dispatch(hydrateUser(res.payload))
-            _fbGetUserPhoto(res.payload.fbId)
-              .then(imgRes => {
-              console.log('img', imgRes);
+  return dispatch => {
+    console.log('auth token action called... we should see a res:')
+    return _sendTokenToServer(token)
+      .then(res => {
+        dispatch(hydrateUser(res.payload))
+        _fbGetUserPhoto(res.payload.fbId)
+          .then(base64Str => {
+            dispatch(saveFbPhoto(base64Str))
           })
-        }).catch(err => console.log('error', err))
+      }).catch(err => console.log('error', err))
   }
 }
 

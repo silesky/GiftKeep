@@ -93,7 +93,8 @@ const user = (state = initialStateUser, action) => {
           gifts: []
         }]
         }
-      
+     case 'SAVE_FB_PHOTO': 
+     return { ...state, fbImage: action.payload.fbImage } 
     case 'ADD_GIFT':
       newData = state.data.map(el => {
         if (el.friendId === action.payload.friendId) {

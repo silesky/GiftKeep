@@ -5,3 +5,4 @@ config.json
 *.crt
 Gifter.postman_test_run.json
 *.json
+.env
