@@ -5,17 +5,14 @@ chai.use(chaiHttp);
 const { expect, request } = chai;
 const serverUrl = "http://localhost:3000"
 const userCollectionJSON = require('./../../seeds/userCollection.json')
-// for get
-
+const DB = require('./../../db')
 const FbTestUser = require('./../lib/FbTestUser');
 
 module.exports = () =>
-
   describe('API -->', () => {
-
     let userCollection;
     before(() => {
-      MongoClient.connect(process.env.DB_HOST, (err, db) => {
+      DB.promiseConnect().then(db => {
         db.createCollection('userCollection')
         userCollection = db.collection('userCollection');
         userCollection.remove({});
@@ -23,12 +20,8 @@ module.exports = () =>
       })
     });
 
-
-
       describe('/api/ -->', () => {
-
         it('get: getAllData should get all the data', (done) => {
-
           request(serverUrl)
             .get('/api')
             .end((err, res) => {
