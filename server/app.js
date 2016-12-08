@@ -11,7 +11,6 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static('./public'));
 const DB = require('./db');
-
 DB.connect();
 // get all
 app.get('/api', (undefined, resCb, next) => {

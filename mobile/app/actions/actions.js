@@ -3,7 +3,7 @@ const config = require('./../../mobileconfig.json');
 const {
   serverUrl
 } = config
-
+import { ImageStore } from 'react-native'
 export const selectTab = (tabNum) => {
   return {
     type: "SELECT_TAB",
@@ -81,6 +81,7 @@ export const createFriendToggleModalVisible = () => ({ type: 'CREATE_FRIEND_TOGG
 export const _createFriend = (friendName, bday) => ({ type: 'CREATE_FRIEND', payload: { friendName, bday } });
 // modal visibility toggle called
 export const createFriend = (friendName, bday) => {
+
   console.log('bday input:', bday);
   bday = (bday) ? bday : '???';
   return (dispatch) => {
@@ -134,31 +135,18 @@ const _sendTokenToServer = (token) => {
     .then(res => res.json())
 }
 //
-const _fbGetUserPhoto = (userId) => {
-  // returns a base64Str
-  return fetch(`https://graph.facebook.com/v2.8/${userId}/picture`)
-    .then(imgRes => Utils.toDataURL(imgRes.url))
-    .catch(err => console.log({message: 'action->fetching img failed', error: err}))
-}
 
-export const saveFbPhoto = (base64Str) => {
+
+export const saveFbPhoto = (uriOrBase64) => {
   return {
     type: 'SAVE_FB_PHOTO',
-    payload: {fbImage: base64Str}
+    payload: { fbImage: uriOrBase64 }
   }
 }
 export const authTokenAndTryToGetUser = (token) => {
-  return dispatch => {
-    console.log('auth token action called... we should see a res:')
-    return _sendTokenToServer(token)
-      .then(res => {
-        dispatch(hydrateUser(res.payload))
-        _fbGetUserPhoto(res.payload.fbId)
-          .then(base64Str => {
-            dispatch(saveFbPhoto(base64Str))
-          })
-          
-      }).catch(err => console.log('error', err))
-  }
+  return dispatch => _sendTokenToServer(token)
+    .then(({payload, payload: {fbId}}) => {
+      dispatch(hydrateUser(payload));
+      Utils.fbGetPicURLById(fbId).then(url => dispatch(saveFbPhoto(url)))
+    })
 }
-

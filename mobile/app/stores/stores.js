@@ -24,7 +24,6 @@ export const storeStateInAsyncStorage = () => {
 
 export const storeStateInDb = () => {
   const state = store.getState();
-  console.log('stores.js', state);
   updateUserByBody({user: state.user})
   .then(successOrFail => console.log('success or fail', successOrFail))
   .catch(err => console.log('stores.js', err));
@@ -34,7 +33,6 @@ export const storeStateInDb = () => {
 export const hydrateFromAsyncStorage = () => { 
   return getFromAsyncStorage('store')  
       .then(res => {
-        
         const { user, visible } = JSON.parse(res);
         store.dispatch({type: 'HYDRATE_USER', payload: user})
         store.dispatch({type: 'HYDRATE_VISIBLE', payload: visible}); 

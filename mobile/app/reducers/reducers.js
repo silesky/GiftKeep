@@ -27,7 +27,6 @@ const user = (state = initialStateUser, action) => {
     
     case 'HYDRATE_USER':
     // fromat should be { data: [], fbId: ..., userName: }
-    console.log('state', state, 'payload', action.payload);
       newState = action.payload
       return newState;
     case 'CLEAR':

@@ -1,5 +1,9 @@
 import defaultFriend from './../json/defaultFriend.json';
-import { AsyncStorage } from 'react-native';
+import { 
+  AsyncStorage, 
+  ImageStore
+ } from 'react-native';
+
 const _serverUrl = 'http://localhost:3000';
 
 const log = (el) => {
@@ -125,13 +129,26 @@ export const getFriendByGiftId = (state, gid) => {
   return (friendObj.friendId) ? friendObj : false;
 }
 
-
-export const toDataURL = url => fetch(url)
+// not using any more
+export const fbGetPicURLById = (fbId) => {
+     return fetch(`https://graph.facebook.com/v2.8/${fbId}/picture`)
+          .then(({url}) => url)
+}
+ export const fbGetBase64PicById = (userId) => {
+ const urlStringToGetUserPhoto = "https://graph.facebook.com/v2.8/${userId}/picture"
+ const _toDataURL = (url) =>  {
+   return fetch(url)
     .then(response => response.blob())
     .then(blob => new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onloadend = () => resolve(reader.result);
         reader.onerror = reject;
         reader.readAsDataURL(blob);
-    })
- )
+    }))
+     .catch(err => console.log({
+       error: err, 
+       message: `cant get image or convert blob to datauri. the url: ${url} and userId: ${userId}. error: ${err}`
+    }))
+  }
+  return _toDataURL(urlStringToGetUserPhoto)
+}

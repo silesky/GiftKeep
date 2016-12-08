@@ -1,20 +1,19 @@
 require('dotenv').config();
 const MongoClient = require('mongodb').MongoClient;
 module.exports = {
-    connect: () => MongoClient.connect(process.env.DB_HOST, (err, database) => {
+    connect: () => MongoClient.connect(process.env.DB_HOST, (err, db) => {
             if (err) throw err;
-            console.log('...connected to mongoDB!');
-            this.db = database;
-            return database
+            console.log('...connected to mongoDB!!');
     }),
      promiseConnect: () => {
        return new Promise((resolve, reject) => {
           MongoClient.connect(process.env.DB_HOST, (err, db) => {
             if (err) reject(err);
-            if (db) resolve (db)
+            this.database = db;
+            if (db) resolve(db);
           })
-    })
+      })
     },
     connected: () => typeof database !== 'undefined',
-    userCollection: () => this.db.collection('userCollection'),
+    userCollection: () => this.database.collection('userCollection'),
 }

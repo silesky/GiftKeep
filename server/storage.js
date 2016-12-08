@@ -1,6 +1,6 @@
-const { userCollection, connect } = require('./db');
-connect();
-module.exports = {
+const { userCollection, promiseConnect } = require('./db');
+promiseConnect();
+  module.exports = {
   // get all
   getAllData: () => {
     return new Promise((resolve, reject) => {
@@ -177,5 +177,4 @@ module.exports = {
       })
     })
   },
-
-}
+  }
