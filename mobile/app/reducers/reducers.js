@@ -134,7 +134,9 @@ const visible = (state = initialStateFirstUser, action) => {
   }
 }
 
-export const rootReducer = combineReducers({
+const rootReducer = combineReducers({
   user,
   visible
 })
+
+export default rootReducer;
