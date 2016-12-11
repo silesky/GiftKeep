@@ -1,6 +1,6 @@
 import * as initialStateUser from './../json/initialState.json'
 import * as defaultFriend from './../json/defaultFriend.json'
-import * as emptyState from './../json/emptyState.json'
+
 import UUID from 'uuid-js';
 import {
   combineReducers
@@ -14,23 +14,33 @@ import {
 const user = (state = initialStateUser, action) => {
   let newState, 
     newData, 
+    data,
     oldgiftArr, 
     newGiftArr, 
     friendId, 
     giftDesc, 
     giftId,
-    giftTitle
+    giftTitle,
+    friendName
     ;
   const _getGiftArrByFriendId = (friendId) => state.data.find(el => el.friendId === friendId).gifts;
   const _getSingleGiftObj = (friendId, giftId) => _getGiftArrByFriendId(friendId).find((el) => el.giftId === giftId)
   switch (action.type) {
-    
+
+    case 'UPDATE_FRIEND_NAME':
+      friendId = action.payload.friendId;
+      friendName = action.payload.friendName;
+      data = state.data.map(el => {
+        if (el.friendId === friendId ) el.friendName = friendName; 
+        return el;
+      })
+      return {...state, data}
     case 'HYDRATE_USER':
     // fromat should be { data: [], fbId: ..., userName: }
       newState = action.payload
       return newState;
     case 'CLEAR':
-      return emptyState;
+      return { "data": []}
     case 'UPDATE_GIFT_TITLE':
         friendId = action.payload.friendId;
         giftTitle = action.payload.giftTitle;

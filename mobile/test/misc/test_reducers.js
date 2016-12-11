@@ -13,6 +13,6 @@ describe('REDUCERS:', () => {
       }
     }
     const newStateWithNewFriendName = rootReducer(state, action).user.data[0].friendName
-    expect(newStateWithNewFriendName).to.equal("Bill")
+    expect(newStateWithNewFriendName).to.equal("MyNewFriendName")
   });
 });
