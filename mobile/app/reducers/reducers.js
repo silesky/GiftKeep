@@ -12,26 +12,33 @@ import {
 
 
 const user = (state = initialStateUser, action) => {
-  let newState, 
+  let 
+    bday,
+    newState, 
     newData, 
     data,
     oldgiftArr, 
     newGiftArr, 
     friendId, 
+    friendName,
     giftDesc, 
     giftId,
-    giftTitle,
-    friendName
-    ;
+    giftTitle;
   const _getGiftArrByFriendId = (friendId) => state.data.find(el => el.friendId === friendId).gifts;
   const _getSingleGiftObj = (friendId, giftId) => _getGiftArrByFriendId(friendId).find((el) => el.giftId === giftId)
   switch (action.type) {
 
-    case 'UPDATE_FRIEND_NAME':
-      friendId = action.payload.friendId;
-      friendName = action.payload.friendName;
+    case 'UPDATE_FRIEND':
+      let { 
+        friendId, 
+        friendName, 
+        bday 
+      } = action.payload;
       data = state.data.map(el => {
-        if (el.friendId === friendId ) el.friendName = friendName; 
+        if (el.friendId === friendId ) { 
+          el.friendName = friendName; 
+          el.bday = bday;
+        }
         return el;
       })
       return {...state, data}
