@@ -35,9 +35,11 @@ export class DrawerContainer extends Component {
         </Header>
         <Content>
           <List>
-            {this.props.state.user.data.map((el, index) => (
+            {
+              this.props.state.user.data.map((el, index) => (
               <FriendListItem
-                deleteFriend={this.props.actions.deleteFriend.bind(this, el.friendId)}
+                onSwipeUpdate={this.props.actions.friendFormIsUpdating.bind(this, el.friendId)}
+                onSwipeDelete={this.props.actions.deleteFriend.bind(this, el.friendId)}
                 selectFriend={this.props.actions.selectFriend.bind(this, el.friendId)}
                 friendName={el.friendName}
                 key={index}

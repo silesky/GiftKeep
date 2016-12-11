@@ -112,7 +112,7 @@ export const getAllGifts = (state) => {
 
 export const getFriendByFriendId = (state, friendId) => {
   const friendObj = state.user.data.find(el => el.friendId === friendId);
-  return (friendObj.friendId) ? friendObj : false;
+  return (friendObj) ? friendObj : false;
 }
 export const getFriendNameById = (state, friendId) => {
   let friendName = getFriendByFriendId(state, friendId).friendName;

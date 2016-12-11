@@ -5,11 +5,11 @@ import {
     Button,
     Icon
 } from 'native-base'
-export const BottomBar = ({createFriendToggleModalVisible, addGift}) => {
+export const BottomBar = ({friendFormVisibilityToggle, addGift}) => {
     return (
         <Footer>
             <FooterTab>
-                <Button onPress={() => createFriendToggleModalVisible()} transparent>
+                <Button onPress={() => friendFormVisibilityToggle()} transparent>
                     <Icon name='ios-person-add' />
                 </Button>  
                 <Button onPress={() => addGift()} transparent>

@@ -1,9 +1,48 @@
 import * as Utils from './../utils/utils'
 const config = require('./../../mobileconfig.json');
-const {
-  serverUrl
-} = config
-import { ImageStore } from 'react-native'
+const { serverUrl } = config
+
+export const friendFormNameInputUpdate = inputNameValue => ({
+  type: 'FRIEND_FORM_NAME_INPUT', payload: inputNameValue
+})
+
+export const friendFormBdayInputUpdate = inputBdayValue => ({
+  type: 'FRIEND_FORM_BDAY_INPUT', payload: inputBdayValue
+})
+export const friendFormUpdatingSelectedFriendId = (friendId) => ({
+  type: 'FRIEND_FORM_UPDATING_SELECTED_FRIEND_ID', 
+  payload: {friendId}
+})
+export const friendFormCancelUpdateOrCreate = () => {
+  return dispatch => {
+    dispatch(friendFormUpdatingStatusChange(false))
+    dispatch(friendFormVisibilityToggle());
+  }
+}
+const friendFormUpdatingStatusChange = (arg) => {
+  return (arg) 
+  ? {type: 'FRIEND_FORM_UPDATING_STATUS_TRUE'} 
+  : {type: 'FRIEND_FORM_UPDATING_STATUS_FALSE'}
+}
+export const friendFormIsUpdating = (friendId) => { 
+  return dispatch => {
+    dispatch(friendFormVisibilityToggle()) // show form 
+    dispatch(friendFormUpdatingSelectedFriendId(friendId))
+    dispatch(friendFormUpdatingStatusChange(true));
+  }
+}
+
+export const updateFriend = (friendId, updatedFriendName, updatedBday) => {
+  return dispatch => {
+    dispatch(friendFormVisibilityToggle())
+    dispatch({ type: 'UPDATE_FRIEND', payload: { 
+      friendId, friendName: updatedFriendName, bday: updatedBday }})
+    dispatch(friendFormUpdatingStatusChange(false))
+
+    
+    }
+}
+
 export const selectTab = (tabNum) => {
   return {
     type: "SELECT_TAB",
@@ -26,6 +65,7 @@ export const updateGiftTitle = (friendId, giftId, giftTitle) => {
     payload: { friendId, giftId, giftTitle }
   }
 }
+
 export const deleteGift = (friendId, giftId) => {
   console.log('deleteGift:', friendId, giftId);
   return {
@@ -50,6 +90,7 @@ const _selectLastFriend = () => {
     dispatch(selectFriend(latestFriendId));
   }
 }
+
 const _selectNextFriend = (currentFriendId) => {
   console.log('selectNextFriend');
   return (dispatch, getState) => {
@@ -76,19 +117,19 @@ export const deleteFriend = (friendId) => {
     dispatch(_deleteFriend(friendId))
   }
 }
-export const createFriendToggleModalVisible = () => ({ type: 'CREATE_FRIEND_TOGGLE_MODAL_VISIBLE' })
+
+export const friendFormVisibilityToggle = () => ({ type: 'FRIEND_FORM_VISIBILITY_TOGGLE' })
 
 export const _createFriend = (friendName, bday) => ({ type: 'CREATE_FRIEND', payload: { friendName, bday } });
+
 // modal visibility toggle called
 export const createFriend = (friendName, bday) => {
-
-  console.log('bday input:', bday);
   bday = (bday) ? bday : '???';
   return (dispatch) => {
     dispatch(_createFriend(friendName, bday));
     dispatch(_selectLastFriend());
-    dispatch(createFriendToggleModalVisible());
-  }
+    dispatch(friendFormVisibilityToggle());
+}  
 }
 // friendId
 export const addGift = (friendId) => {
@@ -134,8 +175,6 @@ const _sendTokenToServer = (token) => {
     })
     .then(res => res.json())
 }
-//
-
 
 export const saveFbPhoto = (uriOrBase64) => {
   return {
@@ -143,6 +182,7 @@ export const saveFbPhoto = (uriOrBase64) => {
     payload: { fbImage: uriOrBase64 }
   }
 }
+
 export const authTokenAndTryToGetUser = (token) => {
   return dispatch => _sendTokenToServer(token)
     .then(({payload, payload: {fbId}}) => {
