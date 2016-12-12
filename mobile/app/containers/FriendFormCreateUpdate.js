@@ -34,7 +34,6 @@ class FriendFormCreateUpdate extends Component {
       nameInput: null,
       bdayInput: null,
     }
-    const { state } = this.props;
     
   }
   handleNameChange(input) {
@@ -45,24 +44,20 @@ class FriendFormCreateUpdate extends Component {
     this.props.actions.friendFormBdayInputUpdate(input);
     this.setState({ bdayInput: input })
   }
-  handleSubmit() {
-    const { state } = this.props,
-     {  friendFormIsUpdating,
-        friendFormUpdatingSelectedFriendId
-    }  = state.visible
-    return (friendFormIsUpdating) 
-          ? this.props.actions.updateFriend(friendFormUpdatingSelectedFriendId, this.state.nameInput, this.state.bdayInput)
-          : this.props.actions.createFriend(this.state.nameInput, this.state.bdayInput) 
-  }
 
   render() {
-    const { state } = this.props;
-    const { 
-      friendFormIsUpdating,
-      friendFormUpdatingSelectedFriendId,
-      friendFormIsVisible //id 
-    }  = state.visible
-    
+  
+    const { state } = this.props,
+      {
+        friendFormIsUpdating,
+        friendFormUpdatingSelectedFriendId,
+        friendFormIsVisible //id 
+      }  = state.visible
+    const handleSubmit = () => {
+      return (friendFormIsUpdating) 
+            ? this.props.actions.updateFriend(friendFormUpdatingSelectedFriendId, this.state.nameInput, this.state.bdayInput)
+            : this.props.actions.createFriend(this.state.nameInput, this.state.bdayInput) 
+    }
     const getFriend = () => {
       let val = Utils.getFriendByFriendId(state, friendFormUpdatingSelectedFriendId);
       return val;
@@ -131,7 +126,7 @@ class FriendFormCreateUpdate extends Component {
                   name='ios-close'
                   style={{ color: 'white' }} />
               </Button>
-              <Button onPress={() => this.handleSubmit()}>
+              <Button onPress={() => handleSubmit()}>
             { (friendFormIsUpdating) ? 'UPDATE' : 'CREATE' }
               </Button>
             </FooterTab>
@@ -145,7 +140,6 @@ class FriendFormCreateUpdate extends Component {
 /* onRequestClose={() => friendFormVisibilityToggle()}  mandatory android prop*/
 
 const mstp = (state) => ({ state });
-// no more store.dispatch(actions.createFriend())
 const mdtp = (dispatch) => {
   return { actions: bindActionCreators(actions, dispatch) }
 }

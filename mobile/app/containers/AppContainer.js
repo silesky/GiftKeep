@@ -7,7 +7,7 @@ import * as actions from './../actions/actions';
 
 import { TopBar } from './../components/TopBar';
 import { BottomBar } from './../components/BottomBar';
-import  FriendFormCreateUpdate from './../components/FriendFormCreateUpdate';
+import  FriendFormCreateUpdate from './../containers/FriendFormCreateUpdate';
 //Containers (not named exports)
 import DrawerContainer from './../containers/DrawerContainer';
 import BodyFriendView from './../containers/BodyFriendView';
@@ -64,17 +64,17 @@ class AppContainer extends Component {
 
         <FriendFormCreateUpdate
            
-          createFriend={this.props.actions.createFriend}
-          friendFormNameInput={this.props.state.friendFormNameInput}
-          friendFormBdayInput={this.props.state.friendFormBdayInput}
-          friendFormBdayInputUpdate={this.props.actions.friendFormBdayInputUpdate}
-          friendFormNameInputUpdate={this.props.actions.friendFormNameInputUpdate}
-          friendFormUpdatingSelectedFriendIdId={this.props.state.visible.friendFormUpdatingSelectedFriendIdId} 
-          friendFormVisibilityToggle={this.props.actions.friendFormVisibilityToggle}
-          isVisible={this.props.state.visible.friendFormIsVisible}
-          isUpdating={this.props.state.visible.isUpdating}
-          selectFriend={this.props.actions.selectFriend}
-          updateFriend={this.props.actions.updateFriend}
+          // createFriend={this.props.actions.createFriend}
+          // friendFormNameInput={this.props.state.friendFormNameInput}
+          // friendFormBdayInput={this.props.state.friendFormBdayInput}
+          // friendFormBdayInputUpdate={this.props.actions.friendFormBdayInputUpdate}
+          // friendFormNameInputUpdate={this.props.actions.friendFormNameInputUpdate}
+          // friendFormUpdatingSelectedFriendIdId={this.props.state.visible.friendFormUpdatingSelectedFriendIdId} 
+          // friendFormVisibilityToggle={this.props.actions.friendFormVisibilityToggle}
+          // isVisible={this.props.state.visible.friendFormIsVisible}
+          // isUpdating={this.props.state.visible.isUpdating}
+          // selectFriend={this.props.actions.selectFriend}
+          // updateFriend={this.props.actions.updateFriend}
           />
 
         <BottomBar
