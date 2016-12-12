@@ -30,11 +30,21 @@ import * as Utils from './../utils/utils'
 class FriendFormCreateUpdate extends Component {
   constructor(props) {
     super(props);
+     const { friendFormIsUpdating  } = this.props.state.visible
+  
     this.state = {
-      nameInput: null,
+      nameInput: null, // use the state so I can clear it based on whether it's updating or not
       bdayInput: null,
     }
-    
+    this.nameInput;
+  }
+  componentWillUpdate() {
+        const { friendFormIsUpdating  } = this.props.state.visible
+
+        console.log(friendFormIsUpdating);
+    this.nameInput = (friendFormIsUpdating) ? 'updating' : 'creating';
+
+
   }
   handleNameChange(input) {
     this.props.actions.friendFormNameInputUpdate(input);
@@ -46,24 +56,20 @@ class FriendFormCreateUpdate extends Component {
   }
 
   render() {
-  
     const { state } = this.props,
       {
         friendFormIsUpdating,
         friendFormUpdatingSelectedFriendId,
         friendFormIsVisible //id 
-      }  = state.visible
-    const handleSubmit = () => {
-      return (friendFormIsUpdating) 
-            ? this.props.actions.updateFriend(friendFormUpdatingSelectedFriendId, this.state.nameInput, this.state.bdayInput)
-            : this.props.actions.createFriend(this.state.nameInput, this.state.bdayInput) 
+      } = state.visible
+    const handleCreateUpdate = () => { // put this in render method because I don't want to destructure twice.
+      return (friendFormIsUpdating)
+        ? this.props.actions.updateFriend(friendFormUpdatingSelectedFriendId, this.state.nameInput, this.state.bdayInput)
+        : this.props.actions.createFriend(this.state.nameInput, this.state.bdayInput)
     }
-    const getFriend = () => {
-      let val = Utils.getFriendByFriendId(state, friendFormUpdatingSelectedFriendId);
-      return val;
-    }
-    const friendObj = getFriend();
-    
+    const friendObj = Utils.getFriendByFriendId(state, friendFormUpdatingSelectedFriendId);
+console.log('FriendFormCreateUpdate.. rendered.')
+
     return (
       <Modal
         visible={friendFormIsVisible}
@@ -84,7 +90,7 @@ class FriendFormCreateUpdate extends Component {
                 <InputGroup>
                   <Icon name='ios-person' />
                   <Input
-                    value={this.state.nameInput}
+                    value={this.nameInput}
                     onChangeText={(input) => this.handleNameChange(input.trim())}
                     placeholder={friendObj ? friendObj.friendName : 'Please Enter a Name'}
                     placeholderTextColor='#c9c9c9' />
@@ -126,8 +132,8 @@ class FriendFormCreateUpdate extends Component {
                   name='ios-close'
                   style={{ color: 'white' }} />
               </Button>
-              <Button onPress={() => handleSubmit()}>
-            { (friendFormIsUpdating) ? 'UPDATE' : 'CREATE' }
+              <Button onPress={() => handleCreateUpdate()}>
+                {(friendFormIsUpdating) ? 'UPDATE' : 'CREATE'}
               </Button>
             </FooterTab>
           </Footer>

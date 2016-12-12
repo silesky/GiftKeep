@@ -25,7 +25,7 @@ export const storeStateInAsyncStorage = () => {
 export const storeStateInDb = () => {
   const state = store.getState();
   updateUserByBody({user: state.user})
-  .then(successOrFail => console.log('success or fail', successOrFail))
+  .then(successOrFail => successOrFail) // get rid of console
   .catch(err => console.log('stores.js', err));
 }
 

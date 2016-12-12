@@ -26,20 +26,17 @@ const friendFormUpdatingStatusChange = (arg) => {
 }
 export const friendFormIsUpdating = (friendId) => { 
   return dispatch => {
-    dispatch(friendFormVisibilityToggle()) // show form 
-    dispatch(friendFormUpdatingSelectedFriendId(friendId))
     dispatch(friendFormUpdatingStatusChange(true));
+    dispatch(friendFormUpdatingSelectedFriendId(friendId))
+    dispatch(friendFormVisibilityToggle()) // show form 
   }
 }
 
 export const updateFriend = (friendId, updatedFriendName, updatedBday) => {
   return dispatch => {
-    dispatch(friendFormVisibilityToggle())
-    dispatch({ type: 'UPDATE_FRIEND', payload: { 
-      friendId, friendName: updatedFriendName, bday: updatedBday }})
+    dispatch({ type: 'UPDATE_FRIEND', payload: { friendId, friendName: updatedFriendName, bday: updatedBday }})
     dispatch(friendFormUpdatingStatusChange(false))
-
-    
+    dispatch(friendFormVisibilityToggle())
     }
 }
 
