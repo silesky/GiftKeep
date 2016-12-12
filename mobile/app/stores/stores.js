@@ -9,10 +9,14 @@ import { AsyncStorage } from 'react-native'
 import rootReducer  from './../reducers/reducers';
 import { composeWithDevTools } from 'remote-redux-devtools';
 import { saveToAsyncStorage, getFromAsyncStorage, updateUserDataByAccessToken, updateUserByBody } from './../utils/utils';
-export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+
+
+const composeEnhancers = composeWithDevTools({
+  name: 'Gifter',
+  actionsBlacklist: ["FRIEND_FORM_NAME_INPUT"] // when I add a seccond item to this array, it doesn't work
+})
+export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 console.log('store created.');
-
-
 export const storeStateInAsyncStorage = () => {
   // whenever the store changes, save it to async storage
   try {

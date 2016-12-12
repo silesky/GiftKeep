@@ -30,31 +30,32 @@ import * as Utils from './../utils/utils'
 class FriendFormCreateUpdate extends Component {
   constructor(props) {
     super(props);
-     const { friendFormIsUpdating  } = this.props.state.visible
-  
+    this.selectedFriend; //delete
     this.state = {
-      nameInput: null, // use the state so I can clear it based on whether it's updating or not
       bdayInput: null,
     }
-    this.nameInput;
   }
   componentWillUpdate() {
-        const { friendFormIsUpdating  } = this.props.state.visible
-
-        console.log(friendFormIsUpdating);
-    this.nameInput = (friendFormIsUpdating) ? 'updating' : 'creating';
-
-
+    this.selectedFriend = this.props.state.visible.friendFormUpdatingSelectedFriendId; //delete
   }
   handleNameChange(input) {
     this.props.actions.friendFormNameInputUpdate(input);
-    this.setState({ nameInput: input });
   }
   handleBdayChange(input) {
     this.props.actions.friendFormBdayInputUpdate(input);
     this.setState({ bdayInput: input })
   }
-
+  handleCreateUpdate() { 
+    const { 
+      friendFormIsUpdating, 
+      friendFormNameInput,
+      friendFormBdayInput,
+      friendFormUpdatingSelectedFriendId 
+    } = this.props.state.visible;
+    return (friendFormIsUpdating)
+      ? this.props.actions.updateFriend(friendFormUpdatingSelectedFriendId, friendFormNameInput, friendFormBdayInput)
+      : this.props.actions.createFriend(friendFormNameInput, friendFormBdayInput)
+  }
   render() {
     const { state } = this.props,
       {
@@ -62,14 +63,10 @@ class FriendFormCreateUpdate extends Component {
         friendFormUpdatingSelectedFriendId,
         friendFormIsVisible //id 
       } = state.visible
-    const handleCreateUpdate = () => { // put this in render method because I don't want to destructure twice.
-      return (friendFormIsUpdating)
-        ? this.props.actions.updateFriend(friendFormUpdatingSelectedFriendId, this.state.nameInput, this.state.bdayInput)
-        : this.props.actions.createFriend(this.state.nameInput, this.state.bdayInput)
-    }
-    const friendObj = Utils.getFriendByFriendId(state, friendFormUpdatingSelectedFriendId);
-console.log('FriendFormCreateUpdate.. rendered.')
 
+    const friendObj = Utils.getFriendByFriendId(state, friendFormUpdatingSelectedFriendId);
+    console.log('FriendFormCreateUpdate.. rendered.')
+    const isUpdating = friendFormIsUpdating && friendObj
     return (
       <Modal
         visible={friendFormIsVisible}
@@ -81,7 +78,7 @@ console.log('FriendFormCreateUpdate.. rendered.')
             <Button transparent>
               <Text></Text>
             </Button>
-            <Title>{(friendFormIsUpdating) ? `Update ${friendObj.friendName}` : `Create Friend`}
+            <Title>{isUpdating ? `Update ${friendObj.friendName}` : `Create Friend`}
             </Title>
           </Header>
           <Content>
@@ -90,9 +87,9 @@ console.log('FriendFormCreateUpdate.. rendered.')
                 <InputGroup>
                   <Icon name='ios-person' />
                   <Input
-                    value={this.nameInput}
-                    onChangeText={(input) => this.handleNameChange(input.trim())}
-                    placeholder={friendObj ? friendObj.friendName : 'Please Enter a Name'}
+                    defaultValue={isUpdating ? friendObj.friendName : ''}
+                    onChangeText={(input) => this.handleNameChange(input)}
+                    placeholder={isUpdating ? friendObj.friendName : 'Please Enter a Name'}
                     placeholderTextColor='#c9c9c9' />
                 </InputGroup>
               </ListItem>
@@ -105,7 +102,7 @@ console.log('FriendFormCreateUpdate.. rendered.')
                   mode="date"
                   date={this.state.bdayInput}
                   format="MM-DD"
-                  placeholder={friendObj ? friendObj.bday : 'Please enter a Birthday'}
+                  placeholder={isUpdating ? friendObj.bday : 'Please enter a Birthday'}
                   confirmBtnText="Confirm"
                   cancelBtnText="Cancel"
                   customStyles={{
@@ -132,7 +129,7 @@ console.log('FriendFormCreateUpdate.. rendered.')
                   name='ios-close'
                   style={{ color: 'white' }} />
               </Button>
-              <Button onPress={() => handleCreateUpdate()}>
+              <Button onPress={() => this.handleCreateUpdate()}>
                 {(friendFormIsUpdating) ? 'UPDATE' : 'CREATE'}
               </Button>
             </FooterTab>
