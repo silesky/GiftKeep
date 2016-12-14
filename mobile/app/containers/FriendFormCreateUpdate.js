@@ -30,13 +30,9 @@ import * as Utils from './../utils/utils'
 class FriendFormCreateUpdate extends Component {
   constructor(props) {
     super(props);
-    this.selectedFriend; //delete
     this.state = {
       bdayInput: null,
     }
-  }
-  componentWillUpdate() {
-    this.selectedFriend = this.props.state.visible.friendFormUpdatingSelectedFriendId; //delete
   }
   handleNameChange(input) {
     this.props.actions.friendFormNameInputUpdate(input);
@@ -47,26 +43,24 @@ class FriendFormCreateUpdate extends Component {
   }
   handleCreateUpdate() { 
     const { 
-      friendFormIsUpdating, 
+      isUpdating,
       friendFormNameInput,
       friendFormBdayInput,
       friendFormUpdatingSelectedFriendId 
-    } = this.props.state.visible;
-    return (friendFormIsUpdating)
+    } = this.props;
+    return (isUpdating)
       ? this.props.actions.updateFriend(friendFormUpdatingSelectedFriendId, friendFormNameInput, friendFormBdayInput)
       : this.props.actions.createFriend(friendFormNameInput, friendFormBdayInput)
   }
   render() {
-    const { state } = this.props,
-      {
-        friendFormIsUpdating,
-        friendFormUpdatingSelectedFriendId,
-        friendFormIsVisible //id 
-      } = state.visible
+    const {
+        friendFormIsVisible,
+        friendName,
+        bday,
+        isUpdating, //id 
+      } = this.props
 
-    const friendObj = Utils.getFriendByFriendId(state, friendFormUpdatingSelectedFriendId);
     console.log('FriendFormCreateUpdate.. rendered.')
-    const isUpdating = friendFormIsUpdating && friendObj
     return (
       <Modal
         visible={friendFormIsVisible}
@@ -78,7 +72,7 @@ class FriendFormCreateUpdate extends Component {
             <Button transparent>
               <Text></Text>
             </Button>
-            <Title>{isUpdating ? `Update ${friendObj.friendName}` : `Create Friend`}
+            <Title>{isUpdating ? `Update ${friendName}` : `Create Friend`}
             </Title>
           </Header>
           <Content>
@@ -87,9 +81,9 @@ class FriendFormCreateUpdate extends Component {
                 <InputGroup>
                   <Icon name='ios-person' />
                   <Input
-                    defaultValue={isUpdating ? friendObj.friendName : ''}
+                    defaultValue={isUpdating ? friendName : ''}
                     onChangeText={(input) => this.handleNameChange(input)}
-                    placeholder={isUpdating ? friendObj.friendName : 'Please Enter a Name'}
+                    placeholder={isUpdating ? friendName : 'Please Enter a Name'}
                     placeholderTextColor='#c9c9c9' />
                 </InputGroup>
               </ListItem>
@@ -102,7 +96,7 @@ class FriendFormCreateUpdate extends Component {
                   mode="date"
                   date={this.state.bdayInput}
                   format="MM-DD"
-                  placeholder={isUpdating ? friendObj.bday : 'Please enter a Birthday'}
+                  placeholder={isUpdating ? bday : 'Please enter a Birthday'}
                   confirmBtnText="Confirm"
                   cancelBtnText="Cancel"
                   customStyles={{
@@ -130,7 +124,7 @@ class FriendFormCreateUpdate extends Component {
                   style={{ color: 'white' }} />
               </Button>
               <Button onPress={() => this.handleCreateUpdate()}>
-                {(friendFormIsUpdating) ? 'UPDATE' : 'CREATE'}
+                {(isUpdating) ? 'UPDATE' : 'CREATE'}
               </Button>
             </FooterTab>
           </Footer>
@@ -142,7 +136,26 @@ class FriendFormCreateUpdate extends Component {
 
 /* onRequestClose={() => friendFormVisibilityToggle()}  mandatory android prop*/
 
-const mstp = (state) => ({ state });
+const mstp = (state) => {
+   const { 
+      friendFormIsUpdating, 
+      friendFormIsVisible,
+      friendFormNameInput,
+      friendFormBdayInput,
+      friendFormUpdatingSelectedFriendId 
+    } = state.visible;
+    const { bday, friendName } = Utils.getFriendByFriendId(state, friendFormUpdatingSelectedFriendId);
+  return {
+      isUpdating: !!(friendFormIsUpdating && friendFormUpdatingSelectedFriendId),
+      bday,
+      friendName,
+      friendFormIsUpdating, 
+      friendFormIsVisible,
+      friendFormNameInput,
+      friendFormBdayInput,
+      friendFormUpdatingSelectedFriendId
+   }
+  };
 const mdtp = (dispatch) => {
   return { actions: bindActionCreators(actions, dispatch) }
 }
