@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { FriendFormOccasionPicker } from './../components/FriendFormOccasionPicker.js';
+import { FriendFormDatePicker } from './../components/FriendFormDatePicker.js';
 import * as actions from './../actions/actions'
 import {
   StyleSheet,
@@ -89,7 +89,7 @@ class FriendFormCreateUpdate extends Component {
               </ListItem>
               <ListItem>
                 <Icon name='md-calendar' />
-                <FriendFormOccasionPicker
+                <FriendFormDatePicker
                   placeholder={isUpdating ? bday : 'Add a special date.'}
                   onDateChange={(input) => this.handleBdayChange(input)}
                   date={this.state.bdayInput}

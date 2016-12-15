@@ -67,6 +67,7 @@ module.exports = () => {
         //    console.log(store.getState());
 
       });
+      it
     })
   })
   }

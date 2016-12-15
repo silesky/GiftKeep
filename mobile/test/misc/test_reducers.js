@@ -22,5 +22,14 @@ describe('REDUCERS:', () => {
     expect(currentStateBday).to.equal(updatedBday);
       
   });
+  it('add Date should add a new data', () => {
+    let action = {
+      type: 'ADD_OCCASSION',
+      payload: {
+        
+      }
+
+    }
+  })
 
 });

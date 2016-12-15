@@ -3,7 +3,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { Icon, ListItem} from 'native-base';
 
-export const FriendFormOccasionPicker = ({date, placeholder, onDateChange}) => (
+export const FriendFormDatePicker = ({date, placeholder, onDateChange}) => (
       <DatePicker
       showIcon={false}
       onDateChange={(input) => onDateChange(input)}
