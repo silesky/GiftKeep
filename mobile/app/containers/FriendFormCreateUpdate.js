@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
+import { FriendFormOccasionPicker } from './../components/FriendFormOccasionPicker.js';
 import * as actions from './../actions/actions'
 import {
   StyleSheet,
@@ -23,7 +24,7 @@ import {
 } from 'native-base';
 
 
-import DatePicker from 'react-native-datepicker';
+
 import * as Utils from './../utils/utils'
 
 
@@ -60,7 +61,6 @@ class FriendFormCreateUpdate extends Component {
         isUpdating, //id 
       } = this.props
 
-    console.log('FriendFormCreateUpdate.. rendered.')
     return (
       <Modal
         visible={friendFormIsVisible}
@@ -89,42 +89,31 @@ class FriendFormCreateUpdate extends Component {
               </ListItem>
               <ListItem>
                 <Icon name='md-calendar' />
-                <DatePicker
-                  showIcon={false}
+                <FriendFormOccasionPicker
+                  placeholder={isUpdating ? bday : 'Add a special date.'}
                   onDateChange={(input) => this.handleBdayChange(input)}
-                  style={{ width: 200 }}
-                  mode="date"
                   date={this.state.bdayInput}
-                  format="MM-DD"
-                  placeholder={isUpdating ? bday : 'Please enter a Birthday'}
-                  confirmBtnText="Confirm"
-                  cancelBtnText="Cancel"
-                  customStyles={{
-                    dateInput: {
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      justifyContent: 'flex-start',
-                      paddingLeft: 10, /* double name */
-                      paddingRight: 5, /* does nothing, same as name */
-                      borderWidth: null,
-                    }
-
-                  }}
-
-                  />
+                 />
+                 <Button>
+                 {/* onPress={friendFormAddCateogry*/}
+                Category <Icon name='ios-add-circle' />
+                 </Button>
               </ListItem>
             </List>
-
           </Content>
           <Footer>
             <FooterTab>
-              <Button onPress={() => this.props.actions.friendFormCancelUpdateOrCreate()}>
-                <Icon
-                  name='ios-close'
-                  style={{ color: 'white' }} />
+               <Button onPress={() => this.props.actions.friendFormCancelUpdateOrCreate()}>
+                 CANCEL
+                <Icon name='ios-close-circle-outline'/>
+              </Button>
+              <Button onPress={() => console.log('next event clicked!')}>
+                ADD NEXT EVENT
+                <Icon name='ios-calendar-outline' />
               </Button>
               <Button onPress={() => this.handleCreateUpdate()}>
                 {(isUpdating) ? 'UPDATE' : 'CREATE'}
+                <Icon name='ios-checkbox-outline' />
               </Button>
             </FooterTab>
           </Footer>
@@ -149,7 +138,6 @@ const mstp = (state) => {
       isUpdating: !!(friendFormIsUpdating && friendFormUpdatingSelectedFriendId),
       bday,
       friendName,
-      friendFormIsUpdating, 
       friendFormIsVisible,
       friendFormNameInput,
       friendFormBdayInput,
