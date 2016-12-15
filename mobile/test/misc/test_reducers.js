@@ -24,9 +24,11 @@ describe('REDUCERS:', () => {
   });
   it('add Date should add a new data', () => {
     let action = {
-      type: 'ADD_OCCASSION',
+      type: 'ADD_EVENT',
       payload: {
-        
+        eventName: '',
+        eventDate: '',
+        eventGiftIds: [],
       }
 
     }
