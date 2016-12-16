@@ -1,10 +1,9 @@
 const chai = require('chai')
-const chaiHttp = require('chai-http');
 const sinon = require('sinon');
-const chaiAsPromised = require("chai-as-promised");
-chai.use(chaiHttp, chaiAsPromised);
-
-const { expect, request } = chai
+import user from './../../app/reducers/reducers';
+import visible from './../../app/reducers/reducers';
+const userReducer = user;
+const { expect } = chai
 import thunk from 'redux-thunk';
 import nock from 'nock'
 import configureMockStore from 'redux-mock-store';
@@ -16,7 +15,7 @@ import * as Util from './../../app/utils/utils';
 const mockStore = configureMockStore([thunk]);
 const store = mockStore(state);
 module.exports = () => {
-  describe('CLIENT: Store, Actions', function () {
+  describe('test_actions.js', function () {
     after(() => store.clearActions());
     // this.timeout(() => console.log('done'), 2000)
     it('store should exist', () => {
@@ -36,6 +35,7 @@ module.exports = () => {
             done();
           }).catch(done)
       })
+    })
       it('internet should be connected', (done) => {
         fetch('http://google.com').then(res => {
           expect(res.status).to.equal(200)
@@ -58,16 +58,34 @@ module.exports = () => {
                 callback();
               })
               .then(() => {
-                expect(callback.called).to.be.true 
+                expect(callback.called).to.be.true
                 done()
               }).catch(done)
           }).catch(done)
       })
-      it('when I log out, clear localStorage', () => {
-        //    console.log(store.getState());
-
-      });
-      it
+      describe('Events:', () => {
+        before(() => {
+          this.existingFriendId = state.user.data[0].friendId;
+          this.eventNameToCreate = "Birthday";
+          this.eventDateToCreate = "06-06";
+          const addEvent = actions.addEvent(
+            this.existingFriendId, 
+            this.eventNameToCreate, 
+            this.eventDateToCreate
+           );
+          this.newState = userReducer(state, addEvent)
+          const eventsArr = this.newState.user.data[0].events; // each friend has an events array
+          this.addedEvent = eventsArr[eventsArr.length - 1];
+        })
+        afterEach(() => {
+          this.newState = userReducer(state, actions.clear())
+        });
+        it('addEvent() should add an event name', () => {
+          expect(this.addedEvent.eventName).to.equal(this.eventNameToCreate);
+        })
+        it('addEvent() should add an event date', () => {
+          expect(this.addedEvent.eventDate).to.equal(this.eventDateToCreate);
+        });
+      })
     })
-  })
-  }
+}

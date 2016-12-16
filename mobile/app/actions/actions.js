@@ -1,7 +1,12 @@
 import * as Utils from './../utils/utils'
 const config = require('./../../mobileconfig.json');
 const { serverUrl } = config
-
+export const addEvent = (friendId, eventName, eventDate) => {
+  return {
+    type: 'ADD_EVENT',
+    payload: {friendId, eventName, eventDate}
+  }
+}
 export const friendFormNameInputUpdate = inputNameValue => ({
   type: 'FRIEND_FORM_NAME_INPUT', payload: inputNameValue
 })

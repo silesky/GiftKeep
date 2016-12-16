@@ -11,15 +11,17 @@ import {
 // hello
 
 
-const user = (state = initialStateUser, action) => {
+export const user = (state = initialStateUser, action) => {
   let
     bday,
     newState,
     newData,
     data,
+    eventId,
+    eventName,
+    friendId,
     oldgiftArr,
     newGiftArr,
-    friendId,
     friendName,
     giftDesc,
     giftId,
@@ -27,17 +29,23 @@ const user = (state = initialStateUser, action) => {
   const _getGiftArrByFriendId = (friendId) => state.data.find(el => el.friendId === friendId).gifts;
   const _getSingleGiftObj = (friendId, giftId) => _getGiftArrByFriendId(friendId).find((el) => el.giftId === giftId)
   switch (action.type) {
-
+    case 'ADD_EVENT':
+    data = state.data.map(el => {
+      if (el.friendId === action.payload.friendId) {
+        el.events = [...el.events, {
+          eventName: action.payload.eventName,
+          eventDate: action.payload.eventDate,
+          eventId: UUID.create().toString()
+         }]
+      }
+      return el
+    })
+    return {...state, data}
     case 'UPDATE_FRIEND':
-      let {
-        friendId,
-        friendName,
-        bday
-      } = action.payload;
       data = state.data.map(el => {
-        if (el.friendId === friendId) {
-          el.friendName = friendName;
-          el.bday = bday;
+        if (el.friendId === action.payload.friendId) {
+          el.friendName = action.payload.friendName;
+          el.bday = action.payload.bday;
         }
         return el;
       })
@@ -137,7 +145,7 @@ const initialStateFirstUser = {
   friendFormBdayInput: "01-10",
   selectedTab: 0,
 };
-const visible = (state = initialStateFirstUser, action) => {
+export const visible = (state = initialStateFirstUser, action) => {
   switch (action.type) {
     case 'FRIEND_FORM_UPDATING_SELECTED_FRIEND_ID':
       return {...state, friendFormUpdatingSelectedFriendId: action.payload.friendId }
