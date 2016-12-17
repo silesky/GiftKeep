@@ -8,7 +8,6 @@
     "jest": "jest",
     "test": "mocha --require babel-polyfill ./test/mocha-setup.js --compilers js:babel-core/register --recursive test",
     "testwatch": "mocha --growl --watch --require babel-polyfill ./test/mocha-setup.js --compilers js:babel-core/register --recursive test"
-    
   },
   "dependencies": {
     "json-loader": "^0.5.4",
@@ -44,6 +43,7 @@
     "jest": "16.0.2",
     "jest-react-native": "16.0.0",
     "mocha": "^3.1.2",
+    "mocha-clean": "^1.0.0",
     "mongodb": "^2.2.11",
     "react-addons-test-utils": "^15.4.0",
     "react-dom": "^15.4.0",

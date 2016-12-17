@@ -9,7 +9,8 @@
     "post": "newman run Gifter.postman_test_run.json",
     "watch": "nodemon --debug --nolazy ./*.js --delay 4",
     "debug": "node-debug",
-    "seed": "seed"
+    "seed": "seed",
+		"gulp": "gulp"
   },
   "author": "",
   "license": "ISC",
