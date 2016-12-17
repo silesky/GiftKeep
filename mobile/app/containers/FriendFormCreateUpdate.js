@@ -47,8 +47,11 @@ class FriendFormCreateUpdate extends Component {
         bday,
         isUpdating, //id 
         actions,
+        events
       } = this.props
 
+   
+       
     return (
       <Modal
         visible={friendFormIsVisible}
@@ -75,18 +78,23 @@ class FriendFormCreateUpdate extends Component {
                     placeholderTextColor='#c9c9c9' />
                 </InputGroup>
               </ListItem>
-              <ListItem>
-                <Icon name='md-calendar' />
-                <FriendFormDatePicker
-                  placeholder={isUpdating ? bday : 'Add a special date.'}
-                  onDateChange={(input) => this.handleBdayChange(input)}
-                  date={this.state.eventTitleInput}
-                 />
-                 <Button>
-                 {/* onPress={friendFormAddCateogry*/}
-                Category <Icon name='ios-add-circle' />
-                 </Button>
-              </ListItem>
+           { events.map((eachEvent) => {
+              return (
+                  <ListItem key={eachEvent.eventId}>
+                    <Icon name='md-calendar' />
+                    <FriendFormDatePicker
+                      placeholder={isUpdating ? bday : 'Add a special date.'}
+                      onDateChange={(input) => this.handleBdayChange(input)}
+                      date={this.state.eventTitleInput}
+                    />
+                    <Button>
+                    {/* onPress={friendFormAddCateogry*/}
+                    Category <Icon name='ios-add-circle' />
+                    </Button>
+                  </ListItem>
+              )
+            })
+          }
             </List>
           </Content>
           <Footer>
@@ -96,7 +104,8 @@ class FriendFormCreateUpdate extends Component {
                 <Icon name='ios-close-circle-outline'/>
               </Button>
               <Button onPress={() => {
-                  actions.friendFormAddEvent(friendFormUpdatingSelectedFriendId, 'eventTitleInput', '01-10' );
+                //friendFormUpdatingSelectFriendId, eventTitleInput, eventDate,
+                  actions.friendFormAddEvent(friendFormUpdatingSelectedFriendId, "eventTitleInput" , "eventDate" );
               }}>
                 ADD NEXT EVENT
                 <Icon name='ios-calendar-outline' />
@@ -127,10 +136,14 @@ const mstp = (state) => {
       friendFormBdayInput,
       friendFormUpdatingSelectedFriendId 
     } = state.visible;
-    const { bday, friendName } = Utils.getFriendByFriendId(state, friendFormUpdatingSelectedFriendId);
+    
+    const friendObj = Utils.getFriendByFriendId(state, friendFormUpdatingSelectedFriendId);
+    const { bday, friendName, events } = friendObj
+    console.log(events);
   return {
       isUpdating: !!(friendFormIsUpdating && friendFormUpdatingSelectedFriendId),
       bday,
+      events,
       friendName,
       friendFormIsVisible,
       friendFormNameInput,
