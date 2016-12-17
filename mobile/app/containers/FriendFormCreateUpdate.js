@@ -31,12 +31,7 @@ import * as Utils from './../utils/utils'
 class FriendFormCreateUpdate extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      bdayInput: null,
-    }
-  }
-  handleNameChange(input) {
-    this.props.actions.friendFormNameInputUpdate(input);
+    this.state = { bdayInput: null } // adding state bc of some bug in date-picker where input won't show up
   }
   handleBdayChange(input) {
     this.props.actions.friendFormBdayInputUpdate(input);
@@ -51,6 +46,7 @@ class FriendFormCreateUpdate extends Component {
         friendName,
         bday,
         isUpdating, //id 
+        actions,
       } = this.props
 
     return (
@@ -74,7 +70,7 @@ class FriendFormCreateUpdate extends Component {
                   <Icon name='ios-person' />
                   <Input
                     defaultValue={isUpdating ? friendName : ''}
-                    onChangeText={(input) => this.handleNameChange(input)}
+                    onChangeText={(input) => actions.friendFormNameInputUpdate(input)}
                     placeholder={isUpdating ? friendName : 'Please Enter a Name'}
                     placeholderTextColor='#c9c9c9' />
                 </InputGroup>
@@ -95,7 +91,7 @@ class FriendFormCreateUpdate extends Component {
           </Content>
           <Footer>
             <FooterTab>
-               <Button onPress={() => this.props.actions.friendFormCancelUpdateOrCreate()}>
+               <Button onPress={() => actions.friendFormCancelUpdateOrCreate()}>
                  CANCEL
                 <Icon name='ios-close-circle-outline'/>
               </Button>
@@ -105,8 +101,8 @@ class FriendFormCreateUpdate extends Component {
               </Button>
               <Button onPress={() => {
                 return (isUpdating)
-                      ? this.props.actions.updateFriend(friendFormUpdatingSelectedFriendId, friendFormNameInput, friendFormBdayInput)
-                      : this.props.actions.createFriend(friendFormNameInput, friendFormBdayInput)
+                      ? actions.updateFriend(friendFormUpdatingSelectedFriendId, friendFormNameInput, friendFormBdayInput)
+                      : actions.createFriend(friendFormNameInput, friendFormBdayInput)
                     }}>
                 {(isUpdating) ? 'UPDATE' : 'CREATE'} {/* Button Title */}
                 <Icon name='ios-checkbox-outline' />
