@@ -31,12 +31,18 @@ import * as Utils from './../utils/utils'
 class FriendFormCreateUpdate extends Component {
   constructor(props) {
     super(props);
-    this.state = { eventTitleInput: null } // adding state bc of some bug in date-picker where input won't show up
+    // eventTitleInput should be an array, since there are mulitple values
+    this.state = { datePickerInputs: [] } // adding state bc of some bug in date-picker where input won't show up
   }
-  handleBdayChange(input) {
-    this.props.actions.friendFormBdayInputUpdate(input);
-    this.setState({ eventTitleInput: input })
+  handleBdayChange(eventId, inputDateString) {
+    this.props.actions.friendFormBdayInputUpdate(inputDateString);
+    this.setState({datePickerInputs: [...this.state.datePickerInputs, {eventId, inputDateString}]});
   }
+  getEventDateInput(eventId) {
+      const date = this.state.datePickerInputs.filter(el => el.eventId === eventId); 
+      return (date) ? date.inputDateString : false;
+  }
+  
   render() {
     const {
         friendFormIsVisible,
@@ -78,14 +84,15 @@ class FriendFormCreateUpdate extends Component {
                     placeholderTextColor='#c9c9c9' />
                 </InputGroup>
               </ListItem>
+              
            { events.map((eachEvent) => {
               return (
                   <ListItem key={eachEvent.eventId}>
                     <Icon name='md-calendar' />
                     <FriendFormDatePicker
                       placeholder={isUpdating ? bday : 'Add a special date.'}
-                      onDateChange={(input) => this.handleBdayChange(input)}
-                      date={this.state.eventTitleInput}
+                      onDateChange={(inputDateString) => this.handleBdayChange(eachEvent.eventId, inputDateString)}
+                      date={this.getEventDateInput(eachEvent.eventId)}
                     />
                     <Button>
                     {/* onPress={friendFormAddCateogry*/}
@@ -104,8 +111,7 @@ class FriendFormCreateUpdate extends Component {
                 <Icon name='ios-close-circle-outline'/>
               </Button>
               <Button onPress={() => {
-                //friendFormUpdatingSelectFriendId, eventTitleInput, eventDate,
-                  actions.friendFormAddEvent(friendFormUpdatingSelectedFriendId, "eventTitleInput" , "eventDate" );
+                  actions.friendFormAddEvent(friendFormUpdatingSelectedFriendId, "my event title", "11-11" );
               }}>
                 ADD NEXT EVENT
                 <Icon name='ios-calendar-outline' />
@@ -136,10 +142,12 @@ const mstp = (state) => {
       friendFormBdayInput,
       friendFormUpdatingSelectedFriendId 
     } = state.visible;
-    
-    const friendObj = Utils.getFriendByFriendId(state, friendFormUpdatingSelectedFriendId);
-    const { bday, friendName, events } = friendObj
-    console.log(events);
+    let { 
+      bday, 
+      events,
+      friendName
+    } = Utils.getFriendByFriendId(state, friendFormUpdatingSelectedFriendId);
+    events = events && events.length ? events : [];
   return {
       isUpdating: !!(friendFormIsUpdating && friendFormUpdatingSelectedFriendId),
       bday,

@@ -111,7 +111,8 @@ export const user = (state = initialStateUser, action) => {
         friendId: UUID.create().toString(),
         friendName: action.payload.friendName,
         bday: action.payload.bday,
-        gifts: []
+        gifts: [],
+        events: [],
       }]
       }
     case 'SAVE_FB_PHOTO':
