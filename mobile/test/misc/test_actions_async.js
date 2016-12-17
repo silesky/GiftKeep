@@ -10,7 +10,7 @@ import configureMockStore from 'redux-mock-store';
 import state from './../json/state.json'
 const FbTestUser = require('./../lib/FbTestUser');
 // import { store } from '../../app/stores/store';
-import * as actions from './../../app/actions/actions';
+import * as actions from './../../app/actions/'
 import * as Util from './../../app/utils/utils';
 const mockStore = configureMockStore([thunk]);
 const store = mockStore(state);
@@ -38,7 +38,7 @@ module.exports = () => {
               expect(actions[0].type).to.equal('HYDRATE_USER');
               expect(resUserObj).to.be.an.object;
               expect(resUserObj['fbAccessToken']).to.equal(existingUserToken);
-              expect(resUserObj['userName']).to.equal('Existing User');
+              expect(resUserObj['userName']).to.equal('Existing User'); // 'Existing User' is in mongodb and totally subject to change
               callback();
             })
             .then(() => {
