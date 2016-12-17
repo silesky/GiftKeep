@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Drawer from 'react-native-drawer';
 import { bindActionCreators } from 'redux'
-import * as actions from './../actions/actions';
+import * as actions from './../actions/';
 // Components
 
 import { TopBar } from './../components/TopBar';
