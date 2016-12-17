@@ -1,24 +1,11 @@
-import defaultFriend from './../json/defaultFriend.json';
 import { 
-  AsyncStorage, 
-  ImageStore
+AsyncStorage
  } from 'react-native';
 
 const _serverUrl = 'http://localhost:3000';
 
-const log = (el) => {
- console.log('array!', el)
- return el; 
-};
-
-export const getFriendFormInput = ({visible: {friendFormNameInput, friendFormBdayInput}}) => ({friendFormNameInput, friendFormBdayInput})
-export const lipsum = 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.'
-export const compose = (f1, f2) => value => f1(f2(value));
-
 export const getFriendItemById = (state, friendId, key) => {
-
   const friend = state.user.data.find(el => el.friendId === friendId);
-
   // my fallback return should depends on what is being asked for. 
   // null breaks the app if 
   let defItem;

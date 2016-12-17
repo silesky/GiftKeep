@@ -1,6 +1,3 @@
-//import * as initialStateUser from './../json/initialState.json'
-import * as defaultFriend from './../json/defaultFriend.json'
-const initialStateUser = { "data": [] }
 import UUID from 'uuid-js';
 import {
   combineReducers
@@ -10,7 +7,7 @@ import {
 } from './../utils/utils';
 // hello
 
-
+const initialStateUser = { "data": [] }
 export const user = (state = initialStateUser, action) => {
   let
     bday,
