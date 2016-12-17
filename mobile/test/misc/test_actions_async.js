@@ -52,22 +52,22 @@ module.exports = () => {
         this.existingFriendId = state.user.data[0].friendId;
         this.eventNameToCreate = "Birthday";
         this.eventDateToCreate = "06-06";
-        const addEvent = actions.addEvent(
+        const friendFormAddEvent = actions.friendFormAddEvent(
           this.existingFriendId,
           this.eventNameToCreate,
           this.eventDateToCreate
         );
-        this.newState = userReducer(state, addEvent)
+        this.newState = userReducer(state, friendFormAddEvent)
         const eventsArr = this.newState.user.data[0].events; // each friend has an events array
         this.addedEvent = eventsArr[eventsArr.length - 1];
       })
       afterEach(() => {
         this.newState = userReducer(state, actions.clear())
       });
-      it('addEvent() should add an event name', () => {
+      it('friendFormAddEvent() should add an event name', () => {
         expect(this.addedEvent.eventName).to.equal(this.eventNameToCreate);
       })
-      it('addEvent() should add an event date', () => {
+      it('friendFormAddEvent() should add an event date', () => {
         expect(this.addedEvent.eventDate).to.equal(this.eventDateToCreate);
       });
     })

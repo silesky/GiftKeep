@@ -31,11 +31,11 @@ import * as Utils from './../utils/utils'
 class FriendFormCreateUpdate extends Component {
   constructor(props) {
     super(props);
-    this.state = { bdayInput: null } // adding state bc of some bug in date-picker where input won't show up
+    this.state = { eventTitleInput: null } // adding state bc of some bug in date-picker where input won't show up
   }
   handleBdayChange(input) {
     this.props.actions.friendFormBdayInputUpdate(input);
-    this.setState({ bdayInput: input })
+    this.setState({ eventTitleInput: input })
   }
   render() {
     const {
@@ -80,7 +80,7 @@ class FriendFormCreateUpdate extends Component {
                 <FriendFormDatePicker
                   placeholder={isUpdating ? bday : 'Add a special date.'}
                   onDateChange={(input) => this.handleBdayChange(input)}
-                  date={this.state.bdayInput}
+                  date={this.state.eventTitleInput}
                  />
                  <Button>
                  {/* onPress={friendFormAddCateogry*/}
@@ -95,7 +95,9 @@ class FriendFormCreateUpdate extends Component {
                  CANCEL
                 <Icon name='ios-close-circle-outline'/>
               </Button>
-              <Button onPress={() => console.log('next event clicked!')}>
+              <Button onPress={() => {
+                  actions.friendFormAddEvent(friendFormUpdatingSelectedFriendId, 'eventTitleInput', '01-10' );
+              }}>
                 ADD NEXT EVENT
                 <Icon name='ios-calendar-outline' />
               </Button>

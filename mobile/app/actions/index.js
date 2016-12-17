@@ -5,12 +5,6 @@ import * as Utils from './../utils/utils'
 const config = require('./../../mobileconfig.json');
 const { serverUrl } = config
 
-export const addEvent = (friendId, eventName, eventDate) => { // TODO: hook it up!
-  return {
-    type: 'ADD_EVENT',
-    payload: {friendId, eventName, eventDate}
-  }
-}
 export const selectTab = (tabNum) => {
   return {
     type: "SELECT_TAB",

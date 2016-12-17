@@ -1,115 +1,181 @@
-[
-		{	"userName": "John McSeed!",
-			"googleIdToken": "g1",
-			"fbAccessToken": "f1",
-			"fbId":"111", 
-	    	"data": [
-            {   "friendId": 123,
-                "order": 1,
-                "friendName" : "Glop",
-                "bday": "12-25",
-                "gifts" : [
-                    {"giftTitle": "John Gift!", "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.", "giftId": 111 },
-                    {"giftTitle": "Tennis Racket", "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.", "giftId": 112},
-                    {"giftTitle": "The Once", "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.", "giftId": 113 }
-                ]
-              
-            },
+[{
+    "userName": "John McSeed!",
+    "googleIdToken": "g1",
+    "fbAccessToken": "f1",
+    "fbId": "111",
+    "data": [{
+        "friendId": 123,
+        "order": 1,
+        "friendName": "Glop",
+        "bday": "12-25",
+        "gifts": [{
+          "giftTitle": "John Gift!",
+          "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.",
+          "giftId": 111
+        }, {
+          "giftTitle": "Tennis Racket",
+          "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.",
+          "giftId": 112
+        }, {
+          "giftTitle": "The Once",
+          "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.",
+          "giftId": 113
+        }]
 
-            {   
-                "friendId": 456,
-                "order": 2,
-                "friendName" : "Gan",
-                "bday": "07-01",
-                "gifts" : [
-                    { "giftTitle": "Dan Gift!",  "giftDesc": "Vestibulum ante ipsum primis in faucibus.", "giftId": 221},
-                    { "giftTitle": "The Wall", "giftDesc": "Vestibulum ante ipsum primis in faucibus.", "giftId": 222},
-                    { "giftTitle": "Riot Geat", "giftDesc": "Vestibulum ante ipsum primis in faucibus.", "giftId": 223}
-                ]
-            },
-            {   "friendId": 789,
-                "order": 3,
-                "bday": "07-19",
-                "friendName" : "Gtephen",
-                "gifts" : [{ "giftTitle": "Stephen Gift!",  "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.", "giftId": 331 }]
-                
-            }
-			]
-	},
-	{	"userName": "Seth InvalidToken",
-		"googleIdToken": "g2",
-		"fbAccessToken":"invalidToken",
-		"fbId":"222", 
-    	"data": [
-            {   "friendId": 123,
-                "order": 1,
-                "friendName" : "Nick",
-                "bday": "12-25",
-                "gifts" : [
-                    {"giftTitle": "Nick Gift!", "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.", "giftId": 111 },
-                    {"giftTitle": "Tennis Racket", "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.", "giftId": 112},
-                    {"giftTitle": "The Once", "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.", "giftId": 113 }
-                ]
-              
-            },
+      },
 
-            {   
-                "friendId": 456,
-                "order": 2,
-                "friendName" : "Dan",
-                "bday": "07-01",
-                "gifts" : [
-                    { "giftTitle": "Dan Gift!",  "giftDesc": "Vestibulum ante ipsum primis in faucibus.", "giftId": 221},
-                    { "giftTitle": "The Wall", "giftDesc": "Vestibulum ante ipsum primis in faucibus.", "giftId": 222},
-                    { "giftTitle": "Riot Geat", "giftDesc": "Vestibulum ante ipsum primis in faucibus.", "giftId": 223}
-                ]
-            },
-            {   "friendId": 789,
-                "order": 3,
-                "bday": "07-19",
-                "friendName" : "Stephen",
-                "gifts" : [{ "giftTitle": "Stephen Gift!",  "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.", "giftId": 331 }]
-                
-            }
-         ]
-	},
+      {
+        "friendId": 456,
+        "order": 2,
+        "friendName": "Gan",
+        "bday": "07-01",
+        "gifts": [{
+          "giftTitle": "Dan Gift!",
+          "giftDesc": "Vestibulum ante ipsum primis in faucibus.",
+          "giftId": 221
+        }, {
+          "giftTitle": "The Wall",
+          "giftDesc": "Vestibulum ante ipsum primis in faucibus.",
+          "giftId": 222
+        }, {
+          "giftTitle": "Riot Geat",
+          "giftDesc": "Vestibulum ante ipsum primis in faucibus.",
+          "giftId": 223
+        }]
+      }, {
+        "friendId": 789,
+        "order": 3,
+        "bday": "07-19",
+        "friendName": "Gtephen",
+        "gifts": [{
+          "giftTitle": "Stephen Gift!",
+          "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.",
+          "giftId": 331
+        }]
 
-	{	"userName": "Existing User",
-		"googleIdToken": "g2",
-		"fbAccessToken":"ExistingUserSeedToken",
-		"fbId":"105456176609093", 
-		    "data": [
-            {   "friendId": 123,
-                "order": 1,
-                "friendName" : "Existing User's Friend1",
-                "bday": "12-25",
-                "gifts" : [
-                    {"giftTitle": "Nick Gift!", "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.", "giftId": 111 },
-                    {"giftTitle": "Tennis Racket", "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.", "giftId": 112},
-                    {"giftTitle": "The Once", "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.", "giftId": 113 }
-                ]
-              
-            },
+      }
+    ]
+  }, {
+    "userName": "Seth InvalidToken",
+    "googleIdToken": "g2",
+    "fbAccessToken": "invalidToken",
+    "fbId": "222",
+    "data": [{
+        "friendId": 123,
+        "order": 1,
+        "friendName": "Nick",
+        "bday": "12-25",
+        "gifts": [{
+          "giftTitle": "Nick Gift!",
+          "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.",
+          "giftId": 111
+        }, {
+          "giftTitle": "Tennis Racket",
+          "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.",
+          "giftId": 112
+        }, {
+          "giftTitle": "The Once",
+          "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.",
+          "giftId": 113
+        }]
 
-            {   
-                "friendId": 456,
-                "order": 2,
-                "friendName" : "Existing User's Friend2",
-                "bday": "07-01",
-                "gifts" : [
-                    { "giftTitle": "Dan Gift!",  "giftDesc": "Vestibulum ante ipsum primis in faucibus.", "giftId": 221},
-                    { "giftTitle": "The Wall", "giftDesc": "Vestibulum ante ipsum primis in faucibus.", "giftId": 222},
-                    { "giftTitle": "Riot Geat", "giftDesc": "Vestibulum ante ipsum primis in faucibus.", "giftId": 223}
-                ]
-            },
-            {   "friendId": 789,
-                "order": 3,
-                "bday": "07-19",
-                "friendName" : "Existing User's Friend3",
-                "gifts" : [{ "giftTitle": "Stephen Gift!",  "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.", "giftId": 331 }]
-                
-            }
-         ]
-	}
+      },
 
-]
+      {
+        "friendId": 456,
+        "order": 2,
+        "friendName": "Dan",
+        "bday": "07-01",
+        "gifts": [{
+          "giftTitle": "Dan Gift!",
+          "giftDesc": "Vestibulum ante ipsum primis in faucibus.",
+          "giftId": 221
+        }, {
+          "giftTitle": "The Wall",
+          "giftDesc": "Vestibulum ante ipsum primis in faucibus.",
+          "giftId": 222
+        }, {
+          "giftTitle": "Riot Geat",
+          "giftDesc": "Vestibulum ante ipsum primis in faucibus.",
+          "giftId": 223
+        }]
+      }, {
+        "friendId": 789,
+        "order": 3,
+        "bday": "07-19",
+        "friendName": "Stephen",
+        "gifts": [{
+          "giftTitle": "Stephen Gift!",
+          "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.",
+          "giftId": 331
+        }]
+
+      }
+    ]
+  },
+
+  {
+    "userName": "Existing User",
+    "googleIdToken": "g2",
+    "fbAccessToken": "ExistingUserSeedToken",
+    "fbId": "105456176609093",
+        "data": [{
+            "friendId": 123,
+            "order": 1,
+            "friendName": "Existing User's Friend1",
+            "bday": "12-25",
+            "events": [{
+              "eventId": "123-NY",
+              "eventName": "New Year's EVE",
+              "eventDate": "01-01"
+            }],
+            "gifts": [{
+              "giftTitle": "Nick Gift!",
+              "giftDesc": "Vestibulum ante ipsum primis in faucibus.",
+              "giftId": 221,
+              "eventIds": [
+                "123-NY"
+              ]
+            }]
+          }, {
+            "friendId": 456,
+            "order": 2,
+            "friendName": "Dan Initial",
+            "bday": "07-01",
+            "events": [{
+              "eventId": "123-CHRISTMAS",
+              "eventName": "CHRISTMAS",
+              "eventDate": "12-25"
+            }],
+            "gifts": [{
+              "giftTitle": "Dan Gift!",
+              "giftDesc": "Vestibulum ante ipsum primis in faucibus.",
+              "giftId": 221,
+              "eventIds": [
+                "123-CHRISTMAS"
+              ]
+            }]
+          }, {
+            "friendId": 789,
+            "order": 3,
+            "bday": "07-19",
+            "friendName": "Stephen Initial",
+            "events": [{
+              "eventName": "Birthday",
+              "eventDate": "6-05",
+              "eventId": [
+                "123-BDAY"
+              ]
+            }],
+            "gifts": [{
+              "giftTitle": "Stephen Gift!",
+              "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.",
+              "giftId": 331,
+              "eventIds": [
+                "123-BDAY"
+              ]
+            }]
+          }
+        ]}
+
+        ]
