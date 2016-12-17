@@ -11,6 +11,7 @@ export const friendFormNameInputUpdate = inputNameValue => ({
   type: 'FRIEND_FORM_NAME_INPUT', payload: inputNameValue
 })
 
+
 export const friendFormBdayInputUpdate = inputBdayValue => ({
   type: 'FRIEND_FORM_BDAY_INPUT', payload: inputBdayValue
 })
@@ -21,6 +22,7 @@ export const friendFormUpdatingSelectedFriendId = (friendId) => ({
 export const friendFormCancelUpdateOrCreate = () => {
   return dispatch => {
     dispatch(friendFormUpdatingStatusChange(false))
+    dispatch(friendFormUpdatingSelectedFriendId(null)); //clear friendId just in case 
     dispatch(friendFormVisibilityToggle());
   }
 }
@@ -29,11 +31,21 @@ const friendFormUpdatingStatusChange = (arg) => {
   ? {type: 'FRIEND_FORM_UPDATING_STATUS_TRUE'} 
   : {type: 'FRIEND_FORM_UPDATING_STATUS_FALSE'}
 }
-export const friendFormIsUpdating = (friendId) => { 
-  return dispatch => {
-    dispatch(friendFormUpdatingStatusChange(true));
-    dispatch(friendFormUpdatingSelectedFriendId(friendId))
-    dispatch(friendFormVisibilityToggle()) // show form 
+
+
+const _friendFormSetCurrentInputByFriendId = (friendId) => {
+      return (dispatch, getState) => {
+        const { bday, friendName } = Utils.getFriendByFriendId(getState(), friendId);
+        dispatch(friendFormBdayInputUpdate(bday));
+        dispatch(friendFormNameInputUpdate(friendName));
+  }
+}
+export const friendFormIsUpdating = (friendId) => { //swipe to update
+  return (dispatch) => {
+    dispatch(_friendFormSetCurrentInputByFriendId(friendId)); // fixes the accidental overwriting of usernames on swipeToUpdate 
+    dispatch(friendFormUpdatingStatusChange(true))
+    dispatch(friendFormUpdatingSelectedFriendId(friendId));
+    dispatch(friendFormVisibilityToggle());
   }
 }
 

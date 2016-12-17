@@ -32,13 +32,13 @@ const testUtils = () => {
         })
     }),
       describe('misc functional tests', () => {
-         const _steve = state.user.data[2];
-         const dummyGiftId = _steve.gifts[0]['giftId'];
-         const dummygiftObjToReturn = _steve.gifts[0];
-         const dummyFriendId = _steve['friendId'];
-         const dummyFriendObjToReturn = _steve;         
+        const _steve = state.user.data[2];
+        const dummyGiftId = _steve.gifts[0]['giftId'];
+        const dummygiftObjToReturn = _steve.gifts[0];
+        const dummyFriendId = _steve['friendId'];
+        const dummyFriendObjToReturn = _steve;
         it('getGiftByGiftId', () => {
-            expect(Utils.getGiftByGiftId(state, dummyGiftId)).to.equal(dummygiftObjToReturn)
+          expect(Utils.getGiftByGiftId(state, dummyGiftId)).to.equal(dummygiftObjToReturn)
         }),
           it('getFriendByFriendId', () => {
 
@@ -52,7 +52,23 @@ const testUtils = () => {
             expect(Utils.getFriendByGiftId(state, dummyGiftId)).to.have.property('friendName');
             expect(Utils.getFriendByGiftId(state, dummyGiftId)).to.equal(dummyFriendObjToReturn)
           })
-      })
+        it('getFriendFormInput', () => {
+          const state = {
+            "visible": {
+              "selectedFriendId": "70fab100-3398-444a-8aba-5d9db249134e",
+              "friendFormUpdatingSelectedFriendId": "10a678a1-e543-4bf3-a832-413bdfed23cb",
+              "friendFormIsUpdating": true,
+              "friendFormIsVisible": true,
+              "friendFormNameInput": "Nick",
+              "friendFormBdayInput": "12-16",
+              "selectedTab": 0
+            }
+          }
+        
+        expect(Utils.getFriendFormInput(state)).to.have.property('friendFormBdayInput');
+           
+  })
+})
   });
 }
 

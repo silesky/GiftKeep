@@ -42,20 +42,12 @@ class FriendFormCreateUpdate extends Component {
     this.props.actions.friendFormBdayInputUpdate(input);
     this.setState({ bdayInput: input })
   }
-  handleCreateUpdate() { 
-    const { 
-      isUpdating,
-      friendFormNameInput,
-      friendFormBdayInput,
-      friendFormUpdatingSelectedFriendId 
-    } = this.props;
-    return (isUpdating)
-      ? this.props.actions.updateFriend(friendFormUpdatingSelectedFriendId, friendFormNameInput, friendFormBdayInput)
-      : this.props.actions.createFriend(friendFormNameInput, friendFormBdayInput)
-  }
   render() {
     const {
         friendFormIsVisible,
+        friendFormUpdatingSelectedFriendId,
+        friendFormNameInput,
+        friendFormBdayInput,
         friendName,
         bday,
         isUpdating, //id 
@@ -111,8 +103,12 @@ class FriendFormCreateUpdate extends Component {
                 ADD NEXT EVENT
                 <Icon name='ios-calendar-outline' />
               </Button>
-              <Button onPress={() => this.handleCreateUpdate()}>
-                {(isUpdating) ? 'UPDATE' : 'CREATE'}
+              <Button onPress={() => {
+                return (isUpdating)
+                      ? this.props.actions.updateFriend(friendFormUpdatingSelectedFriendId, friendFormNameInput, friendFormBdayInput)
+                      : this.props.actions.createFriend(friendFormNameInput, friendFormBdayInput)
+                    }}>
+                {(isUpdating) ? 'UPDATE' : 'CREATE'} {/* Button Title */}
                 <Icon name='ios-checkbox-outline' />
               </Button>
             </FooterTab>
