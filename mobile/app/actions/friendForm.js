@@ -54,9 +54,13 @@ export const friendFormIsUpdating = (friendId) => { //swipe to update
   }
 }
 
-export const updateFriend = (friendId, updatedFriendName, updatedBday) => {
+export const updateFriend = (friendId, updatedFriendName, friendFormEventInputs) => {
   return dispatch => {
-    dispatch({ type: 'UPDATE_FRIEND', payload: { friendId, friendName: updatedFriendName, bday: updatedBday } })
+    dispatch({ type: 'UPDATE_FRIEND',
+     payload: { friendId, 
+       friendName: updatedFriendName, 
+       friendFormEventInputs: friendFormEventInputs } 
+    })
     dispatch(friendFormUpdatingStatusChange(false))
     dispatch(friendFormVisibilityToggle())
   }

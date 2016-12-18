@@ -39,10 +39,20 @@ export const user = (state = initialStateUser, action) => {
     })
     return {...state, data}
     case 'UPDATE_FRIEND':
+    console.log('UPDATED FRIEND!', action.payload);
+    console.info('state!', state);
       data = state.data.map(el => {
         if (el.friendId === action.payload.friendId) {
           el.friendName = action.payload.friendName;
-          el.bday = action.payload.bday;
+          el.events = el.events // replace map object .... probaly should create an update friend event action
+            .map(el => {
+                if (el.eventId === action.payload.friendFormEventInputs[el.eventId]) {
+                  console.log('.............match!');
+                  el.eventDate = el.inputEventDate;
+                  el.eventName = el.inputEventName;
+               }
+               return el
+            })
         }
         return el;
       })

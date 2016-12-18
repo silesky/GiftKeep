@@ -1,3 +1,5 @@
+var l = console.log;
+var ls = () => console.log('state!', this.state);
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
@@ -31,21 +33,32 @@ import * as Utils from './../utils/utils'
 class FriendFormCreateUpdate extends Component {
   constructor(props) {
     super(props);
+    this.handleEventInputChange = this.handleEventInputChange.bind(this);
     // eventTitleInput should be an array, since there are mulitple values
     this.state = { friendFormEventInputs: {} } // adding state bc of some bug in date-picker where input won't show up
   }
+
+
  handleEventInputChange(eventId, inputEventDate, inputEventName) {
-    // this.props.actions.friendFormBdayInputUpdate(inputEventDate);
+console.log(eventId, inputEventDate, inputEventName);
+    const updatingExistingEvent = !!this.state.friendFormEventInputs[eventId];
+
     this.setState({friendFormEventInputs: {...this.state.friendFormEventInputs, 
-      [eventId]: {
-        inputEventDate: inputEventDate,
-        inputEventName: inputEventName
-    }
-    }})
+        [eventId]: {
+          inputEventDate: inputEventDate,
+          inputEventName: inputEventName
+      }}
+    })
+  
+    console.log('state set',this.state.friendFormEventInputs);
+
   }
   getEventDateInput(eventId) {
       const date = this.state.datePickerInputs.filter(el => el.eventId === eventId); 
       return (date) ? date.inputEventDate : false;
+  }
+  clearState() {
+     this.setState({friendFormEventInputs: {} })
   }
   
   render() {
@@ -61,7 +74,8 @@ class FriendFormCreateUpdate extends Component {
         events
       } = this.props
 
-   
+     const { friendFormEventInputs } = this.state;
+     console.log("EVENTS", events);
        
     return (
       <Modal
@@ -91,13 +105,19 @@ class FriendFormCreateUpdate extends Component {
               </ListItem>
               
            { events.map((eachEvent) => {
+              const { eventId, eventDate, eventName } = eachEvent;
+
+              const date = (friendFormEventInputs.hasOwnProperty(eventId))
+                ? friendFormEventInputs[eventId].inputEventDate
+                : 'false'
+                   // console.log("eachEvent", eachEvent, "component state", this.state, "redux state", events)
               return (
-                  <ListItem key={eachEvent.eventId}>
+                  <ListItem key={eventId}>
                     <Icon name='md-calendar' />
                     <FriendFormDatePicker
-                      placeholder={isUpdating ? bday : 'Add a special date.'}
-                      onDateChange={(inputEventDate) => this.handleEventInputChange(eachEvent.eventId, inputEventDate, "eventName")}
-                      date={this.state.friendFormEventInputs[eachEvent.eventId].inputEventDate}
+                      date={date}
+                      placeholder={isUpdating ? `date: ${date}, eventName: ${eventName}` : 'Add a special date.'}
+                      onDateChange={(inputEventDate) => this.handleEventInputChange(eventId, inputEventDate, "eventName")}
                     />
                     <Button>
                     {/* onPress={friendFormAddCateogry*/}
@@ -116,15 +136,20 @@ class FriendFormCreateUpdate extends Component {
                 <Icon name='ios-close-circle-outline'/>
               </Button>
               <Button onPress={() => {
-                  actions.friendFormAddEvent(friendFormUpdatingSelectedFriendId, "my event title", "11-11" );
+                  actions.friendFormAddEvent(friendFormUpdatingSelectedFriendId, "BLANK EVENT", "01-01" );
               }}>
                 ADD NEXT EVENT
                 <Icon name='ios-calendar-outline' />
               </Button>
               <Button onPress={() => {
+                 friendFormEventInputs
                 return (isUpdating)
-                      ? actions.updateFriend(friendFormUpdatingSelectedFriendId, friendFormNameInput, friendFormBdayInput)
-                      : actions.createFriend(friendFormNameInput, friendFormBdayInput)
+                      ? actions.updateFriend(
+                          friendFormUpdatingSelectedFriendId, 
+                          friendFormNameInput, 
+                          friendFormEventInputs
+                        )
+                      : actions.createFriend(friendFormNameInput, friendFormEventInputs)
                     }}>
                 {(isUpdating) ? 'UPDATE' : 'CREATE'} {/* Button Title */}
                 <Icon name='ios-checkbox-outline' />
