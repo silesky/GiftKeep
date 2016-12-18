@@ -32,15 +32,20 @@ class FriendFormCreateUpdate extends Component {
   constructor(props) {
     super(props);
     // eventTitleInput should be an array, since there are mulitple values
-    this.state = { datePickerInputs: [] } // adding state bc of some bug in date-picker where input won't show up
+    this.state = { friendFormEventInputs: {} } // adding state bc of some bug in date-picker where input won't show up
   }
-  handleBdayChange(eventId, inputDateString) {
-    this.props.actions.friendFormBdayInputUpdate(inputDateString);
-    this.setState({datePickerInputs: [...this.state.datePickerInputs, {eventId, inputDateString}]});
+ handleEventInputChange(eventId, inputEventDate, inputEventName) {
+    // this.props.actions.friendFormBdayInputUpdate(inputEventDate);
+    this.setState({friendFormEventInputs: {...this.state.friendFormEventInputs, 
+      [eventId]: {
+        inputEventDate: inputEventDate,
+        inputEventName: inputEventName
+    }
+    }})
   }
   getEventDateInput(eventId) {
       const date = this.state.datePickerInputs.filter(el => el.eventId === eventId); 
-      return (date) ? date.inputDateString : false;
+      return (date) ? date.inputEventDate : false;
   }
   
   render() {
@@ -91,8 +96,8 @@ class FriendFormCreateUpdate extends Component {
                     <Icon name='md-calendar' />
                     <FriendFormDatePicker
                       placeholder={isUpdating ? bday : 'Add a special date.'}
-                      onDateChange={(inputDateString) => this.handleBdayChange(eachEvent.eventId, inputDateString)}
-                      date={this.getEventDateInput(eachEvent.eventId)}
+                      onDateChange={(inputEventDate) => this.handleEventInputChange(eachEvent.eventId, inputEventDate, "eventName")}
+                      date={this.state.friendFormEventInputs[eachEvent.eventId].inputEventDate}
                     />
                     <Button>
                     {/* onPress={friendFormAddCateogry*/}
