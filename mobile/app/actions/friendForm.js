@@ -55,6 +55,7 @@ export const friendFormIsUpdating = (friendId) => { //swipe to update
 }
 
 export const updateFriend = (friendId, updatedFriendName, friendFormEventInputs) => {
+  console.log('UPDATE_FRIEND', friendFormEventInputs);
   return dispatch => {
     dispatch({ type: 'UPDATE_FRIEND',
      payload: { friendId, 
@@ -65,6 +66,7 @@ export const updateFriend = (friendId, updatedFriendName, friendFormEventInputs)
     dispatch(friendFormVisibilityToggle())
   }
 }
+
 
 export const _createFriend = (friendName, bday) => ({ type: 'CREATE_FRIEND', payload: { friendName, bday } });
 // modal visibility toggle called

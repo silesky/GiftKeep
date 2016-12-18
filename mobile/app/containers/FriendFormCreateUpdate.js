@@ -75,7 +75,6 @@ console.log(eventId, inputEventDate, inputEventName);
       } = this.props
 
      const { friendFormEventInputs } = this.state;
-     console.log("EVENTS", events);
        
     return (
       <Modal
@@ -110,12 +109,11 @@ console.log(eventId, inputEventDate, inputEventName);
               const date = (friendFormEventInputs.hasOwnProperty(eventId))
                 ? friendFormEventInputs[eventId].inputEventDate
                 : 'false'
-                   // console.log("eachEvent", eachEvent, "component state", this.state, "redux state", events)
+                    console.log("eachEvent", eachEvent, "component state", this.state, "redux state", events)
               return (
                   <ListItem key={eventId}>
                     <Icon name='md-calendar' />
                     <FriendFormDatePicker
-                      date={date}
                       placeholder={isUpdating ? `date: ${date}, eventName: ${eventName}` : 'Add a special date.'}
                       onDateChange={(inputEventDate) => this.handleEventInputChange(eventId, inputEventDate, "eventName")}
                     />
@@ -142,7 +140,6 @@ console.log(eventId, inputEventDate, inputEventName);
                 <Icon name='ios-calendar-outline' />
               </Button>
               <Button onPress={() => {
-                 friendFormEventInputs
                 return (isUpdating)
                       ? actions.updateFriend(
                           friendFormUpdatingSelectedFriendId, 

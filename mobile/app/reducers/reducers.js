@@ -39,22 +39,32 @@ export const user = (state = initialStateUser, action) => {
     })
     return {...state, data}
     case 'UPDATE_FRIEND':
-    console.log('UPDATED FRIEND!', action.payload);
-    console.info('state!', state);
+      // payload: friendId, friendName, friendFormEventInputs
       data = state.data.map(el => {
         if (el.friendId === action.payload.friendId) {
           el.friendName = action.payload.friendName;
           el.events = el.events // replace map object .... probaly should create an update friend event action
-            .map(el => {
-                if (el.eventId === action.payload.friendFormEventInputs[el.eventId]) {
-                  console.log('.............match!');
-                  el.eventDate = el.inputEventDate;
-                  el.eventName = el.inputEventName;
-               }
-               return el
-            })
-        }
-        return el;
+            .map((events, ind) => {
+              // keys are being used as ids. on second throught, probably not my favorite experiment.
+              // since you can have multiple event objects getting updated at the same time, and iterate over them;
+                const payloadEventIdArr = Object.keys(action.payload.friendFormEventInputs);
+                payloadEventIdArr.forEach(payloadEventId => {                           
+                  const { 
+                    inputEventDate, 
+                    inputEventName 
+                  } = action.payload.friendFormEventInputs[payloadEventId];
+                  if (events.eventId === payloadEventId) {
+                    // very annoying to replace super nested properties 'eventDate, eventName'
+                    el.events[ind].eventDate = inputEventDate;
+                    el.events[ind].eventName = inputEventName;
+                  }
+                })
+                return events
+              })
+          }
+          return el;
+         
+              
       })
       return {...state, data }
     case 'HYDRATE_USER':
