@@ -5,13 +5,12 @@ import {
 import * as state from './../json/state.json'
 import rootReducer from './../../app/reducers/reducers';
 module.exports = () => {
-    describe('REDUCERS:', () => {
+    describe.only('REDUCERS:', () => {
       this.existingFriendId = state.user.data[0].friendId;
       this.existingEventId = state.user.data[0].events[0].eventId;
       describe('UPDATE_FRIEND', () => {
         let events, friendName;
         before(() => {
-
           let action = {
             type: 'UPDATE_FRIEND',
             payload: {
