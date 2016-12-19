@@ -2,9 +2,7 @@ import UUID from 'uuid-js';
 import {
   combineReducers
 } from 'redux'
-import {
-  createUuid
-} from './../utils/utils';
+
 /*
   {
     "user": {

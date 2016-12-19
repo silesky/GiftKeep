@@ -53,7 +53,7 @@ class FriendFormCreateUpdate extends Component {
     this.setState({
       friendFormEventInputs: [
         ...this.state.friendFormEventInputs, {
-              inputEventDate,
+          inputEventDate: inputEventDate,
           eventId: eventId
             //inputEventName: inputEventName
         } 
@@ -64,7 +64,7 @@ class FriendFormCreateUpdate extends Component {
      this.setState({
       friendFormEventInputs: [
         ...this.state.friendFormEventInputs, {
-            inputEventName,
+          inputeventName: inputEventName,
           eventId: eventId
            
         } 
