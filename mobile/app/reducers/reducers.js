@@ -92,7 +92,7 @@ export const user = (state = initialStateUser, action) => {
 
       // TODO: implement
     case 'UPDATE_EVENT':
-      const { friendId, friendFormEventInputs } = action.payload;
+      let { friendId, friendFormEventInputs } = action.payload;
       const payloadEventIdArr = Object.keys(action.payload.friendFormEventInputs);
       data = state.data.map(el => {
         if (el.friendId === friendId) {
@@ -128,9 +128,9 @@ export const user = (state = initialStateUser, action) => {
           .map((events, ind) => {
               // keys are being used as ids. on second throught, probably not my favorite experiment.
               // since you can have multiple event objects getting updated at the same time, and iterate over them;
-              const payloadEventIdArr = Object.keys(action.payload.friendFormEventInputs);
+              let payloadEventIdArr = Object.keys(action.payload.friendFormEventInputs);
               payloadEventIdArr.forEach(payloadEventId => {                           
-                const { 
+                let { 
                   inputEventDate, 
                   inputEventName 
                 } = action.payload.friendFormEventInputs[payloadEventId];
