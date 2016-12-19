@@ -118,8 +118,17 @@ export const user = (state = initialStateUser, action) => {
          el.events = el.events 
           .map((events, ind) => {
             eventPayload.forEach(({eventId, eventDate, eventName}) => {
-
-              if (events.eventId === eventId) {
+              if (eventId === 'create') { 
+              // so the user can add events without officially updating the store, because the user might need to cancel or whatever. 
+              // allows me to use this.state to store that temporary form data ...[form] => this.state => redux store => [form]...
+              // also lets me use the event picker, which needs this.state to render
+                el.events[ind] = {
+                  ...el.events[ind],
+                    eventId: UUID.create().toString(),
+                    eventDate: eventDate,
+                    eventName: eventName,
+                  }
+              } else if (events.eventId === eventId) {
                 el.events[ind].eventDate = eventDate;
                 el.events[ind].eventName = eventName;
               }
@@ -131,26 +140,6 @@ export const user = (state = initialStateUser, action) => {
       })
       return {...state, data: newData };
     }
-
-        //  el.events = el.events // replace map object .... probaly should create an update friend event action
-        //   .map((events, ind) => {
-        //       // keys are being used as ids. on second throught, probably not my favorite experiment.
-        //       // since you can have multiple event objects getting updated at the same time, and iterate over them;
-        //       let payloadEventIdArr = Object.keys(action.payload.friendFormEventInputs);
-        //       payloadEventIdArr.forEach(payloadEventId => {                           
-        //         let { 
-        //           inputEventDate, 
-        //           inputEventName 
-        //         } = action.payload.friendFormEventInputs[payloadEventId];
-        //         if (events.eventId === payloadEventId) {
-        //             // very annoying to replace super nested properties 'eventDate, eventName'
-        //             el.events[ind].eventDate = inputEventDate;
-        //             el.events[ind].eventName = inputEventName;
-        //           }
-        //         })
-        //       return events
-        //     })
-        // }
 
     case 'HYDRATE_USER': {
       // fromat should be { data: [], fbId: ..., userName: }
@@ -231,7 +220,7 @@ export const user = (state = initialStateUser, action) => {
         if (el.friendId === action.payload.friendId) {
           el.gifts = [...el.gifts, {
             giftTitle: '',
-            giftId: UUID.create()
+            giftId: UUID.create().toString()
           }]
         }
         return el
