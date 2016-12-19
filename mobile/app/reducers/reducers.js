@@ -17,6 +17,7 @@ import {
           "bday": 
           "events": [
             {
+              // "friendId":
               "eventId": 
               "eventName": 
               "eventDate":
@@ -78,68 +79,46 @@ export const user = (state = initialStateUser, action) => {
       return {...state, data };
     }
 
-      // TODO: implement
-    case 'UPDATE_EVENT': {
-      let { friendId, friendFormEventInputs } = action.payload;
-      let payloadEventIdArr = Object.keys(action.payload.friendFormEventInputs);
-      let newData = state.data.map(el => {
-        if (el.friendId === friendId) {
-        el.events = el.events // replace map object .... probaly should create an update friend event action
-            .map((events, ind) => {
-              // keys are being used as ids. on second throught, probably not my favorite experiment.
-              // since you can have multiple event objects getting updated at the same time, and iterate over them;
-                payloadEventIdArr.forEach(payloadEventId => {                           
-                  let { 
-                    inputEventDate, 
-                    inputEventName 
-                  } = friendFormEventInputs[payloadEventId];
-                  if (events.eventId === payloadEventId) {
-                    // very annoying to replace super nested properties 'eventDate, eventName'
-                    el.events[ind].eventDate = inputEventDate;
-                    el.events[ind].eventName = inputEventName;
-                  }
-                })
-                return events
-               })
-          }
-          })
-          return {...state, data: newData };
-      }
-
-
     // TODO: break up
     case 'UPDATE_FRIEND': {
-    let friendId = action.payload.friendId,
-      friendName = action.payload.friendName,
-      eventPayload = action.payload.friendFormEventInputs;
-      let newData = state.data.map(el => {
-        if(el.friendId === friendId) {
-         el.friendName = friendName;
-         el.events = el.events 
-          .map((events, ind) => {
-            eventPayload.forEach(({eventId, eventDate, eventName}) => {
-              if (eventId === 'create') { 
-              // so the user can add events without officially updating the store, because the user might need to cancel or whatever. 
-              // allows me to use this.state to store that temporary form data ...[form] => this.state => redux store => [form]...
-              // also lets me use the event picker, which needs this.state to render
-                el.events[ind] = {
-                  ...el.events[ind],
-                    eventId: UUID.create().toString(),
-                    eventDate: eventDate,
-                    eventName: eventName,
-                  }
-              } else if (events.eventId === eventId) {
-                el.events[ind].eventDate = eventDate;
-                el.events[ind].eventName = eventName;
-              }
-            })
-            return events
-          })
-        }
-        return el;
+   const friendId = action.payload.friendId
+    , friendName = action.payload.friendName
+    , eventPayload = action.payload.friendFormEventInputs;
+  let createdEvent
+  let createdEventFriendIndex;
+  let newData = state.data.map((eachFriend, ind) =>{
+    if (eachFriend.friendId === friendId) {
+      eachFriend.friendName = friendName;
+      eachFriend.events = eachFriend.events.map((eachEvent)=>{
+        // return eachEvent
+        eventPayload.forEach((eachPayloadEvent) => {
+          // find eventId in the payload matches the one in the events array
+          if (eachEvent.eventId === eachPayloadEvent.eventId) {
+            eachEvent.friendId = friendId
+            eachEvent.eventDate = eachPayloadEvent.eventDate;
+            eachEvent.eventName = eachPayloadEvent.eventName;
+          } else if (eachPayloadEvent.eventId === 'create') {
+            createdEventFriendIndex = ind; 
+            createdEvent = {
+              eventId: UUID.create().toString(),
+              eventDate: eachPayloadEvent.eventDate,
+              eventName: eachPayloadEvent.eventName,
+            }
+          }
+        }) // end eachPayloadEvent iterator
+        // should be called once for each Event
+        return eachEvent
+        
       })
-      return {...state, data: newData };
-    }
+      return eachFriend;
+
+     
+    }// end eachFriend iterator 
+  })
+  // check to see if there's a new event, if not, create a new event before merging in the new state
+  if (createdEvent) newData[createdEventFriendIndex].events.push(createdEvent);
+  return Object.assign({}, state, {data: newData})
+  }
 
     case 'HYDRATE_USER': {
       // fromat should be { data: [], fbId: ..., userName: }

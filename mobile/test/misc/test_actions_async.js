@@ -26,7 +26,7 @@ module.exports = () => {
       expect(state.user).to.have.property('fbAccessToken');
       expect(state.user).to.have.property('data');
     });
-    it('hydrate_user action should be dispatched, and response should carry with it the new access token (and user data)', (done) => {
+    it('[server] hydrate_user action should be dispatched, and response should carry with it the new access token (and user data)', (done) => {
       const callback = sinon.spy();
       FbTestUser().getExistingUserToken()
         .then(existingUserToken => {
@@ -48,27 +48,30 @@ module.exports = () => {
         }).catch(done)
     })
     describe('Events:', () => {
+        let newState;
+        let eventsArr;
+        let addedEvent;
+        const existingFriendId = state.user.data[0].friendId;
+        const eventNameToCreate = "Birthday";
+        const eventDateToCreate = "06-06";      
       before(() => {
-        this.existingFriendId = state.user.data[0].friendId;
-        this.eventNameToCreate = "Birthday";
-        this.eventDateToCreate = "06-06";
-        const friendFormAddEvent = actions.friendFormAddEvent(
-          this.existingFriendId,
-          this.eventNameToCreate,
-          this.eventDateToCreate
+          const friendFormAddEvent = actions.friendFormAddEvent(
+          existingFriendId,
+          eventNameToCreate,
+          eventDateToCreate
         );
-        this.newState = userReducer(state, friendFormAddEvent)
-        const eventsArr = this.newState.user.data[0].events; // each friend has an events array
-        this.addedEvent = eventsArr[eventsArr.length - 1];
+         newState = userReducer(state, friendFormAddEvent)
+         eventsArr = newState.user.data[0].events; // each friend has an events array
+         addedEvent = eventsArr[eventsArr.length - 1];
       })
-      afterEach(() => {
-        this.newState = userReducer(state, actions.clear())
+      after(() => {
+        newState = userReducer(state, actions.clear())
       });
       it('friendFormAddEvent() should add an event name', () => {
-        expect(this.addedEvent.eventName).to.equal(this.eventNameToCreate);
+        expect(addedEvent.eventName).to.equal(eventNameToCreate);
       })
       it('friendFormAddEvent() should add an event date', () => {
-        expect(this.addedEvent.eventDate).to.equal(this.eventDateToCreate);
+        expect(addedEvent.eventDate).to.equal(eventDateToCreate);
       });
     })
   })

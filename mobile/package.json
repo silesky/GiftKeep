@@ -6,7 +6,7 @@
     "__postinstall": "remotedev-debugger --injectserver",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "jest": "jest",
-    "test": "mocha --growl --require mocha-clean/brief --require babel-polyfill ./test/mocha-setup.js --compilers js:babel-core/register --recursive test",
+    "test": "mocha --growl --require babel-polyfill ./test/mocha-setup.js --compilers js:babel-core/register --recursive test",
     "testwatch": "mocha --growl  --watch --require mocha-clean/brief --require babel-polyfill ./test/mocha-setup.js --compilers js:babel-core/register --recursive test"
   },
   "dependencies": {
