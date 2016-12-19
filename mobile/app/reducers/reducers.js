@@ -49,25 +49,14 @@ import {
 
 const initialStateUser = { "data": [] }
 export const user = (state = initialStateUser, action) => {
-  let
-    bday,
-    newState,
-    newData,
-    data,
-    eventId,
-    eventName,
-    friendId,
-    oldgiftArr,
-    newGiftArr,
-    friendName,
-    giftDesc,
-    giftId,
-    giftTitle;
+
+
+
   const _getGiftArrByFriendId = (friendId) => state.data.find(el => el.friendId === friendId).gifts;
   const _getSingleGiftObj = (friendId, giftId) => _getGiftArrByFriendId(friendId).find((el) => el.giftId === giftId)
   switch (action.type) {
     case 'ADD_EVENT':
-    data = state.data.map(el => {
+    let data = state.data.map(el => {
       if (el.friendId === action.payload.friendId) {
         el.events = [...el.events, {
           eventName: action.payload.eventName,
@@ -80,18 +69,19 @@ export const user = (state = initialStateUser, action) => {
     return {...state, data}
 
   // TODO: implement
-    case 'UPDATE_FRIEND_NAME':
-      data = state.data.map(el => {
+    case 'UPDATE_FRIEND_NAME': {
+      let data = state.data.map(el => {
         if (el.friendId === action.payload.friendId) {
           el.friendName = action.payload.friendName;
         }
       })
       return {...state, data };
+    }
 
       // TODO: implement
-    case 'UPDATE_EVENT':
+    case 'UPDATE_EVENT': {
       let { friendId, friendFormEventInputs } = action.payload;
-      const payloadEventIdArr = Object.keys(action.payload.friendFormEventInputs);
+      let payloadEventIdArr = Object.keys(action.payload.friendFormEventInputs);
       data = state.data.map(el => {
         if (el.friendId === friendId) {
         el.events = el.events // replace map object .... probaly should create an update friend event action
@@ -99,7 +89,7 @@ export const user = (state = initialStateUser, action) => {
               // keys are being used as ids. on second throught, probably not my favorite experiment.
               // since you can have multiple event objects getting updated at the same time, and iterate over them;
                 payloadEventIdArr.forEach(payloadEventId => {                           
-                  const { 
+                  let { 
                     inputEventDate, 
                     inputEventName 
                   } = friendFormEventInputs[payloadEventId];
@@ -114,97 +104,118 @@ export const user = (state = initialStateUser, action) => {
           }
           })
               return {...state, data };
+      }
 
 
     // TODO: break up
-    case 'UPDATE_FRIEND':
+    case 'UPDATE_FRIEND': {
       // payload--friendId, friendName, friendFormEventInputs
+   
+      let friendId = action.payload.friendId;
+      let friendName = action.payload.friendName;
+      let { eventId, inputEventName, inputEventDate}  = action.payload.events;
       data = state.data.map(el => {
-        if (el.friendId === action.payload.friendId) {
-          el.friendName = action.payload.friendName;
+        if (el.friendId === friendId) {
+          el.friendName = friendName;
           el.events = el.events // replace map object .... probaly should create an update friend event action
-          .map((events, ind) => {
-              // keys are being used as ids. on second throught, probably not my favorite experiment.
-              // since you can have multiple event objects getting updated at the same time, and iterate over them;
-              let payloadEventIdArr = Object.keys(action.payload.friendFormEventInputs);
-              payloadEventIdArr.forEach(payloadEventId => {                           
-                let { 
-                  inputEventDate, 
-                  inputEventName 
-                } = action.payload.friendFormEventInputs[payloadEventId];
-                if (events.eventId === payloadEventId) {
-                    // very annoying to replace super nested properties 'eventDate, eventName'
-                    el.events[ind].eventDate = inputEventDate;
-                    el.events[ind].eventName = inputEventName;
-                  }
-                })
-              return events
+          .map((eventsArr) => {
+            console.log('#########', eventsArr);
+            eventsArr.map(eachEvent => {
+              if(eachEvent.id === eventId) {
+                  console.log('hi');
+              }
             })
-        }
-        return el;
-      })
+          })
+          return el;
+      }})
       return {...state, data }
+    }
 
-    case 'HYDRATE_USER':
+        //  el.events = el.events // replace map object .... probaly should create an update friend event action
+        //   .map((events, ind) => {
+        //       // keys are being used as ids. on second throught, probably not my favorite experiment.
+        //       // since you can have multiple event objects getting updated at the same time, and iterate over them;
+        //       let payloadEventIdArr = Object.keys(action.payload.friendFormEventInputs);
+        //       payloadEventIdArr.forEach(payloadEventId => {                           
+        //         let { 
+        //           inputEventDate, 
+        //           inputEventName 
+        //         } = action.payload.friendFormEventInputs[payloadEventId];
+        //         if (events.eventId === payloadEventId) {
+        //             // very annoying to replace super nested properties 'eventDate, eventName'
+        //             el.events[ind].eventDate = inputEventDate;
+        //             el.events[ind].eventName = inputEventName;
+        //           }
+        //         })
+        //       return events
+        //     })
+        // }
+
+    case 'HYDRATE_USER': {
       // fromat should be { data: [], fbId: ..., userName: }
-      newState = action.payload
+      let newState = action.payload
       return newState;
-    case 'CLEAR':
+    }
+    case 'CLEAR': {
       return { "data": [] }
-    case 'UPDATE_GIFT_TITLE':
-      friendId = action.payload.friendId;
-      giftTitle = action.payload.giftTitle;
-      giftId = action.payload.giftId;
-      newGiftArr = _getGiftArrByFriendId(friendId).map(el => {
+    }
+    case 'UPDATE_GIFT_TITLE': {
+      let friendId = action.payload.friendId;
+      let giftTitle = action.payload.giftTitle;
+      let giftId = action.payload.giftId;
+      let newGiftArr = _getGiftArrByFriendId(friendId).map(el => {
         if (el.giftId === giftId) el.giftTitle = giftTitle
         return el
       })
-      newData = state.data.map(el => {
+      let newData = state.data.map(el => {
         if (el.friendId === friendId) el.gifts = newGiftArr
         return el
       })
-      newState = Object.assign({}, state, { data: newData })
+      let newState = Object.assign({}, state, { data: newData })
       return newState;
+    }
+    case 'DELETE_GIFT': {
+      let friendId = action.payload.friendId;
+      let giftId = action.payload.giftId;
 
-    case 'DELETE_GIFT':
-      friendId = action.payload.friendId;
-      giftId = action.payload.giftId;
-
-      newGiftArr = _getGiftArrByFriendId(friendId)
+      let newGiftArr = _getGiftArrByFriendId(friendId)
         .filter(el => el.giftId !== giftId)
 
       console.log('newGiftArr with thing removed', newGiftArr);
-      newData = state.data.map(el => {
+      let newData = state.data.map(el => {
         if (el.friendId === friendId) el.gifts = newGiftArr
         return el
       })
-      newState = Object.assign({}, state, { data: newData })
+      let newState = Object.assign({}, state, { data: newData })
 
       return newState;
+    }
 
-    case 'DELETE_FRIEND':
-      friendId = action.payload.friendId;
-      newData = state.data.filter(el => el.friendId !== friendId)
-      newState = Object.assign({}, state, { data: newData })
+    case 'DELETE_FRIEND': {
+      let friendId = action.payload.friendId;
+      let newData = state.data.filter(el => el.friendId !== friendId)
+      let newState = Object.assign({}, state, { data: newData })
 
       return newState;
+    }
 
-    case 'UPDATE_GIFT_DESC':
-      friendId = action.payload.friendId;
-      giftDesc = action.payload.giftDesc;
-      giftId = action.payload.giftId;
-      newGiftArr = _getGiftArrByFriendId(friendId).map(el => {
+    case 'UPDATE_GIFT_DESC': {
+      let friendId = action.payload.friendId;
+      let giftDesc = action.payload.giftDesc;
+      let giftId = action.payload.giftId;
+      let newGiftArr = _getGiftArrByFriendId(friendId).map(el => {
         if (el.giftId === giftId) el.giftDesc = giftDesc
         return el
       })
-      newData = state.data.map(el => {
+      let newData = state.data.map(el => {
         if (el.friendId === friendId) el.gifts = newGiftArr
         return el
       })
-      newState = { ...state, data: newData }
+      let newState = { ...state, data: newData }
       return newState;
+    }
 
-    case 'CREATE_FRIEND':
+    case 'CREATE_FRIEND': {
       return { ...state, data: [...state.data, {
         friendId: UUID.create().toString(),
         friendName: action.payload.friendName,
@@ -213,10 +224,12 @@ export const user = (state = initialStateUser, action) => {
         events: [],
       }]
       }
-    case 'SAVE_FB_PHOTO':
+    }
+    case 'SAVE_FB_PHOTO': {
       return { ...state, fbImage: action.payload.fbImage }
-    case 'ADD_GIFT':
-      newData = state.data.map(el => {
+    }
+    case 'ADD_GIFT': {
+      let newData = state.data.map(el => {
         if (el.friendId === action.payload.friendId) {
           el.gifts = [...el.gifts, {
             giftTitle: '',
@@ -226,10 +239,11 @@ export const user = (state = initialStateUser, action) => {
         return el
       })
       return { ...state, data: newData };
-
-    default:
+    }
+    default: {
       return state;
   }
+}
 }
 
 const initialStateFirstUser = {
