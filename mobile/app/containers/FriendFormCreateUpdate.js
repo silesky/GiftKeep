@@ -7,6 +7,7 @@ import {
 import {
   bindActionCreators
 } from 'redux'
+
 import {
   FriendFormDatePicker
 } from './../components/FriendFormDatePicker.js';
@@ -134,6 +135,7 @@ class FriendFormCreateUpdate extends Component {
                   <ListItem>
                     <Icon name='md-calendar' />
                     <FriendFormDatePicker
+
                       date={isUpdating ? stateEventDate : "11-11"}
                       placeholder={isUpdating ? `date: ${stateEventDate}, eventName: ${eventName}` : 'Add a special date.'}
                       onDateChange={(inputEventDate) => this.handleEventDateInputChange(eventId, inputEventDate)}
@@ -165,9 +167,9 @@ class FriendFormCreateUpdate extends Component {
                 <Icon name='ios-close-circle-outline'/>
               </Button>
               <Button onPress={() => {
-                  actions.friendFormAddEvent(friendFormUpdatingSelectedFriendId, "BLANK EVENT", "01-01" );
+                  actions.friendFormAddEvent(friendFormUpdatingSelectedFriendId, "BLANK EVENT", "07-07" );
               }}>
-                ADD NEXT EVENT
+                ADD EVENT
                 <Icon name='ios-calendar-outline' />
               </Button>
               <Button onPress={() => {
