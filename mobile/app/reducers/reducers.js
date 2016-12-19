@@ -5,7 +5,49 @@ import {
 import {
   createUuid
 } from './../utils/utils';
-// hello
+/*
+  {
+    "user": {
+      "userName": 
+      "fbId": 
+      "fbAccessToken": 
+      "data": [
+        {
+          "friendId": 
+          "order": 
+          "friendName": 
+          "bday": 
+          "events": [
+            {
+              "eventId": 
+              "eventName": 
+              "eventDate":
+            }
+          ],
+          "gifts": [
+            {
+              "giftTitle": 
+              "giftDesc": 
+              "giftId": 
+              "eventIds": [
+                "123-NY"
+              ]
+            }
+          ]
+        },
+      ]
+    },
+    "visible": {
+      "selectedFriendId": 
+      "friendFormUpdatingSelectedFriendId": 
+      "friendFormIsUpdating": 
+      "friendFormIsVisible": 
+      "friendFormNameInput":
+      "friendFormAddEventInput": 
+      "selectedTab": 
+    }
+  }
+*/
 
 const initialStateUser = { "data": [] }
 export const user = (state = initialStateUser, action) => {
