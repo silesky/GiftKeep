@@ -5,7 +5,7 @@ import {
 import * as state from './../json/state.json'
 import rootReducer from './../../app/reducers/reducers';
 module.exports = () => {
-    describe.only('REDUCERS:', () => {
+    describe('REDUCERS:', () => {
       this.existingFriendId = state.user.data[0].friendId;
       this.existingEventId = state.user.data[0].events[0].eventId;
       describe('UPDATE_FRIEND', () => {
@@ -19,13 +19,13 @@ module.exports = () => {
               friendFormEventInputs: [
                 {
                   eventId: this.existingEventId,
-                  inputEventDate: '11-11',
-                  inputEventName: 'MyNewEventName',
+                  eventDate: '11-11',
+                  eventName: 'MyNewEventName',
                 }
                ]
               }
             }
-          // use the action to get a new state
+          // use the action to get a new stat
           const newState = rootReducer(state, action).user.data[0]
             events = newState.events;
             friendName = newState.friendName;
