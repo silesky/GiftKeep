@@ -3,7 +3,9 @@ import React from 'react';
 import { View } from 'react-native';
 import { Icon, ListItem} from 'native-base';
 
-export const FriendFormDatePicker = ({date, placeholder, onDateChange}) => (
+export const FriendFormDatePicker = ({date, placeholder, onDateChange}) => {
+console.log('...........', date, placeholder, onDateChange)
+return (
       <DatePicker
       showIcon={false}
       onDateChange={(input) => onDateChange(input)}
@@ -28,3 +30,4 @@ export const FriendFormDatePicker = ({date, placeholder, onDateChange}) => (
 
       />
       )
+}

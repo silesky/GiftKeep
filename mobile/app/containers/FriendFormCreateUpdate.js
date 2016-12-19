@@ -1,15 +1,22 @@
-var l = console.log;
-var ls = () => console.log('state!', this.state);
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
-import { FriendFormDatePicker } from './../components/FriendFormDatePicker.js';
+import React, {
+  Component
+} from 'react';
+import {
+  connect
+} from 'react-redux';
+import {
+  bindActionCreators
+} from 'redux'
+import {
+  FriendFormDatePicker
+} from './../components/FriendFormDatePicker.js';
 import * as actions from './../actions/'
 import {
   StyleSheet,
   Modal
 } from 'react-native';
 import {
+  Thumbnail,
   Container,
   Content,
   Footer,
@@ -33,49 +40,58 @@ import * as Utils from './../utils/utils'
 class FriendFormCreateUpdate extends Component {
   constructor(props) {
     super(props);
-    this.handleEventInputChange = this.handleEventInputChange.bind(this);
     // eventTitleInput should be an array, since there are mulitple values
-    this.state = { friendFormEventInputs: {} } // adding state bc of some bug in date-picker where input won't show up
+    this.state = {
+      friendFormEventInputs: {}
+    }
   }
 
 
- handleEventInputChange(eventId, inputEventDate, inputEventName) {
-console.log(eventId, inputEventDate, inputEventName);
-    const updatingExistingEvent = !!this.state.friendFormEventInputs[eventId];
-
-    this.setState({friendFormEventInputs: {...this.state.friendFormEventInputs, 
+  handleEventDateInputChange(eventId, inputEventDate) {
+    // const updatingExistingEvent = !!this.state.friendFormEventInputs[eventId];
+    this.setState({
+      friendFormEventInputs: {...this.state.friendFormEventInputs,
         [eventId]: {
-          inputEventDate: inputEventDate,
-          inputEventName: inputEventName
-      }}
+          inputEventDate: inputEventDate
+            //inputEventName: inputEventName
+        }
+      }
     })
-  
-    console.log('state set',this.state.friendFormEventInputs);
-
   }
-  getEventDateInput(eventId) {
-      const date = this.state.datePickerInputs.filter(el => el.eventId === eventId); 
-      return (date) ? date.inputEventDate : false;
+  handleEventNameInputChange(eventId, inputEventName) {
+    console.log('handleEventDateInputChange', eventId, inputEventName);
+    // const updatingExistingEvent = !!this.state.friendFormEventInputs[eventId];
+    this.setState({
+      friendFormEventInputs: {...this.state.friendFormEventInputs,
+        [eventId]: {
+          inputEventName: inputEventName
+            //inputEventName: inputEventName
+        }
+      }
+    })
   }
   clearState() {
-     this.setState({friendFormEventInputs: {} })
+    this.setState({
+      friendFormEventInputs: {}
+    })
   }
-  
   render() {
     const {
-        friendFormIsVisible,
-        friendFormUpdatingSelectedFriendId,
-        friendFormNameInput,
-        friendFormBdayInput,
-        friendName,
-        bday,
-        isUpdating, //id 
-        actions,
-        events
-      } = this.props
+      friendFormIsVisible,
+      friendFormUpdatingSelectedFriendId,
+      friendFormNameInput,
+      friendFormBdayInput,
+      friendName,
+      bday,
+      isUpdating, //id 
+      actions,
+      events
+    } = this.props
 
-     const { friendFormEventInputs } = this.state;
-       
+    const {
+      friendFormEventInputs
+    } = this.state;
+
     return (
       <Modal
         visible={friendFormIsVisible}
@@ -95,6 +111,7 @@ console.log(eventId, inputEventDate, inputEventName);
               <ListItem>
                 <InputGroup>
                   <Icon name='ios-person' />
+
                   <Input
                     defaultValue={isUpdating ? friendName : ''}
                     onChangeText={(input) => actions.friendFormNameInputUpdate(input)}
@@ -105,26 +122,40 @@ console.log(eventId, inputEventDate, inputEventName);
               
            { events.map((eachEvent) => {
               const { eventId, eventDate, eventName } = eachEvent;
-
-              const date = (friendFormEventInputs.hasOwnProperty(eventId))
+              const stateEventDate = (friendFormEventInputs.hasOwnProperty(eventId))
                 ? friendFormEventInputs[eventId].inputEventDate
-                : 'false'
-                    console.log("eachEvent", eachEvent, "component state", this.state, "redux state", events)
+                : "01-01";
+              const stateEventName = (friendFormEventInputs.hasOwnProperty(eventName))
+                ? friendFormEventInputs[eventId].inputEventName
+                : "Your event name.";
+
               return (
-                  <ListItem key={eventId}>
+              <List key={eventId}>
+                  <ListItem>
                     <Icon name='md-calendar' />
                     <FriendFormDatePicker
-                      placeholder={isUpdating ? `date: ${date}, eventName: ${eventName}` : 'Add a special date.'}
-                      onDateChange={(inputEventDate) => this.handleEventInputChange(eventId, inputEventDate, "eventName")}
+                      date={isUpdating ? stateEventDate : "11-11"}
+                      placeholder={isUpdating ? `date: ${stateEventDate}, eventName: ${eventName}` : 'Add a special date.'}
+                      onDateChange={(inputEventDate) => this.handleEventDateInputChange(eventId, inputEventDate)}
                     />
                     <Button>
-                    {/* onPress={friendFormAddCateogry*/}
                     Category <Icon name='ios-add-circle' />
                     </Button>
-                  </ListItem>
+                    </ListItem>
+                    <ListItem>
+                      <Icon name='ios-person-outline' />
+                      <Input
+                        defaultValue={isUpdating ? eventName : ''}
+                        onChangeText={(inputEventName) => this.handleEventNameInputChange(eventId, inputEventName)}
+                        placeholder={isUpdating ? stateEventName : 'Please Enter an Event Name'}
+                        placeholderTextColor='#c9c9c9' />
+                    </ListItem>
+                    </List>
+
               )
             })
           }
+
             </List>
           </Content>
           <Footer>
@@ -162,32 +193,33 @@ console.log(eventId, inputEventDate, inputEventName);
 /* onRequestClose={() => friendFormVisibilityToggle()}  mandatory android prop*/
 
 const mstp = (state) => {
-   const { 
-      friendFormIsUpdating, 
-      friendFormIsVisible,
-      friendFormNameInput,
-      friendFormBdayInput,
-      friendFormUpdatingSelectedFriendId 
-    } = state.visible;
-    let { 
-      bday, 
-      events,
-      friendName
-    } = Utils.getFriendByFriendId(state, friendFormUpdatingSelectedFriendId);
-    events = events && events.length ? events : [];
+  const {
+    friendFormIsUpdating,
+    friendFormIsVisible,
+    friendFormNameInput,
+    friendFormBdayInput,
+    friendFormUpdatingSelectedFriendId
+  } = state.visible;
+  let {
+    bday,
+    events,
+    friendName
+  } = Utils.getFriendByFriendId(state, friendFormUpdatingSelectedFriendId);
+  events = events && events.length ? events : [];
   return {
-      isUpdating: !!(friendFormIsUpdating && friendFormUpdatingSelectedFriendId),
-      bday,
-      events,
-      friendName,
-      friendFormIsVisible,
-      friendFormNameInput,
-      friendFormBdayInput,
-      friendFormUpdatingSelectedFriendId
-   }
-  };
+    isUpdating: !!(friendFormIsUpdating && friendFormUpdatingSelectedFriendId),
+    bday,
+    events,
+    friendName,
+    friendFormIsVisible,
+    friendFormNameInput,
+    friendFormBdayInput,
+    friendFormUpdatingSelectedFriendId
+  }
+};
 const mdtp = (dispatch) => {
-  return { actions: bindActionCreators(actions, dispatch) }
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  }
 }
 export default connect(mstp, mdtp)(FriendFormCreateUpdate)
-
