@@ -53,25 +53,25 @@ class FriendFormCreateUpdate extends Component {
     this.setState({
       friendFormEventInputs: [
         ...this.state.friendFormEventInputs, {
-          inputEventDate: inputEventDate,
+              inputEventDate,
           eventId: eventId
             //inputEventName: inputEventName
         } 
-        ]
+      ]
     })
   }
   handleEventNameInputChange(eventId, inputEventName) {
-    console.log('handleEventDateInputChange', eventId, inputEventName);
-    // const updatingExistingEvent = !!this.state.friendFormEventInputs[eventId];
-    this.setState({
-      friendFormEventInputs: {...this.state.friendFormEventInputs,
-        [eventId]: {
-          inputEventName: inputEventName
-            //inputEventName: inputEventName
-        }
-      }
+     this.setState({
+      friendFormEventInputs: [
+        ...this.state.friendFormEventInputs, {
+            inputEventName,
+          eventId: eventId
+           
+        } 
+      ]
     })
   }
+
   clearState() {
     this.setState({
       friendFormEventInputs: {}

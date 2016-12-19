@@ -16,14 +16,15 @@ module.exports = () => {
             payload: {
               friendId: this.existingFriendId,
               friendName: 'John A. New Friend',
-              friendFormEventInputs: {
-                [this.existingEventId]: {
+              friendFormEventInputs: [
+                {
+                  eventId: this.existingEventId,
                   inputEventDate: '11-11',
                   inputEventName: 'MyNewEventName',
                 }
+               ]
               }
             }
-          }
           // use the action to get a new state
           const newState = rootReducer(state, action).user.data[0]
             events = newState.events;
