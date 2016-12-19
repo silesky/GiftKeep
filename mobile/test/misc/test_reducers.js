@@ -5,25 +5,45 @@ import {
 import * as state from './../json/state.json'
 import rootReducer from './../../app/reducers/reducers';
 module.exports = () => {
-  describe('REDUCERS:', () => {
-    describe('UPDATE_FRIEND', () => {
-      it('should should update friendName', () => {
-        const existingFriendId = state.user.data[0].friendId,
-          updatedBday = "1-11",
-          updatedFriendName = "MyNewFriendName";
-        let action = {
-          type: 'UPDATE_FRIEND',
-          payload: {
-            friendId: existingFriendId,
-            friendName: updatedFriendName,
-            bday: updatedBday
+    describe('REDUCERS:', () => {
+      this.existingFriendId = state.user.data[0].friendId;
+      this.existingEventId = state.user.data[0].events[0].eventId;
+      describe('UPDATE_FRIEND', () => {
+        let events, friendName;
+        before(() => {
+
+          let action = {
+            type: 'UPDATE_FRIEND',
+            payload: {
+              friendId: this.existingFriendId,
+              friendName: 'John A. New Friend',
+              friendFormEventInputs: {
+                [this.existingEventId]: {
+                  inputEventDate: '11-11',
+                  inputEventName: 'MyNewEventName',
+                }
+              }
+            }
           }
-        }
-        const currentStateFriendName = rootReducer(state, action).user.data[0].friendName
-        const currentStateBday = rootReducer(state, action).user.data[0].bday
-        expect(currentStateFriendName).to.equal(updatedFriendName);
-        expect(currentStateBday).to.equal(updatedBday)
+          // use the action to get a new state
+          const newState = rootReducer(state, action).user.data[0]
+            events = newState.events;
+            friendName = newState.friendName;
+        })
+        it('should update friendName', () => {
+          expect(friendName).to.equal('John A. New Friend');
+        })
+        it('should update events (object)', () => {
+          const anEventObj = events[0];
+          expect(events).to.be.an.array;
+          expect(anEventObj).to.have.property('eventId');
+          expect(anEventObj).to.have.property('eventDate');
+          expect(anEventObj).to.have.property('eventName');
+          expect(anEventObj['eventId']).to.equal(this.existingEventId);
+          expect(anEventObj['eventName']).to.equal('MyNewEventName');
+        })
+
+
       })
-    })
-  });
-}
+    }); // REDUCERS
+  } //module.exports
