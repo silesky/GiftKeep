@@ -4,7 +4,6 @@ import { View } from 'react-native';
 import { Icon, ListItem} from 'native-base';
 
 export const FriendFormDatePicker = ({date, placeholder, onDateChange}) => {
-console.log('...........', date, placeholder, onDateChange)
 return (
       <DatePicker
       showIcon={false}

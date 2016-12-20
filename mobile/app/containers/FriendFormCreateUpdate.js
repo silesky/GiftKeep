@@ -43,41 +43,73 @@ class FriendFormCreateUpdate extends Component {
     super(props);
     // eventTitleInput should be an array, since there are mulitple values
     this.state = {
-      friendFormEventInputs: {}
+      // on first load, set the default values to the events array in redux
+      friendFormEventInputs: [{}], // {eventId: null, eventDate: null, eventName: null}
+    }
+    this.handleEventDateInputChange = this.handleEventDateInputChange.bind(this);
+    this.handleEventNameInputChange = this.handleEventNameInputChange.bind(this);
+  }
+  componentWillMount() {
+    console.log('called');
+  }
+  handleEventDateInputChange(eventId, eventDateInputArg) {
+    // if no event id at all
+    let objectToAdd
+    if (!eventId) {
+      this.setState([...this.state.newFriendFormEventInput, 
+      { eventId: 'create', eventName: 'unset', eventDate: eventDateInputArg }])
+    } else {
+     // if we're adding
+      const newFriendFormEventInput = this.state.friendFormEventInputs
+        .map(el => {
+          if (el.eventId === eventId) {
+            el.eventDate = eventDateInputArg
+          } else {
+            objectToAdd = {eventId: eventId, eventName: 'unset', eventDate: eventDateInputArg }
+          }
+          return el
+        })
+        // if we're adding and not updating
+    if (objectToAdd) {
+      this.setState({ friendFormEventInputs: [...this.state.friendFormEventInputs, objectToAdd ] })
+    } else {
+  // const updatingExistingEvent = !!this.state.friendFormEventInputs[eventId];
+
+    this.setState({ friendFormEventInputs: newFriendFormEventInput }) // if updating, finish updating
+    }
     }
   }
-
-
-  handleEventDateInputChange(eventId, inputEventDate) {
-    // const updatingExistingEvent = !!this.state.friendFormEventInputs[eventId];
-    this.setState({
-      friendFormEventInputs: [
-        ...this.state.friendFormEventInputs, {
-          inputEventDate: inputEventDate,
-          eventId: eventId
-            //inputEventName: inputEventName
-        } 
-      ]
-    })
-  }
   handleEventNameInputChange(eventId, inputEventName) {
-     this.setState({
-      friendFormEventInputs: [
-        ...this.state.friendFormEventInputs, {
-          inputeventName: inputEventName,
-          eventId: eventId
-           
-        } 
-      ]
-    })
+    if (!eventId) {
+      this.setState([...this.state.newFriendFormEventInput, 
+      { eventId: 'create', eventDate: 'unset', eventName: inputEventName }])
+    } else {
+      const newFriendFormEventInput = this.state.friendFormEventInputs
+        .map(el => {
+          if (el.eventId === eventId) {
+            el.eventName = inputEventName
+          }
+          return el
+        })
+      // const updatingExistingEvent = !!this.state.friendFormEventInputs[eventId];
+      this.setState({ friendFormEventInputs: newFriendFormEventInput })
+    }
   }
-
+  getEventDateInputById(eventId) {
+    const foundObj = this.state.friendFormEventInputs.find(el => el.eventId === eventId);
+    return foundObj.eventDate;
+  }
+  getEventNameInputById(eventId) {
+    const foundObj = this.state.friendFormEventInputs.find(el => el.eventId === eventId)
+    return foundObj.eventName;
+  }
   clearState() {
     this.setState({
-      friendFormEventInputs: {}
+      friendFormEventInputs: [],
     })
   }
   render() {
+    console.log(this.state.friendFormEventInputs);
     const {
       friendFormIsVisible,
       friendFormUpdatingSelectedFriendId,
@@ -93,7 +125,6 @@ class FriendFormCreateUpdate extends Component {
     const {
       friendFormEventInputs
     } = this.state;
-
     return (
       <Modal
         visible={friendFormIsVisible}
@@ -121,67 +152,60 @@ class FriendFormCreateUpdate extends Component {
                     placeholderTextColor='#c9c9c9' />
                 </InputGroup>
               </ListItem>
-              
-           { events.map((eachEvent) => {
-              const { eventId, eventDate, eventName } = eachEvent;
-              const stateEventDate = (friendFormEventInputs.hasOwnProperty(eventId))
-                ? friendFormEventInputs[eventId].inputEventDate
-                : "01-01";
-              const stateEventName = (friendFormEventInputs.hasOwnProperty(eventName))
-                ? friendFormEventInputs[eventId].inputEventName
-                : "Your event name.";
 
-              return (
-              <List key={eventId}>
-                  <ListItem>
-                    <Icon name='md-calendar' />
-                    <FriendFormDatePicker
+              {events.map((eachEvent) => {
+                const { eventId, eventName } = eachEvent;
 
-                      date={isUpdating ? stateEventDate : "11-11"}
-                      placeholder={isUpdating ? `date: ${stateEventDate}, eventName: ${eventName}` : 'Add a special date.'}
-                      onDateChange={(inputEventDate) => this.handleEventDateInputChange(eventId, inputEventDate)}
-                    />
-                    <Button>
-                    Category <Icon name='ios-add-circle' />
-                    </Button>
+
+                return (
+                  <List key={eventId}>
+                    <ListItem>
+                      <Icon name='md-calendar' />
+                      <FriendFormDatePicker
+                        date="11-11"
+                        onDateChange={(eventDateInputArg) => this.handleEventDateInputChange(eventId, eventDateInputArg)}
+                        />
+                      <Button>
+                        Category <Icon name='ios-add-circle' />
+                      </Button>
                     </ListItem>
                     <ListItem>
                       <Icon name='ios-person-outline' />
                       <Input
                         defaultValue={isUpdating ? eventName : ''}
-                        onChangeText={(inputEventName) => this.handleEventNameInputChange(eventId, inputEventName)}
-                        placeholder={isUpdating ? stateEventName : 'Please Enter an Event Name'}
+                        onChangeText={(eventNameInputArg) => this.handleEventNameInputChange(eventId, eventNameInputArg)}
+                        placeholder={isUpdating ? eventName : 'Please Enter an Event Name'}
                         placeholderTextColor='#c9c9c9' />
                     </ListItem>
-                    </List>
+                  </List>
 
-              )
-            })
-          }
+                )
+              })
+              }
 
             </List>
           </Content>
           <Footer>
             <FooterTab>
-               <Button onPress={() => actions.friendFormCancelUpdateOrCreate()}>
-                 CANCEL
-                <Icon name='ios-close-circle-outline'/>
+              <Button onPress={() => actions.friendFormCancelUpdateOrCreate()}>
+                CANCEL
+                <Icon name='ios-close-circle-outline' />
               </Button>
               <Button onPress={() => {
-                  actions.friendFormAddEvent(friendFormUpdatingSelectedFriendId, "BLANK EVENT", "07-07" );
-              }}>
+                actions.friendFormAddEvent(friendFormUpdatingSelectedFriendId, "BLANK EVENT", "07-07");
+              } }>
                 ADD EVENT
                 <Icon name='ios-calendar-outline' />
               </Button>
               <Button onPress={() => {
                 return (isUpdating)
-                      ? actions.updateFriend(
-                          friendFormUpdatingSelectedFriendId, 
-                          friendFormNameInput, 
-                          friendFormEventInputs
-                        )
-                      : actions.createFriend(friendFormNameInput, friendFormEventInputs)
-                    }}>
+                  ? actions.updateFriend(
+                    friendFormUpdatingSelectedFriendId,
+                    friendFormNameInput,
+                    friendFormEventInputs
+                  )
+                  : actions.createFriend(friendFormNameInput, friendFormEventInputs)
+              } }>
                 {(isUpdating) ? 'UPDATE' : 'CREATE'} {/* Button Title */}
                 <Icon name='ios-checkbox-outline' />
               </Button>
@@ -208,6 +232,8 @@ const mstp = (state) => {
     events,
     friendName
   } = Utils.getFriendByFriendId(state, friendFormUpdatingSelectedFriendId);
+
+
   events = events && events.length ? events : [];
   return {
     isUpdating: !!(friendFormIsUpdating && friendFormUpdatingSelectedFriendId),
