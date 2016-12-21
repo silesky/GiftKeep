@@ -17,7 +17,6 @@ import {
           "bday": 
           "events": [
             {
-              // "friendId":
               "eventId": 
               "eventName": 
               "eventDate":
@@ -28,9 +27,7 @@ import {
               "giftTitle": 
               "giftDesc": 
               "giftId": 
-              "eventIds": [
-                "123-NY"
-              ]
+              "eventIds": [...]
             }
           ]
         },
@@ -40,9 +37,10 @@ import {
       "selectedFriendId": 
       "friendFormUpdatingSelectedFriendId": 
       "friendFormIsUpdating": 
-      "friendFormIsVisible": 
+      "friendFormIsVisible":
+      "friendFormBdayInput": 
       "friendFormNameInput":
-      "friendFormAddEventInput": 
+      "friendFormEventInput: [ {"eventId":..., "eventDate:...", "eventName:..."} ]
       "selectedTab": 
     }
   }
@@ -56,7 +54,8 @@ export const user = (state = initialStateUser, action) => {
   const _getGiftArrByFriendId = (friendId) => state.data.find(el => el.friendId === friendId).gifts;
   const _getSingleGiftObj = (friendId, giftId) => _getGiftArrByFriendId(friendId).find((el) => el.giftId === giftId)
   switch (action.type) {
-    case 'ADD_EVENT':
+
+    case 'ADD_EVENT': {
     let data = state.data.map(el => {
       if (el.friendId === action.payload.friendId) {
         el.events = [...el.events, {
@@ -68,7 +67,7 @@ export const user = (state = initialStateUser, action) => {
       return el
     })
     return {...state, data}
-
+    }
   // TODO: implement
     case 'UPDATE_FRIEND_NAME': {
       let data = state.data.map(el => {
@@ -83,7 +82,7 @@ export const user = (state = initialStateUser, action) => {
     case 'UPDATE_FRIEND': {
    const friendId = action.payload.friendId
     , friendName = action.payload.friendName
-    , eventPayload = action.payload.friendFormEventInputs;
+    , eventPayload = action.payload.friendFormEventInput;
   let createdEvent
   let createdEventFriendIndex;
   let newData = state.data.map((eachFriend, ind) =>{
@@ -97,10 +96,10 @@ export const user = (state = initialStateUser, action) => {
             eachEvent.friendId = friendId
             eachEvent.eventDate = eachPayloadEvent.eventDate;
             eachEvent.eventName = eachPayloadEvent.eventName;
-          } else if (eachPayloadEvent.eventId === 'create') {
+          } else {
             createdEventFriendIndex = ind; 
             createdEvent = {
-              eventId: UUID.create().toString(),
+              eventId: eachPayloadEvent.eventId,
               eventDate: eachPayloadEvent.eventDate,
               eventName: eachPayloadEvent.eventName,
             }
@@ -213,11 +212,13 @@ export const user = (state = initialStateUser, action) => {
 }
 
 const initialStateFirstUser = {
+  
   selectedFriendId: null,
   friendFormUpdatingSelectedFriendId: null,
   friendFormIsUpdating: null,
   friendFormIsVisible: false,
   friendFormNameInput: null,
+  friendFormEventInput: null,
   friendFormBdayInput: "01-10",
   selectedTab: 0,
 };
@@ -229,7 +230,14 @@ export const visible = (state = initialStateFirstUser, action) => {
       return {...state, friendFormIsUpdating: true }
     case 'FRIEND_FORM_UPDATING_STATUS_FALSE':
       return {...state, friendFormIsUpdating: false }
-      
+/* TODO */     case 'FRIEND_FORM_EVENT_DATE_INPUT_UPDATE': {
+       console.error('TODO');
+       return state
+     }
+/* TODO */ case 'FRIEND_FORM_EVENT_NAME_INPUT_UPDATE': {
+      return state; 
+    }
+    
     case 'FRIEND_FORM_NAME_INPUT':
       return {...state, friendFormNameInput: action.payload }
     case 'FRIEND_FORM_BDAY_INPUT':

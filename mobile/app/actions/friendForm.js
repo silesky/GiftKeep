@@ -1,6 +1,6 @@
 import * as Utils from './../utils/utils'
 import { _selectLastFriend } from './index'
-
+import UUID from 'uuid';
 export const friendFormAddEvent = (friendId, eventName, eventDate) => { // TODO: hook it up!
   return {
     type: 'ADD_EVENT',
@@ -10,6 +10,21 @@ export const friendFormAddEvent = (friendId, eventName, eventDate) => { // TODO:
 
 export const friendFormVisibilityToggle = () => ({ type: 'FRIEND_FORM_VISIBILITY_TOGGLE' })
 
+export const friendFormEventDateInputUpdate = (eventId, eventDate) => {
+  return {
+    type: 'FRIEND_FORM_EVENT_DATE_INPUT_UPDATE',
+    payload: { eventId, eventDate }
+}
+// finds the friend, then finds the
+}
+
+export const friendFormEventNameInputUpdate = (eventId, eventName) => { 
+  return {
+    type: 'FRIEND_FORM_EVENT_NAME_INPUT_UPDATE',
+    payload: { eventId, eventName }
+}
+// finds the friend, then finds the
+}
 export const friendFormNameInputUpdate = inputNameValue => ({
   type: 'FRIEND_FORM_NAME_INPUT', payload: inputNameValue
 })
@@ -54,13 +69,15 @@ export const friendFormIsUpdating = (friendId) => { //swipe to update
   }
 }
 
-export const updateFriend = (friendId, updatedFriendName, friendFormEventInputs) => {
-  console.log('UPDATE_FRIEND', friendFormEventInputs);
-  return dispatch => {
-    dispatch({ type: 'UPDATE_FRIEND',
-     payload: { friendId, 
-       friendName: updatedFriendName, 
-       friendFormEventInputs: friendFormEventInputs } 
+export const updateFriend = (friendId) => {
+  return (dispatch, getState) => {
+    const { friendFormEventInput, friendFormNameInput } = getState().visible;
+     dispatch({ type: 'UPDATE_FRIEND', 
+      payload: {
+        friendId: friendId,
+        friendName: friendFormNameInput, 
+        friendFormEventInput: friendFormEventInput //{"eventId": .."eventDate:": "eventName": }
+       } 
     })
     dispatch(friendFormUpdatingStatusChange(false))
     dispatch(friendFormVisibilityToggle())
