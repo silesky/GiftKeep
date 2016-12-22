@@ -12,7 +12,7 @@ export const friendFormVisibilityToggle = () => ({ type: 'FRIEND_FORM_VISIBILITY
 
 export const friendFormEventDateInputUpdate = (eventId, eventDate) => {
   return {
-    type: 'FRIEND_FORM_EVENT_DATE_INPUT_UPDATE',
+    type: 'FRIEND_FORM_EVENT_DATE_INPUT_UPDATE_OR_CREATE',
     payload: { eventId, eventDate }
 }
 // finds the friend, then finds the
@@ -20,7 +20,7 @@ export const friendFormEventDateInputUpdate = (eventId, eventDate) => {
 
 export const friendFormEventNameInputUpdate = (eventId, eventName) => { 
   return {
-    type: 'FRIEND_FORM_EVENT_NAME_INPUT_UPDATE',
+    type: 'FRIEND_FORM_EVENT_NAME_INPUT_UPDATE_OR_CREATE',
     payload: { eventId, eventName }
 }
 // finds the friend, then finds the

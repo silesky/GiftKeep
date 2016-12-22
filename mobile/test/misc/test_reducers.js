@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import * as state from './../json/state.json'
 import rootReducer from './../../app/reducers/reducers';
 module.exports = () => {
-  describe('REDUCERS:', () => {
+  describe.only('REDUCERS:', () => {
     const existingFriendId = state.user.data[0].friendId;
     const existingEventId = state.user.data[0].events[0].eventId;
     describe('UPDATE_FRIEND', () => {
@@ -22,9 +22,14 @@ module.exports = () => {
                 eventName: 'MyUpdatedEventName',
               },
               {
-                eventId: 'create',
+                eventId: 'IDONTEXIST',
                 eventDate: '12-12',
                 eventName: 'MyJustCreatedEventName',
+              },
+              {
+                eventId: 'IDONTEXIST2',
+                eventDate: '12-12',
+                eventName: 'MyJustCreatedEventName2',
               }
             ]
           }
@@ -55,13 +60,24 @@ module.exports = () => {
         expect(anEventObj['eventName']).to.equal('MyUpdatedEventName');
       })
 
-      it('should create a new events if the id says create', () => {
-        const anEventObj = events[events.length - 1];
+      it('should be able to create a new event, rather than update (if no existing id is found)', () => {
+        const anEventObj = events[1];
+        console.log(events[1]);
         expect(anEventObj).to.have.property('eventId');
         expect(anEventObj).to.have.property('eventDate');
         expect(anEventObj).to.have.property('eventName');
         expect(anEventObj['eventId']).to.be.a.string;
         expect(anEventObj['eventName']).to.equal('MyJustCreatedEventName');
+   
+      })
+     it('if there are multiple new events, they should be created, too', () => {
+        const anEventObj2 = events[events.length - 1];
+        expect(anEventObj2).to.have.property('eventId');
+        expect(anEventObj2).to.have.property('eventDate');
+        expect(anEventObj2).to.have.property('eventName');
+        expect(anEventObj2['eventId']).to.be.a.string;
+        expect(anEventObj2['eventName']).to.equal('MyJustCreatedEventName2');
+   
       })
     })
   }); // REDUCERS

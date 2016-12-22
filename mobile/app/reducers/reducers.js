@@ -56,68 +56,69 @@ export const user = (state = initialStateUser, action) => {
   switch (action.type) {
 
     case 'ADD_EVENT': {
-    let data = state.data.map(el => {
-      if (el.friendId === action.payload.friendId) {
-        el.events = [...el.events, {
-          eventName: action.payload.eventName,
-          eventDate: action.payload.eventDate,
-          eventId: UUID.create().toString()
-         }]
-      }
-      return el
-    })
-    return {...state, data}
+      let data = state.data.map(el => {
+        if (el.friendId === action.payload.friendId) {
+          el.events = [...el.events, {
+            eventName: action.payload.eventName,
+            eventDate: action.payload.eventDate,
+            eventId: UUID.create().toString()
+          }]
+        }
+        return el
+      })
+      return { ...state, data }
     }
-  // TODO: implement
+    // TODO: implement
     case 'UPDATE_FRIEND_NAME': {
       let data = state.data.map(el => {
         if (el.friendId === action.payload.friendId) {
           el.friendName = action.payload.friendName;
         }
       })
-      return {...state, data };
+      return { ...state, data };
     }
 
     // TODO: break up
     case 'UPDATE_FRIEND': {
-   const friendId = action.payload.friendId
-    , friendName = action.payload.friendName
-    , eventPayload = action.payload.friendFormEventInput;
-  let createdEvent
-  let createdEventFriendIndex;
-  let newData = state.data.map((eachFriend, ind) =>{
-    if (eachFriend.friendId === friendId) {
-      eachFriend.friendName = friendName;
-      eachFriend.events = eachFriend.events.map((eachEvent)=>{
-        // return eachEvent
-        eventPayload.forEach((eachPayloadEvent) => {
-          // find eventId in the payload matches the one in the events array
-          if (eachEvent.eventId === eachPayloadEvent.eventId) {
-            eachEvent.friendId = friendId
-            eachEvent.eventDate = eachPayloadEvent.eventDate;
-            eachEvent.eventName = eachPayloadEvent.eventName;
-          } else {
-            createdEventFriendIndex = ind; 
-            createdEvent = {
-              eventId: eachPayloadEvent.eventId,
-              eventDate: eachPayloadEvent.eventDate,
-              eventName: eachPayloadEvent.eventName,
-            }
-          }
-        }) // end eachPayloadEvent iterator
-        // should be called once for each Event
-        return eachEvent
-        
-      })
-      return eachFriend;
+      let createdEventArr = [];
+      const friendId = action.payload.friendId
+        , friendName = action.payload.friendName
+        , eventPayload = action.payload.friendFormEventInput;
+      let createdEventFriendIndex;
+      let newData = state.data.map((eachFriend, ind) => {
+        if (eachFriend.friendId === friendId) {
+          eachFriend.friendName = friendName;
+          eachFriend.events = eachFriend.events.map((eachEvent) => {
+            // return eachEvent
+            eventPayload.forEach((eachPayloadEvent) => {
+              // find eventId in the payload matches the one in the events array
+              if (eachEvent.eventId === eachPayloadEvent.eventId) {
+                eachEvent.friendId = friendId
+                eachEvent.eventDate = eachPayloadEvent.eventDate;
+                eachEvent.eventName = eachPayloadEvent.eventName;
+              } else {
+                createdEventFriendIndex = ind;
+                const createdEventArr = [...createdEventArr, {
+                  eventId: eachPayloadEvent.eventId,
+                  eventDate: eachPayloadEvent.eventDate,
+                  eventName: eachPayloadEvent.eventName,
+                }]
+              }
+            }) // end eachPayloadEvent iterator
+            // should be called once for each Event
+            return eachEvent
 
-     
-    }// end eachFriend iterator 
-  })
-  // check to see if there's a new event, if not, create a new event before merging in the new state
-  if (createdEvent) newData[createdEventFriendIndex].events.push(createdEvent);
-  return Object.assign({}, state, {data: newData})
-  }
+          })
+          return eachFriend;
+
+
+        }// end eachFriend iterator 
+      })
+      console.log('###########', createdEventArr);
+      // check to see if there's a new event, if not, create a new event before merging in the new state
+      if (createdEventArr.length) newData[createdEventFriendIndex].events.push(...createdEventArr);
+      return Object.assign({}, state, { data: newData })
+    }
 
     case 'HYDRATE_USER': {
       // fromat should be { data: [], fbId: ..., userName: }
@@ -181,13 +182,14 @@ export const user = (state = initialStateUser, action) => {
     }
 
     case 'CREATE_FRIEND': {
-      return { ...state, data: [...state.data, {
-        friendId: UUID.create().toString(),
-        friendName: action.payload.friendName,
-        bday: action.payload.bday,
-        gifts: [],
-        events: [],
-      }]
+      return {
+        ...state, data: [...state.data, {
+          friendId: UUID.create().toString(),
+          friendName: action.payload.friendName,
+          bday: action.payload.bday,
+          gifts: [],
+          events: [],
+        }]
       }
     }
     case 'SAVE_FB_PHOTO': {
@@ -207,50 +209,95 @@ export const user = (state = initialStateUser, action) => {
     }
     default: {
       return state;
+    }
   }
-}
 }
 
 const initialStateFirstUser = {
-  
+
   selectedFriendId: null,
   friendFormUpdatingSelectedFriendId: null,
   friendFormIsUpdating: null,
   friendFormIsVisible: false,
   friendFormNameInput: null,
-  friendFormEventInput: null,
+  friendFormEventInput: [],
   friendFormBdayInput: "01-10",
   selectedTab: 0,
 };
 export const visible = (state = initialStateFirstUser, action) => {
   switch (action.type) {
+
     case 'FRIEND_FORM_UPDATING_SELECTED_FRIEND_ID':
-      return {...state, friendFormUpdatingSelectedFriendId: action.payload.friendId }
+      return { ...state, friendFormUpdatingSelectedFriendId: action.payload.friendId }
+      
     case 'FRIEND_FORM_UPDATING_STATUS_TRUE':
-      return {...state, friendFormIsUpdating: true }
+      return { ...state, friendFormIsUpdating: true }
+
     case 'FRIEND_FORM_UPDATING_STATUS_FALSE':
-      return {...state, friendFormIsUpdating: false }
-/* TODO */     case 'FRIEND_FORM_EVENT_DATE_INPUT_UPDATE': {
-       console.error('TODO');
-       return state
-     }
-/* TODO */ case 'FRIEND_FORM_EVENT_NAME_INPUT_UPDATE': {
-      return state; 
+      return { ...state, friendFormIsUpdating: false }
+
+    case 'FRIEND_FORM_EVENT_DATE_INPUT_UPDATE_OR_CREATE': {
+      const { eventId, eventDate } = action.payload;
+      const _eventDoesNotExistYet = (eventId) => !state.friendFormEventInput.find(el => el.eventId === eventId);
+      let newFriendFormEventInput;
+      if (_eventDoesNotExistYet(eventId)) {
+             newFriendFormEventInput = [...state.friendFormEventInput, {
+                eventId: eventId,
+                eventDate: eventDate,
+              }
+           ]
+      } else {
+      newFriendFormEventInput = state.friendFormEventInput.map(eachEvent => {
+        if (eachEvent.eventId === eventId) {
+          eachEvent.eventDate = eventDate
+        }
+        return eachEvent    
+      })
+      }
+      return { ...state, friendFormEventInput: newFriendFormEventInput }
     }
-    
+//doing
+    case 'FRIEND_FORM_EVENT_NAME_INPUT_UPDATE_OR_CREATE': {
+      const { eventId, eventName } = action.payload;
+      const _eventDoesNotExistYet = (eventId) => !state.friendFormEventInput.find(el => el.eventId === eventId);
+      let newFriendFormEventInput;
+      if (_eventDoesNotExistYet(eventId)) {
+             newFriendFormEventInput = [...state.friendFormEventInput, {
+                eventId: eventId,
+                eventName: eventName,
+              }
+           ]
+      } else {
+      newFriendFormEventInput = state.friendFormEventInput.map(eachEvent => {
+        if (eachEvent.eventId === eventId) {
+          eachEvent.eventName = eventName
+        }
+        return eachEvent    
+      })
+      }
+
+      return { ...state, friendFormEventInput: newFriendFormEventInput }
+    }
+
     case 'FRIEND_FORM_NAME_INPUT':
-      return {...state, friendFormNameInput: action.payload }
+      return { ...state, friendFormNameInput: action.payload }
+
     case 'FRIEND_FORM_BDAY_INPUT':
-      return {...state, friendFormBdayInput: action.payload }
+      return { ...state, friendFormBdayInput: action.payload }
+
     case 'SELECT_TAB':
-      return {...state, selectedTab: action.payload.selectedTab }
+      return { ...state, selectedTab: action.payload.selectedTab }
+
     case 'HYDRATE_VISIBLE':
       const newState = Object.assign({}, action.payload)
       return newState
+
     case 'SELECT_FRIEND':
       return { ...state, selectedFriendId: action.payload.friendId }
+    
     case 'FRIEND_FORM_VISIBILITY_TOGGLE':
-      return { ...state,
+      return {
+        ...state,
         friendFormIsVisible: !state.friendFormIsVisible
       };
 

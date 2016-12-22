@@ -115,7 +115,9 @@ class FriendFormCreateUpdate extends Component {
 
                 return (
                   <List key={eventId}>
-                    <ListItem>
+            
+                    {/* <ListItem>
+
                       <Icon name='md-calendar' />
                       <FriendFormDatePicker
                         date="11-11"
@@ -124,7 +126,7 @@ class FriendFormCreateUpdate extends Component {
                       <Button>
                         Category <Icon name='ios-add-circle' />
                       </Button>
-                    </ListItem>
+                    </ListItem> */}
                     <ListItem>
                       <Icon name='ios-person-outline' />
                       <Input
