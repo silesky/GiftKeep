@@ -54,7 +54,9 @@ export const user = (state = initialStateUser, action) => {
   const _getGiftArrByFriendId = (friendId) => state.data.find(el => el.friendId === friendId).gifts;
   const _getSingleGiftObj = (friendId, giftId) => _getGiftArrByFriendId(friendId).find((el) => el.giftId === giftId)
   switch (action.type) {
-
+   case 'RESET_USER': {
+    return initialStateUser 
+   }
     case 'ADD_EVENT': {
       let data = state.data.map(el => {
         if (el.friendId === action.payload.friendId) {
@@ -80,10 +82,10 @@ export const user = (state = initialStateUser, action) => {
     }
     // TODO: break up
     case 'UPDATE_OR_CREATE_FRIEND_EVENTS': {
-      let createdEventArr = [];
-      const friendId = action.payload.friendId
-        , eventPayload = action.payload.friendFormEventInput;
-      let createdEventFriendIndex;
+     let eventsToCreate = [];
+      const friendId = action.payload.friendId, 
+        eventPayload = action.payload.friendFormEventInput
+        ;
       let newData = state.data.map((eachFriend, ind) => {
         if (eachFriend.friendId === friendId) {
           eachFriend.events = eachFriend.events.map((eachEvent) => {
@@ -95,27 +97,26 @@ export const user = (state = initialStateUser, action) => {
                 eachEvent.eventDate = eachPayloadEvent.eventDate;
                 eachEvent.eventName = eachPayloadEvent.eventName;
               } else {
-                createdEventFriendIndex = ind;
-                const createdEventArr = [...createdEventArr, {
+                eventsToCreate.push({
                   eventId: eachPayloadEvent.eventId,
                   eventDate: eachPayloadEvent.eventDate,
                   eventName: eachPayloadEvent.eventName,
-                }]
+                })
               }
             }) // end eachPayloadEvent iterator
             // should be called once for each Event
-            return eachEvent
-
+          return eachEvent
           })
-          return eachFriend;
 
-
-        }// end eachFriend iterator 
+         if (eventsToCreate.length) {
+              eachFriend.events.push(...eventsToCreate)
+              eventsToCreate = []; 
+            }
+        }
+        return eachFriend;// end eachFriend iterator 
       })
-      console.log('###########', createdEventArr);
-      // check to see if there's a new event, if not, create a new event before merging in the new state
-      if (createdEventArr.length) newData[createdEventFriendIndex].events.push(...createdEventArr);
-      return Object.assign({}, state, { data: newData })
+      const newState = Object.assign({}, state, { data: newData })
+      return newState;
     }
 
     case 'HYDRATE_USER': {
@@ -224,6 +225,9 @@ const initialStateFirstUser = {
 };
 export const visible = (state = initialStateFirstUser, action) => {
   switch (action.type) {
+    case 'RESET_VISIBLE': {
+    return initialStateFirstUser 
+    }
 
     case 'FRIEND_FORM_UPDATING_SELECTED_FRIEND_ID':
       return { ...state, friendFormUpdatingSelectedFriendId: action.payload.friendId }

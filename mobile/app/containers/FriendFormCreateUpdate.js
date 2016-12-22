@@ -61,11 +61,7 @@ class FriendFormCreateUpdate extends Component {
       friendFormEventInput 
     } = this.props
     return (isUpdating)
-      ? actions.updateFriendAndOrUpdateCreateEvents(
-        friendFormUpdatingSelectedFriendId,
-        friendFormNameInput,
-        friendFormEventInput,
-      )
+      ? actions.updateFriendNameAndOrUpdateOrCreateEvents(friendFormUpdatingSelectedFriendId)
       : this.props.actions.createFriend(friendFormNameInput, friendFormEventInput)
   }
   render() {

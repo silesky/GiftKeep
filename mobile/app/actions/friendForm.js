@@ -71,21 +71,22 @@ export const friendFormIsUpdating = (friendId) => { //swipe to update
   }
 }
 
-const updateOrCreateFriendEvents = (friendFormEventInput) => {
+const updateOrCreateFriendEvents = (friendId, friendFormEventInput) => {
   return {
     type: 'UPDATE_OR_CREATE_FRIEND_EVENTS',
-    payload: { friendFormEventInput } //{"eventId": .."eventDate:": "eventName": }
+    payload: { friendId, friendFormEventInput } //{"eventId": .."eventDate:": "eventName": }
   }
 }
 const updateFriendName = (friendId, friendName) => ({ type: 'UPDATE_FRIEND_NAME', payload: { friendId, friendName } });
+
 export const updateFriendNameAndOrUpdateOrCreateEvents = (friendId) => {
   return (dispatch, getState) => {
     const { 
       friendFormNameInput,
       friendFormEventInput 
      } = getState().visible;
+    dispatch(updateOrCreateFriendEvents(friendId, friendFormEventInput));
     dispatch(updateFriendName(friendId, friendFormNameInput));
-    dispatch(updateOrCreateFriendEvents(friendFormEventInput));
     dispatch(friendFormUpdatingStatusChange(false))
     dispatch(friendFormEventInputClear())
     dispatch(friendFormVisibilityToggle())
@@ -99,6 +100,7 @@ export const createFriend = (friendName, bday) => {
   bday = (bday) ? bday : '???';
   return (dispatch) => {
     dispatch(_createFriend(friendName, bday));
+    dispatch(friendFormEventInputClear())
     dispatch(_selectLastFriend());
     dispatch(friendFormVisibilityToggle());
   }

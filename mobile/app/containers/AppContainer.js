@@ -40,7 +40,7 @@ class AppContainer extends Component {
         content={<DrawerContainer />}
         >
         <TopBar
-          testClick={this.props.actions.testClick}
+          testClick={() => this.props.actions.resetAll()}
           friendName={getFriendItemById(this.props.state, selectedFriendId, 'friendName')}
           drawerOpen={() => this._drawer.open()}
           />

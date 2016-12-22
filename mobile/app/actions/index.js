@@ -4,7 +4,12 @@ import * as Utils from './../utils/utils'
 
 const config = require('./../../mobileconfig.json');
 const { serverUrl } = config
-
+export const resetAll = () => {
+  return dispatch => {
+    dispatch({type: 'RESET_USER'});
+    dispatch({type: 'RESET_VISIBLE'});
+  }
+}
 export const selectTab = (tabNum) => {
   return {
     type: "SELECT_TAB",
