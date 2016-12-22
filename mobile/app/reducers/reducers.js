@@ -74,20 +74,18 @@ export const user = (state = initialStateUser, action) => {
         if (el.friendId === action.payload.friendId) {
           el.friendName = action.payload.friendName;
         }
+        return el;
       })
       return { ...state, data };
     }
-
     // TODO: break up
-    case 'UPDATE_FRIEND': {
+    case 'UPDATE_OR_CREATE_FRIEND_EVENTS': {
       let createdEventArr = [];
       const friendId = action.payload.friendId
-        , friendName = action.payload.friendName
         , eventPayload = action.payload.friendFormEventInput;
       let createdEventFriendIndex;
       let newData = state.data.map((eachFriend, ind) => {
         if (eachFriend.friendId === friendId) {
-          eachFriend.friendName = friendName;
           eachFriend.events = eachFriend.events.map((eachEvent) => {
             // return eachEvent
             eventPayload.forEach((eachPayloadEvent) => {
@@ -229,53 +227,55 @@ export const visible = (state = initialStateFirstUser, action) => {
 
     case 'FRIEND_FORM_UPDATING_SELECTED_FRIEND_ID':
       return { ...state, friendFormUpdatingSelectedFriendId: action.payload.friendId }
-      
+
     case 'FRIEND_FORM_UPDATING_STATUS_TRUE':
       return { ...state, friendFormIsUpdating: true }
 
     case 'FRIEND_FORM_UPDATING_STATUS_FALSE':
       return { ...state, friendFormIsUpdating: false }
+
     case 'FRIEND_FORM_EVENT_INPUT_CLEAR_ALL': {
-      return { ...state, friendFormEventInput: []}
+      return { ...state, friendFormEventInput: [] }
     }
+
     case 'FRIEND_FORM_EVENT_DATE_INPUT_UPDATE_OR_CREATE': {
       const { eventId, eventDate } = action.payload;
       const _eventDoesNotExistYet = (eventId) => !state.friendFormEventInput.find(el => el.eventId === eventId);
       let newFriendFormEventInput;
       if (_eventDoesNotExistYet(eventId)) {
-             newFriendFormEventInput = [...state.friendFormEventInput, {
-                eventId: eventId,
-                eventDate: eventDate,
-              }
-           ]
-      } else {
-      newFriendFormEventInput = state.friendFormEventInput.map(eachEvent => {
-        if (eachEvent.eventId === eventId) {
-          eachEvent.eventDate = eventDate
+        newFriendFormEventInput = [...state.friendFormEventInput, {
+          eventId: eventId,
+          eventDate: eventDate,
         }
-        return eachEvent    
-      })
+        ]
+      } else {
+        newFriendFormEventInput = state.friendFormEventInput.map(eachEvent => {
+          if (eachEvent.eventId === eventId) {
+            eachEvent.eventDate = eventDate
+          }
+          return eachEvent
+        })
       }
       return { ...state, friendFormEventInput: newFriendFormEventInput }
     }
-//doing
+
     case 'FRIEND_FORM_EVENT_NAME_INPUT_UPDATE_OR_CREATE': {
       const { eventId, eventName } = action.payload;
       const _eventDoesNotExistYet = (eventId) => !state.friendFormEventInput.find(el => el.eventId === eventId);
       let newFriendFormEventInput;
       if (_eventDoesNotExistYet(eventId)) {
-             newFriendFormEventInput = [...state.friendFormEventInput, {
-                eventId: eventId,
-                eventName: eventName,
-              }
-           ]
-      } else {
-      newFriendFormEventInput = state.friendFormEventInput.map(eachEvent => {
-        if (eachEvent.eventId === eventId) {
-          eachEvent.eventName = eventName
+        newFriendFormEventInput = [...state.friendFormEventInput, {
+          eventId: eventId,
+          eventName: eventName,
         }
-        return eachEvent    
-      })
+        ]
+      } else {
+        newFriendFormEventInput = state.friendFormEventInput.map(eachEvent => {
+          if (eachEvent.eventId === eventId) {
+            eachEvent.eventName = eventName
+          }
+          return eachEvent
+        })
       }
 
       return { ...state, friendFormEventInput: newFriendFormEventInput }
@@ -296,7 +296,7 @@ export const visible = (state = initialStateFirstUser, action) => {
 
     case 'SELECT_FRIEND':
       return { ...state, selectedFriendId: action.payload.friendId }
-    
+
     case 'FRIEND_FORM_VISIBILITY_TOGGLE':
       return {
         ...state,

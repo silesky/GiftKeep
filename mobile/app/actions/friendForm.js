@@ -14,22 +14,22 @@ export const friendFormEventDateInputUpdate = (eventId, eventDate) => {
   return {
     type: 'FRIEND_FORM_EVENT_DATE_INPUT_UPDATE_OR_CREATE',
     payload: { eventId, eventDate }
-}
-// finds the friend, then finds the
+  }
+  // finds the friend, then finds the
 }
 
-export const friendFormEventNameInputUpdate = (eventId, eventName) => { 
+export const friendFormEventNameInputUpdate = (eventId, eventName) => {
   return {
     type: 'FRIEND_FORM_EVENT_NAME_INPUT_UPDATE_OR_CREATE',
     payload: { eventId, eventName }
-}
-// finds the friend, then finds the
+  }
+  // finds the friend, then finds the
 }
 export const friendFormNameInputUpdate = inputNameValue => ({
   type: 'FRIEND_FORM_NAME_INPUT', payload: inputNameValue
 })
 
-const friendFormEventInputClear = () => ({type: 'FRIEND_FORM_EVENT_INPUT_CLEAR_ALL'})
+const friendFormEventInputClear = () => ({ type: 'FRIEND_FORM_EVENT_INPUT_CLEAR_ALL' })
 export const friendFormBdayInputUpdate = inputBdayValue => ({
   type: 'FRIEND_FORM_BDAY_INPUT', payload: inputBdayValue
 })
@@ -71,16 +71,21 @@ export const friendFormIsUpdating = (friendId) => { //swipe to update
   }
 }
 
-export const updateFriend = (friendId) => {
+const updateOrCreateFriendEvents = (friendFormEventInput) => {
+  return {
+    type: 'UPDATE_OR_CREATE_FRIEND_EVENTS',
+    payload: { friendFormEventInput } //{"eventId": .."eventDate:": "eventName": }
+  }
+}
+const updateFriendName = (friendId, friendName) => ({ type: 'UPDATE_FRIEND_NAME', payload: { friendId, friendName } });
+export const updateFriendNameAndOrUpdateOrCreateEvents = (friendId) => {
   return (dispatch, getState) => {
-    const { friendFormEventInput, friendFormNameInput } = getState().visible;
-     dispatch({ type: 'UPDATE_FRIEND', 
-      payload: {
-        friendId: friendId,
-        friendName: friendFormNameInput, 
-        friendFormEventInput: friendFormEventInput //{"eventId": .."eventDate:": "eventName": }
-       } 
-    })
+    const { 
+      friendFormNameInput,
+      friendFormEventInput 
+     } = getState().visible;
+    dispatch(updateFriendName(friendId, friendFormNameInput));
+    dispatch(updateOrCreateFriendEvents(friendFormEventInput));
     dispatch(friendFormUpdatingStatusChange(false))
     dispatch(friendFormEventInputClear())
     dispatch(friendFormVisibilityToggle())

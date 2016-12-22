@@ -74,7 +74,7 @@ class AppContainer extends Component {
           // isVisible={this.props.state.visible.friendFormIsVisible}
           // isUpdating={this.props.state.visible.isUpdating}
           // selectFriend={this.props.actions.selectFriend}
-          // updateFriend={this.props.actions.updateFriend}
+          // updateFriendAndOrUpdateCreateEvents={this.props.actions.updateFriendAndOrUpdateCreateEvents}
           />
 
         <BottomBar
