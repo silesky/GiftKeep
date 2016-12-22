@@ -235,7 +235,9 @@ export const visible = (state = initialStateFirstUser, action) => {
 
     case 'FRIEND_FORM_UPDATING_STATUS_FALSE':
       return { ...state, friendFormIsUpdating: false }
-
+    case 'FRIEND_FORM_EVENT_INPUT_CLEAR_ALL': {
+      return { ...state, friendFormEventInput: []}
+    }
     case 'FRIEND_FORM_EVENT_DATE_INPUT_UPDATE_OR_CREATE': {
       const { eventId, eventDate } = action.payload;
       const _eventDoesNotExistYet = (eventId) => !state.friendFormEventInput.find(el => el.eventId === eventId);

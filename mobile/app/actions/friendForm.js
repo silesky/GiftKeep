@@ -29,6 +29,7 @@ export const friendFormNameInputUpdate = inputNameValue => ({
   type: 'FRIEND_FORM_NAME_INPUT', payload: inputNameValue
 })
 
+const friendFormEventInputClear = () => ({type: 'FRIEND_FORM_EVENT_INPUT_CLEAR_ALL'})
 export const friendFormBdayInputUpdate = inputBdayValue => ({
   type: 'FRIEND_FORM_BDAY_INPUT', payload: inputBdayValue
 })
@@ -42,12 +43,13 @@ export const friendFormCancelUpdateOrCreate = () => {
   return dispatch => {
     dispatch(friendFormUpdatingStatusChange(false))
     dispatch(friendFormUpdatingSelectedFriendId(null)); //clear friendId just in case 
+    dispatch(friendFormEventInputClear())
     dispatch(friendFormVisibilityToggle());
   }
 }
 
-const friendFormUpdatingStatusChange = (arg) => {
-  return (arg)
+const friendFormUpdatingStatusChange = (bool) => {
+  return (bool)
     ? { type: 'FRIEND_FORM_UPDATING_STATUS_TRUE' }
     : { type: 'FRIEND_FORM_UPDATING_STATUS_FALSE' }
 }
@@ -80,6 +82,7 @@ export const updateFriend = (friendId) => {
        } 
     })
     dispatch(friendFormUpdatingStatusChange(false))
+    dispatch(friendFormEventInputClear())
     dispatch(friendFormVisibilityToggle())
   }
 }
