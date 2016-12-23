@@ -15,7 +15,7 @@ import * as Util from './../../app/utils/utils';
 const mockStore = configureMockStore([thunk]);
 const store = mockStore(state);
 module.exports = () => {
-  describe('TEST_ASYNC_ACTIONS', function () {
+  describe('TEST_ASYNC_ACTIONS-->', function () {
     after(() => store.clearActions());
     // this.timeout(() => console.log('done'), 2000)
     it('store should exist', () => {
@@ -47,37 +47,39 @@ module.exports = () => {
         }).catch(done)
       }).catch(done)
     })
-    describe('Events:', () => {
+    describe('Events: Add to New / add to existing / Update -->', () => {
+
+      // - adding new events to an existing friend (isUpdating = true)
+      // - adding new events to a new friend (isUpdating = false)
+      // - updating an existing event for an existing friend (isUpdating = true)
       let newState;
       let newEventsArr;
-      let addedEvent;
+      let newEvent;
       const existingFriendId = state.user.data[0].friendId;
-      const existingFriendArrayLength = state.user.data[0].events.length;
+      const existingEventArr = state.user.data[0].events
       const eventNameToCreate = "eventNameToCreate";
       const eventDateToCreate = "eventDateToCreate";     
-
-      describe.only('friendFormAddEvent()', () => {
-        before(() => {
-          newState = userReducer(state, actions.clear())
-          newState = userReducer(state, actions.resetAll());
-          const friendFormAddEvent = actions.friendFormAddEvent(existingFriendId, eventNameToCreate, eventDateToCreate );
-          newState = userReducer(state, friendFormAddEvent)
+       before(() => {
+        newState = userReducer(state, actions.clear())
+        newState = userReducer(state, actions.resetAll());
+        const friendFormAddEvent = actions.friendFormAddEvent(existingFriendId, eventNameToCreate, eventDateToCreate );
+        newState = userReducer(state, friendFormAddEvent)
           newEventsArr = newState.user.data[0].events; // each friend has an events array
-          addedEvent = newEventsArr[newEventsArr.length - 1];
-       })
-        it ('should add a new object to the corresponding friend events array', () => {
-          expect(existingFriendArrayLength).to.be.above(newEventsArr.length);
-        });
-        it('if friend is already created: the new event should add an eventName', () => {
-          expect(addedEvent.eventName).to.equal(eventNameToCreate);
+          newEvent = newEventsArr[newEventsArr.length - 1];
         })
-        it('if friend is already created: the new event should have an eventDate', () => {
-          expect(addedEvent.eventDate).to.equal(eventDateToCreate);
-        });
-        it('friendFormAddEvent() should add an event date', () => {
-          expect(addedEvent.eventDate).to.equal(eventDateToCreate);
-        });
+       it ('should add a new event to the state (if adding new event to existing friend, isUpdating = true) ', () => {
+        expect(newEventsArr.length).to.be.above(existingEventArr.length);
+        expect(newEvent).to.be.an.object;
+      });
+       it('the new event should have the right name (if adding new event to existing friend, isUpdating = true)', () => {
+        expect(newEvent).to.have.property('eventName');
+        expect(newEvent.eventName).to.equal(eventNameToCreate);
       })
-    })
+       it('the new event should have an eventDate (if adding new event to existing friend, isUpdating = true)', () => {
+        expect(newEvent).to.have.property('eventDate');
+        expect(newEvent.eventDate).to.equal(eventDateToCreate);
+      });
+     })
+
   })
 }
