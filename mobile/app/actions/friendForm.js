@@ -1,11 +1,24 @@
 import * as Utils from './../utils/utils'
 import { _selectLastFriend } from './index'
-import UUID from 'uuid';
+import UUID from 'uuid-js';
+
+// for when you're adding a friend... unfortunately, there's no friendId
 export const friendFormAddEvent = (friendId, eventName, eventDate) => { // TODO: hook it up!
-  return {
-    type: 'ADD_EVENT',
-    payload: { friendId, eventName, eventDate }
+  const _friendHasNotBeenCreatedYet = !friendId;
+  return dispatch => {
+      if (_friendHasNotBeenCreatedYet) {
+        // create a new friend and store it in visible object (since it's temporary)
+        const newId = UUID.create().toString();
+        dispatch(friendFormEventNameInputUpdate(newId, eventName));
+        dispatch(friendFormEventDateInputUpdate(newId, eventDate));
+
+    } else {
+      dispatch({ // if friend form is updating, friend id must exist, so new events can go in the user object
+        type: 'ADD_EVENT',
+        payload: { friendId, eventName, eventDate }
+      })
   }
+}
 }
 
 export const friendFormVisibilityToggle = () => ({ type: 'FRIEND_FORM_VISIBILITY_TOGGLE' })
@@ -15,7 +28,6 @@ export const friendFormEventDateInputUpdate = (eventId, eventDate) => {
     type: 'FRIEND_FORM_EVENT_DATE_INPUT_UPDATE_OR_CREATE',
     payload: { eventId, eventDate }
   }
-  // finds the friend, then finds the
 }
 
 export const friendFormEventNameInputUpdate = (eventId, eventName) => {
@@ -23,13 +35,13 @@ export const friendFormEventNameInputUpdate = (eventId, eventName) => {
     type: 'FRIEND_FORM_EVENT_NAME_INPUT_UPDATE_OR_CREATE',
     payload: { eventId, eventName }
   }
-  // finds the friend, then finds the
 }
 export const friendFormNameInputUpdate = inputNameValue => ({
   type: 'FRIEND_FORM_NAME_INPUT', payload: inputNameValue
 })
 
 const friendFormEventInputClear = () => ({ type: 'FRIEND_FORM_EVENT_INPUT_CLEAR_ALL' })
+
 export const friendFormBdayInputUpdate = inputBdayValue => ({
   type: 'FRIEND_FORM_BDAY_INPUT', payload: inputBdayValue
 })

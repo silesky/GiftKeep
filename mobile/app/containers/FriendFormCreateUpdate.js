@@ -51,6 +51,10 @@ class FriendFormCreateUpdate extends Component {
   handleEventNameInputChange(eventId, eventNameInputArg) {
     this.props.actions.friendFormEventNameInputUpdate(eventId, eventNameInputArg);
   }
+  onFriendFormAddEventForNewFriendOrExistingFriend() {
+    const { friendFormUpdatingSelectedFriendId } = this.props;
+    this.props.actions.friendFormAddEvent(friendFormUpdatingSelectedFriendId, "BLANK EVENT", "07-07");
+  }
 
   onFriendFormUpdateOrCreate() {
    const { 
@@ -62,10 +66,11 @@ class FriendFormCreateUpdate extends Component {
     } = this.props
     return (isUpdating)
       ? actions.updateFriendNameAndOrUpdateOrCreateEvents(friendFormUpdatingSelectedFriendId)
-      : this.props.actions.createFriend(friendFormNameInput, friendFormEventInput)
+      : actions.createFriend(friendFormNameInput, friendFormEventInput)
   }
   render() {
     const {
+      friendFormEventInput,
       friendFormIsVisible,
       friendFormUpdatingSelectedFriendId,
       friendFormNameInput,
@@ -76,6 +81,8 @@ class FriendFormCreateUpdate extends Component {
       actions,
       events
     } = this.props
+      // 
+    const eventsArrayFromVisibleOrFriend = (isUpdating) ? events : friendFormEventInput;
 
     return (
       <Modal
@@ -105,37 +112,36 @@ class FriendFormCreateUpdate extends Component {
                 </InputGroup>
               </ListItem>
 
-              {events.map((eachEvent) => {
-                const { eventId, eventName } = eachEvent;
+              { 
 
+                eventsArrayFromVisibleOrFriend.map((eachEvent) => {
+                  const { eventId, eventName } = eachEvent;
+                  return (
+                    <List key={eventId}>
+              
+                      {/* <ListItem>
 
-                return (
-                  <List key={eventId}>
-            
-                    {/* <ListItem>
-
-                      <Icon name='md-calendar' />
-                      <FriendFormDatePicker
-                        date="11-11"
-                        onDateChange={(eventDateInputArg) => this.handleEventDateInputChange(eventId, eventDateInputArg)}
-                        />
-                      <Button>
-                        Category <Icon name='ios-add-circle' />
-                      </Button>
-                    </ListItem> */}
-                    <ListItem>
-                      <Icon name='ios-person-outline' />
-                      <Input
-                        defaultValue={isUpdating ? eventName : ''}
-                        onChangeText={(eventNameInputArg) => this.handleEventNameInputChange(eventId, eventNameInputArg)}
-                        placeholder={isUpdating ? eventName : 'Please Enter an Event Name'}
-                        placeholderTextColor='#c9c9c9' />
-                    </ListItem>
-                  </List>
-
-                )
-              })
-              }
+                        <Icon name='md-calendar' />
+                        <FriendFormDatePicker
+                          date="11-11"
+                          onDateChange={(eventDateInputArg) => this.handleEventDateInputChange(eventId, eventDateInputArg)}
+                          />
+                        <Button>
+                          Category <Icon name='ios-add-circle' />
+                        </Button>
+                      </ListItem> */}
+                      <ListItem>
+                        <Icon name='ios-person-outline' />
+                        <Input
+                          defaultValue={isUpdating ? eventName : ''}
+                          onChangeText={(eventNameInputArg) => this.handleEventNameInputChange(eventId, eventNameInputArg)}
+                          placeholder={isUpdating ? eventName : 'Please Enter an Event Name'}
+                          placeholderTextColor='#c9c9c9' />
+                      </ListItem>
+                    </List>        
+                  )
+                })
+            }
 
             </List>
           </Content>
@@ -145,9 +151,7 @@ class FriendFormCreateUpdate extends Component {
                 CANCEL
                 <Icon name='ios-close-circle-outline' />
               </Button>
-              <Button onPress={() => {
-                actions.friendFormAddEvent(friendFormUpdatingSelectedFriendId, "BLANK EVENT", "07-07");
-              } }>
+              <Button onPress={() => {this.onFriendFormAddEventForNewFriendOrExistingFriend()}}>
                 ADD EVENT
                 <Icon name='ios-calendar-outline' />
               </Button>
