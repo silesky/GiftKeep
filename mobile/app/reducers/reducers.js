@@ -181,13 +181,18 @@ export const user = (state = initialStateUser, action) => {
     }
 
     case 'CREATE_FRIEND': {
+      const {
+        friendId, 
+        friendName,
+        friendFormEventInput,
+      } = action.payload; 
       return {
         ...state, data: [...state.data, {
-          friendId: UUID.create().toString(),
-          friendName: action.payload.friendName,
-          bday: action.payload.bday,
+          friendId: friendId, 
+          friendName: friendName,
+          bday: null,
           gifts: [],
-          events: [],
+          events: friendFormEventInput,
         }]
       }
     }

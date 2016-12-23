@@ -7,13 +7,11 @@ export const friendFormAddEvent = (friendId, eventName, eventDate) => { // TODO:
   const _friendHasNotBeenCreatedYet = !friendId;
   return dispatch => {
       if (_friendHasNotBeenCreatedYet) {
-        // create a new friend and store it in visible object (since it's temporary)
         const newId = UUID.create().toString();
         dispatch(friendFormEventNameInputUpdate(newId, eventName));
         dispatch(friendFormEventDateInputUpdate(newId, eventDate));
-
     } else {
-      dispatch({ // if friend form is updating, friend id must exist, so new events can go in the user object
+      dispatch({
         type: 'ADD_EVENT',
         payload: { friendId, eventName, eventDate }
       })
@@ -41,7 +39,6 @@ export const friendFormNameInputUpdate = inputNameValue => ({
 })
 
 const friendFormEventInputClear = () => ({ type: 'FRIEND_FORM_EVENT_INPUT_CLEAR_ALL' })
-
 export const friendFormBdayInputUpdate = inputBdayValue => ({
   type: 'FRIEND_FORM_BDAY_INPUT', payload: inputBdayValue
 })
@@ -83,7 +80,7 @@ export const friendFormIsUpdating = (friendId) => { //swipe to update
   }
 }
 
-const updateOrCreateFriendEvents = (friendId, friendFormEventInput) => {
+const _updateOrCreateFriendEvents = (friendId, friendFormEventInput) => {
   return {
     type: 'UPDATE_OR_CREATE_FRIEND_EVENTS',
     payload: { friendId, friendFormEventInput } //{"eventId": .."eventDate:": "eventName": }
@@ -97,7 +94,7 @@ export const updateFriendNameAndOrUpdateOrCreateEvents = (friendId) => {
       friendFormNameInput,
       friendFormEventInput 
      } = getState().visible;
-    dispatch(updateOrCreateFriendEvents(friendId, friendFormEventInput));
+    dispatch(_updateOrCreateFriendEvents(friendId, friendFormEventInput));
     dispatch(updateFriendName(friendId, friendFormNameInput));
     dispatch(friendFormUpdatingStatusChange(false))
     dispatch(friendFormEventInputClear())
@@ -105,13 +102,24 @@ export const updateFriendNameAndOrUpdateOrCreateEvents = (friendId) => {
   }
 }
 
+const _createNewFriendFromTempStoredFormInputs = () => { 
+return (dispatch, getState) => {
+    const { friendFormEventInput, friendFormNameInput } = getState().visible
+    dispatch({
+      type: 'CREATE_FRIEND', 
+      payload: { 
+        friendId: UUID.create().toString(),
+        friendName: friendFormNameInput,
+        friendFormEventInput: friendFormEventInput
+      }
+    })
+  }
+}
 
-export const _createFriend = (friendName, bday) => ({ type: 'CREATE_FRIEND', payload: { friendName, bday } });
 // modal visibility toggle called
-export const createFriend = (friendName, bday) => {
-  bday = (bday) ? bday : '???';
-  return (dispatch) => {
-    dispatch(_createFriend(friendName, bday));
+export const createFriend = () => {
+  return dispatch => {
+    dispatch(_createNewFriendFromTempStoredFormInputs());
     dispatch(friendFormEventInputClear())
     dispatch(_selectLastFriend());
     dispatch(friendFormVisibilityToggle());

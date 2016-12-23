@@ -29,10 +29,10 @@ module.exports = () => {
     it('[server] hydrate_user action should be dispatched, and response should carry with it the new access token (and user data)', (done) => {
       const callback = sinon.spy();
       FbTestUser().getExistingUserToken()
-        .then(existingUserToken => {
-          store.dispatch(actions.authTokenAndTryToGetUser(existingUserToken))
-            .then(() => {
-              const actions = store.getActions();
+      .then(existingUserToken => {
+        store.dispatch(actions.authTokenAndTryToGetUser(existingUserToken))
+        .then(() => {
+          const actions = store.getActions();
               // all this means that it it dispatched a certain actions
               const resUserObj = actions[0].payload;
               expect(actions[0].type).to.equal('HYDRATE_USER');
@@ -41,38 +41,43 @@ module.exports = () => {
               expect(resUserObj['userName']).to.equal('Existing User'); // 'Existing User' is in mongodb and totally subject to change
               callback();
             })
-            .then(() => {
-              expect(callback.called).to.be.true
-              done()
-            }).catch(done)
+        .then(() => {
+          expect(callback.called).to.be.true
+          done()
         }).catch(done)
+      }).catch(done)
     })
     describe('Events:', () => {
-        let newState;
-        let eventsArr;
-        let addedEvent;
-        const existingFriendId = state.user.data[0].friendId;
-        const eventNameToCreate = "Birthday";
-        const eventDateToCreate = "06-06";      
-      before(() => {
-          const friendFormAddEvent = actions.friendFormAddEvent(
-          existingFriendId,
-          eventNameToCreate,
-          eventDateToCreate
-        );
-         newState = userReducer(state, friendFormAddEvent)
-         eventsArr = newState.user.data[0].events; // each friend has an events array
-         addedEvent = eventsArr[eventsArr.length - 1];
+      let newState;
+      let newEventsArr;
+      let addedEvent;
+      const existingFriendId = state.user.data[0].friendId;
+      const existingFriendArrayLength = state.user.data[0].events.length;
+      const eventNameToCreate = "eventNameToCreate";
+      const eventDateToCreate = "eventDateToCreate";     
+
+      describe.only('friendFormAddEvent()', () => {
+        before(() => {
+          newState = userReducer(state, actions.clear())
+          newState = userReducer(state, actions.resetAll());
+          const friendFormAddEvent = actions.friendFormAddEvent(existingFriendId, eventNameToCreate, eventDateToCreate );
+          newState = userReducer(state, friendFormAddEvent)
+          newEventsArr = newState.user.data[0].events; // each friend has an events array
+          addedEvent = newEventsArr[newEventsArr.length - 1];
+       })
+        it ('should add a new object to the corresponding friend events array', () => {
+          expect(existingFriendArrayLength).to.be.above(newEventsArr.length);
+        });
+        it('if friend is already created: the new event should add an eventName', () => {
+          expect(addedEvent.eventName).to.equal(eventNameToCreate);
+        })
+        it('if friend is already created: the new event should have an eventDate', () => {
+          expect(addedEvent.eventDate).to.equal(eventDateToCreate);
+        });
+        it('friendFormAddEvent() should add an event date', () => {
+          expect(addedEvent.eventDate).to.equal(eventDateToCreate);
+        });
       })
-      after(() => {
-        newState = userReducer(state, actions.clear())
-      });
-      it('friendFormAddEvent() should add an event name', () => {
-        expect(addedEvent.eventName).to.equal(eventNameToCreate);
-      })
-      it('friendFormAddEvent() should add an event date', () => {
-        expect(addedEvent.eventDate).to.equal(eventDateToCreate);
-      });
     })
   })
 }
