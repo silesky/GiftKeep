@@ -1,9 +1,9 @@
-appiInfo.json
+testUsers.json
+appInfo.json
 config.json
 *.key
 *.csr
 *.crt
 Gifter.postman_test_run.json
-*.json
 .env
 .env.*

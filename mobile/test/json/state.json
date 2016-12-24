@@ -1,0 +1,99 @@
+{
+  "user": {
+    "userName": "Seth",
+    "fbId": "initialState",
+    "fbAccessToken": "initialState",
+    "data": [
+      {
+        "friendId": 123,
+        "order": 1,
+        "friendName": "Nick Initial",
+        "bday": "12-25",
+        "events": [
+          {
+            "eventId": "123-NICK",
+            "eventName": "AlreadyExistingEventName",
+            "eventDate": "01-01"
+          }
+        ],
+        "gifts": [
+          {
+            "giftTitle": "Nick Gift!",
+            "giftDesc": "AlreadyExistingGiftDesc",
+            "giftId": 221,
+            "eventIds": [
+              "123-NICK"
+            ]
+          }
+        ]
+      },
+      {
+        "friendId": 456,
+        "order": 2,
+        "friendName": "Dan Initial",
+        "bday": "07-01",
+        "events": [
+          {
+            "eventId": "123-DAN",
+            "eventName": "CHRISTMAS",
+            "eventDate": "12-25"
+          }
+        ],
+        "gifts": [
+          {
+            "giftTitle": "Dan Gift!",
+            "giftDesc": "Vestibulum ante ipsum primis in faucibus.",
+            "giftId": 221,
+            "eventIds": [
+              "123-DAN"
+            ]
+          }
+        ]
+      },
+      {
+        "friendId": 789,
+        "order": 3,
+        "bday": "07-19",
+        "friendName": "Stephen Initial",
+        "events": [
+          {
+            "eventId": "123-STEVE",
+            "eventName": "Birthday",
+            "eventDate": "6-05"
+           
+          }
+        ],
+        "gifts": [
+          {
+            "giftTitle": "Stephen Gift!",
+            "giftDesc": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.",
+            "giftId": 331,
+            "eventIds": [
+              "123-STEVE"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "visible": {
+    "selectedFriendId": "70fab100-3398-444a-8aba-5d9db249134e",
+    "friendFormUpdatingSelectedFriendId": "10a678a1-e543-4bf3-a832-413bdfed23cb",
+    "friendFormIsUpdating": true,
+    "friendFormIsVisible": true,
+    "friendFormNameInput":  "Nick",
+    "friendFormEventInput": [
+          {
+            "eventId": 111,
+            "eventDate:": "12-16",
+            "eventName": "tai kown do"
+          },
+          {
+            "eventId": 222,
+            "eventDate:": "12-17",
+            "eventName": "kung foo"
+          }
+    ],
+    "selectedTab": 0
+  }
+}

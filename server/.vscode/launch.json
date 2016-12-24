@@ -1,0 +1,44 @@
+{
+  // Use IntelliSense to learn about possible Node.js debug attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "attach (node)",
+      "stopOnEntry": true,
+      "type": "node",
+      "request": "attach",
+      "port": 5858, // run nodemon with --debug flag
+      "restart": true //restart debugging session automatically when nodemon restarts
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "run (node)",
+      "program": "${workspaceRoot}/app.js",
+      // I think this is how it's supposed to work
+      // "cannot launch program user/local/bin/node"
+      // nolazy makes sure it doesn't skip async calls
+      "args": [
+        "--debug",
+        "--nolazy"
+      ],
+      "cwd": "${workspaceRoot}"
+    },
+    {
+      "name": "mocha",
+      "type": "node",
+      "request": "launch",
+      "program": "/usr/local/bin/mocha",
+      // Automatically stop program after launch.
+      "stopOnEntry": false,
+      "args": [
+        "${workspaceRoot}/test/index.js", 
+        "--no-timeouts"
+      ],
+      // Workspace relative or absolute path to the working directory of the program being debugged. Default is the current workspace.
+      "cwd": "${workspaceRoot}",
+      "runtimeExecutable": null
+  }]
+}

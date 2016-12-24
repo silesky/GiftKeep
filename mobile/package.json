@@ -8,7 +8,9 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "jest": "jest",
     "test": "mocha --growl --require babel-polyfill ./test/mocha-setup.js --compilers js:babel-core/register --recursive test",
-    "testwatch": "mocha --growl  --watch --require mocha-clean/brief --require babel-polyfill ./test/mocha-setup.js --compilers js:babel-core/register --recursive test"
+    "testwatch": "npm run test -- --watch",
+    "testdb": "npm run test -- --debug-brk=9999",
+    "testdbw": "npm run testwatch -- --debug-brk=9999"
   },
   "dependencies": {
     "json-loader": "^0.5.4",

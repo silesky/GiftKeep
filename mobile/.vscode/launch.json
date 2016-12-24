@@ -1,0 +1,66 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "iOS attach",
+      "program": "${workspaceRoot}/.vscode/launchReactNative.js",
+      "type": "reactnative",
+      "request": "attach",
+      "internalDebuggerPort": 9090,
+      "sourceMaps": true,
+      "outDir": "${workspaceRoot}/.vscode/.react"
+    },
+    {
+      "name": "Debug iOS",
+      "program": "${workspaceRoot}/.vscode/launchReactNative.js",
+      "type": "reactnative",
+      "request": "launch",
+      "platform": "ios",
+      "target": "iPhone 5s",
+      "internalDebuggerPort": 9090,
+      "sourceMaps": true,
+      "outDir": "${workspaceRoot}/.vscode/.react"
+    },
+    {
+      "name": "mocha",
+      "type": "node",
+      "request": "launch",
+      "program": "/usr/local/bin/mocha",
+      // Automatically stop program after launch.
+      "stopOnEntry": false,
+      "args": [
+        "--compilers",
+        "js:babel-core/register",
+        "--require",
+        "./node_modules/babel-polyfill",
+        "./test/mocha-setup.js",
+        "--growl",
+        "--recursive",
+        "./test/index.js"
+      ],
+      // Workspace relative or absolute path to the working directory of the program being debugged. Default is the current workspace.
+      "cwd": "${workspaceRoot}",
+      "runtimeExecutable": null
+    },
+    {
+      "name": "Debug Android",
+      "program": "${workspaceRoot}/.vscode/launchReactNative.js",
+      "type": "reactnative",
+      "request": "launch",
+      "platform": "android",
+      "internalDebuggerPort": 9090,
+      "sourceMaps": true,
+      "outDir": "${workspaceRoot}/.vscode/.react"
+    },
+    {
+      "name": "Debug in Exponent",
+      "program": "${workspaceRoot}/.vscode/launchReactNative.js",
+      "type": "reactnative",
+      "request": "launch",
+      "platform": "exponent",
+      "internalDebuggerPort": 9090,
+      "sourceMaps": true,
+      "outDir": "${workspaceRoot}/.vscode/.react"
+    }
+  ]
+}
