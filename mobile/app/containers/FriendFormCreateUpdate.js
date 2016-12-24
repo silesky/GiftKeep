@@ -79,8 +79,9 @@ class FriendFormCreateUpdate extends Component {
       actions,
       events
     } = this.props
-      // 
-    const eventsArrayFromVisibleOrFriend = (isUpdating) ? events : friendFormEventInput;
+    
+    // either from user state or events state
+    const whichEventArray = (isUpdating) ? events : friendFormEventInput;
 
     return (
       <Modal
@@ -112,7 +113,7 @@ class FriendFormCreateUpdate extends Component {
 
               { 
 
-                eventsArrayFromVisibleOrFriend.map((eachEvent) => {
+                whichEventArray.map((eachEvent) => {
                   const { eventId, eventName } = eachEvent;
                   return (
                     <List key={eventId}>
