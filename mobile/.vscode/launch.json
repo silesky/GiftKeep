@@ -25,22 +25,24 @@
       "name": "mocha",
       "type": "node",
       "request": "launch",
-      "program": "/usr/local/bin/mocha",
+      "program": "${workspaceRoot}/node_modules/mocha/bin/mocha",
       // Automatically stop program after launch.
-      "stopOnEntry": false,
+      "stopOnEntry": false, // just stops at mocha
       "args": [
+        "--colors",
+        "--no-timeouts",
         "--compilers",
         "js:babel-core/register",
         "--require",
         "./node_modules/babel-polyfill",
         "./test/mocha-setup.js",
-        "--growl",
-        "--recursive",
-        "./test/index.js"
+        "./test/index.js",
+        "--growl"
       ],
       // Workspace relative or absolute path to the working directory of the program being debugged. Default is the current workspace.
       "cwd": "${workspaceRoot}",
-      "runtimeExecutable": null
+      "runtimeExecutable": null,
+      "env": { "NODE_ENV": "production"}
     },
     {
       "name": "Debug Android",
