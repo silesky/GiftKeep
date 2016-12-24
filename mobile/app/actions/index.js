@@ -1,5 +1,5 @@
-import './friendForm';
-export * from './friendForm';
+import './actionsFriendForm';
+export * from './actionsFriendForm';
 import * as Utils from './../utils/utils'
 
 const config = require('./../../mobileconfig.json');

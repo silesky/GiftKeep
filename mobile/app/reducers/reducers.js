@@ -230,8 +230,14 @@ const initialStateFirstUser = {
 };
 export const visible = (state = initialStateFirstUser, action) => {
   switch (action.type) {
+    case 'FRIEND_FORM_INPUT_HYDRATE': {
+      const { 
+        friendFormNameInput, friendFormEventInput, friendFormBdayInput 
+      } = action.payload;
+      return {...state, friendFormNameInput, friendFormEventInput, friendFormBdayInput }
+    }
     case 'RESET_VISIBLE': {
-    return initialStateFirstUser 
+      return initialStateFirstUser 
     }
 
     case 'FRIEND_FORM_UPDATING_SELECTED_FRIEND_ID':

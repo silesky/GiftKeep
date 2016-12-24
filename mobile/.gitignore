@@ -1,5 +1,6 @@
 # OSX
 #
+*.bundle
 .DS_Store
 typings/*
 # Xcode

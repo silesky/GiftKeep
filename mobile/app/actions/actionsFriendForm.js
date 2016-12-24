@@ -63,17 +63,23 @@ const friendFormUpdatingStatusChange = (bool) => {
     : { type: 'FRIEND_FORM_UPDATING_STATUS_FALSE' }
 }
 
-const _friendFormSetCurrentInputByFriendId = (friendId) => {
+
+const _hydrateFriendFormInputsFromPermStorage = friendId => {
   return (dispatch, getState) => {
-    const { bday, friendName } = Utils.getFriendByFriendId(getState(), friendId);
-    dispatch(friendFormBdayInputUpdate(bday));
-    dispatch(friendFormNameInputUpdate(friendName));
+    const {events, friendName, bday} = Utils.getFriendByFriendId(getState(), friendId);
+    dispatch({
+      type: 'FRIEND_FORM_INPUT_HYDRATE',
+      payload: {
+        friendFormNameInput: friendName,
+        friendFormEventInput: events,
+        friendFormBdayInput: bday,
+      }
+    })
   }
 }
-
 export const friendFormIsUpdating = (friendId) => { //swipe to update
   return (dispatch) => {
-    dispatch(_friendFormSetCurrentInputByFriendId(friendId)); // fixes the accidental overwriting of usernames on swipeToUpdate 
+    dispatch(_hydrateFriendFormInputsFromPermStorage(friendId)); // fixes the accidental overwriting of usernames on swipeToUpdate 
     dispatch(friendFormUpdatingStatusChange(true))
     dispatch(friendFormUpdatingSelectedFriendId(friendId));
     dispatch(friendFormVisibilityToggle());
