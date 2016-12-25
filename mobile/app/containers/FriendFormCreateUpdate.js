@@ -1,5 +1,8 @@
-// eachEvent should have a default object
-// 
+// [x] eachEvent should have a default object
+// [ ] import from react native calendar datepicker and display
+// react-native-calendar-datepicker
+import Calendar from 'react-native-calendar-datepicker';
+
 
 import React, {
   Component
@@ -11,12 +14,12 @@ import {
   bindActionCreators
 } from 'redux'
 
-import {
-  FriendFormDatePicker
-} from './../components/FriendFormDatePicker.js';
+// import {
+//   FriendFormDatePicker
+// } from './../components/FriendFormDatePicker.js';
 import * as actions from './../actions/'
 import {
-  StyleSheet,
+  // StyleSheet,
   Modal
 } from 'react-native';
 import {
@@ -73,11 +76,11 @@ class FriendFormCreateUpdate extends Component {
     const {
       friendFormEventInput,
       friendFormIsVisible,
-      friendFormUpdatingSelectedFriendId,
-      friendFormNameInput,
-      friendFormBdayInput,
+      // friendFormUpdatingSelectedFriendId,
+      // friendFormNameInput,
+      // friendFormBdayInput,
       friendName,
-      bday,
+      // bday,
       isUpdating, //id 
       actions,
       events
@@ -116,10 +119,10 @@ class FriendFormCreateUpdate extends Component {
 
               { 
     
-                whichEventArray.map((eachEvent) => {
+                whichEventArray.map((eachEvent, eachIndex) => {
                   const { eventId, eventName } = eachEvent;
                   return (
-                    <List key={eventId}>
+                    <List key={eachIndex}>
               
                       {/* <ListItem>
 
