@@ -2,7 +2,7 @@ import UUID from 'uuid-js';
 import {
   combineReducers
 } from 'redux'
-
+import Moment from 'moment';
 /*
   {
     "user": {
@@ -260,9 +260,10 @@ export const visible = (state = initialStateFirstUser, action) => {
       let newFriendFormEventInput;
       if (_eventDoesNotExistYet(eventId)) {
         newFriendFormEventInput = [...state.friendFormEventInput, {
-          eventId: eventId,
+          eventId: (eventId) ? eventId : UUID.create().toString(),
           eventDate: eventDate,
-        }
+          eventName: 'my event name',
+          }
         ]
       } else {
         newFriendFormEventInput = state.friendFormEventInput.map(eachEvent => {
@@ -281,7 +282,8 @@ export const visible = (state = initialStateFirstUser, action) => {
       let newFriendFormEventInput;
       if (_eventDoesNotExistYet(eventId)) {
         newFriendFormEventInput = [...state.friendFormEventInput, {
-          eventId: eventId,
+          eventId: (eventId) ? eventId : UUID.create().toString(),
+          eventDate: Moment().toISOString(),
           eventName: eventName,
         }
         ]

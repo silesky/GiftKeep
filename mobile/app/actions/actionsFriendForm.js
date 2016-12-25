@@ -1,13 +1,14 @@
 import * as Utils from './../utils/utils'
 import { _selectLastFriend } from './index'
 import UUID from 'uuid-js';
+import Moment from 'moment';
 
-// for when you're adding a friend... unfortunately, there's no friendId
-export const friendFormAddEvent = (friendId, eventName, eventDate) => { // TODO: hook it up!
+export const friendFormAddEvent = (friendId, eventName = 'default new event', eventDate = Moment().toISOString()) => { // for when you press the 'add event' button
   const _friendHasNotBeenCreatedYet = !friendId;
   return dispatch => {
       if (_friendHasNotBeenCreatedYet) {
         const newId = UUID.create().toString();
+        // uuid gets created here bc eventNameInput needs to be in-sync// it's ok to change the id once it's made permentant
         dispatch(friendFormEventNameInputUpdate(newId, eventName));
         dispatch(friendFormEventDateInputUpdate(newId, eventDate));
     } else {
@@ -21,14 +22,14 @@ export const friendFormAddEvent = (friendId, eventName, eventDate) => { // TODO:
 
 export const friendFormVisibilityToggle = () => ({ type: 'FRIEND_FORM_VISIBILITY_TOGGLE' })
 
-export const friendFormEventDateInputUpdate = (eventId, eventDate) => {
+export const friendFormEventDateInputUpdate = (eventId, eventDate) => { // if eventId is null, it will create the uuid in the reducer
   return {
     type: 'FRIEND_FORM_EVENT_DATE_INPUT_UPDATE_OR_CREATE',
     payload: { eventId, eventDate }
   }
 }
 
-export const friendFormEventNameInputUpdate = (eventId, eventName) => {
+export const friendFormEventNameInputUpdate = (eventId, eventName) => { //if eventId is null, it will create the uuid in the reducer
   return {
     type: 'FRIEND_FORM_EVENT_NAME_INPUT_UPDATE_OR_CREATE',
     payload: { eventId, eventName }
@@ -94,7 +95,7 @@ const _updateOrCreateFriendEvents = (friendId, friendFormEventInput) => {
 }
 const updateFriendName = (friendId, friendName) => ({ type: 'UPDATE_FRIEND_NAME', payload: { friendId, friendName } });
 
-export const updateFriendNameAndOrUpdateOrCreateEvents = (friendId) => {
+export const updateFriendNameAndOrUpdateOrCreateEvents = (friendId) => { // for when you hit create/update
   return (dispatch, getState) => {
     const { 
       friendFormNameInput,
