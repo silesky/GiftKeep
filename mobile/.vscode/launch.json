@@ -42,7 +42,7 @@
       // Workspace relative or absolute path to the working directory of the program being debugged. Default is the current workspace.
       "cwd": "${workspaceRoot}",
       "runtimeExecutable": null,
-      "env": { "NODE_ENV": "production"}
+      "env": { "NODE_ENV": "development"}
     },
     {
       "name": "Debug Android",
