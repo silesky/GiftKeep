@@ -1,3 +1,6 @@
+// eachEvent should have a default object
+// 
+
 import React, {
   Component
 } from 'react';
@@ -80,7 +83,7 @@ class FriendFormCreateUpdate extends Component {
       events
     } = this.props
     
-    // either from user state or events state
+    // two events array: either from 'user reducer' state (permanant) or 'visible reducer' state (temp input)
     const whichEventArray = (isUpdating) ? events : friendFormEventInput;
 
     return (
@@ -112,7 +115,7 @@ class FriendFormCreateUpdate extends Component {
               </ListItem>
 
               { 
-
+    
                 whichEventArray.map((eachEvent) => {
                   const { eventId, eventName } = eachEvent;
                   return (
@@ -169,12 +172,12 @@ class FriendFormCreateUpdate extends Component {
 /* onRequestClose={() => friendFormVisibilityToggle()}  mandatory android prop*/
 
 const mstp = (state) => {
-  const {
+  let {
     friendFormIsUpdating,
     friendFormIsVisible,
     friendFormNameInput,
     friendFormBdayInput,
-    friendFormEventInput,
+    friendFormEventInput, // [{"eventId":..., "eventDate:...", "eventName:..."}
     friendFormUpdatingSelectedFriendId
   } = state.visible;
   let {
@@ -182,7 +185,9 @@ const mstp = (state) => {
     events,
     friendName
   } = Utils.getFriendByFriendId(state, friendFormUpdatingSelectedFriendId);
-  events = events && events.length ? events : [];
+  events = (events && events.length) ? events : [];
+ 
+  friendFormEventInput = (friendFormEventInput && friendFormEventInput.length) ? friendFormEventInput : [{}];  // show an empty event
   return {
     isUpdating: !!(friendFormIsUpdating && friendFormUpdatingSelectedFriendId),
     bday,
