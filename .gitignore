@@ -1,4 +1,7 @@
 testUsers.json
+.vscode/**/*
+.react
+!launch.json
 appInfo.json
 config.json
 *.key
