@@ -2,7 +2,7 @@
 // [ ] import from react native calendar datepicker and display
 // react-native-calendar-datepicker
 import Calendar from 'react-native-calendar-datepicker';
-
+import * as moment from 'moment';
 
 import React, {
   Component
@@ -23,7 +23,6 @@ import {
   Modal
 } from 'react-native';
 import {
-  Thumbnail,
   Container,
   Content,
   Footer,
@@ -120,10 +119,13 @@ class FriendFormCreateUpdate extends Component {
               { 
     
                 whichEventArray.map((eachEvent, eachIndex) => {
-                  const { eventId, eventName } = eachEvent;
+                  const { eventId, eventName, eventDate } = eachEvent;
                   return (
                     <List key={eachIndex}>
-              
+                      <Calendar 
+                  selected={isUpdating ? eventDate : moment.now() }
+                      onChange={(eventDateInputArg) => this.handleEventDateInputChange(eventId, eventDateInputArg)}
+                      />
                       {/* <ListItem>
 
                         <Icon name='md-calendar' />
