@@ -87,11 +87,6 @@
             "eventId": 111,
             "eventDate:": "12-16",
             "eventName": "tai kown do"
-          },
-          {
-            "eventId": 222,
-            "eventDate:": "12-17",
-            "eventName": "kung foo"
           }
     ],
     "selectedTab": 0

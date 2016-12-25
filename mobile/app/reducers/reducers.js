@@ -57,12 +57,13 @@ export const user = (state = initialStateUser, action) => {
    case 'RESET_USER': {
     return initialStateUser 
    }
-    case 'ADD_EVENT': {
+    case 'ADD_NEW_EVENT_TO_FRIEND': {
+      const { friendId, eventName, eventDate } = action.payload;
       let data = state.data.map(el => {
-        if (el.friendId === action.payload.friendId) {
+        if (el.friendId === friendId) {
           el.events = [...el.events, {
-            eventName: action.payload.eventName,
-            eventDate: action.payload.eventDate,
+            eventName: eventName,
+            eventDate: eventDate,
             eventId: UUID.create().toString()
           }]
         }

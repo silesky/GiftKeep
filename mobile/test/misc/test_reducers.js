@@ -87,7 +87,6 @@ module.exports = () => {
       
       it('if there are multiple new events, they should be created, too', () => {
         const anEventObj2 = events[events.length - 1];
-        console.log(events);
         expect(anEventObj2).to.have.property('eventId');
         expect(anEventObj2).to.have.property('eventDate');
         expect(anEventObj2).to.have.property('eventName');

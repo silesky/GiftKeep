@@ -12,7 +12,7 @@ export const friendFormAddEvent = (friendId, eventName, eventDate) => { // TODO:
         dispatch(friendFormEventDateInputUpdate(newId, eventDate));
     } else {
       dispatch({
-        type: 'ADD_EVENT',
+        type: 'ADD_NEW_EVENT_TO_FRIEND',
         payload: { friendId, eventName, eventDate }
       })
   }
