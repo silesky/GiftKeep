@@ -4,13 +4,15 @@
   "private": true,
   "scripts": {
     "emu": "xcrun instruments -w 'iPhone 6 (9.3)'",
-    "__postinstall": "remotedev-debugger --injectserver",
+    "postinstall": "rndebugger-open",
+    "_asdasf_postinstall": "remotedev-debugger --injectserver",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "jest": "jest",
-    "test": "mocha --growl --require babel-polyfill ./test/mocha-setup.js --compilers js:babel-core/register --recursive test",
+    "test": "mocha --growl --require babel-polyfill ./test/mocha-setup.js --compilers js:babel-core/register --require mocha-clean test",
+    "node-inspector": "node-inspector ./test & open 'http://127.0.0.1:8080/?port=5858'",
     "testwatch": "npm run test -- --watch",
-    "testdb": "npm run test -- --debug-brk=9999",
-    "testdbw": "npm run testwatch -- --debug-brk=9999"
+    "testdb": "npm run node-inspector & npm run test -- --debug-brk",
+    "testdbw": "npm run testdb -- --watch"
   },
   "dependencies": {
     "json-loader": "^0.5.4",
@@ -50,6 +52,7 @@
     "mongodb": "^2.2.11",
     "react-addons-test-utils": "^15.4.0",
     "react-dom": "^15.4.0",
+    "react-native-debugger-open": "^0.3.2",
     "react-native-mock": "^0.2.7",
     "react-test-renderer": "15.3.2",
     "remote-redux-devtools": "^0.5.4",
