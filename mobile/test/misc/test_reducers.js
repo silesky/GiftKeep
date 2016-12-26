@@ -22,7 +22,7 @@ module.exports = () => {
       })
 
       describe('UPDATE_OR_CREATE_FRIEND_EVENTS', () => {
-        let action = {
+        const action = {
           type: 'UPDATE_OR_CREATE_FRIEND_EVENTS',
           payload: {
             friendId: existingFriendId,
@@ -46,7 +46,7 @@ module.exports = () => {
 
           }
         }
-        let events = rootReducer(state, action).user.data[0].events
+        const events = rootReducer(state, action).user.data[0].events
         afterEach(() => {
           rootReducer(state, actions.resetAll());
         })
@@ -84,6 +84,63 @@ module.exports = () => {
 
         })
       })
-    })
-  }); // REDUCERS
-} //module.exports
+      describe('FRIEND_EVENT_DELETE...', () => {
+        // for deleting out of the visible reducer (temporary)
+        const action1 = {
+          type: 'FRIEND_EVENT_DELETE',
+          payload: { eventId: existingEventId }
+        }
+        // for deleting out of the user reducer (Permenant)
+        const action2 = {
+          type: 'FRIEND_FORM_EVENT_DELETE',
+          payload: { eventId: existingEventId }
+        }
+
+        const prevState = {
+          "user": {
+            "data": [{
+              "events": [
+                {
+                  "eventId": "123-DELETEME",
+                  "eventName": "tai kown do",
+                  "eventDate": "12-16"
+                },
+                {
+                  "eventId": "123-Filler",
+                  "eventName": "JustAFillerEvent",
+                  "eventDate": "01-01"
+                }
+              ]
+            }],
+            "visible": {
+              "friendFormEventInput": [
+                {
+                  "eventId": "123-DELETEME",
+                  "eventName": "tai kown do",
+                  "eventDate:": "12-16",
+                },
+                {
+                  "eventId": "123-Filler",
+                  "eventName": "JustAnEditedFillerEvent",
+                  "eventDate": "01-01"
+                }
+              ]
+            }
+          }
+        }
+        const newStateReducerUserEvents = rootReducer(prevState, action1).user.data[0].events
+        const newStateReducerVisibleEvents = rootReducer(prevState, action2).visible.friendFormEventInput;
+        it('FRIEND_FORM_EVENT_DELETE should delete events from the VISIBLE reducer', () => {
+          const anEventObj = newStateReducerVisibleEvents[0]
+          expect(newStateReducerVisibleEvents.length).to.equal(1);
+          expect(anEventObj.eventName).to.equal('JustAnEditedFillerEvent')
+        })
+        it('FRIEND_EVENT_DELETE should delete events from the USER reducer', () => {
+          const anEventObj = newStateReducerVisibleEvents[0]
+          expect(newStateReducerUserEvents.length).to.equal(1);
+          expect(anEventObj.eventName).to.equal('JustAnEditedFillerEvent')
+        })
+      })
+      })
+    }) // REDUCERS
+  } //module.exports
