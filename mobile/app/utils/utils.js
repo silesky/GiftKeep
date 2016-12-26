@@ -1,13 +1,13 @@
 import { AsyncStorage } from 'react-native';
 const _serverUrl = 'http://localhost:3000';
 
-
-export const getAnEventByEventId = (state, eventId) => {
-  return state.user.data
-    .map(eachFriend => eachFriend.events)
-    .reduce((p, n) => p.concat(n))
-    .find(eachEvent => eachEvent.eventId === eventId)
+export const getAllEvents = (state) => {
+    return state.user.data
+      .map(eachFriend => eachFriend.events)
+      .reduce((p, n) => p.concat(n))
 }
+
+export const getAnEventByEventId = (state, eventId) => getAllEvents(state).find(eachEvent => eachEvent.eventId === eventId);
 
 export const getEventsByFriendId = (state, friendId) => {
  const friendObj = getFriendByFriendId(state, friendId);

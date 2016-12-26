@@ -2,10 +2,11 @@
 import { expect } from 'chai';
 import * as actions from './../../app/actions/'
 import * as state from './../json/state.json'
-import rootReducer from './../../app/reducers/reducers';
+import rootReducer, { user, visible } from './../../app/reducers/reducers';
 module.exports = () => {
   describe('REDUCERS:', () => {
     before(() => rootReducer(state, actions.resetAll()))
+
     const existingFriendId = state.user.data[0].friendId;
     const existingEventId = state.user.data[0].events[0].eventId;
     describe('UPDATE_FRIEND_NAME', () => {
@@ -86,19 +87,20 @@ module.exports = () => {
       })
       describe('FRIEND_EVENT_DELETE...', () => {
         // for deleting out of the visible reducer (temporary)
-        const action1 = {
-          type: 'FRIEND_EVENT_DELETE',
+        const actionUser = {
+          type: 'FRIEND_FORM_EVENT_DELETE',
           payload: { eventId: existingEventId }
         }
         // for deleting out of the user reducer (Permenant)
-        const action2 = {
-          type: 'FRIEND_FORM_EVENT_DELETE',
+        const actionVisible = {
+          type: 'FRIEND_FORM_EVENT_INPUT_DELETE',
           payload: { eventId: existingEventId }
         }
 
         const prevState = {
           "user": {
             "data": [{
+              "friendName": "Nick",
               "events": [
                 {
                   "eventId": "123-DELETEME",
@@ -111,27 +113,29 @@ module.exports = () => {
                   "eventDate": "01-01"
                 }
               ]
-            }],
-            "visible": {
-              "friendFormEventInput": [
-                {
-                  "eventId": "123-DELETEME",
-                  "eventName": "tai kown do",
-                  "eventDate:": "12-16",
-                },
-                {
-                  "eventId": "123-Filler",
-                  "eventName": "JustAnEditedFillerEvent",
-                  "eventDate": "01-01"
-                }
-              ]
-            }
+            }]
+          },
+          "visible": {
+            "friendFormEventInput": [
+              {
+                "eventId": "123-DELETEME",
+                "eventName": "tai kown do",
+                "eventDate:": "12-16",
+              },
+              {
+                "eventId": "123-Filler",
+                "eventName": "JustAnEditedFillerEvent",
+                "eventDate": "01-01"
+              }
+            ]
           }
+
         }
-        const newStateReducerUserEvents = rootReducer(prevState, action1).user.data[0].events
-        const newStateReducerVisibleEvents = rootReducer(prevState, action2).visible.friendFormEventInput;
-        it('FRIEND_FORM_EVENT_DELETE should delete events from the VISIBLE reducer', () => {
+        const newStateReducerUserEvents = rootReducer(prevState, actionUser).user.data[0].events
+        const newStateReducerVisibleEvents = rootReducer(prevState, actionVisible).visible.friendFormEventInput;
+        it.only('FRIEND_FORM_EVENT_DELETE should delete events from the VISIBLE reducer', () => {
           const anEventObj = newStateReducerVisibleEvents[0]
+          console.log('#######', anEventObj)
           expect(newStateReducerVisibleEvents.length).to.equal(1);
           expect(anEventObj.eventName).to.equal('JustAnEditedFillerEvent')
         })
@@ -141,6 +145,6 @@ module.exports = () => {
           expect(anEventObj.eventName).to.equal('JustAnEditedFillerEvent')
         })
       })
-      })
-    }) // REDUCERS
-  } //module.exports
+    })
+  }) // REDUCERS
+} //module.exports
