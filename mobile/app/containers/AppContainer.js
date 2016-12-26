@@ -64,11 +64,11 @@ class AppContainer extends Component {
 
         <FriendFormCreateUpdate
            
-          // createFriend={this.props.actions.createFriend}
+          // friendFormCreateAndSave={this.props.actions.friendFormCreateAndSave}
           // friendFormNameInput={this.props.state.friendFormNameInput}
           // friendFormBdayInput={this.props.state.friendFormBdayInput}
           // friendFormBdayInputUpdate={this.props.actions.friendFormBdayInputUpdate}
-          // friendFormNameInputUpdate={this.props.actions.friendFormNameInputUpdate}
+          // friendFormFriendNameInputUpdate={this.props.actions.friendFormFriendNameInputUpdate}
           // friendFormUpdatingSelectedFriendIdId={this.props.state.visible.friendFormUpdatingSelectedFriendIdId} 
           // friendFormVisibilityToggle={this.props.actions.friendFormVisibilityToggle}
           // isVisible={this.props.state.visible.friendFormIsVisible}
@@ -91,7 +91,7 @@ class AppContainer extends Component {
 
 
 const mstp = (state) => ({ state });
-// no more store.dispatch(actions.createFriend())
+// no more store.dispatch(actions.friendFormCreateAndSave())
 const mdtp = (dispatch) => {
   return { actions: bindActionCreators(actions, dispatch) }
 }

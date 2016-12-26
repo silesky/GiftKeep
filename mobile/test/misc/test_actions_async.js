@@ -61,7 +61,7 @@ module.exports = () => {
       describe('should add a new event to the state (if adding new event to existing friend, isUpdating = true) ', () => {
         it('actions should work', () => {
             const store = mockStore(state);
-            store.dispatch(actions.friendFormAddEvent(existingFriendId, eventNameToCreate, eventDateToCreate))
+            store.dispatch(actions.friendFormEventCreate(existingFriendId, eventNameToCreate, eventDateToCreate))
             expect(store.getActions()[0].type).to.equal('ADD_NEW_EVENT_TO_FRIEND'); // since it's an existing friend
         });
           it('ADD_NEW_EVENT_TO_FRIEND', () => {

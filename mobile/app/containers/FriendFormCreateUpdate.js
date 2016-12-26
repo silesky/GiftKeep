@@ -56,9 +56,9 @@ class FriendFormCreateUpdate extends Component {
     this.props.actions.friendFormEventNameInputUpdate(eventId, eventNameInputArg);
   }
 
-  onFriendFormAddEventForNewFriendOrExistingFriend() {
+  onfriendFormEventCreateForNewFriendOrExistingFriend() {
     const { friendFormUpdatingSelectedFriendId } = this.props;
-    this.props.actions.friendFormAddEvent(friendFormUpdatingSelectedFriendId, undefined, undefined); // default eventName, default eventDate     // uses default params
+    this.props.actions.friendFormEventCreate(friendFormUpdatingSelectedFriendId, undefined, undefined); // default eventName, default eventDate     // uses default params
   }
 
   onFriendFormUpdateOrCreate() {
@@ -68,8 +68,8 @@ class FriendFormCreateUpdate extends Component {
       friendFormUpdatingSelectedFriendId,
     } = this.props
     return (isUpdating)
-      ? actions.updateFriendNameAndOrUpdateOrCreateEvents(friendFormUpdatingSelectedFriendId)
-      : actions.createFriend()
+      ? actions.friendFormUpdateAndSave(friendFormUpdatingSelectedFriendId)
+      : actions.friendFormCreateAndSave()
   }
   render() {
     const {
@@ -110,7 +110,7 @@ class FriendFormCreateUpdate extends Component {
 
                   <Input
                     defaultValue={isUpdating ? friendName : ''}
-                    onChangeText={(input) => actions.friendFormNameInputUpdate(input)}
+                    onChangeText={(input) => actions.friendFormFriendNameInputUpdate(input)}
                     placeholder={isUpdating ? friendName : 'Please Enter a Name'}
                     placeholderTextColor='#c9c9c9' />
                 </InputGroup>
@@ -146,11 +146,11 @@ class FriendFormCreateUpdate extends Component {
           </Content>
           <Footer>
             <FooterTab>
-              <Button onPress={() => actions.friendFormCancelUpdateOrCreate()}>
+              <Button onPress={() => actions.friendFormCancel()}>
                 CANCEL
                 <Icon name='ios-close-circle-outline' />
               </Button>
-              <Button onPress={() => { this.onFriendFormAddEventForNewFriendOrExistingFriend() } }>
+              <Button onPress={() => { this.onfriendFormEventCreateForNewFriendOrExistingFriend() } }>
                 ADD EVENT
                 <Icon name='ios-calendar-outline' />
               </Button>

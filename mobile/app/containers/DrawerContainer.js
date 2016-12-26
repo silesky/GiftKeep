@@ -38,7 +38,7 @@ export class DrawerContainer extends Component {
             {
               this.props.state.user.data.map((el, index) => (
               <FriendListItem
-                onSwipeUpdate={this.props.actions.friendFormIsUpdating.bind(this, el.friendId)}
+                onSwipeUpdate={this.props.actions.friendFormUpdateActivate.bind(this, el.friendId)}
                 onSwipeDelete={this.props.actions.deleteFriend.bind(this, el.friendId)}
                 selectFriend={this.props.actions.selectFriend.bind(this, el.friendId)}
                 friendName={el.friendName}
