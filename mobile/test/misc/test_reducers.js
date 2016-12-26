@@ -86,16 +86,6 @@ module.exports = () => {
         })
       })
       describe('FRIEND_EVENT_DELETE...', () => {
-        // for deleting out of the visible reducer (temporary)
-        const actionUser = {
-          type: 'FRIEND_FORM_EVENT_DELETE',
-          payload: { eventId: existingEventId }
-        }
-        // for deleting out of the user reducer (Permenant)
-        const actionVisible = {
-          type: 'FRIEND_FORM_EVENT_INPUT_DELETE',
-          payload: { eventId: existingEventId }
-        }
 
         const prevState = {
           "user": {
@@ -129,18 +119,29 @@ module.exports = () => {
               }
             ]
           }
-
         }
-        const newStateReducerUserEvents = rootReducer(prevState, actionUser).user.data[0].events
-        const newStateReducerVisibleEvents = rootReducer(prevState, actionVisible).visible.friendFormEventInput;
-        it.only('FRIEND_FORM_EVENT_DELETE should delete events from the VISIBLE reducer', () => {
-          const anEventObj = newStateReducerVisibleEvents[0]
-          console.log('#######', anEventObj)
+        // for deleting out of the visible reducer (temporary)
+        const actionUser = {
+          type: 'FRIEND_FORM_EVENT_DELETE',
+          payload: { eventId: "123-DELETEME" }
+        }
+        // for deleting out of the user reducer (Permenant)
+        const actionVisible = {
+          type: 'FRIEND_FORM_EVENT_INPUT_DELETE',
+          payload: { eventId: "123-DELETEME" }
+        }
+
+
+    
+        it('FRIEND_FORM_EVENT_DELETE should delete events from the VISIBLE reducer', () => {
+          const newStateReducerVisibleEvents = rootReducer(prevState, actionVisible).visible.friendFormEventInput;
+          const anEventObj = newStateReducerVisibleEvents[0];
           expect(newStateReducerVisibleEvents.length).to.equal(1);
           expect(anEventObj.eventName).to.equal('JustAnEditedFillerEvent')
         })
         it('FRIEND_EVENT_DELETE should delete events from the USER reducer', () => {
-          const anEventObj = newStateReducerVisibleEvents[0]
+          const newStateReducerUserEvents = rootReducer(prevState, actionUser).user.data[0].events
+          const anEventObj = newStateReducerUserEvents[0]
           expect(newStateReducerUserEvents.length).to.equal(1);
           expect(anEventObj.eventName).to.equal('JustAnEditedFillerEvent')
         })

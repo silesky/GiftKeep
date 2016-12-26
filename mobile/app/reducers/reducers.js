@@ -300,7 +300,6 @@ export const visible = (state = initialStateFirstUser, action) => {
     }
     case 'FRIEND_FORM_EVENT_INPUT_DELETE': {
       const { eventId } = action.payload;
-      console.log(state);
       const newFriendFormEventInput = state.friendFormEventInput.filter(eachEvent => {
          if (eachEvent.eventId !== eventId) return eachEvent
       })
