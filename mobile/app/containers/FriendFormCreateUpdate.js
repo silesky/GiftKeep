@@ -2,7 +2,7 @@
 // [ ] import from react native calendar datepicker and display
 // react-native-calendar-datepicker
 import Calendar from 'react-native-calendar-datepicker';
-
+import { FA } from './../icons'
 import React, {
   Component
 } from 'react';
@@ -35,12 +35,10 @@ import {
   Button,
   Title,
   Icon,
+
 } from 'native-base';
 
-
-
 import * as Utils from './../utils/utils'
-
 
 class FriendFormCreateUpdate extends Component {
   constructor(props) {
@@ -95,7 +93,9 @@ class FriendFormCreateUpdate extends Component {
         transparent={false}
         >
         <Container style={{ height: 50 }}>
+
           <Header>
+     
             <Button transparent>
               <Text></Text>
             </Button>
@@ -106,8 +106,6 @@ class FriendFormCreateUpdate extends Component {
             <List>
               <ListItem>
                 <InputGroup>
-                  <Icon name='ios-person' />
-
                   <Input
                     defaultValue={isUpdating ? friendName : ''}
                     onChangeText={(input) => actions.friendFormFriendNameInputUpdate(input)}
@@ -123,7 +121,7 @@ class FriendFormCreateUpdate extends Component {
                   return (
                     <List key={eachIndex}>
                       <ListItem>
-                        <Icon name='ios-calendar-outline' />
+                         <FA name="calendar-plus-o"/>
                         <Input
                           defaultValue={isUpdating ? eventName : ''}
                           onChangeText={(eventNameInputArg) => this.handleEventNameInputChange(eventId, eventNameInputArg)}
@@ -145,6 +143,7 @@ class FriendFormCreateUpdate extends Component {
             </List>
           </Content>
           <Footer>
+          
             <FooterTab>
               <Button onPress={() => actions.friendFormCancel()}>
                 CANCEL
@@ -152,7 +151,7 @@ class FriendFormCreateUpdate extends Component {
               </Button>
               <Button onPress={() => { this.onfriendFormEventCreateForNewFriendOrExistingFriend() } }>
                 ADD EVENT
-                <Icon name='ios-calendar-outline' />
+                    <Icon name='ios-calendar-outline' />
               </Button>
               <Button onPress={() => this.onFriendFormUpdateOrCreate()}>
                 {(isUpdating) ? 'UPDATE' : 'CREATE'}
