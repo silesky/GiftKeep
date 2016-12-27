@@ -1,7 +1,25 @@
 import { AsyncStorage } from 'react-native';
 const _serverUrl = 'http://localhost:3000';
 
-export const getAllEvents = (state) => {
+export const getEventArrByEventId = (state, eventId) => { // getEventArrByEventId(state['user'], 111)
+
+  let newEvents = []
+  state.data.map(eachFriend => {
+    eachFriend.events.map((eachEvent, undefined, eventArr) => {
+      if (eachEvent.eventId === eventId) {
+       newEvents = eventArr;
+      }
+    }) 
+  })
+
+  return newEvents
+}
+export const getEventArrAndDeleteEvent = (state, eventId) => { 
+  const modEvents = getEventArrByEventId(state, eventId)
+   .filter(el => el.eventId !== eventId)
+  return modEvents;
+}
+export const getAllEvents = (state) => {  //getAllEvents(state)
     return state.user.data
       .map(eachFriend => eachFriend.events)
       .reduce((p, n) => p.concat(n))
