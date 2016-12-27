@@ -50,11 +50,15 @@ class AppContainer extends Component {
             //  currentPage={this.props.state.selectedTab} broken unforuntately
             onChangeTab={(selectTabEvent) => this.props.actions.selectTab(selectTabEvent['i'])}>
             <BodyFriendView 
-              tabLabel='Friends'
+              tabLabel='Gifts'
               isSelected={this.props.state.selectedTab === 0 ? true : false}
               friendId={selectedFriendId}
               />
             <BodyAllGiftsView 
+              tabLabel='Events'
+              isSelected={this.props.state.selectedTab === 1 ? true : false}
+              />
+             <BodyAllGiftsView 
               tabLabel='All Gifts'
               isSelected={this.props.state.selectedTab === 1 ? true : false}
               />
