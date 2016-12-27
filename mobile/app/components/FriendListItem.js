@@ -9,13 +9,13 @@ import Swipeout from 'react-native-swipeout';
 export const FriendListItem = ({friendName, selectFriend, onSwipeDelete, onSwipeUpdate}) => {
   const swipeoutBtns = [
     {
-      text: 'X',
+      text: 'x',
       backgroundColor: 'red',
       onPress: () => onSwipeDelete(),
     },
     {
-      text: 'U',
-      backgroundColor: 'green',
+      text: 'edit',
+      backgroundColor: 'orange',
       onPress: () => onSwipeUpdate(),
     },
   ]

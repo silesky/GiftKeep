@@ -2,7 +2,6 @@
 // [ ] import from react native calendar datepicker and display
 // react-native-calendar-datepicker
 import Calendar from 'react-native-calendar-datepicker';
-import { FA } from './../icons'
 import React, {
   Component
 } from 'react';
@@ -19,7 +18,8 @@ import {
 import * as actions from './../actions/'
 import {
   // StyleSheet,
-  Modal
+  Modal,
+  View
 } from 'react-native';
 import {
   Container,
@@ -95,7 +95,7 @@ class FriendFormCreateUpdate extends Component {
         <Container style={{ height: 50 }}>
 
           <Header>
-     
+
             <Button transparent>
               <Text></Text>
             </Button>
@@ -104,46 +104,44 @@ class FriendFormCreateUpdate extends Component {
           </Header>
           <Content>
             <List>
-              <ListItem>
-                <InputGroup>
+              <InputGroup>
                   <Input
                     defaultValue={isUpdating ? friendName : ''}
                     onChangeText={(input) => actions.friendFormFriendNameInputUpdate(input)}
                     placeholder={isUpdating ? friendName : 'Please Enter a Name'}
-                    placeholderTextColor='#c9c9c9' />
-                </InputGroup>
-              </ListItem>
-
+                    placeholderTextColor='#c9c9c9'
+                    />
+                  <Icon name="ios-person" />
+              </InputGroup>
               {
-
                 whichEventArray.map((eachEvent, eachIndex) => {
                   const { eventId, eventName, eventDate } = eachEvent;
                   return (
-                    <List key={eachIndex}>
-                      <ListItem>
-                         <FA name="calendar-plus-o"/>
-                        <Input
-                          defaultValue={isUpdating ? eventName : ''}
-                          onChangeText={(eventNameInputArg) => this.handleEventNameInputChange(eventId, eventNameInputArg)}
-                          placeholder='Birthday, graduation, anniversary...'
-                          placeholderTextColor='#c9c9c9' />
-                      </ListItem>
-                      <ListItem>
-                        <Calendar
-                          defaultValue={eventDate}
-                          selected={eventDate}
-                          onChange={(eventDateInputArg) => this.handleEventDateInputChange(eventId, eventDateInputArg)}
-                          />
-                      </ListItem>
-                    </List>
+                    <View key={eachIndex}>
+                        <InputGroup>
+                          <Icon name="ios-calendar" />
+                          <Input
+                            defaultValue={isUpdating ? eventName : ''}
+                            onChangeText={(eventNameInputArg) => this.handleEventNameInputChange(eventId, eventNameInputArg)}
+                            placeholder='Birthday, graduation, anniversary...'
+                            placeholderTextColor='#c9c9c9'
+                            />
+                            </InputGroup>
+                            <Calendar
+                              defaultValue={eventDate}
+                              selected={eventDate}
+                              onChange={(eventDateInputArg) => this.handleEventDateInputChange(eventId, eventDateInputArg)}
+                              />
+                       </View>
+                      
+                     
                   )
                 })
               }
-
             </List>
           </Content>
           <Footer>
-          
+
             <FooterTab>
               <Button onPress={() => actions.friendFormCancel()}>
                 CANCEL
@@ -151,7 +149,7 @@ class FriendFormCreateUpdate extends Component {
               </Button>
               <Button onPress={() => { this.onfriendFormEventCreateForNewFriendOrExistingFriend() } }>
                 ADD EVENT
-                    <Icon name='ios-calendar-outline' />
+                    <Icon name='ios-calendar-outline' /> {/* it seems that you can't add custom icons here*/}
               </Button>
               <Button onPress={() => this.onFriendFormUpdateOrCreate()}>
                 {(isUpdating) ? 'UPDATE' : 'CREATE'}
