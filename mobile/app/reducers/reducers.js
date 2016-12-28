@@ -233,6 +233,7 @@ export const user = (state = initialStateUser, action) => {
   }
 }
 
+/************************************************************************************/
 const initialStateFirstUser = {
 
   selectedFriendId: null,

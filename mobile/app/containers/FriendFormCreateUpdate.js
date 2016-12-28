@@ -1,7 +1,6 @@
 // [x] eachEvent should have a default object
 // [ ] import from react native calendar datepicker and display
 // react-native-calendar-datepicker
-import Calendar from 'react-native-calendar-datepicker';
 import React, {
   Component
 } from 'react';
@@ -11,10 +10,9 @@ import {
 import {
   bindActionCreators
 } from 'redux'
-
-// import {
-//   FriendFormDatePicker
-// } from './../components/FriendFormDatePicker.js';
+ import {
+  FriendFormDatePicker
+ } from './../components'
 import * as actions from './../actions/'
 import {
   // StyleSheet,
@@ -71,6 +69,7 @@ class FriendFormCreateUpdate extends Component {
   }
   render() {
     const {
+      friendFormEventDatePickerIsVisible,
       friendFormEventInput,
       friendFormIsVisible,
       // friendFormUpdatingSelectedFriendId,
@@ -105,36 +104,36 @@ class FriendFormCreateUpdate extends Component {
           <Content>
             <List>
               <InputGroup>
-                  <Input
-                    defaultValue={isUpdating ? friendName : ''}
-                    onChangeText={(input) => actions.friendFormFriendNameInputUpdate(input)}
-                    placeholder={isUpdating ? friendName : 'Please Enter a Name'}
-                    placeholderTextColor='#c9c9c9'
-                    />
-                  <Icon name="ios-person" />
+                <Input
+                  defaultValue={isUpdating ? friendName : ''}
+                  onChangeText={(input) => actions.friendFormFriendNameInputUpdate(input)}
+                  placeholder={isUpdating ? friendName : 'Please Enter a Name'}
+                  placeholderTextColor='#c9c9c9'
+                  />
+                <Icon name="ios-person" />
               </InputGroup>
               {
                 whichEventArray.map((eachEvent, eachIndex) => {
                   const { eventId, eventName, eventDate } = eachEvent;
                   return (
                     <View key={eachIndex}>
-                        <InputGroup>
-                          <Icon name="ios-calendar" />
-                          <Input
-                            defaultValue={isUpdating ? eventName : ''}
-                            onChangeText={(eventNameInputArg) => this.handleEventNameInputChange(eventId, eventNameInputArg)}
-                            placeholder='Birthday, graduation, anniversary...'
-                            placeholderTextColor='#c9c9c9'
-                            />
-                            </InputGroup>
-                            <Calendar
-                              defaultValue={eventDate}
-                              selected={eventDate}
-                              onChange={(eventDateInputArg) => this.handleEventDateInputChange(eventId, eventDateInputArg)}
-                              />
-                       </View>
-                      
-                     
+                      <InputGroup>
+                        <Icon name="md-happy" />
+                        <Input
+                          defaultValue={isUpdating ? eventName : ''}
+                          onChangeText={(eventNameInputArg) => this.handleEventNameInputChange(eventId, eventNameInputArg)}
+                          placeholder='Birthday, graduation, anniversary...'
+                          placeholderTextColor='#c9c9c9'
+                          />
+                      </InputGroup>
+                      <FriendFormDatePicker
+                        isVisible={friendFormEventDatePickerIsVisible}
+                        eventDate={eventDate}
+                        handleEventDateInputChange={this.handleEventDateInputChange.bind(this, eventId)}
+                      />
+                    </View>
+
+
                   )
                 })
               }
@@ -169,6 +168,7 @@ const mstp = (state) => {
   let {
     friendFormIsUpdating,
     friendFormIsVisible,
+    friendFormEventDatePickerIsVisible,
     friendFormNameInput,
     friendFormBdayInput,
     friendFormEventInput, // [{"eventId":..., "eventDate:...", "eventName:..."}
@@ -189,6 +189,7 @@ const mstp = (state) => {
     friendFormEventInput,
     friendName,
     friendFormIsVisible,
+    friendFormEventDatePickerIsVisible,
     friendFormNameInput,
     friendFormBdayInput,
     friendFormUpdatingSelectedFriendId

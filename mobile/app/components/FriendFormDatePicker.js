@@ -1,32 +1,51 @@
-import DatePicker from 'react-native-datepicker';
-import React from 'react';
-import { View } from 'react-native';
-import { Icon, ListItem} from 'native-base';
+import Calendar from 'react-native-calendar-datepicker';
+import React, {
+  Component
+} from 'react';
 
-export const FriendFormDatePicker = ({date, placeholder, onDateChange}) => {
-return (
-      <DatePicker
-      showIcon={false}
-      onDateChange={(input) => onDateChange(input)}
-      style={{ width: 200 }}
-      mode="date"
-      date={date}
-      format="MM-DD"
-      placeholder={placeholder}
-      confirmBtnText="Confirm"
-      cancelBtnText="Cancel"
-      customStyles={{
-        dateInput: {
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'flex-start',
-          paddingLeft: 10, /* double name */
-          paddingRight: 5, /* does nothing, same as name */
-          borderWidth: null,
-        }
+import * as actions from './../actions/'
+import {
+  // StyleSheet,
+  Modal,
+  View
+} from 'react-native';
+import {
+  Container,
+  Content,
+  Footer,
+  FooterTab,
+  Header,
+  Input,
+  InputGroup,
+  List,
+  ListItem,
+  Text,
+  Button,
+  Title,
+  Icon,
 
-      }}
+} from 'native-base';
+  // <Modal
+  //   visible={isVisible}
+  //   animationType={'fade'}
+  //   transparent={true}
+  //   >
+    // </Modal>
+export const FriendFormDatePicker = ({ 
+eventDate,
+isVisible, 
+handleEventDateInputChange
 
+}) => (
+
+  <View>
+    <Calendar
+      defaultValue={eventDate}
+      selected={eventDate}
+      onChange={(eventDateInputArg) => handleEventDateInputChange(eventDateInputArg)}
       />
-      )
-}
+
+  </View>
+)             
+
+console.log('hello!');
