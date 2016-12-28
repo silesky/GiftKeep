@@ -42,6 +42,7 @@ import * as Utils from './../utils/utils';
       "friendFormBdayInput": 
       "friendFormNameInput":
       "friendFormEventInput: [ {"eventId":..., "eventDate:...", "eventName:..."} ]
+      "friendFormEventDatePickerIsVisible":
       "selectedTab": 
     }
   }
@@ -240,11 +241,18 @@ const initialStateFirstUser = {
   friendFormIsVisible: false,
   friendFormNameInput: null,
   friendFormEventInput: [],
+  friendFormEventDatePickerIsVisible: false,
   friendFormBdayInput: "01-10",
   selectedTab: 0,
 };
 export const visible = (state = initialStateFirstUser, action) => {
   switch (action.type) {
+      case 'FRIEND_FORM_EVENT_DATEPICKER_VISIBILITY_FALSE': {
+      return {...state, friendFormEventDatePickerIsVisible: false}
+    }
+   case 'FRIEND_FORM_EVENT_DATEPICKER_VISIBILITY_TRUE': {
+      return {...state, friendFormEventDatePickerIsVisible: true}
+    }
     case 'FRIEND_FORM_INPUT_HYDRATE': {
       const {
         friendFormNameInput, friendFormEventInput, friendFormBdayInput

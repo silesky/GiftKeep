@@ -13,7 +13,7 @@
           {
             "eventId": "123-NICK",
             "eventName": "AlreadyExistingEventName",
-            "eventDate": "01-01"
+            "eventDate": "2017-01-01"
           }
         ],
         "gifts": [
@@ -36,7 +36,7 @@
           {
             "eventId": "123-DAN",
             "eventName": "CHRISTMAS",
-            "eventDate": "12-25"
+            "eventDate": "2017-12-25"
           }
         ],
         "gifts": [
@@ -59,7 +59,7 @@
           {
             "eventId": "123-STEVE",
             "eventName": "Birthday",
-            "eventDate": "6-05"
+            "eventDate": "2017-6-05"
            
           }
         ],
@@ -85,10 +85,11 @@
     "friendFormEventInput": [
           {
             "eventId": 111,
-            "eventDate:": "12-16",
+            "eventDate:": "2017-12-16",
             "eventName": "tai kown do"
           }
     ],
+    "friendFormEventDatePickerIsVisible": false,
     "selectedTab": 0
   }
 }
