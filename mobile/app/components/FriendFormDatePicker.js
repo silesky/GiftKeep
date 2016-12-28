@@ -27,7 +27,7 @@ import {
   CardItem
 
 } from 'native-base';
-
+import Moment from 'moment';
 export const FriendFormDatePicker = ({
   eventDate,
   isVisible,
@@ -35,13 +35,24 @@ export const FriendFormDatePicker = ({
   onEventDateInputBoxFocus,
   onEventDateInputOk,
   onCancel,
-}) => (
+}) => {
+  const 
+    eventMonth = Moment(eventDate).format('M')
+    , eventDay =  Moment(eventDate).format('D')
+    , eventYear =  Moment(eventDate).format('Y')
+    , eventTimeFromNow = Moment(eventDate).fromNow()
+;
+  const isEventInTheFuture = Moment(eventDate).format('YYYYMMDD') > Moment().format('YYYYMMDD')
+
+//const dateToDisplay = (isEventInTheFuture) ? eventTimeFromNow : '';
+  return (
     <View>
       <InputGroup>
         <Input
+          placeholder="Click to add a friend event."
           selectionColor={'white'}
           editable={false}
-          value={eventDate.toString()}
+          value={Moment(eventDate).format('MM-DD-YYYY')}
           onFocus={() => onEventDateInputBoxFocus()}
           />
         <Icon name="md-calendar" />
@@ -61,7 +72,7 @@ export const FriendFormDatePicker = ({
             }}>
             <CardItem header>
               <Icon name="md-calendar" />
-              <Text>Select an Event</Text>
+              <Text>Select an Event Date</Text>
             </CardItem>
             <CardItem cardBody>
               <Calendar
@@ -89,15 +100,13 @@ export const FriendFormDatePicker = ({
 
     </View>
   )
-const styles = StyleSheet.create({
-  // footerCard: {
-  //     flex: 1,
-  //     alignItems: 'center',
-  //     paddingTop: 5,
-  //     paddingBottom: 5,
+}
+FriendFormDatePicker.PropTypes = {
+  eventDate: React.PropTypes.string,
+  isVisible: React.PropTypes.bool,
+  onEventDateInputChange: React.PropTypes.func,
+  onEventDateInputBoxFocus: React.PropTypes.func,
+  onEventDateInputOk: React.PropTypes.func,
+  onCancel: React.PropTypes.func
 
-  // },
-  // button: {
-  //   backgroundColor: 'purple'
-  // },
-})
+}

@@ -285,7 +285,7 @@ export const visible = (state = initialStateFirstUser, action) => {
         newFriendFormEventInput = [...state.friendFormEventInput, {
           eventId: (eventId) ? eventId : UUID.create().toString(),
           eventDate: eventDate,
-          eventName: 'my event name',
+          eventName: '',
         }
         ]
       } else {

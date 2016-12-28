@@ -46,7 +46,8 @@ class FriendFormCreateUpdate extends Component {
     this.handleEventNameInputChange = this.handleEventNameInputChange.bind(this);
   }
   handleEventDateInputChange(eventId, eventDateInputArg) {
-    this.props.actions.friendFormEventDateInputUpdate(eventId, eventDateInputArg);
+    const isoDateInputString = eventDateInputArg.toISOString();
+    this.props.actions.friendFormEventDateInputUpdate(eventId, isoDateInputString);
   }
   handleEventNameInputChange(eventId, eventNameInputArg) {
     this.props.actions.friendFormEventNameInputUpdate(eventId, eventNameInputArg);
@@ -128,7 +129,7 @@ class FriendFormCreateUpdate extends Component {
                       </InputGroup>
                       <FriendFormDatePicker
                         isVisible={friendFormEventDatePickerIsVisible}
-                        eventDate={eventDate}
+                        eventDate={eventDate /* needs to be an isostring */}
                         onCancel={actions.friendFormEventDatePickerVisibilityStatusChange.bind(this, false)}
                         onEventDateInputOk={actions.friendFormEventDatePickerVisibilityStatusChange.bind(this, false)}
                         onEventDateInputBoxFocus={actions.friendFormEventDatePickerVisibilityStatusChange.bind(this, true)} 
