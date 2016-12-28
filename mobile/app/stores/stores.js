@@ -13,6 +13,7 @@ import { saveToAsyncStorage, getFromAsyncStorage, updateUserDataByAccessToken, u
 
 const composeEnhancers = composeWithDevTools({
   name: 'Gifter',
+  shouldRecordChanges: false, // need to manually click record changes, recording slows down app.
   actionsBlacklist: ["FRIEND_FORM_NAME_INPUT"] // when I add a seccond item to this array, it doesn't work
 })
 export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));

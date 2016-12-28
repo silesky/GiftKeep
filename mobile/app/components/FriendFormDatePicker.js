@@ -5,7 +5,7 @@ import React, {
 
 import * as actions from './../actions/'
 import {
-  // StyleSheet,
+  StyleSheet,
   Modal,
   View
 } from 'react-native';
@@ -23,29 +23,81 @@ import {
   Button,
   Title,
   Icon,
+  Card,
+  CardItem
 
 } from 'native-base';
-  // <Modal
-  //   visible={isVisible}
-  //   animationType={'fade'}
-  //   transparent={true}
-  //   >
-    // </Modal>
-export const FriendFormDatePicker = ({ 
-eventDate,
-isVisible, 
-handleEventDateInputChange
 
+export const FriendFormDatePicker = ({
+  eventDate,
+  isVisible,
+  onEventDateInputChange,
+  onEventDateInputBoxFocus,
+  onEventDateInputOk,
+  onCancel,
 }) => (
+    <View>
+      <InputGroup>
+        <Input
+          selectionColor={'white'}
+          editable={false}
+          value={eventDate.toString()}
+          onFocus={() => onEventDateInputBoxFocus()}
+          />
+        <Icon name="md-calendar" />
+      </InputGroup>
 
-  <View>
-    <Calendar
-      defaultValue={eventDate}
-      selected={eventDate}
-      onChange={(eventDateInputArg) => handleEventDateInputChange(eventDateInputArg)}
-      />
+      <Modal
+        visible={isVisible}
+        animationType={'fade'}
+        transparent={true}
+        >
+        <Container>
+        <Content>
+          <Card
+            style={{
+              marginTop: 30,
+              backgroundColor: 'white',
+            }}>
+            <CardItem header>
+              <Icon name="md-calendar" />
+              <Text>Select an Event</Text>
+            </CardItem>
+            <CardItem cardBody>
+              <Calendar
+                defaultValue={eventDate}
+                selected={eventDate}
+                onChange={(eventDateInputArg) => onEventDateInputChange(eventDateInputArg)}
+                />
+            </CardItem>
+            <CardItem footer>
+              <Button style={{ alignSelf: 'center' }} danger
+                onPress={() => onCancel()}>
+                CANCEL
+            </Button>
+              <Button style={{ alignSelf: 'center' }} success
+                onPress={() => onEventDateInputOk()}>
+                OK
+              </Button>
+            </CardItem>
+          </Card>
+        </Content>
+        </Container>
 
-  </View>
-)             
+      </Modal>
 
-console.log('hello!');
+
+    </View>
+  )
+const styles = StyleSheet.create({
+  // footerCard: {
+  //     flex: 1,
+  //     alignItems: 'center',
+  //     paddingTop: 5,
+  //     paddingBottom: 5,
+
+  // },
+  // button: {
+  //   backgroundColor: 'purple'
+  // },
+})

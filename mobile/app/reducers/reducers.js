@@ -337,9 +337,13 @@ export const visible = (state = initialStateFirstUser, action) => {
     case 'SELECT_TAB':
       return { ...state, selectedTab: action.payload.selectedTab }
 
-    case 'HYDRATE_VISIBLE':
-      const newState = Object.assign({}, action.payload)
-      return newState
+    case 'HYDRATE_VISIBLE': {
+      return {
+        ...action.payload, 
+        friendFormIsVisible: false,  // no matter what, don't display this stuff 
+        friendFormEventDatePickerIsVisible: false
+      }
+    }
 
     case 'SELECT_FRIEND':
       return { ...state, selectedFriendId: action.payload.friendId }

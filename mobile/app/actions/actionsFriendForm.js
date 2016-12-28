@@ -3,9 +3,11 @@ import { _selectLastFriend } from './index'
 import UUID from 'uuid-js';
 import Moment from 'moment';
 
-export const friendFormEventDatePickerVisibilityTrue = () => ({type: 'FRIEND_FORM_EVENT_DATEPICKER_VISIBILITY_TRUE'})
-export const friendFormEventDatePickerVisibilityFalse = () => ({type: 'FRIEND_FORM_EVENT_DATEPICKER_VISIBILITY_FALSE'})
-
+export const friendFormEventDatePickerVisibilityStatusChange = (bool) => {
+   return (bool) 
+   ? {type: 'FRIEND_FORM_EVENT_DATEPICKER_VISIBILITY_TRUE'} 
+   : {type: 'FRIEND_FORM_EVENT_DATEPICKER_VISIBILITY_FALSE'}
+}
 export const friendFormVisibilityToggle = () => ({ type: 'FRIEND_FORM_VISIBILITY_TOGGLE' })
 
 
@@ -94,7 +96,7 @@ export const friendFormUpdateActivate = (friendId) => {
   }
 }
 // for when you hit 'ADD EVENT'
-export const friendFormEventCreate = (friendId, eventName = 'default new event', eventDate = Moment().toISOString()) => { // for when you press the 'add event' button
+export const friendFormEventCreate = (friendId, eventName = '', eventDate = Moment().toISOString()) => { // for when you press the 'add event' button
   const _friendHasNotBeenCreatedYet = !friendId;
   return dispatch => {
       if (_friendHasNotBeenCreatedYet) {

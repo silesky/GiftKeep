@@ -129,7 +129,10 @@ class FriendFormCreateUpdate extends Component {
                       <FriendFormDatePicker
                         isVisible={friendFormEventDatePickerIsVisible}
                         eventDate={eventDate}
-                        handleEventDateInputChange={this.handleEventDateInputChange.bind(this, eventId)}
+                        onCancel={actions.friendFormEventDatePickerVisibilityStatusChange.bind(this, false)}
+                        onEventDateInputOk={actions.friendFormEventDatePickerVisibilityStatusChange.bind(this, false)}
+                        onEventDateInputBoxFocus={actions.friendFormEventDatePickerVisibilityStatusChange.bind(this, true)} 
+                        onEventDateInputChange={this.handleEventDateInputChange.bind(this, eventId)}
                       />
                     </View>
 
