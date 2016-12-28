@@ -24,8 +24,8 @@ class AppContainer extends Component {
     return (
       <Drawer
         tapToClose={true}
-        openDrawerOffset={0.4 /* % gap on right side of drawer */}
-        panCloseMask={0.4 /* tightly coupled ^. % of screen can be used to close (if tapToClose=true}    */}
+        openDrawerOffset={0.3 /* % gap on right side of drawer */}
+        panCloseMask={0.3 /* tightly coupled ^. % of screen can be used to close (if tapToClose=true}    */}
         ref={(ref) => this._drawer = ref}
         tweenDuration={70 /* speed */}
         tweenHandler={(ratio) => { /* transparency effects */
