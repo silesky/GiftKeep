@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import * as actions from './../actions/'
+import Moment from 'moment';
 import {
   Container,
   Content,
@@ -20,21 +21,26 @@ class BodyEventsView extends React.Component {
     isSelected: React.PropTypes.bool,
   }
   render() {
-    console.log('props', this.props, '###');
-    // I can use truthy or falsy, but I prefer to keep the logic explicit in case I want to add another tab
+    const isEventInTheFuture = (date) => Moment(date).format('YYYYMMDD') > Moment().format('YYYYMMDD');
     return (
       <Container>
         <Content>
-          {this.props.events.map( ({eventName, eventDate, eventId}, index) => {
+          { this.props.events.map(({eventName, eventDate, eventId}, index) => {
+            const eventTimeFromNow = Moment(eventDate).fromNow();
             return (
               <Card key={index}>
                 <CardItem header>
                   <Title>{eventName}</Title>
                 </CardItem>
-                
                 <CardItem body>
-                  <Text>{eventDate}</Text>
-                </CardItem> 
+                  <Text>
+                  {
+                    isEventInTheFuture(eventDate)
+                      ? eventTimeFromNow
+                      : 'Event has passed.'
+                  }
+                  </Text>
+                </CardItem>
               </Card>
             )
           })
@@ -48,11 +54,9 @@ class BodyEventsView extends React.Component {
 
 const mdtp = (dispatch) => ({ actions: bindActionCreators(actions, dispatch) })
 const mstp = (state) => {
-  let { events } = Utils.getFriendByFriendId(state, state.visible.friendFormUpdatingSelectedFriendId);
+  let { events } = Utils.getFriendByFriendId(state, state.visible.selectedFriendId);
   events = (events && events.length) ? events : [];
-  console.log('HEY!', events);
   return {
-    state: state,
     events: events
   }
 };
