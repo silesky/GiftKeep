@@ -11,6 +11,7 @@ import  FriendFormCreateUpdate from './../containers/FriendFormCreateUpdate';
 //Containers (not named exports)
 import DrawerContainer from './../containers/DrawerContainer';
 import BodyFriendView from './../containers/BodyFriendView';
+import { BodyEventsView } from './../containers/'
 import BodyAllGiftsView from './../containers/BodyAllGiftsView';
 import { getFriendItemById } from './../utils/utils';
 
@@ -54,7 +55,7 @@ class AppContainer extends Component {
               isSelected={this.props.state.selectedTab === 0 ? true : false}
               friendId={selectedFriendId}
               />
-            <BodyAllGiftsView 
+            <BodyEventsView 
               tabLabel='Events'
               isSelected={this.props.state.selectedTab === 1 ? true : false}
               />
@@ -66,20 +67,7 @@ class AppContainer extends Component {
           </Tabs>
         </Content>
 
-        <FriendFormCreateUpdate
-           
-          // friendFormCreateAndSave={this.props.actions.friendFormCreateAndSave}
-          // friendFormNameInput={this.props.state.friendFormNameInput}
-          // friendFormBdayInput={this.props.state.friendFormBdayInput}
-          // friendFormBdayInputUpdate={this.props.actions.friendFormBdayInputUpdate}
-          // friendFormFriendNameInputUpdate={this.props.actions.friendFormFriendNameInputUpdate}
-          // friendFormUpdatingSelectedFriendIdId={this.props.state.visible.friendFormUpdatingSelectedFriendIdId} 
-          // friendFormVisibilityToggle={this.props.actions.friendFormVisibilityToggle}
-          // isVisible={this.props.state.visible.friendFormIsVisible}
-          // isUpdating={this.props.state.visible.isUpdating}
-          // selectFriend={this.props.actions.selectFriend}
-          // updateFriendAndOrUpdateCreateEvents={this.props.actions.updateFriendAndOrUpdateCreateEvents}
-          />
+        <FriendFormCreateUpdate />
 
         <BottomBar
           addGift={this.props.actions.addGift.bind(this, selectedFriendId)}
