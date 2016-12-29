@@ -106,13 +106,16 @@ export const user = (state = initialStateUser, action) => {
     if (eachFriend.friendId === friendId) {
       eachFriend.events = eachFriend.events.map((eachEvent) => {
         // return eachEvent
+       
         eventPayload.forEach((eachPayloadEvent) => {
+          // bug where the eventToCreate array was getting populated with existing events
+           const payloadEventDoesNotExistYet = !eachFriend.events.find(eventObj => eventObj.eventId === eachPayloadEvent.eventId);
           // find eventId in the payload matches the one in the events array
+          // seach the whole array yo see if it's found
           if (eachEvent.eventId === eachPayloadEvent.eventId) {
-            eachEvent.friendId = friendId
             eachEvent.eventDate = eachPayloadEvent.eventDate;
             eachEvent.eventName = eachPayloadEvent.eventName;
-          } else {
+          } else if (payloadEventDoesNotExistYet) {
             eventsToCreate.push({
               eventId: eachPayloadEvent.eventId,
               eventDate: eachPayloadEvent.eventDate,
