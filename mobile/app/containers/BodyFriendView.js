@@ -17,13 +17,13 @@ class BodyFriendView extends Component {
       gifts = getFriendItemById(state, friendId, 'gifts');
     return (
       <Content>
-      { (hasFriends) 
-        ? undefined
-        : <NoFriendsAlert
-          friendName={friendName}
-          bday={bday}
-         />
-      }
+        {(hasFriends)
+          ? undefined
+          : <NoFriendsAlert
+            friendName={friendName}
+            bday={bday}
+            />
+        }
         {gifts.map((el, ind) => {
           return (
             <GiftCard
@@ -43,11 +43,10 @@ class BodyFriendView extends Component {
 
 
 const mdtp = (dispatch) => ({ actions: bindActionCreators(actions, dispatch) })
-const mstp = (state) => { 
-return {
-  state: state,
-  hasFriends: !!state.user.data.length,
-
+const mstp = (state) => {
+  return {
+    state: state,
+    hasFriends: !!state.user.data.length,
   }
 }
 export default connect(mstp, mdtp)(BodyFriendView)

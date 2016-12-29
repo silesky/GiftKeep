@@ -11,7 +11,7 @@ import  FriendFormCreateUpdate from './../containers/FriendFormCreateUpdate';
 //Containers (not named exports)
 import DrawerContainer from './../containers/DrawerContainer';
 import BodyFriendView from './../containers/BodyFriendView';
-import { BodyEventsView } from './../containers/'
+import BodyEventsView from './../containers/BodyEventsView';
 import BodyAllGiftsView from './../containers/BodyAllGiftsView';
 import { getFriendItemById } from './../utils/utils';
 
@@ -21,7 +21,6 @@ class AppContainer extends Component {
     super(props)
   }
   render() {
-    const { selectedFriendId, createUpdateFriendModalVisibility } = this.props.state.visible;
     return (
       <Drawer
         tapToClose={true}
@@ -42,7 +41,7 @@ class AppContainer extends Component {
         >
         <TopBar
           testClick={() => this.props.actions.resetAll()}
-          friendName={getFriendItemById(this.props.state, selectedFriendId, 'friendName')}
+          friendName={this.props.friendName}
           drawerOpen={() => this._drawer.open()}
           />
         <Content>
@@ -52,16 +51,16 @@ class AppContainer extends Component {
             onChangeTab={(selectTabEvent) => this.props.actions.selectTab(selectTabEvent['i'])}>
             <BodyFriendView 
               tabLabel='Gifts'
-              isSelected={this.props.state.selectedTab === 0 ? true : false}
-              friendId={selectedFriendId}
+              isSelected={this.props.selectedTab === 0 ? true : false}
+              friendId={this.props.selectedFriendId}
               />
             <BodyEventsView 
               tabLabel='Events'
-              isSelected={this.props.state.selectedTab === 1 ? true : false}
+              isSelected={this.props.selectedTab === 1 ? true : false}
               />
              <BodyAllGiftsView 
               tabLabel='All Gifts'
-              isSelected={this.props.state.selectedTab === 1 ? true : false}
+              isSelected={this.props.selectedTab === 2 ? true : false}
               />
 
           </Tabs>
@@ -70,7 +69,7 @@ class AppContainer extends Component {
         <FriendFormCreateUpdate />
 
         <BottomBar
-          addGift={this.props.actions.addGift.bind(this, selectedFriendId)}
+          addGift={this.props.actions.addGift.bind(this, this.props.selectedFriendId)}
           friendFormVisibilityToggle={this.props.actions.friendFormVisibilityToggle}
           />
 
@@ -82,7 +81,14 @@ class AppContainer extends Component {
 }
 
 
-const mstp = (state) => ({ state });
+const mstp = (state) => {
+  const { selectedFriendId, selectedTab } = state.visible;
+  return {
+    selectedFriendId,
+    selectedTab,
+    friendName: getFriendItemById(state, selectedFriendId, 'friendName')
+  }
+}
 // no more store.dispatch(actions.friendFormCreateAndSave())
 const mdtp = (dispatch) => {
   return { actions: bindActionCreators(actions, dispatch) }
