@@ -4,23 +4,26 @@ import { bindActionCreators } from 'redux';
 import * as actions from './../actions/';
 import { Content } from 'native-base';
 import { GiftCard } from './../components/GiftCard';
-import { FriendInfoBar } from './../components/FriendInfoBar';
+import { NoFriendsAlert } from './../components/';
 import { getFriendItemById } from './../utils/utils';
 class BodyFriendView extends Component {
   constructor() {
     super();
   }
   render() {
-    const { friendId, state } = this.props;
+    const { friendId, state, hasFriends } = this.props;
     const bday = getFriendItemById(state, friendId, 'bday'),
       friendName = getFriendItemById(state, friendId, 'friendName'),
       gifts = getFriendItemById(state, friendId, 'gifts');
     return (
       <Content>
-        <FriendInfoBar
+      { (hasFriends) 
+        ? undefined
+        : <NoFriendsAlert
           friendName={friendName}
           bday={bday}
-          />
+         />
+      }
         {gifts.map((el, ind) => {
           return (
             <GiftCard
@@ -40,5 +43,11 @@ class BodyFriendView extends Component {
 
 
 const mdtp = (dispatch) => ({ actions: bindActionCreators(actions, dispatch) })
-const mstp = (state) => ({ state });
+const mstp = (state) => { 
+return {
+  state: state,
+  hasFriends: !!state.user.data.length,
+
+  }
+}
 export default connect(mstp, mdtp)(BodyFriendView)

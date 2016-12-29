@@ -1,4 +1,7 @@
+import { NoFriendsAlert } from './NoFriendsAlert';
 import { FriendFormDatePicker } from './FriendFormDatePicker';
+
 export { 
-  FriendFormDatePicker 
+  NoFriendsAlert,
+  FriendFormDatePicker,
 }
