@@ -246,11 +246,17 @@ const initialStateFirstUser = {
   friendFormNameInput: null,
   friendFormEventInput: [],
   friendFormEventDatePickerIsVisible: false,
+  friendFormEventDatePickerSelectedEventId: null,
   friendFormBdayInput: "01-10",
   selectedTab: 0,
 };
+
 export const visible = (state = initialStateFirstUser, action) => {
   switch (action.type) {
+    
+    case 'FRIEND_FORM_EVENT_DATEPICKER_SELECT_EVENT': { // which box is selected with onfocus
+      return {...state, friendFormEventDatePickerSelectedEventId: action.payload.eventId}
+    }
       case 'FRIEND_FORM_EVENT_DATEPICKER_VISIBILITY_FALSE': {
       return {...state, friendFormEventDatePickerIsVisible: false}
     }

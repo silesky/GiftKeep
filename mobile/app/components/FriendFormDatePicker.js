@@ -29,7 +29,10 @@ import {
 } from 'native-base';
 import Moment from 'moment';
 export const FriendFormDatePicker = ({
+  isUpdating,
   eventDate,
+  calendarModalIsVisible,
+  //eventWithFocus,
   isVisible,
   onEventDateInputChange,
   onEventDateInputBoxFocus,
@@ -59,7 +62,7 @@ export const FriendFormDatePicker = ({
       </InputGroup>
 
       <Modal
-        visible={isVisible}
+        visible={calendarModalIsVisible}
         animationType={'fade'}
         transparent={true}
         >
@@ -76,7 +79,6 @@ export const FriendFormDatePicker = ({
             </CardItem>
             <CardItem cardBody>
               <Calendar
-                defaultValue={eventDate}
                 selected={eventDate}
                 onChange={(eventDateInputArg) => onEventDateInputChange(eventDateInputArg)}
                 />
@@ -102,6 +104,7 @@ export const FriendFormDatePicker = ({
   )
 }
 FriendFormDatePicker.PropTypes = {
+  eventWithFocus: React.PropTypes.object,
   eventDate: React.PropTypes.string,
   isVisible: React.PropTypes.bool,
   onEventDateInputChange: React.PropTypes.func,

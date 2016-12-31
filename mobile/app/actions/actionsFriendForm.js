@@ -3,6 +3,14 @@ import { _selectLastFriend } from './index'
 import UUID from 'uuid-js';
 import Moment from 'moment';
 
+export const friendFormEventDatePickerSelectEvent = (eventId) => {
+  return {
+    type: 'FRIEND_FORM_EVENT_DATEPICKER_SELECT_EVENT',
+    payload: {
+      eventId
+    }
+  }
+}
 export const friendFormEventDatePickerVisibilityStatusChange = (bool) => {
    return (bool) 
    ? {type: 'FRIEND_FORM_EVENT_DATEPICKER_VISIBILITY_TRUE'} 

@@ -20,9 +20,11 @@ export const getEventArrAndDeleteEvent = (state, eventId) => {
   return modEvents;
 }
 export const getAllEvents = (state) => {  //getAllEvents(state)
-    return state.user.data
-      .map(eachFriend => eachFriend.events)
-      .reduce((p, n) => p.concat(n))
+ let allEvents = state.user.data
+  .map(eachFriend => eachFriend.events) 
+ return (allEvents.length) 
+  ? allEvents.reduce((p, n) => p.concat(n)) //don't want to 'reduce of empty array with no initial value'
+  : []
 }
 
 export const getAnEventByEventId = (state, eventId) => getAllEvents(state).find(eachEvent => eachEvent.eventId === eventId);
