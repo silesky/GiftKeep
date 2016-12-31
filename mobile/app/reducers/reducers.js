@@ -350,7 +350,9 @@ export const visible = (state = initialStateFirstUser, action) => {
       return {
         ...action.payload, 
         friendFormIsVisible: false,  // no matter what, don't display this stuff 
-        friendFormEventDatePickerIsVisible: false
+        friendFormEventDatePickerIsVisible: false,
+        friendFormEventDatePickerSelectedEventId: null,
+
       }
     }
 
