@@ -13,7 +13,7 @@
           {
             "eventId": "123-NICK",
             "eventName": "AlreadyExistingEventName",
-            "eventDate": "2017-01-01"
+            "eventDate": "2017-10-20T06:00:00.000Z"
           }
         ],
         "gifts": [
@@ -36,7 +36,7 @@
           {
             "eventId": "123-DAN",
             "eventName": "CHRISTMAS",
-            "eventDate": "2017-12-25"
+            "eventDate": "2017-12-31T06:00:00.000Z"
           }
         ],
         "gifts": [
@@ -59,7 +59,7 @@
           {
             "eventId": "123-STEVE",
             "eventName": "Birthday",
-            "eventDate": "2017-6-05"
+            "eventDate": "2017-12-01T06:00:00.000Z"
            
           }
         ],
@@ -85,7 +85,7 @@
     "friendFormEventInput": [
           {
             "eventId": 111,
-            "eventDate:": "2017-12-16",
+            "eventDate:": "2017-12-20T06:00:00.000Z",
             "eventName": "tai kown do"
           }
     ],
