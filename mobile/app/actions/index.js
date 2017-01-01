@@ -6,14 +6,27 @@ const config = require('./../../mobileconfig.json');
 const { serverUrl } = config
 export const resetAll = () => {
   return dispatch => {
-    dispatch({type: 'RESET_USER'});
-    dispatch({type: 'RESET_VISIBLE'});
+    dispatch({ type: 'RESET_USER' });
+    dispatch({ type: 'RESET_VISIBLE' });
   }
 }
 export const selectTab = (tabNum) => {
+  let selectedTab;
+  switch (tabNum) {
+    case 0:
+      selectedTab = 'gifts';
+      break;
+    case 1:
+      selectedTab = 'events';
+      break;
+    case 2:
+      selectedTab = 'all gifts';
+      break;
+    default:
+      selectedTab = 'no tab selected';
+  }
   return {
-    type: "SELECT_TAB",
-    payload: { selectedTab: tabNum }
+    type: "SELECT_TAB", payload: { selectedTab }
   }
 }
 

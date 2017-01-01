@@ -51,16 +51,16 @@ class AppContainer extends Component {
             onChangeTab={(selectTabEvent) => this.props.actions.selectTab(selectTabEvent['i'])}>
             <BodyFriendView 
               tabLabel='Gifts'
-              isSelected={this.props.selectedTab === 0 ? true : false}
+              isSelected={this.props.selectedTab === 'gifts'}
               friendId={this.props.selectedFriendId}
               />
             <BodyEventsView 
               tabLabel='Events'
-              isSelected={this.props.selectedTab === 1 ? true : false}
+              isSelected={this.props.selectedTab === 'events'}
               />
              <BodyAllGiftsView 
               tabLabel='All Gifts'
-              isSelected={this.props.selectedTab === 2 ? true : false}
+              isSelected={this.props.selectedTab === 'all gifts'}
               />
 
           </Tabs>

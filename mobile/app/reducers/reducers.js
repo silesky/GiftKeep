@@ -43,7 +43,7 @@ import * as Utils from './../utils/utils';
       "friendFormNameInput":
       "friendFormEventInput: [ {"eventId":..., "eventDate:...", "eventName:..."} ]
       "friendFormEventDatePickerIsVisible":
-      "selectedTab": 
+      "selectedTab": // 'gifts' OR 'events' OR 'all gifts'
     }
   }
 */
@@ -248,7 +248,7 @@ const initialStateFirstUser = {
   friendFormEventDatePickerIsVisible: false,
   friendFormEventDatePickerSelectedEventId: null,
   friendFormBdayInput: "01-10",
-  selectedTab: 0,
+  selectedTab: 'gifts',
 };
 
 export const visible = (state = initialStateFirstUser, action) => {
