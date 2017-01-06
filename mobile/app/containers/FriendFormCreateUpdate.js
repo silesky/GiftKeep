@@ -13,7 +13,9 @@ import {
 } from 'redux'
  import {
   FriendFormDatePicker,
-  FriendFormEventSwiper
+  FriendFormEventNameInput,
+  FriendFormEventSwiper,
+
  } from './../components'
 import * as actions from './../actions/'
 import {
@@ -127,16 +129,10 @@ class FriendFormCreateUpdate extends Component {
                       key={eachIndex}
                       onSwipeDelete={actions.friendEventDelete.bind(this, eventId)}
                    >
-              
-                      <InputGroup style={{paddingLeft: 10, marginTop: 10, marginBottom: 10 }} borderType="rounded" >
-                        <Icon name="md-happy" />
-                        <Input
-                          defaultValue={isUpdating ? eventName : ''}
-                          onChangeText={(eventNameInputArg) => this.handleEventNameInputChange(eventId, eventNameInputArg)}
-                          placeholder='Birthday, graduation, anniversary...'
-                          placeholderTextColor='#c9c9c9'
-                          />
-                      </InputGroup>
+                     <FriendFormEventNameInput 
+                      defaultValue={isUpdating ? eventName : ''}
+                      handleOnChangeText={this.handleEventNameInputChange.bind(this, eventId)}
+                    />
                       <FriendFormDatePicker
                         calendarModalIsVisible={eventId === friendFormEventDatePickerSelectedEventId}
                         eventDate={eventDate /* needs to be an isostring */}
