@@ -3,6 +3,12 @@ import { _selectLastFriend } from './index'
 import UUID from 'uuid-js';
 import Moment from 'moment';
 
+export const friendEventDelete = (eventId) => {
+  return {
+    type: 'FRIEND_EVENT_DELETE',
+    payload: {eventId}
+  }
+}
 export const friendFormEventDatePickerSelectEvent = (eventId) => {
   return {
     type: 'FRIEND_FORM_EVENT_DATEPICKER_SELECT_EVENT',

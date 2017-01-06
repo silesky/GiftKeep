@@ -50,7 +50,7 @@ export const FriendFormDatePicker = ({
 //const dateToDisplay = (isEventInTheFuture) ? eventTimeFromNow : '';
   return (
     <View>
-      <InputGroup>
+      <InputGroup borderType="rounded" style={{marginBottom: 10, paddingLeft: 10}} >
         <Input
           placeholder="Click to add a friend event."
           selectionColor={'white'}

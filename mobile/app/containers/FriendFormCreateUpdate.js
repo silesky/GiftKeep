@@ -1,6 +1,7 @@
 // [x] eachEvent should have a default object
 // [ ] import from react native calendar datepicker and display
 // react-native-calendar-datepicker
+
 import React, {
   Component
 } from 'react';
@@ -11,7 +12,8 @@ import {
   bindActionCreators
 } from 'redux'
  import {
-  FriendFormDatePicker
+  FriendFormDatePicker,
+  FriendFormEventSwiper
  } from './../components'
 import * as actions from './../actions/'
 import {
@@ -28,7 +30,7 @@ import {
   Input,
   InputGroup,
   List,
-  // ListItem,
+  ListItem,
   Text,
   Button,
   Title,
@@ -107,6 +109,7 @@ class FriendFormCreateUpdate extends Component {
           </Header>
           <Content>
             <List>
+               <ListItem itemDivider><Text>Information</Text></ListItem>
               <InputGroup>
                 <Input
                   defaultValue={isUpdating ? friendName : ''}
@@ -116,11 +119,16 @@ class FriendFormCreateUpdate extends Component {
                   />
                 <Icon name="ios-person" />
               </InputGroup>
+              <ListItem itemDivider><Text>Events</Text></ListItem>
               {
                 whichEventArray.map(({eventId, eventName, eventDate}, eachIndex) => {
                   return (
-                    <View key={eachIndex}>
-                      <InputGroup>
+                   <FriendFormEventSwiper 
+                      key={eachIndex}
+                      onSwipeDelete={actions.friendEventDelete.bind(this, eventId)}
+                   >
+              
+                      <InputGroup style={{paddingLeft: 10, marginTop: 10, marginBottom: 10 }} borderType="rounded" >
                         <Icon name="md-happy" />
                         <Input
                           defaultValue={isUpdating ? eventName : ''}
@@ -139,7 +147,8 @@ class FriendFormCreateUpdate extends Component {
                         onEventDateInputBoxFocus={this.onEventDateInputBoxFocus.bind(this, eventId)} 
                         onEventDateInputChange={this.handleEventDateInputChange.bind(this, eventId)}
                       />
-                    </View>
+                 
+                    </FriendFormEventSwiper>
 
                   )
                 })
