@@ -183,7 +183,7 @@ export const user = (state = initialStateUser, action) => {
   return newState;
 }
 
-    case 'UPDATE_GIFT_DESC': {
+case 'UPDATE_GIFT_DESC': {
   let friendId = action.payload.friendId;
   let giftDesc = action.payload.giftDesc;
   let giftId = action.payload.giftId;
@@ -199,7 +199,7 @@ export const user = (state = initialStateUser, action) => {
   return newState;
 }
 
-    case 'CREATE_FRIEND': {
+ case 'CREATE_FRIEND': {
   const {
     friendId,
     friendName,

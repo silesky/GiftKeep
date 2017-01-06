@@ -4,17 +4,18 @@ import UUID from 'uuid-js';
 import Moment from 'moment';
 
 export const friendEventDelete = (eventId) => {
-  return {
-    type: 'FRIEND_EVENT_DELETE',
-    payload: {eventId}
+  return (dispatch, getState) => {
+    const isUpdating = getState().visible.friendFormIsUpdating;
+    (isUpdating) 
+      ? dispatch({type: 'FRIEND_EVENT_DELETE', payload: {eventId}})
+      : dispatch({type: 'FRIEND_FORM_EVENT_INPUT_DELETE', payload: {eventId}})
+     
   }
 }
 export const friendFormEventDatePickerSelectEvent = (eventId) => {
   return {
     type: 'FRIEND_FORM_EVENT_DATEPICKER_SELECT_EVENT',
-    payload: {
-      eventId
-    }
+    payload: { eventId }
   }
 }
 export const friendFormEventDatePickerVisibilityStatusChange = (bool) => {

@@ -193,8 +193,7 @@ const mstp = (state) => {
     friendName
   } = Utils.getFriendByFriendId(state, friendFormUpdatingSelectedFriendId);
   events = (events && events.length) ? events : [];
-
-  friendFormEventInput = (friendFormEventInput && friendFormEventInput.length) ? friendFormEventInput : [{}];  // show an empty event
+  friendFormEventInput = (friendFormEventInput && friendFormEventInput.length) ? friendFormEventInput : [];  // show an empty event
    
   return {
     isUpdating: !!(friendFormIsUpdating && friendFormUpdatingSelectedFriendId),
