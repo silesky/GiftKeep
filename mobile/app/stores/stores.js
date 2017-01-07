@@ -6,7 +6,7 @@
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk';
 import { AsyncStorage } from 'react-native'
-import rootReducer  from './../reducers/reducers';
+import rootReducer  from './../reducers/';
 import { composeWithDevTools } from 'remote-redux-devtools';
 import { saveToAsyncStorage, getFromAsyncStorage, updateUserDataByAccessToken, updateUserByBody } from './../utils/utils';
 

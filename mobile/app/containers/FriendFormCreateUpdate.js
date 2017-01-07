@@ -186,7 +186,7 @@ const mstp = (state) => {
     friendFormBdayInput,
     friendFormEventInput, // [{"eventId":..., "eventDate:...", "eventName:..."}
     friendFormUpdatingSelectedFriendId
-  } = state.visible;
+  } = state.friendForm;
   let {
     bday,
     events,

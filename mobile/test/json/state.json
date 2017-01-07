@@ -76,8 +76,7 @@
       }
     ]
   },
-  "visible": {
-    "selectedFriendId": "70fab100-3398-444a-8aba-5d9db249134e",
+  "friendForm": {
     "friendFormUpdatingSelectedFriendId": "10a678a1-e543-4bf3-a832-413bdfed23cb",
     "friendFormIsUpdating": true,
     "friendFormIsVisible": true,
@@ -89,7 +88,10 @@
             "eventName": "tai kown do"
           }
     ],
-    "friendFormEventDatePickerIsVisible": false,
+    "friendFormEventDatePickerIsVisible": false
+  },
+  "visible": {
+    "selectedFriendId": "70fab100-3398-444a-8aba-5d9db249134e",
     "selectedTab": "gifts"
   }
 }

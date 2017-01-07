@@ -3,7 +3,9 @@
 // whether the right action was returned.
 const { expect} = require('chai')
 const sinon = require('sinon');
-import rootReducer from './../../app/reducers/reducers';
+import rootReducer from './../../app/reducers/';
+import { friendForm } from './../../app/reducers/';
+
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 import state from './../json/state.json'
@@ -88,7 +90,7 @@ module.exports = () => {
               eventName: eventNameToCreate,
             }
           })
-        const { friendFormEventInput } = newState.visible;
+        const { friendFormEventInput } = newState.friendForm;
         expect(last(friendFormEventInput).eventName).to.equal(eventNameToCreate);
       })
       it('FRIEND_FORM_EVENT_DATE_INPUT_UPDATE_OR_CREATE', () => {
@@ -100,7 +102,7 @@ module.exports = () => {
               eventDate: eventDateToCreate,
             }
           })
-        const { friendFormEventInput } = newState.visible;
+        const { friendFormEventInput } = newState.friendForm;
         expect(last(friendFormEventInput).eventDate).to.equal(eventDateToCreate);
 
       })

@@ -5,7 +5,7 @@ import Moment from 'moment';
 
 export const friendEventDelete = (eventId) => {
   return (dispatch, getState) => {
-    const isUpdating = getState().visible.friendFormIsUpdating;
+    const isUpdating = getState().friendForm.friendFormIsUpdating;
     (isUpdating) 
       ? dispatch({type: 'FRIEND_EVENT_DELETE', payload: {eventId}})
       : dispatch({type: 'FRIEND_FORM_EVENT_INPUT_DELETE', payload: {eventId}})
@@ -74,7 +74,7 @@ const _friendFormFriendNameUpdate = (friendId, friendName) => ({ type: 'UPDATE_F
 
 const _friendFormFriendCreateFromTempStoredFormInputs = () => { 
 return (dispatch, getState) => {
-    const { friendFormEventInput, friendFormNameInput } = getState().visible
+    const { friendFormEventInput, friendFormNameInput } = getState().friendForm
     dispatch({
       type: 'CREATE_FRIEND', 
       payload: { 
@@ -128,7 +128,16 @@ export const friendFormEventCreate = (friendId, eventName = '', eventDate = Mome
 }
 }
 
-
+const _setNotificationText = text => {
+  return {
+    type: 'SET_NOTIFICATION_TEXT',
+    payload: {
+      notificationText: text
+     }
+  }
+}
+const bottomNotificationVisibilityTrue = () => ({type: 'BOTTOM_NOTIFICATION_VISIBILITY_TRUE'})
+const bottomNotificationVisibilityFalse = () => ({type: 'BOTTOM_NOTIFICATION_VISIBILITY_FALSE'})
 // for when you hit 'CANCEL'
 export const friendFormCancel = () => {
   return dispatch => {
@@ -146,6 +155,8 @@ export const friendFormCreateAndSave = () => {
     dispatch(_friendFormEventInputClear())
     dispatch(_selectLastFriend());
     dispatch(friendFormVisibilityToggle())
+    dispatch(_setNotificationText('friend event created'))
+    dispatch(bottomNotificationVisibilityTrue());
   }
 }
 
@@ -155,7 +166,7 @@ export const friendFormUpdateAndSave = (friendId) => { // for when you hit creat
     const { 
       friendFormNameInput,
       friendFormEventInput 
-     } = getState().visible;
+     } = getState().friendForm;
     dispatch(_friendFormEventUpdateOrCreate(friendId, friendFormEventInput));
     dispatch(_friendFormFriendNameUpdate(friendId, friendFormNameInput));
     dispatch(_friendFormUpdatingStatusChange(false))
