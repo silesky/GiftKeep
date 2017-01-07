@@ -9,7 +9,7 @@ import { AsyncStorage } from 'react-native'
 import rootReducer  from './../reducers/';
 import { composeWithDevTools } from 'remote-redux-devtools';
 import { saveToAsyncStorage, getFromAsyncStorage, updateUserDataByAccessToken, updateUserByBody } from './../utils/utils';
-
+import { hydrateAll } from './../actions';
 
 const composeEnhancers = composeWithDevTools({
   name: 'Gifter',
@@ -38,9 +38,8 @@ export const storeStateInDb = () => {
 export const hydrateFromAsyncStorage = () => { 
   return getFromAsyncStorage('store')  
       .then(res => {
-        const { user, visible } = JSON.parse(res);
-        store.dispatch({type: 'HYDRATE_USER', payload: user})
-        store.dispatch({type: 'HYDRATE_VISIBLE', payload: visible}); 
+        const savedState = JSON.parse(res);
+        store.dispatch(hydrateAll(savedState))
       })
   }
   

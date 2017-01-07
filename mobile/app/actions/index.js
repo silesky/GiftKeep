@@ -4,6 +4,14 @@ import * as Utils from './../utils/utils'
 
 const config = require('./../../mobileconfig.json');
 const { serverUrl } = config
+
+export const hydrateAll = ({user, visible, friendForm}) => {
+  return dispatch => {
+      dispatch({type: 'HYDRATE_USER', payload: user})
+      dispatch({type: 'HYDRATE_VISIBLE', payload: visible}); 
+      dispatch({type: 'HYDRATE_FRIEND_FORM', payload: friendForm});
+  }
+}
 export const resetAll = () => {
   return dispatch => {
     dispatch({ type: 'RESET_USER' });

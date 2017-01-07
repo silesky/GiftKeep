@@ -49,7 +49,6 @@ import Moment from 'moment';
 
 /************************************************************************************/
 const initialStateFirstUser = {
-
   selectedFriendId: null,
   friendFormUpdatingSelectedFriendId: null,
   friendFormIsUpdating: null,
@@ -64,6 +63,14 @@ const initialStateFirstUser = {
 
 export const friendForm = (state = initialStateFirstUser, action) => {
   switch (action.type) {
+    case 'HYDRATE_FRIEND_FORM': {
+       return {
+          ...action.payload,
+          friendFormIsVisible: false, // no matter what, don't display this stuff 
+          friendFormEventDatePickerIsVisible: false,
+          friendFormEventDatePickerSelectedEventId: null,
+        }
+    }
     case 'FRIEND_FORM_EVENT_DATEPICKER_SELECT_EVENT': { // which box is selected with onfocus
       return {...state, friendFormEventDatePickerSelectedEventId: action.payload.eventId}
     }
