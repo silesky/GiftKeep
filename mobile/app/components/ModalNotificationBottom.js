@@ -8,20 +8,17 @@ import { Text, Container } from 'native-base';
 
 
 export const ModalNotificationBottom = ({ notificationText, IsVisible }) => {
+  console.log('modal notificationr rerender');
   return (
 
     <Modal style={{flex: 1}}
-      visible={true}
+      visible={IsVisible}
+      autoClose={true}
       animationType='fade'
       transparent={true}
       >
-      <View 
-
-
-      style={Styles.text_container__VIEW}>
-       <Text 
-          
-       style={Styles.text}>{notificationText}</Text>
+      <View style={Styles.text_container__VIEW}>
+       <Text style={Styles.text}>{notificationText}</Text>
      </View>
 
    </Modal>
@@ -41,13 +38,13 @@ const Styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-end'
 
- 
+
   },
   text: {
     fontSize: 14,
     color: 'white',
     borderRadius: 5,
-    backgroundColor: 'grey', 
+    backgroundColor: 'grey',
     textAlign: 'justify',
     padding: 5,
     marginBottom: 60, // it shouldn't quite touch the bottom

@@ -1,7 +1,10 @@
 import * as Utils from './../utils/utils'
-import { _selectLastFriend } from './index'
 import UUID from 'uuid-js';
 import Moment from 'moment';
+import { 
+  _selectLastFriend, 
+  _createNotification 
+} from './index'
 
 export const friendEventDelete = (eventId) => {
   return (dispatch, getState) => {
@@ -128,16 +131,10 @@ export const friendFormEventCreate = (friendId, eventName = '', eventDate = Mome
 }
 }
 
-const _setNotificationText = text => {
-  return {
-    type: 'SET_NOTIFICATION_TEXT',
-    payload: {
-      notificationText: text
-     }
-  }
-}
-const bottomNotificationVisibilityTrue = () => ({type: 'BOTTOM_NOTIFICATION_VISIBILITY_TRUE'})
-const bottomNotificationVisibilityFalse = () => ({type: 'BOTTOM_NOTIFICATION_VISIBILITY_FALSE'})
+
+
+
+
 // for when you hit 'CANCEL'
 export const friendFormCancel = () => {
   return dispatch => {
@@ -154,9 +151,8 @@ export const friendFormCreateAndSave = () => {
     dispatch(_friendFormFriendCreateFromTempStoredFormInputs());
     dispatch(_friendFormEventInputClear())
     dispatch(_selectLastFriend());
-    dispatch(friendFormVisibilityToggle())
-    dispatch(_setNotificationText('friend event created'))
-    dispatch(bottomNotificationVisibilityTrue());
+    dispatch(friendFormVisibilityToggle());
+    dispatch(_createNotification('friend created.'))
   }
 }
 

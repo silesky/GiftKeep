@@ -5,6 +5,16 @@ import * as Utils from './../utils/utils'
 const config = require('./../../mobileconfig.json');
 const { serverUrl } = config
 
+export const _createNotification = (text) => {
+   return dispatch => {
+      dispatch({type: 'SET_NOTIFICATION_TEXT', payload: { notificationText: text }});
+      dispatch({type: 'BOTTOM_NOTIFICATION_VISIBILITY_TRUE'});
+      setTimeout(() => {
+        dispatch({type: 'BOTTOM_NOTIFICATION_VISIBILITY_FALSE'})
+        dispatch({ type: 'SET_NOTIFICATION_TEXT', payload: { notificationText: null }});
+      }, 3000)
+  }
+}
 export const hydrateAll = ({user, visible, friendForm}) => {
   return dispatch => {
       dispatch({type: 'HYDRATE_USER', payload: user})
