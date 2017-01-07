@@ -70,12 +70,14 @@ class AppContainer extends Component {
         </Content>
 
         <FriendFormCreateUpdate />
-
+        <ModalNotificationBottom 
+        notificationText={this.props.notificationText} 
+        IsVisible={this.props.bottomNotificationVisible} />
         <BottomBar
           addGift={this.props.actions.addGift.bind(this, this.props.selectedFriendId)}
           friendFormVisibilityToggle={this.props.actions.friendFormVisibilityToggle}
           />
-
+        
       </Drawer>
 
 
@@ -85,10 +87,13 @@ class AppContainer extends Component {
 
 
 const mstp = (state) => {
+  const { notificationText, bottomNotificationVisible } = state.notification;
   const { selectedFriendId, selectedTab } = state.visible;
   return {
     selectedFriendId,
     selectedTab,
+    notificationText,
+    bottomNotificationVisible,
     friendName: getFriendItemById(state, selectedFriendId, 'friendName')
   }
 }

@@ -1,6 +1,6 @@
   export const notification = (
     state = { 
-      notificationText: null,
+      notificationText: 'New Friend Created.',
       bottomNotificationVisibility: false
     }, action) => {
     switch (action.type) {
