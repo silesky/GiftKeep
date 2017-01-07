@@ -4,9 +4,12 @@ import Drawer from 'react-native-drawer';
 import { bindActionCreators } from 'redux'
 import * as actions from './../actions/';
 // Components
+import { 
+  ModalNotificationBottom,
+  TopBar,
+  BottomBar
+   } from './../components';
 
-import { TopBar } from './../components/TopBar';
-import { BottomBar } from './../components/BottomBar';
 import  FriendFormCreateUpdate from './../containers/FriendFormCreateUpdate';
 //Containers (not named exports)
 import DrawerContainer from './../containers/DrawerContainer';

@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import * as actions from './../actions/'
-import { GiftCard } from './../components/GiftCard'
 import {
   Container,
   Content
 } from 'native-base'
+import { GiftCard } from './../components/'
 import * as Utils from './../utils/utils'
 // should get an array of all the gifts
 class BodyAllGiftsView extends React.Component {

@@ -3,8 +3,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from './../actions/';
 import { Content } from 'native-base';
-import { GiftCard } from './../components/GiftCard';
-import { NoFriendsAlert } from './../components/';
+
+import { 
+  NoFriendsAlert, 
+  GiftCard 
+} from './../components/';
+
 import { getFriendItemById } from './../utils/utils';
 class BodyFriendView extends Component {
   constructor() {

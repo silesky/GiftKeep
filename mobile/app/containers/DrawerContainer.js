@@ -20,8 +20,11 @@ import {
   Title
 } from 'native-base';
 
-import { FbLogin } from './../components/FbLogin'
-import { FriendListItem } from './../components/FriendListItem'
+import { 
+  FbLogin,
+  FriendListItem 
+} from './../components/'
+
 
 export class DrawerContainer extends Component {
   constructor(props) {
