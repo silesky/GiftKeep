@@ -15,7 +15,6 @@ import  FriendFormCreateUpdate from './../containers/FriendFormCreateUpdate';
 import DrawerContainer from './../containers/DrawerContainer';
 import BodyFriendView from './../containers/BodyFriendView';
 import BodyEventsView from './../containers/BodyEventsView';
-import BodyAllGiftsView from './../containers/BodyAllGiftsView';
 import { getFriendItemById } from './../utils/utils';
 
 import { Tabs, Container, Content } from 'native-base';
@@ -61,10 +60,11 @@ class AppContainer extends Component {
               tabLabel='Events'
               isSelected={this.props.selectedTab === 'events'}
               />
+              {/*
              <BodyAllGiftsView 
               tabLabel='All Gifts'
               isSelected={this.props.selectedTab === 'all gifts'}
-              />
+              /> */}
 
           </Tabs>
         </Content>
