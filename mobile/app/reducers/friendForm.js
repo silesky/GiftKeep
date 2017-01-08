@@ -3,37 +3,8 @@ import UUID from 'uuid-js';
 import Moment from 'moment';
 
 /*
-  {
-    "user": {
-      "userName": 
-      "fbId": 
-      "fbAccessToken": 
-      "data": [
-        {
-          "friendId": 
-          "order": 
-          "friendName": 
-          "bday": 
-          "events": [
-            {
-              "eventId": 
-              "eventName": 
-              "eventDate":
-            }
-          ],
-          "gifts": [
-            {
-              "giftTitle": 
-              "giftDesc": 
-              "giftId": 
-              "eventIds": [...]
-            }
-          ]
-        },
-      ]
-    },
-    "visible": {
-      "selectedFriendId": 
+  }
+    "friendForm": {
       "friendFormUpdatingSelectedFriendId": 
       "friendFormIsUpdating": 
       "friendFormIsVisible":
@@ -41,7 +12,7 @@ import Moment from 'moment';
       "friendFormNameInput":
       "friendFormEventInput: [ {"eventId":..., "eventDate:...", "eventName:..."} ]
       "friendFormEventDatePickerIsVisible":
-      "selectedTab": // 'gifts' OR 'events' OR 'all gifts'
+
     }
   }
 */
@@ -49,7 +20,6 @@ import Moment from 'moment';
 
 /************************************************************************************/
 const initialStateFirstUser = {
-  selectedFriendId: null,
   friendFormUpdatingSelectedFriendId: null,
   friendFormIsUpdating: null,
   friendFormIsVisible: false,
@@ -58,7 +28,6 @@ const initialStateFirstUser = {
   friendFormEventDatePickerIsVisible: false,
   friendFormEventDatePickerSelectedEventId: null,
   friendFormBdayInput: "01-10",
-  selectedTab: 'gifts',
 };
 
 export const friendForm = (state = initialStateFirstUser, action) => {
