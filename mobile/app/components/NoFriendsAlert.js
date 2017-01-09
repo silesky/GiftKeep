@@ -2,6 +2,7 @@
 import React from 'react';
 import moment from 'moment';
 import {
+    Button,
     Icon,
     Text,
     List, 
@@ -12,7 +13,11 @@ import {
     Title
 } from 'native-base';
 
-export const NoFriendsAlert = ({friendName, bday}) => {
+export const NoFriendsAlert = ({
+  friendName,
+  bday,
+  addFriendBtnClick,
+}) => {
     const parsedBday = moment(bday, 'MM-DD')
     const friendBdayStringLong = `${parsedBday.format('MMMM')} ${parsedBday.format('D')}`;
     const parsedCurrentDate = moment(moment(), 'MM-DD')
@@ -24,18 +29,24 @@ export const NoFriendsAlert = ({friendName, bday}) => {
 
     const howMuchTimeStringLong = `${monthDiff} ${monthString}, ${dayDiff} ${dayString}`; return (
              <Card>
-                <CardItem>
-                    <Title> {
-                    (friendName && bday) 
+                <CardItem style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+                 <Text>
+                    { (friendName && bday) 
                         ? `${howMuchTimeStringLong} until ${friendName}'s birthday on ${friendBdayStringLong}!` 
                         : 'No Friends Added.'
                     } 
-
-                    </Title>
+                    </Text>
+                 
+                    <Button 
+                      danger
+                      onPress={() => addFriendBtnClick() }>
+                      <Icon name="ios-person-add" />
+                      <Text>Add a Friend</Text>
+                    </Button>
                     </CardItem>
+                </Card>
            
-           
-            </Card>
+          
 
         )    
    }

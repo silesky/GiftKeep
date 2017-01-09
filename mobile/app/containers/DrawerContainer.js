@@ -1,10 +1,10 @@
-import React,  { Component } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as actions from './../actions/'
-import { 
-  Image, 
-  StyleSheet, 
+import {
+  Image,
+  StyleSheet,
   View
 } from 'react-native';
 
@@ -17,16 +17,17 @@ import {
   Footer,
   Header,
   List,
+  Icon,
   Title
 } from 'native-base';
 
-import { 
+import {
   FbLogin,
-  FriendListItem 
+  FriendListItem
 } from './../components/'
 
 
-export class DrawerContainer extends Component {
+class DrawerContainer extends Component {
   constructor(props) {
     super(props);
   }
@@ -34,7 +35,20 @@ export class DrawerContainer extends Component {
     return (
       <Container>
         <Header>
-          <Title>Friends</Title>
+           <Button 
+              iconRight
+              transparent
+            >
+          <Icon name='ios-search' />
+        </Button>
+        <Title>Friends</Title>
+        <Button 
+              iconRight
+              onPress={() => this.props.actions.friendFormVisibilityToggle()} 
+              transparent
+            >
+          <Icon name='ios-person-add' />
+        </Button>
         </Header>
         <Content>
           <List>

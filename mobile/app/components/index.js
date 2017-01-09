@@ -23,9 +23,15 @@ export { ModalNotificationBottom }
 import { NoFriendsAlert } from './NoFriendsAlert';
 export { NoFriendsAlert }
 
+
+import NoGiftsAlert from './NoGiftsAlert';
+export { NoGiftsAlert } 
+
 import { TopBar } from './TopBar';
 export { TopBar }
 
 import { GiftCard } from './GiftCard';
 export { GiftCard }
 
+import TabBar from './TabBar';
+export { TabBar }

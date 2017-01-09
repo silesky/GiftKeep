@@ -45,9 +45,6 @@ export const BottomBar = ({
     return (
         <Footer>
              <FooterTab>
-                <Button onPress={() => friendFormVisibilityToggle()} transparent>
-                  <Icon name={'ios-person'} />
-                </Button>  
                    <Button onPress={() => whichBtn().handler()} transparent>
                       <Text>{whichBtn().text}</Text>
                     <Icon name={whichBtn().icon} />
