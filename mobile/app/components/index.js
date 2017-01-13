@@ -23,6 +23,8 @@ export { ModalNotificationBottom }
 import { NoFriendsAlert } from './NoFriendsAlert';
 export { NoFriendsAlert }
 
+import { NoEventsAlert } from './NoEventsAlert';
+export { NoEventsAlert }
 
 import NoGiftsAlert from './NoGiftsAlert';
 export { NoGiftsAlert } 

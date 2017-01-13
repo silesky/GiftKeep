@@ -3,12 +3,8 @@ import {
     Button,
     Icon,
     Text,
-    List, 
-    ListItem,
-    Header,
     Card,
     CardItem,
-    Title
 } from 'native-base';
 
 export const NoGiftsAlert = ({

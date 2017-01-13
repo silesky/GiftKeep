@@ -113,6 +113,15 @@ export const friendFormUpdateActivate = (friendId) => {
     dispatch(friendFormVisibilityToggle());
   }
 }
+export const friendFormBlankEventCreateFromSelectedFriendId = () => {
+  return(dispatch, getState) => {
+    const selectedFriendId = getState().visible.selectedFriendId;
+    dispatch({
+        type: 'ADD_NEW_EVENT_TO_FRIEND',
+        payload: { friendId: selectedFriendId, eventName: '', eventDate: '' }
+      })
+  }
+}
 // for when you hit 'ADD EVENT'
 export const friendFormEventCreate = (friendId, eventName = '', eventDate = Moment().toISOString()) => { // for when you press the 'add event' button
   const _friendHasNotBeenCreatedYet = !friendId;

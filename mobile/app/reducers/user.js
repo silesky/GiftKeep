@@ -24,6 +24,7 @@ export const user = (state = initialState, action) => {
     }
     case 'ADD_NEW_EVENT_TO_FRIEND': {
   const { friendId, eventName, eventDate } = action.payload;
+  console.log('payload', action.payload);
   let data = state.data.map(el => {
     if (el.friendId === friendId) {
       el.events = [...el.events, {
@@ -34,6 +35,7 @@ export const user = (state = initialState, action) => {
     }
     return el
   })
+  console.log('newdata', data);
   return { ...state, data }
 }
     // TODO: implement
