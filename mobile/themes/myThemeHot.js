@@ -2,6 +2,20 @@ import Color from 'color';
 
 import {Platform} from 'react-native';
 
+// hot 
+const hotOrange = '#FB8B24';
+const hotPink = '#D90368';
+const hotPurple = '#820263';
+const hotBlack = '#291720';
+const hotGreen = '#04A777';
+
+// chill
+const chillOrange = '#FB8B24';
+const chillPink = '#D90368';
+const chillPurple = '#820263';
+const chillBlack = '#291720';
+const chillGreen = '#04A777';
+
 export default {
 
     // Badge
@@ -69,7 +83,7 @@ export default {
 
 
     // Card
-    cardDefaultBg: '#fff',
+    cardDefaultBg: hotOrange,
 
 
     // Check Box
