@@ -1,16 +1,23 @@
 import React from 'react';
+import { View } from 'react-native';
 import {
   ListItem,
   Text,
   Button,
   Title,
+  Container,
+  Icon,
 } from 'native-base';
+
 import Swipeout from 'react-native-swipeout';
+
+
 export const FriendListItem = ({friendName, selectFriend, onSwipeDelete, onSwipeUpdate}) => {
+
   const swipeoutBtns = [
     {
       type: 'delete',
-      text: 'delete',
+      component: [<Icon key={1} style={{alignSelf: 'center', marginTop: 7 }} name="ios-trash-outline" />],
       onPress: () => onSwipeDelete(),
     },
     {
@@ -19,11 +26,13 @@ export const FriendListItem = ({friendName, selectFriend, onSwipeDelete, onSwipe
       onPress: () => onSwipeUpdate(),
     },
   ]
+
   return (
     <Swipeout
       backgroundColor="white"
       autoClose={true}
-      right={swipeoutBtns}>
+      right={swipeoutBtns}
+    >
       <ListItem button onPress={() => selectFriend()}>
         <Text>{friendName}</Text>
       </ListItem>
