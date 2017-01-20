@@ -1,5 +1,5 @@
 import React from 'react';
-import myThemeHot from './../../themes/myThemeHot';
+import myThemeLight from './../themes/myThemeLight';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import * as actions from './../actions/'
@@ -25,11 +25,11 @@ class BodyEventsView extends React.Component {
     const isEventInTheFuture = (date) => Moment(date).format('YYYYMMDD') > Moment().format('YYYYMMDD');
     return (
       <Container>
-        <Content theme={myThemeHot}>
+        <Content theme={myThemeLight}>
           { this.props.events.map(({eventName, eventDate, eventId}, index) => {
             const eventTimeFromNow = Moment(eventDate).fromNow();
             return (
-              <Card theme={myThemeHot} key={index}>
+              <Card key={index}>
                 <CardItem header>
                   <Title>{eventName}</Title>
                 </CardItem>

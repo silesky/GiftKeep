@@ -78,10 +78,14 @@ export const FriendFormDatePicker = ({
               <Text>Select an Event Date</Text>
             </CardItem>
             <CardItem cardBody>
+            
               <Calendar
+                minDate={Moment().startOf('day')}
+                maxDate={Moment().add(10, 'years').startOf('day')}
                 selected={eventDate}
                 onChange={(eventDateInputArg) => onEventDateInputChange(eventDateInputArg)}
                 />
+            
             </CardItem>
             <CardItem footer>
               <Button style={{ alignSelf: 'center' }} danger

@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "emu": "xcrun instruments -w 'iPhone 6 (9.3)'",
+    "emu": "xcrun instruments -w 'iPhone 5s (10.2)'",
     "postinstall": "rndebugger-open",
     "_asdasf_postinstall": "remotedev-debugger --injectserver",
     "start": "node node_modules/react-native/local-cli/cli.js start",
