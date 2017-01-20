@@ -66,7 +66,6 @@ export const FriendFormDatePicker = ({
         animationType={'fade'}
         transparent={true}
         >
-        <Container>
         <Content>
           <Card
             style={{
@@ -78,14 +77,14 @@ export const FriendFormDatePicker = ({
               <Text>Select an Event Date</Text>
             </CardItem>
             <CardItem cardBody>
-            
+ 
               <Calendar
+                startStage="month"
                 minDate={Moment().startOf('day')}
                 maxDate={Moment().add(10, 'years').startOf('day')}
                 selected={eventDate}
                 onChange={(eventDateInputArg) => onEventDateInputChange(eventDateInputArg)}
                 />
-            
             </CardItem>
             <CardItem footer>
               <Button style={{ alignSelf: 'center' }} danger
@@ -99,8 +98,6 @@ export const FriendFormDatePicker = ({
             </CardItem>
           </Card>
         </Content>
-        </Container>
-
       </Modal>
 
 
