@@ -8,7 +8,7 @@ import {
   Container,
   Icon,
 } from 'native-base';
-
+import { FA } from './../icons';
 import Swipeout from 'react-native-swipeout';
 
 
@@ -22,7 +22,12 @@ export const FriendListItem = ({friendName, selectFriend, onSwipeDelete, onSwipe
     },
     {
       type: 'secondary',
-      text: 'edit',
+       component: [
+         <FA 
+          name="pencil-square-o" 
+          key={1} 
+          style={{fontSize: 24, alignSelf: 'center', marginTop: 12}}/>
+          ],
       onPress: () => onSwipeUpdate(),
     },
   ]
