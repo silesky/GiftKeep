@@ -38,3 +38,5 @@ export { TabBar }
 
 import { SwipeIcon } from './SwipeIcon';
 export { SwipeIcon }
+import { FriendFormEvent } from './FriendFormEvent';
+export { FriendFormEvent }
