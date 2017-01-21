@@ -5,7 +5,13 @@ import {
   _selectLastFriend, 
   _createNotification 
 } from './index'
-
+export const friendEventUpdateFromEventsView = (eventId, eventInputType) => {
+console.log('called!');
+return (dispatch, getState) => {
+    const friendId = Utils.getFriendByEventId(getState(), eventId).friendId; 
+    dispatch(friendFormUpdateActivate(friendId));
+  }
+}
 export const friendEventDelete = (eventId) => {
   return (dispatch, getState) => {
     const {friendFormIsUpdating, friendFormIsVisible}  = getState().friendForm;

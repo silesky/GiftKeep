@@ -17,6 +17,7 @@ import {
 //import * as Util  from './../utils/utils';
 
 export const EventCard = ({
+  onFriendEventUpdate,
   onFriendEventDelete,
   eventName,
   eventTime,
@@ -26,6 +27,7 @@ export const EventCard = ({
   // should take a name, birthday and text prop, along with being editable and so forth
   return (
      <FriendFormEventSwiper 
+        onSwipeUpdate={() => onFriendEventUpdate()}
         onSwipeDelete={() => onFriendEventDelete()}
       >
             <Card>
