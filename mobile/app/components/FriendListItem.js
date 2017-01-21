@@ -1,33 +1,28 @@
 import React from 'react';
-import { View } from 'react-native';
+
+import { View, StyleSheet } from 'react-native';
 import {
   ListItem,
   Text,
   Button,
   Title,
   Container,
-  Icon,
+
 } from 'native-base';
-import { FA } from './../icons';
+import { EI as Icon } from './../icons';
 import Swipeout from 'react-native-swipeout';
+import { SwipeIcon } from './../components';
 
-
-export const FriendListItem = ({friendName, selectFriend, onSwipeDelete, onSwipeUpdate}) => {
-
+export const FriendListItem = ({ friendName, selectFriend, onSwipeDelete, onSwipeUpdate }) => {
   const swipeoutBtns = [
     {
       type: 'delete',
-      component: [<Icon key={1} style={{alignSelf: 'center', marginTop: 7 }} name="ios-trash-outline" />],
+      component: SwipeIcon('trash'),
       onPress: () => onSwipeDelete(),
     },
     {
       type: 'secondary',
-       component: [
-         <FA 
-          name="pencil-square-o" 
-          key={1} 
-          style={{fontSize: 24, alignSelf: 'center', marginTop: 12}}/>
-          ],
+      component: SwipeIcon('pencil'),
       onPress: () => onSwipeUpdate(),
     },
   ]

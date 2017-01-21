@@ -35,3 +35,6 @@ export { GiftCard }
 
 import TabBar from './TabBar';
 export { TabBar }
+
+import { SwipeIcon } from './SwipeIcon';
+export { SwipeIcon }
