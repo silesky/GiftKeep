@@ -46,7 +46,6 @@ class AppContainer extends Component {
           friendName={this.props.friendName}
           drawerOpen={() => this._drawer.open()}
           />
-        <Content>
           <Tabs
             initialPage={0}
             //  currentPage={this.props.state.selectedTab} broken unforuntately
@@ -65,10 +64,7 @@ class AppContainer extends Component {
               tabLabel='All Gifts'
               isSelected={this.props.selectedTab === 'all gifts'}
               /> */}
-
           </Tabs>
-        </Content>
-        
         { this.props.bottomNotificationVisibility
           ? <NotificationBottom 
               notificationText={this.props.notificationText} />
