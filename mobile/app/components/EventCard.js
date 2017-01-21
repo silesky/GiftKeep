@@ -29,17 +29,14 @@ export const EventCard = ({
   // should take a name, birthday and text prop, along with being editable and so forth
   return (
             <Card>
-                <CardItem header>
-                  <Title>{eventName}</Title>
+                <CardItem >
+                  <Icon name='md-bulb'/>
+                  <Text>{eventName ? `${eventName.trim()}... ${eventTime}.` : `${eventTime}` }</Text>
                   <Button transparent>
                     <Icon 
                       name='ios-close-circle-outline'
-                      style={{fontSize: 30 }}
                     />
                   </Button>
-              </CardItem>
-              <CardItem cardBody>
-                <Text>{eventTime}</Text>
               </CardItem>
             </Card>
 
