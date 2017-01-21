@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "emu": "xcrun instruments -w 'iPhone 5s (10.2)'",
-    "postinstall": "rndebugger-open",
-    "_asdasf_postinstall": "remotedev-debugger --injectserver",
+    "postinstall": "remotedev-debugger --injectserver",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "jest": "jest",
     "test": "mocha --growl --require babel-polyfill ./test/mocha-setup.js --compilers js:babel-core/register --require mocha-clean test",
