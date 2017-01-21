@@ -3,17 +3,12 @@ import { View } from 'react-native';
 import Swipeout from 'react-native-swipeout';
 
 import { SwipeIcon } from '../components/';
-import {
-  Card,
-  ListItem,
-  List,
-  CardItem
-} from 'native-base';
+
 export const FriendFormEventSwiper = ({ onSwipeDelete, children }) => {
   const swipeoutBtns = [
     {
       type: 'delete',
-      component: SwipeIcon('trash', {fontSize: 50, marginTop: 45}),
+      component: SwipeIcon('trash', {fontSize: 50}),
       onPress: () => onSwipeDelete(),
     }
   ]
@@ -23,9 +18,7 @@ export const FriendFormEventSwiper = ({ onSwipeDelete, children }) => {
       autoClose={true}
       right={swipeoutBtns}
       >
-    <CardItem>
-      { children }
-      </CardItem>
+      <View>{ children }</View>
     </Swipeout>
   )
 }

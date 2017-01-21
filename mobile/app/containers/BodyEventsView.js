@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import myThemeLight from './../themes/myThemeLight';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
@@ -14,23 +14,29 @@ import {
 } from 'native-base'
 import { EventCard } from './../components/'
 import * as Utils from './../utils/utils'
+
 // should get an array of all the gifts
-class BodyEventsView extends React.Component {
+class BodyEventsView extends Component {
+
   constructor(props) {
     super(props)
   }
   static propTypes = {
     isSelected: React.PropTypes.bool,
   }
+
   render() {
+
     const isEventInTheFuture = (date) => Moment(date).format('YYYYMMDD') > Moment().format('YYYYMMDD');
     return (
       <Container>
         <Content>
+
           { this.props.events.map(({eventName, eventDate, eventId}, index) => {
             const eventTimeFromNow = Moment(eventDate).fromNow();
             return (
               <EventCard 
+              onFriendEventDelete={this.props.actions.friendEventDelete.bind(this, eventId)}
               key={index} 
               eventName={eventName}
               eventTime={isEventInTheFuture(eventDate)

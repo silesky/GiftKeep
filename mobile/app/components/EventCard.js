@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 import { StyleSheet } from 'react-native';
+import { EI } from '../icons/'
+import { FriendFormEventSwiper } from '../components/';
 import {
   Button,
   Container,
@@ -15,32 +17,29 @@ import {
 //import * as Util  from './../utils/utils';
 
 export const EventCard = ({
-  deleteGift,
-  friendId,
-  friendName,
-  giftDesc,
-  giftTitle,
-  updateGiftDesc,
-  updateGiftTitle,
-  footerIsVisible,
+  onFriendEventDelete,
   eventName,
   eventTime,
 }) => {
+
+
   // should take a name, birthday and text prop, along with being editable and so forth
   return (
+     <FriendFormEventSwiper 
+        onSwipeDelete={() => onFriendEventDelete()}
+      >
             <Card>
                 <CardItem >
                   <Icon name='md-bulb'/>
                   <Text>{eventName ? `${eventName.trim()}... ${eventTime}.` : `${eventTime}` }</Text>
-                  <Button transparent>
-                    <Icon 
-                      name='ios-close-circle-outline'
-                    />
-                  </Button>
               </CardItem>
             </Card>
+            </FriendFormEventSwiper>
 
   );
 }
 
-EventCard.PropTypes = {}
+ EventCard.PropTypes = {
+  onSwipeDelete: React.PropTypes.string,
+  eventName: React.PropTypes.bool,
+  };

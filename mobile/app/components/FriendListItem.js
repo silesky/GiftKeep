@@ -17,12 +17,12 @@ export const FriendListItem = ({ friendName, selectFriend, onSwipeDelete, onSwip
   const swipeoutBtns = [
     {
       type: 'delete',
-      component: SwipeIcon('trash'),
+      component: SwipeIcon('trash', {fontSize: 30}),
       onPress: () => onSwipeDelete(),
     },
     {
       type: 'secondary',
-      component: SwipeIcon('pencil'),
+      component: SwipeIcon('pencil', {fontSize: 30}),
       onPress: () => onSwipeUpdate(),
     },
   ]
