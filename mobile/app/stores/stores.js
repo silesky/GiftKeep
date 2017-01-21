@@ -13,7 +13,7 @@ import { hydrateAll } from './../actions';
 
 const composeEnhancers = composeWithDevTools({
   name: 'Gifter',
-  shouldRecordChanges: true, // need to manually click record changes, recording slows down app.
+  shouldRecordChanges: false, // need to manually click record changes, recording slows down app.
   actionsBlacklist: ["FRIEND_FORM_NAME_INPUT"] // when I add a seccond item to this array, it doesn't work
 })
 export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
