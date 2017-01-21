@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import * as actions from './../actions/';
 // Components
 import { 
-  ModalNotificationBottom,
+  NotificationBottom,
   TopBar,
   BottomBar
    } from './../components';
@@ -68,11 +68,13 @@ class AppContainer extends Component {
 
           </Tabs>
         </Content>
-
+        
+        { this.props.bottomNotificationVisibility
+          ? <NotificationBottom 
+              notificationText={this.props.notificationText} />
+            : false
+        }
         <FriendFormCreateUpdate />
-        <ModalNotificationBottom 
-        notificationText={this.props.notificationText} 
-        IsVisible={this.props.bottomNotificationVisibility} />
         <BottomBar
           addGift={this.props.actions.addGift.bind(this, this.props.selectedFriendId)}
           addEvent={this.props.actions.friendFormEventCreate.bind(this, this.props.selectedFriendId, undefined, undefined)}

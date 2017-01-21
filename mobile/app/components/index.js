@@ -17,8 +17,8 @@ export { FriendFormEventNameInput }
 import { FriendListItem } from './FriendListItem';
 export { FriendListItem }
 
-import { ModalNotificationBottom } from './ModalNotificationBottom';
-export { ModalNotificationBottom }
+import { NotificationBottom } from './NotificationBottom';
+export { NotificationBottom }
 
 import { NoFriendsAlert } from './NoFriendsAlert';
 export { NoFriendsAlert }
