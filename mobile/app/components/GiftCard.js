@@ -26,8 +26,6 @@ export const GiftCard = ({
   }) => {
   // should take a name, birthday and text prop, along with being editable and so forth
         return (
-           <Container>
-               <Content>
                    <Card>
                        <CardItem style={{backgroundColor: 'rgb(77, 144, 254)'}} header>
                         <Input 
@@ -67,8 +65,6 @@ export const GiftCard = ({
                         : false
                       }
                    </Card>
-               </Content>
-           </Container>
 
         );
 }

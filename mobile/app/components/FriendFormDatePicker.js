@@ -29,25 +29,14 @@ import {
 } from 'native-base';
 import Moment from 'moment';
 export const FriendFormDatePicker = ({
-  isUpdating,
   eventDate,
   calendarModalIsVisible,
-  //eventWithFocus,
-  isVisible,
   onEventDateInputChange,
   onEventDateInputBoxFocus,
   onEventDateInputOk,
   onCancel,
 }) => {
-  const 
-    eventMonth = Moment(eventDate).format('M')
-    , eventDay =  Moment(eventDate).format('D')
-    , eventYear =  Moment(eventDate).format('Y')
-    , eventTimeFromNow = Moment(eventDate).fromNow()
-;
-  const isEventInTheFuture = Moment(eventDate).format('YYYYMMDD') > Moment().format('YYYYMMDD')
 
-//const dateToDisplay = (isEventInTheFuture) ? eventTimeFromNow : '';
   return (
     <View>
       <InputGroup borderType="rounded" style={{marginBottom: 10, paddingLeft: 10}} >

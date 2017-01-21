@@ -40,3 +40,6 @@ import { SwipeIcon } from './SwipeIcon';
 export { SwipeIcon }
 import { FriendFormEvent } from './FriendFormEvent';
 export { FriendFormEvent }
+
+import { EventCard } from './EventCard';
+export { EventCard }

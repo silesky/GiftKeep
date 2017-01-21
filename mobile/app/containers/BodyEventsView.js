@@ -12,6 +12,7 @@ import {
   Title,
   Text
 } from 'native-base'
+import { EventCard } from './../components/'
 import * as Utils from './../utils/utils'
 // should get an array of all the gifts
 class BodyEventsView extends React.Component {
@@ -25,24 +26,18 @@ class BodyEventsView extends React.Component {
     const isEventInTheFuture = (date) => Moment(date).format('YYYYMMDD') > Moment().format('YYYYMMDD');
     return (
       <Container>
-        <Content theme={myThemeLight}>
+        <Content>
           { this.props.events.map(({eventName, eventDate, eventId}, index) => {
             const eventTimeFromNow = Moment(eventDate).fromNow();
             return (
-              <Card key={index}>
-                <CardItem header>
-                  <Title>{eventName}</Title>
-                </CardItem>
-                <CardItem body>
-                  <Text>
-                  {
-                    isEventInTheFuture(eventDate)
+              <EventCard 
+              key={index} 
+              eventName={eventName}
+              eventTime={isEventInTheFuture(eventDate)
                       ? eventTimeFromNow
                       : 'Event has passed.'
                   }
-                  </Text>
-                </CardItem>
-              </Card>
+              />
             )
           })
           }

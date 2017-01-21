@@ -17,8 +17,8 @@ import {
 
 } from './../components'
 import { View } from 'react-native';
-export const FriendFormEvent = ({
-
+export const FriendFormEvent = (props) => {
+  const {
   defaultValue,
   handleOnChangeText,
   calendarModalIsVisible,
@@ -28,10 +28,15 @@ export const FriendFormEvent = ({
   onCancel,
   onEventDateInputOk,
   onEventDateInputBoxFocus,
-  onEventDateInputChange
-}) => (
-  <View>
+  onEventDateInputChange,
+  isFocused
+} = props;
+console.log(props);
+  return (
+    <View>
+  
       <FriendFormEventNameInput 
+      isFocused={isFocused}
       defaultValue={defaultValue}
       handleOnChangeText={(eventNameInput) => handleOnChangeText(eventNameInput)}
       />
@@ -46,4 +51,5 @@ export const FriendFormEvent = ({
           onEventDateInputChange={(eventDateInput) => onEventDateInputChange(eventDateInput)}
         />
      </View>
-)
+  )
+}
