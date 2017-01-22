@@ -8,9 +8,18 @@ import {   StyleSheet,
   TextInput,
   ListView,
 View } from 'react-native';
-String.prototype.tlc = String.prototype.toLowerCase;
-
-const termsArr = ["AAA", "B", "C", "D", "E", "F"];
+const termsArr = [
+  "Birthday", 
+  "Graduation",
+  "Anniversary",
+  "Homecoming",
+  "Confirmation",
+  "Bar Mitzvah",
+  "Baby Shower",
+  "House Warming",
+  "Secret Santa",
+  "Chanukah"
+];
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 export class AutoSuggestInput extends Component {
   constructor(props) {
@@ -19,7 +28,10 @@ export class AutoSuggestInput extends Component {
       results: []
     };
   }
+  clearTerms() { this.setState({results: []}) }
+  addAllTerms() { this.setState({results: termsArr}) }
   searchTerms(input) {
+    String.prototype.tlc = String.prototype.toLowerCase;
     const results = termsArr.filter((eachTerm => eachTerm.tlc().indexOf(input.tlc()) > -1))
     this.setState({results})
   }
@@ -34,9 +46,12 @@ export class AutoSuggestInput extends Component {
     return (
       <View style={styles.container}>
         <TextInput 
-            style={styles.textinput}
-            onChangeText={(el) => this.searchTerms(el)}
-            placeholder="Gift" />
+            onBlur={() => this.clearTerms()}
+            onFocus={() => this.addAllTerms()}
+            onChangeText={(input) => this.searchTerms(input)}
+            placeholder="Gift"
+            style={styles.text_input}
+             />
         <ListView
           dataSource={ds.cloneWithRows(this.state.results)}
           renderRow={this.renderResults} />
@@ -48,16 +63,11 @@ export class AutoSuggestInput extends Component {
 
 var styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: 200,
     backgroundColor: '#FFFFFF',
   },
-  textinput: {
-    marginTop: 30,
-    marginLeft: 10,
+  text_input: {
     backgroundColor: 'lightgrey',
     height: 40,
-    width: 200
   }
 });
