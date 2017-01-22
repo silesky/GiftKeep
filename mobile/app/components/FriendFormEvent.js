@@ -31,7 +31,6 @@ export const FriendFormEvent = (props) => {
   onEventDateInputChange,
   isFocused
 } = props;
-console.log(props);
   return (
     <View>
   

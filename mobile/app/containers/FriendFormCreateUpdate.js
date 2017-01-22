@@ -127,7 +127,7 @@ class FriendFormCreateUpdate extends Component {
                         onSwipeDelete={actions.friendEventDelete.bind(this, eventId)}
                         >
                       <FriendFormEvent
-                        defaultValue={isUpdating ? eventName : ''}
+                        defaultValue={eventName}
                         handleOnChangeText={this.handleEventNameInputChange.bind(this, eventId)}
                         isFocusedInputType={'name'}
                         isFocused={this.props.selectedEventsViewInput.eventId === eventId /* 
