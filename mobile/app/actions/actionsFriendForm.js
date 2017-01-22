@@ -4,7 +4,8 @@ import Moment from 'moment';
 import { 
   selectEventsViewInput,
   _selectLastFriend, 
-  _createNotification 
+  _createNotification,
+  _friendEventAdd
 } from './index'
 
 
@@ -127,6 +128,7 @@ export const friendFormUpdateActivate = (friendId) => {
   }
 }
 // for when you hit 'ADD EVENT'
+
 export const friendFormEventCreate = (friendId, eventName = '', eventDate = Moment().toISOString()) => { // for when you press the 'add event' button
   const _friendHasNotBeenCreatedYet = !friendId;
   return dispatch => {
@@ -136,10 +138,7 @@ export const friendFormEventCreate = (friendId, eventName = '', eventDate = Mome
         dispatch(friendFormEventNameInputUpdate(newId, eventName));
         dispatch(friendFormEventDateInputUpdate(newId, eventDate));
     } else {
-      dispatch({
-        type: 'ADD_NEW_EVENT_TO_FRIEND',
-        payload: { friendId, eventName, eventDate }
-      })
+     dispatch(_friendEventAdd(friendId, eventName, eventDate))
   }
 }
 }
