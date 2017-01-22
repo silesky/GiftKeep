@@ -8,7 +8,9 @@ import {   StyleSheet,
   TextInput,
   ListView,
 View } from 'react-native';
-const termsArr = ["Graduation", "Birthday"];
+String.prototype.tlc = String.prototype.toLowerCase;
+
+const termsArr = ["AAA", "B", "C", "D", "E", "F"];
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 export class AutoSuggestInput extends Component {
   constructor(props) {
@@ -18,14 +20,13 @@ export class AutoSuggestInput extends Component {
     };
   }
   searchTerms(input) {
-    String.prototype.tlc = String.prototype.toLowerCase;
     const results = termsArr.filter((eachTerm => eachTerm.tlc().indexOf(input.tlc()) > -1))
     this.setState({results})
   }
   renderResults(results) {
     return (
       <View>
-        <Text>{results}</Text>
+        <Text>{ results}</Text>
       </View>
     );
   }
@@ -35,7 +36,7 @@ export class AutoSuggestInput extends Component {
         <TextInput 
             style={styles.textinput}
             onChangeText={(el) => this.searchTerms(el)}
-            placeholder="Type your adress here" />
+            placeholder="Gift" />
         <ListView
           dataSource={ds.cloneWithRows(this.state.results)}
           renderRow={this.renderResults} />
@@ -54,7 +55,8 @@ var styles = StyleSheet.create({
   },
   textinput: {
     marginTop: 30,
-    backgroundColor: '#DDDDDD',
+    marginLeft: 10,
+    backgroundColor: 'lightgrey',
     height: 40,
     width: 200
   }
