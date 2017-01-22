@@ -130,8 +130,8 @@ class FriendFormCreateUpdate extends Component {
                         defaultValue={isUpdating ? eventName : ''}
                         handleOnChangeText={this.handleEventNameInputChange.bind(this, eventId)}
                         isFocusedInputType={'name'}
-                        isFocused={eachIndex === 3 /* 
-                          this.props.selectedIdFromEventsView === eventId 
+                        isFocused={this.props.selectedEventsViewInput.eventId === eventId /* 
+                          this.props.selectedIdFromEventsView === eventId
                           it should auto scroll to the box that's focused*/}
                         calendarModalIsVisible={eventId === friendFormEventDatePickerSelectedEventId}
                         eventDate={eventDate /* needs to be an isostring */}
@@ -190,9 +190,13 @@ const mstp = (state) => {
     friendName
   } = Utils.getFriendByFriendId(state, friendFormUpdatingSelectedFriendId);
   events = (events && events.length) ? events : [];
+
+  let { selectedEventsViewInput } = state.eventsView;
+  selectedEventsViewInput = selectedEventsViewInput ? selectedEventsViewInput : {};
   friendFormEventInput = (friendFormEventInput && friendFormEventInput.length) ? friendFormEventInput : [];  // show an empty event
    
   return {
+    selectedEventsViewInput: selectedEventsViewInput,
     selectedIdFromEventsView: 12345,
     isUpdating: !!(friendFormIsUpdating && friendFormUpdatingSelectedFriendId),
     bday,

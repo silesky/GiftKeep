@@ -1,5 +1,9 @@
 import './actionsFriendForm';
+import './actionsEventsView';
+
 export * from './actionsFriendForm';
+export * from './actionsEventsView';
+
 import * as Utils from './../utils/utils'
 
 const config = require('./../../mobileconfig.json');

@@ -41,7 +41,8 @@
     }
   }
   "visible": {
-     "selectedFriendId": 
+      "selectedIdFromEventsView"
+      "selectedFriendId": 
       "selectedTab": // 'gifts' OR 'events' OR 'all gifts'
 
   }
@@ -56,6 +57,7 @@ import { user } from './user';
 import { visible } from './visible';
 import { notification } from './notification';
 import { friendForm } from './friendForm';
+import { eventsView } from './eventsView';
 export { 
   user, 
   visible, 
@@ -67,7 +69,8 @@ const rootReducer = combineReducers({
   user,
   visible,
   friendForm,
-  notification
+  notification,
+  eventsView
 })
 
 export default rootReducer;

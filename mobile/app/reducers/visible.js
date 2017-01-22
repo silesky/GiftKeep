@@ -1,7 +1,3 @@
-import UUID from 'uuid-js';
-import Moment from 'moment';
-
-
 const initialState = {
   selectedFriendId: null,
   friendFormUpdatingSelectedFriendId: null,

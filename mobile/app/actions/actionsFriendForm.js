@@ -2,13 +2,17 @@ import * as Utils from './../utils/utils'
 import UUID from 'uuid-js';
 import Moment from 'moment';
 import { 
+  selectEventsViewInput,
   _selectLastFriend, 
   _createNotification 
 } from './index'
-export const friendEventUpdateFromEventsView = (eventId, eventInputType) => {
-console.log('called!');
+
+
+export const friendEventUpdateFromEventsView = (eventId, inputType) => {
+
 return (dispatch, getState) => {
     const friendId = Utils.getFriendByEventId(getState(), eventId).friendId; 
+    dispatch(selectEventsViewInput(eventId, 'name'));
     dispatch(friendFormUpdateActivate(friendId));
   }
 }
