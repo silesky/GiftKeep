@@ -13,3 +13,4 @@ export * from './TabBar';
 export * from './SwipeIcon';
 export * from './FriendFormEvent';
 export * from './EventCard';
+export * from './AutoSuggestInput';
