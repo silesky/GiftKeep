@@ -36,7 +36,6 @@ class BodyEventsView extends Component {
             const eventTimeFromNow = Moment(eventDate).fromNow();
             return (
               <EventCard 
-                onSelectEventsView={this.props.actions.selectEventsViewInput.bind(this, eventId) /* unneccessary */}
                 onFriendEventUpdate={this.props.actions.friendEventUpdateFromEventsView.bind(this, eventId) /* update everything*/}
                 onFriendEventDelete={this.props.actions.friendEventDelete.bind(this, eventId)}
                 key={index} 

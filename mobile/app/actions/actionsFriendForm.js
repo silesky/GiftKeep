@@ -3,17 +3,27 @@ import UUID from 'uuid-js';
 import Moment from 'moment';
 import { 
   selectEventsViewInput,
+  resetEventsViewInput,
   _selectLastFriend, 
   _createNotification,
   _friendEventAdd
 } from './index'
 
 
+// when you sewipe 
 export const friendEventUpdateFromEventsView = (eventId, inputType) => {
-
 return (dispatch, getState) => {
     const friendId = Utils.getFriendByEventId(getState(), eventId).friendId; 
     dispatch(selectEventsViewInput(eventId, 'name'));
+    dispatch(friendFormUpdateActivate(friendId));
+  }
+}
+
+// when you swipe on a friend, you don't want to focus on a specific event
+export const friendEventUpdateFromDrawer = (friendId) => {
+  
+return dispatch => {
+    dispatch(resetEventsViewInput());
     dispatch(friendFormUpdateActivate(friendId));
   }
 }
@@ -118,6 +128,7 @@ export const friendFormEventNameInputUpdate = (eventId, eventName) => { //if eve
     payload: { eventId, eventName }
   }
 }
+
 // for when you swipe on a name in the drawer, and select update
 export const friendFormUpdateActivate = (friendId) => { 
   return (dispatch) => {
@@ -154,6 +165,7 @@ export const friendFormCancel = () => {
     dispatch(friendFormUpdatingSelectedFriendId(null)); //clear friendId just in case 
     dispatch(_friendFormEventInputClear())
     dispatch(friendFormVisibilityToggle());
+    dispatch(resetEventsViewInput());
   }
 }
 
@@ -179,6 +191,7 @@ export const friendFormUpdateAndSave = (friendId) => { // for when you hit creat
     dispatch(_friendFormFriendNameUpdate(friendId, friendFormNameInput));
     dispatch(_friendFormUpdatingStatusChange(false))
     dispatch(_friendFormEventInputClear())
+    dispatch(resetEventsViewInput());
     dispatch(friendFormVisibilityToggle())
   }
 }
