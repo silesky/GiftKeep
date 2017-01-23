@@ -23,12 +23,13 @@ class BodyFriendView extends Component {
       gifts, 
       hasFriends,
       hasGifts,
+      selectedTab
     } = this.props;
 
     return (
       <Content>
 
-        { (!hasFriends)
+        { (!hasFriends && selectedTab === 'gifts' )
           ? <NoFriendsAlert
             addFriendBtnClick={this.props.actions.friendFormVisibilityToggle}
             friendName={friendName}
@@ -37,7 +38,7 @@ class BodyFriendView extends Component {
             : undefined
           }
         
-        { (hasFriends && !hasGifts) 
+        { (hasFriends && !hasGifts && selectedTab === 'gifts' ) //  selectedTab related to this bug https://trello.com/c/jMfL798g/127-should-not-be-transparent-when-i-m-selecting-events-view
           ? <NoGiftsAlert 
           addGiftBtnClick={this.props.actions.addGift.bind(this, selectedFriendId)}
           />
@@ -65,6 +66,7 @@ const mstp = (state) => {
   const { bday, friendName, gifts } = Utils.getFriendByFriendId(state, state.visible.selectedFriendId); 
   const newGifts =  gifts && gifts.length ? gifts : [];
   return {
+    selectedTab: state.visible.selectedTab, 
     selectedFriendId: state.visible.selectedFriendId,
     bday,
     gifts: newGifts,
