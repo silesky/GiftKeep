@@ -26,35 +26,41 @@ class BodyFriendView extends Component {
       selectedTab
     } = this.props;
 
+
+    const renderBody = (
+        <Content>
+          { (!hasFriends)
+            ? <NoFriendsAlert
+              addFriendBtnClick={this.props.actions.friendFormVisibilityToggle}
+              friendName={friendName}
+              bday={bday}
+              />
+              : undefined
+            }
+          
+          { (hasFriends && !hasGifts) //  selectedTab related to this bug https://trello.com/c/jMfL798g/127-should-not-be-transparent-when-i-m-selecting-events-view
+            ? <NoGiftsAlert 
+            addGiftBtnClick={this.props.actions.addGift.bind(this, selectedFriendId)}
+            />
+          : undefined }
+          { gifts.map((el, ind) => {
+            return (
+              <GiftCard
+                deleteGift={this.props.actions.deleteGift.bind(this, selectedFriendId, el.giftId)}
+                giftDesc={el.giftDesc}
+                updateGiftTitle={this.props.actions.updateGiftTitle.bind(this, selectedFriendId, el.giftId)}
+                updateGiftDesc={this.props.actions.updateGiftDesc.bind(this, selectedFriendId, el.giftId)}
+                giftId={el.giftId}
+                giftTitle={el.giftTitle}
+                key={ind} />
+            )
+          })}
+        </Content>
+        )
+    
     return (
       <Content>
-
-        { (!hasFriends && selectedTab === 'gifts' )
-          ? <NoFriendsAlert
-            addFriendBtnClick={this.props.actions.friendFormVisibilityToggle}
-            friendName={friendName}
-            bday={bday}
-            />
-            : undefined
-          }
-        
-        { (hasFriends && !hasGifts && selectedTab === 'gifts' ) //  selectedTab related to this bug https://trello.com/c/jMfL798g/127-should-not-be-transparent-when-i-m-selecting-events-view
-          ? <NoGiftsAlert 
-          addGiftBtnClick={this.props.actions.addGift.bind(this, selectedFriendId)}
-          />
-        : undefined }
-        { gifts.map((el, ind) => {
-          return (
-            <GiftCard
-              deleteGift={this.props.actions.deleteGift.bind(this, selectedFriendId, el.giftId)}
-              giftDesc={el.giftDesc}
-              updateGiftTitle={this.props.actions.updateGiftTitle.bind(this, selectedFriendId, el.giftId)}
-              updateGiftDesc={this.props.actions.updateGiftDesc.bind(this, selectedFriendId, el.giftId)}
-              giftId={el.giftId}
-              giftTitle={el.giftTitle}
-              key={ind} />
-          )
-        })}
+      { renderBody }
       </Content>
     )
   }
