@@ -147,7 +147,16 @@ export const getFriendByGiftId = (state, gid) => {
   })
   return (friendObj.friendId) ? friendObj : false;
 }
-
+export const getFriendByEventId = (state, eventId) => {
+  let friendObj = {}
+  state.user.data.forEach((eachFriend, ind, arr) => {
+    const foundEvent = eachFriend.events.find(eachEvent => {
+      return eachEvent.eventId === eventId
+    })
+    if (foundEvent) friendObj = arr[ind]
+  })
+  return (friendObj.friendId) ? friendObj : false;
+}
 // not using any more
 export const fbGetPicURLById = (fbId) => {
      return fetch(`https://graph.facebook.com/v2.8/${fbId}/picture`)

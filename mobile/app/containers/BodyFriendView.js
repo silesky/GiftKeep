@@ -11,6 +11,7 @@ import {
 } from './../components/';
 import { NoGiftsAlert } from './../components/NoGiftsAlert';
 import * as Utils from './../utils/utils';
+import { View } from 'react-native';
 class BodyFriendView extends Component {
   constructor() {
     super();
@@ -23,37 +24,46 @@ class BodyFriendView extends Component {
       gifts, 
       hasFriends,
       hasGifts,
+      selectedTab
     } = this.props;
 
+
+    const body = (
+        <View>
+          { (!hasFriends)
+            ? <NoFriendsAlert
+              addFriendBtnClick={this.props.actions.friendFormVisibilityToggle}
+              friendName={friendName}
+              bday={bday}
+              />
+              : undefined
+            }
+          
+          { (hasFriends && !hasGifts) //  
+            ? <NoGiftsAlert 
+            addGiftBtnClick={this.props.actions.addGift.bind(this, selectedFriendId)}
+            />
+          : undefined }
+          { gifts.map((el, ind) => {
+            return (
+              <GiftCard
+                deleteGift={this.props.actions.deleteGift.bind(this, selectedFriendId, el.giftId)}
+                giftDesc={el.giftDesc}
+                updateGiftTitle={this.props.actions.updateGiftTitle.bind(this, selectedFriendId, el.giftId)}
+                updateGiftDesc={this.props.actions.updateGiftDesc.bind(this, selectedFriendId, el.giftId)}
+                giftId={el.giftId}
+                giftTitle={el.giftTitle}
+                key={ind} />
+            )
+          })}
+        </View>
+        )
+    
     return (
       <Content>
-
-        { (!hasFriends)
-          ? <NoFriendsAlert
-            addFriendBtnClick={this.props.actions.friendFormVisibilityToggle}
-            friendName={friendName}
-            bday={bday}
-            />
-            : undefined
-          }
-        
-        { (hasFriends && !hasGifts) 
-          ? <NoGiftsAlert 
-          addGiftBtnClick={this.props.actions.addGift.bind(this, selectedFriendId)}
-          />
-        : undefined }
-        { gifts.map((el, ind) => {
-          return (
-            <GiftCard
-              deleteGift={this.props.actions.deleteGift.bind(this, selectedFriendId, el.giftId)}
-              giftDesc={el.giftDesc}
-              updateGiftTitle={this.props.actions.updateGiftTitle.bind(this, selectedFriendId, el.giftId)}
-              updateGiftDesc={this.props.actions.updateGiftDesc.bind(this, selectedFriendId, el.giftId)}
-              giftId={el.giftId}
-              giftTitle={el.giftTitle}
-              key={ind} />
-          )
-        })}
+      { 
+        (selectedTab === 'gifts') ? body : false //selectedTab related to this bug https://trello.com/c/jMfL798g/127-should-not-be-transparent-when-i-m-selecting-events-view
+      }
       </Content>
     )
   }
@@ -65,6 +75,7 @@ const mstp = (state) => {
   const { bday, friendName, gifts } = Utils.getFriendByFriendId(state, state.visible.selectedFriendId); 
   const newGifts =  gifts && gifts.length ? gifts : [];
   return {
+    selectedTab: state.visible.selectedTab, 
     selectedFriendId: state.visible.selectedFriendId,
     bday,
     gifts: newGifts,

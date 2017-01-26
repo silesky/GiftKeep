@@ -1,39 +1,16 @@
-import { BottomBar } from './BottomBar';
-export { BottomBar }
-
-import { FbLogin } from './FbLogin';
-export { FbLogin }
-
-
-import { FriendFormDatePicker } from './FriendFormDatePicker';
-export { FriendFormDatePicker }
-
-import { FriendFormEventSwiper } from './FriendFormEventSwiper';
-export { FriendFormEventSwiper }
-
-import { FriendFormEventNameInput } from './FriendFormEventNameInput';
-export { FriendFormEventNameInput }
-
-import { FriendListItem } from './FriendListItem';
-export { FriendListItem }
-
-import { ModalNotificationBottom } from './ModalNotificationBottom';
-export { ModalNotificationBottom }
-
-import { NoFriendsAlert } from './NoFriendsAlert';
-export { NoFriendsAlert }
-
-import { NoEventsAlert } from './NoEventsAlert';
-export { NoEventsAlert }
-
-import NoGiftsAlert from './NoGiftsAlert';
-export { NoGiftsAlert } 
-
-import { TopBar } from './TopBar';
-export { TopBar }
-
-import { GiftCard } from './GiftCard';
-export { GiftCard }
-
-import TabBar from './TabBar';
-export { TabBar }
+export * from './BottomBar';
+export * from './FbLogin';
+export * from './FriendFormDatePicker';
+export * from './FriendFormEventSwiper';
+export * from './FriendFormEventNameInput';
+export * from './FriendListItem';
+export * from './NotificationBottom';
+export * from './NoFriendsAlert';
+export * from './NoGiftsAlert';
+export * from './TopBar';
+export * from './GiftCard';
+export * from './TabBar';
+export * from './SwipeIcon';
+export * from './FriendFormEvent';
+export * from './EventCard';
+export * from './AutoSuggestInput';

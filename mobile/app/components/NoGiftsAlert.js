@@ -17,7 +17,7 @@ export const NoGiftsAlert = ({
             No Gifts Added.
             </Text>
             <Button 
-              warning
+              
               onPress={() => addGiftBtnClick() }>
               <Icon name="md-add-circle" />
               <Text>Add a Gift!</Text>

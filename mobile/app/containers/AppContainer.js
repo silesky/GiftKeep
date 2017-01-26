@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import * as actions from './../actions/';
 // Components
 import { 
-  ModalNotificationBottom,
+  NotificationBottom,
   TopBar,
   BottomBar
    } from './../components';
@@ -46,7 +46,6 @@ class AppContainer extends Component {
           friendName={this.props.friendName}
           drawerOpen={() => this._drawer.open()}
           />
-        <Content>
           <Tabs
             initialPage={0}
             //  currentPage={this.props.state.selectedTab} broken unforuntately
@@ -65,14 +64,13 @@ class AppContainer extends Component {
               tabLabel='All Gifts'
               isSelected={this.props.selectedTab === 'all gifts'}
               /> */}
-
           </Tabs>
-        </Content>
-
+        { this.props.bottomNotificationVisibility
+          ? <NotificationBottom 
+              notificationText={this.props.notificationText} />
+            : false
+        }
         <FriendFormCreateUpdate />
-        <ModalNotificationBottom 
-        notificationText={this.props.notificationText} 
-        IsVisible={this.props.bottomNotificationVisibility} />
         <BottomBar
           addGift={this.props.actions.addGift.bind(this, this.props.selectedFriendId)}
           addEvent={this.props.actions.friendFormEventCreate.bind(this, this.props.selectedFriendId, undefined, undefined)}

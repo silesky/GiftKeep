@@ -29,25 +29,14 @@ import {
 } from 'native-base';
 import Moment from 'moment';
 export const FriendFormDatePicker = ({
-  isUpdating,
   eventDate,
   calendarModalIsVisible,
-  //eventWithFocus,
-  isVisible,
   onEventDateInputChange,
   onEventDateInputBoxFocus,
   onEventDateInputOk,
   onCancel,
 }) => {
-  const 
-    eventMonth = Moment(eventDate).format('M')
-    , eventDay =  Moment(eventDate).format('D')
-    , eventYear =  Moment(eventDate).format('Y')
-    , eventTimeFromNow = Moment(eventDate).fromNow()
-;
-  const isEventInTheFuture = Moment(eventDate).format('YYYYMMDD') > Moment().format('YYYYMMDD')
 
-//const dateToDisplay = (isEventInTheFuture) ? eventTimeFromNow : '';
   return (
     <View>
       <InputGroup borderType="rounded" style={{marginBottom: 10, paddingLeft: 10}} >
@@ -66,7 +55,6 @@ export const FriendFormDatePicker = ({
         animationType={'fade'}
         transparent={true}
         >
-        <Container>
         <Content>
           <Card
             style={{
@@ -78,7 +66,11 @@ export const FriendFormDatePicker = ({
               <Text>Select an Event Date</Text>
             </CardItem>
             <CardItem cardBody>
+ 
               <Calendar
+                startStage="month"
+                minDate={Moment().startOf('day')}
+                maxDate={Moment().add(10, 'years').startOf('day')}
                 selected={eventDate}
                 onChange={(eventDateInputArg) => onEventDateInputChange(eventDateInputArg)}
                 />
@@ -95,8 +87,6 @@ export const FriendFormDatePicker = ({
             </CardItem>
           </Card>
         </Content>
-        </Container>
-
       </Modal>
 
 

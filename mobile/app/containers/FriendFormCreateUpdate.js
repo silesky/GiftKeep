@@ -12,16 +12,13 @@ import {
   bindActionCreators
 } from 'redux'
  import {
-  FriendFormDatePicker,
-  FriendFormEventNameInput,
   FriendFormEventSwiper,
-
+  FriendFormEvent
  } from './../components'
 import * as actions from './../actions/'
 import {
   // StyleSheet,
-  Modal,
-  View
+  Modal
 } from 'react-native';
 import {
   Container,
@@ -125,15 +122,17 @@ class FriendFormCreateUpdate extends Component {
               {
                 whichEventArray.map(({eventId, eventName, eventDate}, eachIndex) => {
                   return (
-                   <FriendFormEventSwiper 
-                      key={eachIndex}
-                      onSwipeDelete={actions.friendEventDelete.bind(this, eventId)}
-                   >
-                     <FriendFormEventNameInput 
-                      defaultValue={isUpdating ? eventName : ''}
-                      handleOnChangeText={this.handleEventNameInputChange.bind(this, eventId)}
-                    />
-                      <FriendFormDatePicker
+                     <FriendFormEventSwiper 
+                        key={eachIndex}
+                        onSwipeDelete={actions.friendEventDelete.bind(this, eventId)}
+                        >
+                      <FriendFormEvent
+                        defaultValue={eventName}
+                        handleOnChangeText={this.handleEventNameInputChange.bind(this, eventId)}
+                        isFocusedInputType={'name'}
+                        isFocused={this.props.selectedEventsViewInput.eventId === eventId /* 
+                          this.props.selectedIdFromEventsView === eventId
+                          it should auto scroll to the box that's focused*/}
                         calendarModalIsVisible={eventId === friendFormEventDatePickerSelectedEventId}
                         eventDate={eventDate /* needs to be an isostring */}
                         isUpdating={isUpdating}
@@ -142,10 +141,8 @@ class FriendFormCreateUpdate extends Component {
                         onEventDateInputOk={actions.friendFormEventDatePickerSelectEvent.bind(this, null)}
                         onEventDateInputBoxFocus={this.onEventDateInputBoxFocus.bind(this, eventId)} 
                         onEventDateInputChange={this.handleEventDateInputChange.bind(this, eventId)}
-                      />
-                 
-                    </FriendFormEventSwiper>
-
+                    />
+                   </FriendFormEventSwiper>
                   )
                 })
               }
@@ -193,9 +190,14 @@ const mstp = (state) => {
     friendName
   } = Utils.getFriendByFriendId(state, friendFormUpdatingSelectedFriendId);
   events = (events && events.length) ? events : [];
+
+  let { selectedEventsViewInput } = state.eventsView;
+  selectedEventsViewInput = selectedEventsViewInput ? selectedEventsViewInput : {};
   friendFormEventInput = (friendFormEventInput && friendFormEventInput.length) ? friendFormEventInput : [];  // show an empty event
    
   return {
+    selectedEventsViewInput: selectedEventsViewInput,
+    selectedIdFromEventsView: 12345,
     isUpdating: !!(friendFormIsUpdating && friendFormUpdatingSelectedFriendId),
     bday,
     events,

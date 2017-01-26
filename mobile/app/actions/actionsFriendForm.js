@@ -2,17 +2,41 @@ import * as Utils from './../utils/utils'
 import UUID from 'uuid-js';
 import Moment from 'moment';
 import { 
+  selectEventsViewInput,
+  resetEventsViewInput,
   _selectLastFriend, 
-  _createNotification 
+  _createNotification,
+  _friendEventAdd
 } from './index'
 
+
+// when you sewipe 
+export const friendEventUpdateFromEventsView = (eventId, inputType) => {
+return (dispatch, getState) => {
+    const friendId = Utils.getFriendByEventId(getState(), eventId).friendId; 
+    dispatch(selectEventsViewInput(eventId, 'name'));
+    dispatch(friendFormUpdateActivate(friendId));
+  }
+}
+
+// when you swipe on a friend, you don't want to focus on a specific event
+export const friendEventUpdateFromDrawer = (friendId) => {
+  
+return dispatch => {
+    dispatch(resetEventsViewInput());
+    dispatch(friendFormUpdateActivate(friendId));
+  }
+}
 export const friendEventDelete = (eventId) => {
   return (dispatch, getState) => {
-    const isUpdating = getState().friendForm.friendFormIsUpdating;
-    (isUpdating) 
-      ? dispatch({type: 'FRIEND_EVENT_DELETE', payload: {eventId}})
-      : dispatch({type: 'FRIEND_FORM_EVENT_INPUT_DELETE', payload: {eventId}})
-     
+    const {friendFormIsUpdating, friendFormIsVisible}  = getState().friendForm;
+    if (friendFormIsVisible && !friendFormIsUpdating) {
+      // if we're adding/updating events at the beginning, via 'create friend'
+     dispatch({type: 'FRIEND_FORM_EVENT_INPUT_DELETE', payload: {eventId}})
+  // if we're adding/updating via the edit friend swipe in the form or in the events view)  
+    } else {
+      dispatch({type: 'FRIEND_EVENT_DELETE', payload: {eventId}})
+    }
   }
 }
 export const friendFormEventDatePickerSelectEvent = (eventId) => {
@@ -104,6 +128,7 @@ export const friendFormEventNameInputUpdate = (eventId, eventName) => { //if eve
     payload: { eventId, eventName }
   }
 }
+
 // for when you swipe on a name in the drawer, and select update
 export const friendFormUpdateActivate = (friendId) => { 
   return (dispatch) => {
@@ -123,6 +148,7 @@ export const friendFormBlankEventCreateFromSelectedFriendId = () => {
   }
 }
 // for when you hit 'ADD EVENT'
+
 export const friendFormEventCreate = (friendId, eventName = '', eventDate = Moment().toISOString()) => { // for when you press the 'add event' button
   const _friendHasNotBeenCreatedYet = !friendId;
   return dispatch => {
@@ -132,10 +158,7 @@ export const friendFormEventCreate = (friendId, eventName = '', eventDate = Mome
         dispatch(friendFormEventNameInputUpdate(newId, eventName));
         dispatch(friendFormEventDateInputUpdate(newId, eventDate));
     } else {
-      dispatch({
-        type: 'ADD_NEW_EVENT_TO_FRIEND',
-        payload: { friendId, eventName, eventDate }
-      })
+     dispatch(_friendEventAdd(friendId, eventName, eventDate))
   }
 }
 }
@@ -151,6 +174,7 @@ export const friendFormCancel = () => {
     dispatch(friendFormUpdatingSelectedFriendId(null)); //clear friendId just in case 
     dispatch(_friendFormEventInputClear())
     dispatch(friendFormVisibilityToggle());
+    dispatch(resetEventsViewInput());
   }
 }
 
@@ -176,6 +200,7 @@ export const friendFormUpdateAndSave = (friendId) => { // for when you hit creat
     dispatch(_friendFormFriendNameUpdate(friendId, friendFormNameInput));
     dispatch(_friendFormUpdatingStatusChange(false))
     dispatch(_friendFormEventInputClear())
+    dispatch(resetEventsViewInput());
     dispatch(friendFormVisibilityToggle())
   }
 }

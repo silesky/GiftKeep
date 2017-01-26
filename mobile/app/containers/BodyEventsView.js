@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {Component} from 'react';
+import myThemeLight from './../themes/myThemeLight';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import * as actions from './../actions/'
@@ -11,57 +12,38 @@ import {
   Title,
   Text
 } from 'native-base'
+import { EventCard } from './../components/'
 import * as Utils from './../utils/utils'
-import { 
-  NoFriendsAlert,
-  NoEventsAlert
-   } from './../components/';
+
 // should get an array of all the gifts
-class BodyEventsView extends React.Component {
+class BodyEventsView extends Component {
+
   constructor(props) {
     super(props)
   }
   static propTypes = {
     isSelected: React.PropTypes.bool,
   }
+
   render() {
-    const { 
-      hasEvents,
-      hasFriends 
-      } = this.props;
+
     const isEventInTheFuture = (date) => Moment(date).format('YYYYMMDD') > Moment().format('YYYYMMDD');
     return (
       <Container>
         <Content>
-       { (!hasFriends)
-          ? <NoFriendsAlert
-            addFriendBtnClick={this.props.actions.friendFormVisibilityToggle}
-            />
-            : undefined
-          }
-         { (hasFriends && !hasEvents)
-          ? <NoEventsAlert
-            addEventBtnClick={this.props.actions.friendFormBlankEventCreateFromSelectedFriendId} 
-            />
-            : undefined
-          }
           { this.props.events.map(({eventName, eventDate, eventId}, index) => {
             const eventTimeFromNow = Moment(eventDate).fromNow();
             return (
-              <Card key={index}>
-                <CardItem header>
-                  <Title>{eventName}</Title>
-                </CardItem>
-                <CardItem body>
-                  <Text>
-                  {
-                    isEventInTheFuture(eventDate)
-                      ? eventTimeFromNow
-                      : 'Event has passed.'
+              <EventCard 
+                onFriendEventUpdate={this.props.actions.friendEventUpdateFromEventsView.bind(this, eventId) /* update everything*/}
+                onFriendEventDelete={this.props.actions.friendEventDelete.bind(this, eventId)}
+                key={index} 
+                eventName={eventName}
+                eventTime={isEventInTheFuture(eventDate)
+                        ? eventTimeFromNow
+                        : 'Event has passed.'
                   }
-                  </Text>
-                </CardItem>
-              </Card>
+              />
             )
           })
           }
@@ -77,8 +59,6 @@ const mstp = (state) => {
   let { events } = Utils.getFriendByFriendId(state, state.visible.selectedFriendId);
   events = (events && events.length) ? events : [];
   return {
-    hasEvents: !!events.length,
-    hasFriends: !!state.user.data.length,
     events: events
   }
 };
