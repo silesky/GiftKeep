@@ -1,6 +1,7 @@
+# Giftr: cloud-synced gift notepad.
 ![animated demo gif](demo.gif)
-* cloud-synced google keep for gifts (iOS-only right now)
-# Development
+------
+## Development Instructions
 * make sure `mongodb` is installed
 * `npm install`
 * run mongo daemon
