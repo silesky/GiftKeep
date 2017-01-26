@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "emu": "xcrun instruments -w 'iPhone 5s (10.2)'",
+    "postinstall_comment": "remote-redux-devtools-on-debugger injects remote remotedev monitor into the react native debugger",
     "postinstall": "remotedev-debugger --injectserver",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "jest": "jest",
@@ -44,7 +45,6 @@
     "mocha": "^3.1.2",
     "mocha-clean": "^1.0.0",
     "mongodb": "^2.2.11",
-    "react-native-debugger-open": "^0.3.2",
     "react-native-mock": "^0.2.7",
     "redux-mock-store": "^1.2.1",
     "remote-redux-devtools": "^0.5.4",
