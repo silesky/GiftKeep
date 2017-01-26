@@ -11,6 +11,7 @@ import {
 } from './../components/';
 import { NoGiftsAlert } from './../components/NoGiftsAlert';
 import * as Utils from './../utils/utils';
+import { View } from 'react-native';
 class BodyFriendView extends Component {
   constructor() {
     super();
@@ -27,8 +28,8 @@ class BodyFriendView extends Component {
     } = this.props;
 
 
-    const renderBody = (
-        <Content>
+    const body = (
+        <View>
           { (!hasFriends)
             ? <NoFriendsAlert
               addFriendBtnClick={this.props.actions.friendFormVisibilityToggle}
@@ -38,7 +39,7 @@ class BodyFriendView extends Component {
               : undefined
             }
           
-          { (hasFriends && !hasGifts) //  selectedTab related to this bug https://trello.com/c/jMfL798g/127-should-not-be-transparent-when-i-m-selecting-events-view
+          { (hasFriends && !hasGifts) //  
             ? <NoGiftsAlert 
             addGiftBtnClick={this.props.actions.addGift.bind(this, selectedFriendId)}
             />
@@ -55,12 +56,14 @@ class BodyFriendView extends Component {
                 key={ind} />
             )
           })}
-        </Content>
+        </View>
         )
     
     return (
       <Content>
-      { renderBody }
+      { 
+        (selectedTab === 'gifts') ? body : false //selectedTab related to this bug https://trello.com/c/jMfL798g/127-should-not-be-transparent-when-i-m-selecting-events-view
+      }
       </Content>
     )
   }
