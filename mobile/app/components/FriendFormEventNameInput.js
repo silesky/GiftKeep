@@ -1,19 +1,18 @@
 
 import React, {
   Component
-} from 'react';
+} from 'react'
 import {
   Input,
   InputGroup,
 
-  Icon,
+  Icon
 
-} from 'native-base';
+} from 'native-base'
 
 export const FriendFormEventNameInput = ({defaultValue, isFocused, handleOnChangeText}) => {
   console.log(isFocused)
-return (
-
+  return (
   <InputGroup style={{paddingLeft: 10, marginTop: 10, marginBottom: 10 }} borderType="rounded" >
     <Icon name="md-happy" />
     <Input
