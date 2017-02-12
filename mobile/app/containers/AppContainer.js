@@ -1,28 +1,30 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import Drawer from 'react-native-drawer';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import Drawer from 'react-native-drawer'
 import { bindActionCreators } from 'redux'
-import * as actions from './../actions/';
+import * as actions from './../actions/'
+import {
+  Tabs
+} from 'native-base'
 // Components
-import { 
+import {
   NotificationBottom,
   TopBar,
   BottomBar
-   } from './../components';
+   } from './../components'
+import { LightTheme } from '../themes/'
+import FriendFormCreateUpdate from './../containers/FriendFormCreateUpdate'
+// Containers (not named exports)
+import DrawerContainer from './../containers/DrawerContainer'
+import BodyFriendView from './../containers/BodyFriendView'
+import BodyEventsView from './../containers/BodyEventsView'
+import { getFriendItemById } from './../utils/utils'
 
-import  FriendFormCreateUpdate from './../containers/FriendFormCreateUpdate';
-//Containers (not named exports)
-import DrawerContainer from './../containers/DrawerContainer';
-import BodyFriendView from './../containers/BodyFriendView';
-import BodyEventsView from './../containers/BodyEventsView';
-import { getFriendItemById } from './../utils/utils';
-
-import { Tabs, Container, Content } from 'native-base';
 class AppContainer extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
   }
-  render() {
+  render () {
     return (
       <Drawer
         tapToClose={true}
@@ -34,39 +36,42 @@ class AppContainer extends Component {
           return {
             drawer: { shadowRadius: ratio < 0.2 ? ratio * 5 * 5 : 5 },
             main: {
-              opacity: (2 - ratio) / 2,
-            },
-          };
+              opacity: (2 - ratio) / 2
+            }
+          }
         } }
         negotiatePan
         content={<DrawerContainer />}
         >
+
         <TopBar
           testClick={() => this.props.actions.resetAll()}
           friendName={this.props.friendName}
           drawerOpen={() => this._drawer.open()}
           />
+
           <Tabs
             initialPage={0}
             //  currentPage={this.props.state.selectedTab} broken unforuntately
             onChangeTab={(selectTabEvent) => this.props.actions.selectTab(selectTabEvent['i'])}>
-            <BodyFriendView 
+            <BodyFriendView
               tabLabel='Gifts'
               isSelected={this.props.selectedTab === 'gifts'}
               friendId={this.props.selectedFriendId}
               />
-            <BodyEventsView 
+            <BodyEventsView
               tabLabel='Events'
               isSelected={this.props.selectedTab === 'events'}
               />
               {/*
-             <BodyAllGiftsView 
+             <BodyAllGiftsView
               tabLabel='All Gifts'
               isSelected={this.props.selectedTab === 'all gifts'}
               /> */}
           </Tabs>
+
         { this.props.bottomNotificationVisibility
-          ? <NotificationBottom 
+          ? <NotificationBottom
               notificationText={this.props.notificationText} />
             : false
         }
@@ -74,23 +79,21 @@ class AppContainer extends Component {
         <BottomBar
           addGift={this.props.actions.addGift.bind(this, this.props.selectedFriendId)}
           addEvent={this.props.actions.friendFormEventCreate.bind(this, this.props.selectedFriendId, undefined, undefined)}
-          selectedTab={this.props.selectedTab}          
+          selectedTab={this.props.selectedTab}
           friendFormVisibilityToggle={this.props.actions.friendFormVisibilityToggle}
           />
-        
-      </Drawer>
 
+      </Drawer>
 
     )
   }
 }
 
-
 const mstp = (state) => {
-  const { notificationText, bottomNotificationVisibility } = state.notification;
-  const { selectedFriendId, selectedTab } = state.visible;
+  const { notificationText, bottomNotificationVisibility } = state.notification
+  const { selectedFriendId, selectedTab } = state.visible
   return {
- 
+
     selectedFriendId,
     selectedTab,
     notificationText,
