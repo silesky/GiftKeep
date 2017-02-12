@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import myThemeLight from './../themes/myThemeLight';
+import LightTheme from './../themes';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import * as actions from './../actions/'
@@ -34,10 +34,10 @@ class BodyEventsView extends Component {
           { this.props.events.map(({eventName, eventDate, eventId}, index) => {
             const eventTimeFromNow = Moment(eventDate).fromNow();
             return (
-              <EventCard 
+              <EventCard
                 onFriendEventUpdate={this.props.actions.friendEventUpdateFromEventsView.bind(this, eventId) /* update everything*/}
                 onFriendEventDelete={this.props.actions.friendEventDelete.bind(this, eventId)}
-                key={index} 
+                key={index}
                 eventName={eventName}
                 eventTime={isEventInTheFuture(eventDate)
                         ? eventTimeFromNow

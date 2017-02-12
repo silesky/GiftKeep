@@ -1,4 +1,6 @@
 export default {
+  $offwhite: '#ededed',
+  $lightgrey2: '#dddddd',
   $lightgrey: '#d4d4d4',
   $lightoffwhite: '#ededed',
   $darkgreen: '#5a8e0b',

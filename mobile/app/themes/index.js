@@ -1,2 +1,3 @@
-export * from './myThemeLight'
-export * from './colors'
+import LightTheme from './LightTheme'
+export { LightTheme }
+
