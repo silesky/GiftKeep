@@ -32,9 +32,8 @@ export const FriendFormEvent = (props) => {
   isFocused
 } = props;
   return (
-    <View>
-  
-      <FriendFormEventNameInput 
+    <View style={{paddingTop: 10, paddingBottom: 10, borderBottomWidth: 1, borderBottomColor: '#d4d4d4'}}>
+      <FriendFormEventNameInput
       isFocused={isFocused}
       defaultValue={defaultValue}
       handleOnChangeText={(eventNameInput) => handleOnChangeText(eventNameInput)}
@@ -46,7 +45,7 @@ export const FriendFormEvent = (props) => {
           isVisible={isVisible}
           onCancel={() => onCancel()}
           onEventDateInputOk={() => onEventDateInputOk()}
-          onEventDateInputBoxFocus={() => onEventDateInputBoxFocus()} 
+          onEventDateInputBoxFocus={() => onEventDateInputBoxFocus()}
           onEventDateInputChange={(eventDateInput) => onEventDateInputChange(eventDateInput)}
         />
      </View>

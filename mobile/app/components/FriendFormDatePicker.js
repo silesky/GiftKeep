@@ -39,7 +39,7 @@ export const FriendFormDatePicker = ({
 
   return (
     <View>
-      <InputGroup borderType="rounded" style={{marginBottom: 10, paddingLeft: 10}} >
+      <InputGroup style={{paddingLeft: 10, marginLeft: 5, marginRight: 5}} borderType="rounded" >
         <Input
           placeholder="Click to add a friend event."
           selectionColor={'white'}
@@ -48,6 +48,7 @@ export const FriendFormDatePicker = ({
           onFocus={() => onEventDateInputBoxFocus()}
           />
         <Icon name="md-calendar" />
+
       </InputGroup>
 
       <Modal
@@ -66,7 +67,7 @@ export const FriendFormDatePicker = ({
               <Text>Select an Event Date</Text>
             </CardItem>
             <CardItem cardBody>
- 
+
               <Calendar
                 startStage="month"
                 minDate={Moment().startOf('day')}
