@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from './../actions/';
 import { Content } from 'native-base';
-
-import { 
-  NoFriendsAlert, 
+import { LightTheme } from './../themes/';
+import {
+  NoFriendsAlert,
 
   GiftCard
 } from './../components/';
@@ -17,11 +17,11 @@ class BodyFriendView extends Component {
     super();
   }
   render() {
-    const { 
-      selectedFriendId, 
-      bday, 
-      friendName, 
-      gifts, 
+    const {
+      selectedFriendId,
+      bday,
+      friendName,
+      gifts,
       hasFriends,
       hasGifts,
       selectedTab
@@ -38,9 +38,9 @@ class BodyFriendView extends Component {
               />
               : undefined
             }
-          
-          { (hasFriends && !hasGifts) //  
-            ? <NoGiftsAlert 
+
+          { (hasFriends && !hasGifts) //
+            ? <NoGiftsAlert
             addGiftBtnClick={this.props.actions.addGift.bind(this, selectedFriendId)}
             />
           : undefined }
@@ -58,10 +58,10 @@ class BodyFriendView extends Component {
           })}
         </View>
         )
-    
+
     return (
-      <Content>
-      { 
+      <Content theme={LightTheme}>
+      {
         (selectedTab === 'gifts') ? body : false //selectedTab related to this bug https://trello.com/c/jMfL798g/127-should-not-be-transparent-when-i-m-selecting-events-view
       }
       </Content>
@@ -72,10 +72,10 @@ class BodyFriendView extends Component {
 
 const mdtp = (dispatch) => ({ actions: bindActionCreators(actions, dispatch) })
 const mstp = (state) => {
-  const { bday, friendName, gifts } = Utils.getFriendByFriendId(state, state.visible.selectedFriendId); 
+  const { bday, friendName, gifts } = Utils.getFriendByFriendId(state, state.visible.selectedFriendId);
   const newGifts =  gifts && gifts.length ? gifts : [];
   return {
-    selectedTab: state.visible.selectedTab, 
+    selectedTab: state.visible.selectedTab,
     selectedFriendId: state.visible.selectedFriendId,
     bday,
     gifts: newGifts,

@@ -104,7 +104,7 @@ export default {
 
 
     // Footer
-    footerHeight: 55,
+    footerHeight: 15,
     footerDefaultBg: (Platform.OS === 'ios' ) ? '#F8F8F8' : '#4179F7',
 
 
@@ -112,7 +112,6 @@ export default {
     tabBarTextColor: (Platform.OS === 'ios' ) ? '#6b6b6b' : '#b3c7f9',
     tabBarActiveTextColor: (Platform.OS === 'ios' ) ? colors.$defaultIconColor : '#fff',
     tabActiveBgColor: (Platform.OS=='ios') ? '#cde1f9' : undefined,
-
     //Tab
     tabDefaultBg: (Platform.OS === 'ios' ) ? '#F8F8F8' : '#4179F7',
     topTabBarTextColor: (Platform.OS === 'ios' ) ? '#6b6b6b' : '#b3c7f9',
@@ -123,8 +122,8 @@ export default {
 
     // Header
     iosToolbarBtnColor: colors.$defaultIconColor,
-    toolbarDefaultBg: (Platform.OS === 'ios' ) ? '#F8F8F8' : '#4179F7',
-    toolbarHeight: (Platform.OS === 'ios' ) ? 64 : 56,
+    toolbarDefaultBg: (Platform.OS === 'ios' ) ? colors.$headerFooterBg : '#4179F7',
+    toolbarHeight: (Platform.OS === 'ios' ) ? 56 : 56,
     toolbarIconSize: (Platform.OS === 'ios' ) ? 20 : 22,
     toolbarInputColor: '#CECDD2',
     toolbarInverseBg: '#222',
@@ -201,7 +200,7 @@ export default {
 
     // Tabs
     tabBgColor: Color(colors.$headerFooterBg).darken(0.1).hexString(),
-    tabFontSize: 15,
+    tabFontSize: 16,
     tabTextColor: colors.$activeTabColor, // works
 
     // Text

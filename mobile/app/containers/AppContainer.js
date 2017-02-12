@@ -79,13 +79,16 @@ class AppContainer extends Component {
             : false
         }
         <FriendFormCreateUpdate />
-        <BottomBar
-          addGift={this.props.actions.addGift.bind(this, this.props.selectedFriendId)}
-          addEvent={this.props.actions.friendFormEventCreate.bind(this, this.props.selectedFriendId, undefined, undefined)}
-          selectedTab={this.props.selectedTab}
-          friendFormVisibilityToggle={this.props.actions.friendFormVisibilityToggle}
-          />
-
+        {
+          (this.props.hasFriends)
+            ? <BottomBar
+              addGift={this.props.actions.addGift.bind(this, this.props.selectedFriendId)}
+              addEvent={this.props.actions.friendFormEventCreate.bind(this, this.props.selectedFriendId, undefined, undefined)}
+              selectedTab={this.props.selectedTab}
+              friendFormVisibilityToggle={this.props.actions.friendFormVisibilityToggle}
+              />
+              : false
+        }
       </Drawer>
 
     )
@@ -96,7 +99,7 @@ const mstp = (state) => {
   const { notificationText, bottomNotificationVisibility } = state.notification
   const { selectedFriendId, selectedTab } = state.visible
   return {
-
+    hasFriends: !!state.user.data.length,
     selectedFriendId,
     selectedTab,
     notificationText,

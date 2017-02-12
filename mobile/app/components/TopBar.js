@@ -20,7 +20,7 @@ export const TopBar = ({drawerOpen, friendName, testClick}) => {
                     onPress={() => drawerOpen()}>
                     <Icon name='ios-menu' />
                 </Button>
-                <Title style={{color: colors.$friendHeadingColor}}>{friendName || 'Gifter'}</Title>
+                <Title style={{color: colors.$bigHeadingTextColor}}>{friendName || 'Gifter'}</Title>
                 <Button transparent
                     onPress={() => testClick()}>
                     <Icon name='ios-settings' />

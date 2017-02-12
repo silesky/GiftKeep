@@ -43,7 +43,7 @@ class DrawerContainer extends Component {
             >
           <Icon name='ios-search' />
         </Button>
-        <Title>Friends</Title>
+        <Title style={{color: colors.$bigHeadingTextColor}}>Friends</Title>
         <Button
               iconRight
               onPress={() => this.props.actions.friendFormVisibilityToggle()}

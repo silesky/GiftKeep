@@ -4,8 +4,8 @@ export default {
   // old toolbar bg: F8F8F8
   white: '#fff',
   black: '#000',
-  lightgrey2: '#dddddd', //header (TopBar), footer (BottomBar), tabs (AppContainer)
-  lightgrey: '#d4d4d4',
+  lightgrey: '#dddddd', //header (TopBar), footer (BottomBar), tabs (AppContainer)
+  darkgrey: '#878484',
   offwhite: '#ededed',
   darkgreen: '#5a8e0b',
   lightgreen: '#58b21c' ,
@@ -15,9 +15,9 @@ export default {
   red: '#d62246',
   darkpurple: '#8c2b62',
   pink: '#dd85bd',
-  get $friendHeadingColor () { return this.darkpurple },  // used in TopBar
+  get $bigHeadingTextColor () { return Color(this.darkgrey).darken(0.3).hexString() },  // used in TopBar
   get $headerFooterTextColor () { return this.red },
-  get $activeTabColor () { return this.darkpurple },
+  get $activeTabColor () { return Color(this.darkgrey).darken(0.2).hexString() },
   get $activeTabBackground () { return this.lightgrey },
   get $cardHeaderBg() { return this.darkpurple },
   get $cardBg() { return this.white },
