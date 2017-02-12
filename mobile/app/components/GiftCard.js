@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { StyleSheet } from 'react-native';
+import colors from './../themes/colors';
 import {
     Button,
     Container,
@@ -15,53 +16,53 @@ import {
 //import * as Util  from './../utils/utils';
 
 export const GiftCard = ({
-  deleteGift, 
+  deleteGift,
   friendId,
   friendName,
-  giftDesc,  
+  giftDesc,
   giftTitle,
-  updateGiftDesc, 
-  updateGiftTitle, 
+  updateGiftDesc,
+  updateGiftTitle,
   footerIsVisible,
   }) => {
   // should take a name, birthday and text prop, along with being editable and so forth
         return (
                    <Card>
-                       <CardItem style={{backgroundColor: 'rgb(77, 144, 254)'}} header>
-                        <Input 
+                       <CardItem style={{backgroundColor: colors.$cardHeaderBg}} header>
+                        <Input
                           style={{color: 'white', fontWeight: '700'}}
-                          value={giftTitle} 
+                          value={giftTitle}
                           onChangeText={(input) => {
                             updateGiftTitle(input)
                           }}
                         />
                           <Button transparent>
-                            <Icon 
+                            <Icon
                               name='ios-close-circle-outline'
                               style={{color: 'white',fontSize: 30 }}
-                              onPress={() => deleteGift()} 
+                              onPress={() => deleteGift()}
                             />
                           </Button>
                        </CardItem>
-                       <CardItem cardBody>     
-                        <Input 
+                       <CardItem cardBody>
+                        <Input
                           placeholder="your gift description..."
                           multiline={true}
-                          value={giftDesc} 
+                          value={giftDesc}
                           onChangeText={(input) => {
                             updateGiftDesc(input)
                           }}
                         />
                      </CardItem>
-                      { footerIsVisible 
+                      { footerIsVisible
                         ? (<CardItem style={styles.footerCard}>
-                              <Button style={styles.button} 
-                               disabled small 
-                               textStyle={{color: 'white'}}  
-                              >    
+                              <Button style={styles.button}
+                               disabled small
+                               textStyle={{color: 'white'}}
+                              >
                               { friendName ? friendName.toUpperCase()  : ''}
-                              </Button>             
-                          </CardItem>) 
+                              </Button>
+                          </CardItem>)
                         : false
                       }
                    </Card>
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       paddingTop: 5,
       paddingBottom: 5,
-      
+
   },
   button: {
     backgroundColor: 'purple'

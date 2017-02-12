@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as actions from './../actions/'
+
 import {
   Image,
   StyleSheet,
@@ -26,7 +27,8 @@ import {
   FriendListItem
 } from './../components/'
 
-
+import { LightTheme } from './../themes';
+import colors from './../themes/colors';
 class DrawerContainer extends Component {
   constructor(props) {
     super(props);
@@ -34,23 +36,23 @@ class DrawerContainer extends Component {
   render() {
     return (
       <Container>
-        <Header>
-           <Button 
+        <Header theme={LightTheme} backgroundColor={colors.$headerFooterBg}>
+           <Button
               iconRight
               transparent
             >
           <Icon name='ios-search' />
         </Button>
         <Title>Friends</Title>
-        <Button 
+        <Button
               iconRight
-              onPress={() => this.props.actions.friendFormVisibilityToggle()} 
+              onPress={() => this.props.actions.friendFormVisibilityToggle()}
               transparent
             >
           <Icon name='ios-person-add' />
         </Button>
         </Header>
-        <Content>
+        <Content theme={LightTheme}>
           <List>
             {
               this.props.state.user.data.map((el, index) => (
@@ -65,10 +67,10 @@ class DrawerContainer extends Component {
             }
           </List>
         </Content>
-        <Footer>
+        <Footer backgroundColor={colors.$headerFooterBg}>
           <FbLogin
-            userName={this.props.state.user.userName} 
-            fbImage={this.props.state.user.fbImage} 
+            userName={this.props.state.user.userName}
+            fbImage={this.props.state.user.fbImage}
             clear={this.props.actions.clear}
             authTokenAndTryToGetUser={this.props.actions.authTokenAndTryToGetUser}
           />

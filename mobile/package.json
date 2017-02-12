@@ -44,9 +44,9 @@
     "mocha-clean": "^1.0.0",
     "mongodb": "^2.2.11",
     "react-native-mock": "^0.2.7",
+    "redux-devtools-extension": "^2.13.0",
     "redux-mock-store": "^1.2.1",
-    "remote-redux-devtools": "^0.5.4",
-    "remotedev": "^0.2.3",
+    "remote-redux-devtools": "^0.5.7",
     "remotedev-server": "^0.3.0-beta-3",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0"

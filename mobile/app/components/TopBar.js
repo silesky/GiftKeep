@@ -5,22 +5,27 @@ import {
     Title,
     Button,
     Text,
-    Icon
+    Icon,
+    Container
 } from 'native-base';
+
+import colors from '../themes/colors'
+import LightTheme from '../themes/LightTheme';
 
 
 export const TopBar = ({drawerOpen, friendName, testClick}) => {
       return (
-            <Header>
+            <Header theme={LightTheme} backgroundColor={colors.$headerFooterBg}>
                 <Button transparent
                     onPress={() => drawerOpen()}>
                     <Icon name='ios-menu' />
                 </Button>
-                <Title>{(friendName) ? friendName : 'Gifter'}</Title>
+                <Title style={{color: colors.$friendHeadingColor}}>{friendName || 'Gifter'}</Title>
                 <Button transparent
                     onPress={() => testClick()}>
                     <Icon name='ios-settings' />
                 </Button>
-            </Header>     
+            </Header>
+
                 )
 }

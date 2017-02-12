@@ -4,7 +4,8 @@ import Drawer from 'react-native-drawer'
 import { bindActionCreators } from 'redux'
 import * as actions from './../actions/'
 import {
-  Tabs
+  Tabs,
+  Content
 } from 'native-base'
 // Components
 import {
@@ -20,6 +21,7 @@ import BodyFriendView from './../containers/BodyFriendView'
 import BodyEventsView from './../containers/BodyEventsView'
 import { getFriendItemById } from './../utils/utils'
 
+import colors from '../themes/colors';
 class AppContainer extends Component {
   constructor (props) {
     super(props)
@@ -51,6 +53,7 @@ class AppContainer extends Component {
           />
 
           <Tabs
+            theme={LightTheme}
             initialPage={0}
             //  currentPage={this.props.state.selectedTab} broken unforuntately
             onChangeTab={(selectTabEvent) => this.props.actions.selectTab(selectTabEvent['i'])}>

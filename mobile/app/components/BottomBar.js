@@ -1,6 +1,6 @@
 import React from 'react'
 import {Footer, FooterTab, Button, Icon, Text} from 'native-base'
-import colors from '../themes/colors'
+import { colors } from '../themes/'
 export const BottomBar = ({addGift, addEvent, friendFormVisibilityToggle, selectedTab}) => {
   const whichBtn = () => {
     let addBtn = {}
@@ -32,7 +32,7 @@ export const BottomBar = ({addGift, addEvent, friendFormVisibilityToggle, select
   }
 
   return (
-    <Footer backgroundColor={colors.$lightgrey2}>
+    <Footer backgroundColor={colors.$headerFooterBg}>
       <FooterTab>
         <Button onPress={() => whichBtn().handler()} transparent>
           <Text>{whichBtn().text}</Text>

@@ -1,104 +1,77 @@
-const React = require('react')
-const ReactNative = require('react-native')
-const {
+'use strict';
+
+import React from 'react';
+import NativeBaseComponent from 'native-base/Components/Base/NativeBaseComponent'
+import Text from 'native-base';
+
+import {
+  Dimensions,
   StyleSheet,
-  Text,
+  TouchableHighlight,
   View,
-  Animated
-} = ReactNative
+  Animated,
+} from 'react-native';
 
-import Button from 'react-native-scrollable-tab-view'
+var deviceWidth = Dimensions.get('window').width;
 
-const TabBar = React.createClass({
-  propTypes: {
-    goToPage: React.PropTypes.func,
-    activeTab: React.PropTypes.number,
-    tabs: React.PropTypes.array,
-    backgroundColor: React.PropTypes.string,
-    activeTextColor: React.PropTypes.string,
-    inactiveTextColor: React.PropTypes.string,
-    textStyle: Text.propTypes.style,
-    tabStyle: View.propTypes.style,
-    renderTab: React.PropTypes.func,
-    underlineStyle: View.propTypes.style
-  },
-
-  getDefaultProps () {
-    return {
-      activeTextColor: 'navy',
-      inactiveTextColor: 'black',
-      backgroundColor: null
+export default class DefaultTabBar extends NativeBaseComponent {
+    getInitialStyle() {
+        return {
+            tab: {
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: this.getTheme().tabBgColor
+            },
+            tabs: {
+                height: 45,
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                borderWidth: 1,
+                borderTopWidth: 0,
+                borderLeftWidth: 0,
+                borderRightWidth: 0,
+                borderBottomColor: '#ccc',
+            }
+        }
     }
-  },
-
-  renderTabOption (name, page) {
-  },
-
-  renderTab (name, page, isTabActive, onPressHandler) {
-    const { activeTextColor, inactiveTextColor, textStyle } = this.props
-    const textColor = isTabActive ? activeTextColor : inactiveTextColor
-    const fontWeight = isTabActive ? 'bold' : 'normal'
-
-    return <Button
-      style={{flex: 1 }}
-      key={name}
-      accessible={true}
-      accessibilityLabel={name}
-      accessibilityTraits='button'
-      onPress={() => onPressHandler(page)}
-    >
-      <View style={[styles.tab, this.props.tabStyle ]}>
-        <Text style={[{color: textColor, fontWeight }, textStyle ]}>
-          {name}
-        </Text>
-      </View>
-    </Button>
-  },
-
-  render () {
-    const containerWidth = this.props.containerWidth
-    const numberOfTabs = this.props.tabs.length
-    const tabUnderlineStyle = {
-      position: 'absolute',
-      width: containerWidth / numberOfTabs,
-      height: 4,
-      backgroundColor: 'navy',
-      bottom: 0
+    static propTypes = {
+        goToPage: React.PropTypes.func,
+        activeTab: React.PropTypes.number,
+        tabs: React.PropTypes.array
     }
 
-    const left = this.props.scrollValue.interpolate({
-      inputRange: [0, 1 ], outputRange: [0, containerWidth / numberOfTabs ]
-    })
+  renderTabOption(name, page) {
+    var isTabActive = this.props.activeTab === page;
+
     return (
-      <View style={[styles.tabs, {backgroundColor: this.props.backgroundColor }, this.props.style ]}>
-        {this.props.tabs.map((name, page) => {
-          const isTabActive = this.props.activeTab === page
-          const renderTab = this.props.renderTab || this.renderTab
-          return renderTab(name, page, isTabActive, this.props.goToPage)
-        })}
-        <Animated.View style={[tabUnderlineStyle, { left }, this.props.underlineStyle ]} />
+      <TouchableHighlight underlayColor={this.getTheme().darkenHeader} style={[this.getInitialStyle().tab]} key={name} onPress={() => this.props.goToPage(page)}>
+        <View>
+          <Text style={{color: isTabActive ? this.getTheme().tabTextColor : this.getTheme().tabTextColor, fontWeight: isTabActive ? 'bold' : 'normal', fontSize: this.getTheme().tabFontSize}}>{name}</Text>
+        </View>
+      </TouchableHighlight>
+    );
+  }
+
+  render() {
+    var numberOfTabs = this.props.tabs.length;
+    var tabUnderlineStyle = {
+      position: 'absolute',
+      width: deviceWidth / numberOfTabs,
+      height: 4,
+      backgroundColor: this.getTheme().tabTextColor,
+      bottom: 0,
+    };
+
+    var left = this.props.scrollValue.interpolate({
+      inputRange: [0, 1], outputRange: [0, deviceWidth / numberOfTabs]
+    });
+
+    return (
+      <View style={this.getInitialStyle().tabs}>
+        {this.props.tabs.map((tab, i) => this.renderTabOption(tab, i))}
+        <Animated.View style={[tabUnderlineStyle, {left}]} />
       </View>
-    )
+    );
   }
-})
-
-const styles = StyleSheet.create({
-  tab: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingBottom: 10
-  },
-  tabs: {
-    height: 50,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    borderWidth: 1,
-    borderTopWidth: 0,
-    borderLeftWidth: 0,
-    borderRightWidth: 0,
-    borderColor: '#ccc'
-  }
-})
-
-module.exports = TabBar
+}
