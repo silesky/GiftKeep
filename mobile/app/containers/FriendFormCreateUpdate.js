@@ -4,22 +4,23 @@
 
 import React, {
   Component
-} from 'react';
+} from 'react'
 import {
   connect
-} from 'react-redux';
+} from 'react-redux'
 import {
   bindActionCreators
 } from 'redux'
- import {
+import {
   FriendFormEventSwiper,
-  FriendFormEvent
+  FriendFormEvent,
+  FriendFormNameInput
  } from './../components'
 import * as actions from './../actions/'
 import {
   // StyleSheet,
   Modal
-} from 'react-native';
+} from 'react-native'
 import {
   Container,
   Content,
@@ -33,40 +34,40 @@ import {
   Text,
   Button,
   Title,
-  Icon,
+  Icon
 
-} from 'native-base';
+} from 'native-base'
 
 import * as Utils from './../utils/utils'
 
 class FriendFormCreateUpdate extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     // eventTitleInput should be an array, since there are mulitple values
-    this.handleEventDateInputChange = this.handleEventDateInputChange.bind(this);
-    this.handleEventNameInputChange = this.handleEventNameInputChange.bind(this);
-    this.onEventDateInputBoxFocus = this.onEventDateInputBoxFocus.bind(this);
-  }
-  
-  handleEventDateInputChange(eventId, eventDateInputArg) {
-    const isoDateInputString = eventDateInputArg.toISOString();
-    this.props.actions.friendFormEventDateInputUpdate(eventId, isoDateInputString);
+    this.handleEventDateInputChange = this.handleEventDateInputChange.bind(this)
+    this.handleEventNameInputChange = this.handleEventNameInputChange.bind(this)
+    this.onEventDateInputBoxFocus = this.onEventDateInputBoxFocus.bind(this)
   }
 
-  handleEventNameInputChange(eventId, eventNameInputArg) {
-    this.props.actions.friendFormEventNameInputUpdate(eventId, eventNameInputArg);
+  handleEventDateInputChange (eventId, eventDateInputArg) {
+    const isoDateInputString = eventDateInputArg.toISOString()
+    this.props.actions.friendFormEventDateInputUpdate(eventId, isoDateInputString)
   }
 
-  onfriendFormEventCreateForNewFriendOrExistingFriend() {
-    const { friendFormUpdatingSelectedFriendId } = this.props;
-    this.props.actions.friendFormEventCreate(friendFormUpdatingSelectedFriendId, undefined, undefined); // default eventName, default eventDate     // uses default params
+  handleEventNameInputChange (eventId, eventNameInputArg) {
+    this.props.actions.friendFormEventNameInputUpdate(eventId, eventNameInputArg)
   }
 
-  onEventDateInputBoxFocus(eventId) {
-    this.props.actions.friendFormEventDatePickerVisibilityStatusChange(true);
-    this.props.actions.friendFormEventDatePickerSelectEvent(eventId);
+  onfriendFormEventCreateForNewFriendOrExistingFriend () {
+    const { friendFormUpdatingSelectedFriendId } = this.props
+    this.props.actions.friendFormEventCreate(friendFormUpdatingSelectedFriendId, undefined, undefined) // default eventName, default eventDate     // uses default params
   }
-  render() {
+
+  onEventDateInputBoxFocus (eventId) {
+    this.props.actions.friendFormEventDatePickerVisibilityStatusChange(true)
+    this.props.actions.friendFormEventDatePickerSelectEvent(eventId)
+  }
+  render () {
     const {
       friendFormEventDatePickerSelectedEventId,
       friendFormUpdatingSelectedFriendId,
@@ -78,18 +79,18 @@ class FriendFormCreateUpdate extends Component {
       // friendFormBdayInput,
       friendName,
       // bday,
-      isUpdating, //id 
+      isUpdating, // id
       actions,
       events
     } = this.props
 
-  const onFriendFormUpdateOrCreate = () => {
+    const onFriendFormUpdateOrCreate = () => {
     return (isUpdating)
       ? actions.friendFormUpdateAndSave(friendFormUpdatingSelectedFriendId)
       : actions.friendFormCreateAndSave()
   }
     // two events array: either from 'user reducer' state (permanant) or 'visible reducer' state (temp input)
-  const whichEventArray = (isUpdating) ? events : friendFormEventInput;
+    const whichEventArray = (isUpdating) ? events : friendFormEventInput
     return (
       <Modal
         visible={friendFormIsVisible}
@@ -108,38 +109,35 @@ class FriendFormCreateUpdate extends Component {
           </Header>
           <Content>
             <List>
-               <ListItem itemDivider><Text>Information</Text></ListItem>
-              <InputGroup>
-                <Input
-                  defaultValue={isUpdating ? friendName : ''}
-                  onChangeText={(input) => actions.friendFormFriendNameInputUpdate(input)}
-                  placeholder={isUpdating ? friendName : 'Please Enter a Name'}
-                  placeholderTextColor='#c9c9c9'
-                  />
-                <Icon name="ios-person" />
-              </InputGroup>
+            <ListItem itemDivider><Text>Name</Text></ListItem>
+               <FriendFormNameInput
+                handleOnChangeText={actions.friendFormFriendNameInputUpdate}
+                defaultValue={isUpdating ? friendName : ''}
+                placeholder={isUpdating ? friendName : 'Please Enter a Name'}
+              />
               <ListItem itemDivider><Text>Events</Text></ListItem>
               {
                 whichEventArray.map(({eventId, eventName, eventDate}, eachIndex) => {
                   return (
-                     <FriendFormEventSwiper 
+                     <FriendFormEventSwiper
                         key={eachIndex}
                         onSwipeDelete={actions.friendEventDelete.bind(this, eventId)}
                         >
                       <FriendFormEvent
+
                         defaultValue={eventName}
                         handleOnChangeText={this.handleEventNameInputChange.bind(this, eventId)}
                         isFocusedInputType={'name'}
-                        isFocused={this.props.selectedEventsViewInput.eventId === eventId /* 
+                        isFocused={this.props.selectedEventsViewInput.eventId === eventId /*
                           this.props.selectedIdFromEventsView === eventId
-                          it should auto scroll to the box that's focused*/}
+                          it should auto scroll to the box that's focused */}
                         calendarModalIsVisible={eventId === friendFormEventDatePickerSelectedEventId}
                         eventDate={eventDate /* needs to be an isostring */}
                         isUpdating={isUpdating}
                         isVisible={friendFormEventDatePickerIsVisible}
                         onCancel={actions.friendFormEventDatePickerSelectEvent.bind(this, null)}
                         onEventDateInputOk={actions.friendFormEventDatePickerSelectEvent.bind(this, null)}
-                        onEventDateInputBoxFocus={this.onEventDateInputBoxFocus.bind(this, eventId)} 
+                        onEventDateInputBoxFocus={this.onEventDateInputBoxFocus.bind(this, eventId)}
                         onEventDateInputChange={this.handleEventDateInputChange.bind(this, eventId)}
                     />
                    </FriendFormEventSwiper>
@@ -157,7 +155,7 @@ class FriendFormCreateUpdate extends Component {
               </Button>
               <Button onPress={() => { this.onfriendFormEventCreateForNewFriendOrExistingFriend() } }>
                 ADD EVENT
-                    <Icon name='ios-calendar-outline' /> {/* it seems that you can't add custom icons here*/}
+                    <Icon name='ios-calendar-outline' /> {/* it seems that you can't add custom icons here */}
               </Button>
               <Button onPress={() => onFriendFormUpdateOrCreate()}>
                 {(isUpdating) ? 'UPDATE' : 'CREATE'}
@@ -167,11 +165,11 @@ class FriendFormCreateUpdate extends Component {
           </Footer>
         </Container>
       </Modal>
-    );
+    )
   }
 }
 
-/* onRequestClose={() => friendFormVisibilityToggle()}  mandatory android prop*/
+/* onRequestClose={() => friendFormVisibilityToggle()}  mandatory android prop */
 
 const mstp = (state) => {
   let {
@@ -183,18 +181,18 @@ const mstp = (state) => {
     friendFormBdayInput,
     friendFormEventInput, // [{"eventId":..., "eventDate:...", "eventName:..."}
     friendFormUpdatingSelectedFriendId
-  } = state.friendForm;
+  } = state.friendForm
   let {
     bday,
     events,
     friendName
-  } = Utils.getFriendByFriendId(state, friendFormUpdatingSelectedFriendId);
-  events = (events && events.length) ? events : [];
+  } = Utils.getFriendByFriendId(state, friendFormUpdatingSelectedFriendId)
+  events = (events && events.length) ? events : []
 
-  let { selectedEventsViewInput } = state.eventsView;
-  selectedEventsViewInput = selectedEventsViewInput ? selectedEventsViewInput : {};
-  friendFormEventInput = (friendFormEventInput && friendFormEventInput.length) ? friendFormEventInput : [];  // show an empty event
-   
+  let { selectedEventsViewInput } = state.eventsView
+  selectedEventsViewInput = selectedEventsViewInput || {}
+  friendFormEventInput = (friendFormEventInput && friendFormEventInput.length) ? friendFormEventInput : []  // show an empty event
+
   return {
     selectedEventsViewInput: selectedEventsViewInput,
     selectedIdFromEventsView: 12345,
@@ -210,7 +208,7 @@ const mstp = (state) => {
     friendFormBdayInput,
     friendFormUpdatingSelectedFriendId
   }
-};
+}
 const mdtp = (dispatch) => {
   return {
     actions: bindActionCreators(actions, dispatch)

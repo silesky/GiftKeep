@@ -11,12 +11,13 @@ import {
 } from 'native-base'
 import { View } from 'react-native'
 export const FriendFormEventNameInput = ({defaultValue, isFocused, handleOnChangeText}) => {
-  console.log(isFocused)
+  console.log(defaultValue)
   return (
 <View>
-  <InputGroup style={{paddingLeft: 10, marginLeft: 5, marginRight: 5, marginBottom: 5}} borderType="rounded" >
+  <InputGroup  style={{paddingLeft: 10, marginLeft: 5, marginRight: 5, marginBottom: 5}} borderType="rounded" >
     <Icon name="md-happy" />
     <Input
+
       autoFocus={isFocused}
       defaultValue={defaultValue}
       onChangeText={(eventNameInputArg) => handleOnChangeText(eventNameInputArg)}
