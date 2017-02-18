@@ -1,14 +1,32 @@
 import React from 'react'
 import {Input, InputGroup, Icon} from 'native-base'
-export const FriendFormNameInput = ({handleOnChangeText, thing, defaultValue, placeholder, placeholderTextColor, ListItem}) => {
+
+const InputGroupErrorYesOrNo = ({hasError, children}) => {
+  return ((hasError)
+    ? <InputGroup error>{children}</InputGroup>
+    : <InputGroup succcess>{children}</InputGroup>)
+}
+
+export const FriendFormNameInput = ({
+  friendFormNameInputHasError,
+  handleOnChangeText,
+  defaultValue,
+  placeholder,
+  placeholderTextColor,
+  ListItem
+}) => {
   return (
-    <InputGroup>
+    <InputGroupErrorYesOrNo hasError={friendFormNameInputHasError}>
       <Input
         defaultValue={defaultValue}
         onChangeText={(input) => handleOnChangeText(input)}
         placeholder={placeholder}
         placeholderTextColor={'#c9c9c9'}/>
-      <Icon name="ios-person"/>
-    </InputGroup>
+      <Icon
+        name='ios-person'
+        style={{ color: friendFormNameInputHasError ? 'red' : 'green' }}
+      />
+    </InputGroupErrorYesOrNo>
+
   )
 }

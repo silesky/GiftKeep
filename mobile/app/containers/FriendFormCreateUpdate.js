@@ -73,6 +73,7 @@ class FriendFormCreateUpdate extends Component {
       friendFormUpdatingSelectedFriendId,
       friendFormEventDatePickerIsVisible,
       friendFormEventInput,
+      friendFormNameInputHasError,
       friendFormIsVisible,
       // friendFormUpdatingSelectedFriendId,
       // friendFormNameInput,
@@ -110,7 +111,8 @@ class FriendFormCreateUpdate extends Component {
           <Content>
             <List>
             <ListItem itemDivider><Text>Name</Text></ListItem>
-               <FriendFormNameInput
+            <FriendFormNameInput
+                friendFormNameInputHasError={friendFormNameInputHasError}
                 handleOnChangeText={actions.friendFormFriendNameInputUpdate}
                 defaultValue={isUpdating ? friendName : ''}
                 placeholder={isUpdating ? friendName : 'Please Enter a Name'}
@@ -194,6 +196,7 @@ const mstp = (state) => {
   friendFormEventInput = (friendFormEventInput && friendFormEventInput.length) ? friendFormEventInput : []  // show an empty event
 
   return {
+    friendFormNameInputHasError: !friendFormNameInput,
     selectedEventsViewInput: selectedEventsViewInput,
     selectedIdFromEventsView: 12345,
     isUpdating: !!(friendFormIsUpdating && friendFormUpdatingSelectedFriendId),
@@ -204,7 +207,7 @@ const mstp = (state) => {
     friendName,
     friendFormIsVisible,
     friendFormEventDatePickerIsVisible,
-    friendFormNameInput,
+
     friendFormBdayInput,
     friendFormUpdatingSelectedFriendId
   }
