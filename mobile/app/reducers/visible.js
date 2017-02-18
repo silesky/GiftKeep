@@ -1,15 +1,8 @@
 const initialState = {
   selectedFriendId: null,
-  friendFormUpdatingSelectedFriendId: null,
-  friendFormIsUpdating: null,
   friendFormIsVisible: false,
-  friendFormNameInput: null,
-  friendFormEventInput: [],
-  friendFormEventDatePickerIsVisible: false,
-  friendFormEventDatePickerSelectedEventId: null,
-  friendFormBdayInput: "01-10",
-  selectedTab: 'gifts',
-};
+  selectedTab: 'gifts'
+}
 export const visible = (state = initialState, action) => {
   switch (action.type) {
     case 'RESET_VISIBLE':
@@ -22,7 +15,7 @@ export const visible = (state = initialState, action) => {
       }
     case 'HYDRATE_VISIBLE':
       {
-        return action.payload;
+        return action.payload
       }
     case 'SELECT_FRIEND':
       {
@@ -33,9 +26,9 @@ export const visible = (state = initialState, action) => {
         return {
           ...state,
           friendFormIsVisible: !state.friendFormIsVisible
-        };
+        }
       }
     default:
-      return state;
+      return state
   }
 }

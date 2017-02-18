@@ -5,10 +5,10 @@ import Moment from 'moment';
 /*
   }
     "friendForm": {
-      "friendFormUpdatingSelectedFriendId": 
-      "friendFormIsUpdating": 
+      "friendFormUpdatingSelectedFriendId":
+      "friendFormIsUpdating":
       "friendFormIsVisible":
-      "friendFormBdayInput": 
+      "friendFormBdayInput":
       "friendFormNameInput":
       "friendFormEventInput: [ {"eventId":..., "eventDate:...", "eventName:..."} ]
       "friendFormEventDatePickerIsVisible":
@@ -35,7 +35,7 @@ export const friendForm = (state = initialStateFirstUser, action) => {
     case 'HYDRATE_FRIEND_FORM': {
        return {
           ...action.payload,
-          friendFormIsVisible: false, // no matter what, don't display this stuff 
+          friendFormIsVisible: false, // no matter what, don't display this stuff
           friendFormEventDatePickerIsVisible: false,
           friendFormEventDatePickerSelectedEventId: null,
         }
@@ -66,7 +66,7 @@ export const friendForm = (state = initialStateFirstUser, action) => {
       return { ...state, friendFormIsUpdating: false }
 
     case 'FRIEND_FORM_EVENT_INPUT_CLEAR_ALL': {
-      return { ...state, friendFormEventInput: [] }
+      return { ...state, friendFormNameInput: null, friendFormEventInput: [] }
     }
 
     case 'FRIEND_FORM_EVENT_DATE_INPUT_UPDATE_OR_CREATE': {
