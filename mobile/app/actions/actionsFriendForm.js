@@ -1,19 +1,19 @@
 import * as Utils from './../utils/utils'
 import UUID from 'uuid-js';
 import Moment from 'moment';
-import { 
+import {
   selectEventsViewInput,
   resetEventsViewInput,
-  _selectLastFriend, 
-  _createNotification,
+  _selectLastFriend,
+  createNotification,
   _friendEventAdd
 } from './index'
 
 
-// when you sewipe 
+// when you sewipe
 export const friendEventUpdateFromEventsView = (eventId, inputType) => {
 return (dispatch, getState) => {
-    const friendId = Utils.getFriendByEventId(getState(), eventId).friendId; 
+    const friendId = Utils.getFriendByEventId(getState(), eventId).friendId;
     dispatch(selectEventsViewInput(eventId, 'name'));
     dispatch(friendFormUpdateActivate(friendId));
   }
@@ -21,7 +21,7 @@ return (dispatch, getState) => {
 
 // when you swipe on a friend, you don't want to focus on a specific event
 export const friendEventUpdateFromDrawer = (friendId) => {
-  
+
 return dispatch => {
     dispatch(resetEventsViewInput());
     dispatch(friendFormUpdateActivate(friendId));
@@ -33,7 +33,7 @@ export const friendEventDelete = (eventId) => {
     if (friendFormIsVisible && !friendFormIsUpdating) {
       // if we're adding/updating events at the beginning, via 'create friend'
      dispatch({type: 'FRIEND_FORM_EVENT_INPUT_DELETE', payload: {eventId}})
-  // if we're adding/updating via the edit friend swipe in the form or in the events view)  
+  // if we're adding/updating via the edit friend swipe in the form or in the events view)
     } else {
       dispatch({type: 'FRIEND_EVENT_DELETE', payload: {eventId}})
     }
@@ -46,8 +46,8 @@ export const friendFormEventDatePickerSelectEvent = (eventId) => {
   }
 }
 export const friendFormEventDatePickerVisibilityStatusChange = (bool) => {
-   return (bool) 
-   ? {type: 'FRIEND_FORM_EVENT_DATEPICKER_VISIBILITY_TRUE'} 
+   return (bool)
+   ? {type: 'FRIEND_FORM_EVENT_DATEPICKER_VISIBILITY_TRUE'}
    : {type: 'FRIEND_FORM_EVENT_DATEPICKER_VISIBILITY_FALSE'}
 }
 export const friendFormVisibilityToggle = () => ({ type: 'FRIEND_FORM_VISIBILITY_TOGGLE' })
@@ -57,7 +57,7 @@ export const friendFormFriendNameInputUpdate = inputNameValue => ({
   type: 'FRIEND_FORM_NAME_INPUT', payload: inputNameValue
 })
 
-// hit the settings 
+// hit the settings
 const _friendFormEventInputClear = () => ({ type: 'FRIEND_FORM_EVENT_INPUT_CLEAR_ALL' })
 
 export const friendFormBdayInputUpdate = inputBdayValue => ({
@@ -99,12 +99,12 @@ const _friendFormEventUpdateOrCreate = (friendId, friendFormEventInput) => {
 }
 const _friendFormFriendNameUpdate = (friendId, friendName) => ({ type: 'UPDATE_FRIEND_NAME', payload: { friendId, friendName } });
 
-const _friendFormFriendCreateFromTempStoredFormInputs = () => { 
+const _friendFormFriendCreateFromTempStoredFormInputs = () => {
 return (dispatch, getState) => {
     const { friendFormEventInput, friendFormNameInput } = getState().friendForm
     dispatch({
-      type: 'CREATE_FRIEND', 
-      payload: { 
+      type: 'CREATE_FRIEND',
+      payload: {
         friendId: UUID.create().toString(),
         friendName: friendFormNameInput,
         friendFormEventInput: friendFormEventInput
@@ -130,9 +130,9 @@ export const friendFormEventNameInputUpdate = (eventId, eventName) => { //if eve
 }
 
 // for when you swipe on a name in the drawer, and select update
-export const friendFormUpdateActivate = (friendId) => { 
+export const friendFormUpdateActivate = (friendId) => {
   return (dispatch) => {
-    dispatch(_hydrateFriendFormInputsFromPermStorage(friendId)); // fixes the accidental overwriting of usernames on swipeToUpdate 
+    dispatch(_hydrateFriendFormInputsFromPermStorage(friendId)); // fixes the accidental overwriting of usernames on swipeToUpdate
     dispatch(_friendFormUpdatingStatusChange(true))
     dispatch(friendFormUpdatingSelectedFriendId(friendId));
     dispatch(friendFormVisibilityToggle());
@@ -171,7 +171,7 @@ export const friendFormEventCreate = (friendId, eventName = '', eventDate = Mome
 export const friendFormCancel = () => {
   return dispatch => {
     dispatch(_friendFormUpdatingStatusChange(false))
-    dispatch(friendFormUpdatingSelectedFriendId(null)); //clear friendId just in case 
+    dispatch(friendFormUpdatingSelectedFriendId(null)); //clear friendId just in case
     dispatch(_friendFormEventInputClear())
     dispatch(friendFormVisibilityToggle());
     dispatch(resetEventsViewInput());
@@ -185,16 +185,16 @@ export const friendFormCreateAndSave = () => {
     dispatch(_friendFormEventInputClear())
     dispatch(_selectLastFriend());
     dispatch(friendFormVisibilityToggle());
-    dispatch(_createNotification('friend created.'))
+    dispatch(createNotification('friend created.'))
   }
 }
 
 // for when you hit 'UPDATE'
 export const friendFormUpdateAndSave = (friendId) => { // for when you hit create/update
   return (dispatch, getState) => {
-    const { 
+    const {
       friendFormNameInput,
-      friendFormEventInput 
+      friendFormEventInput
      } = getState().friendForm;
     dispatch(_friendFormEventUpdateOrCreate(friendId, friendFormEventInput));
     dispatch(_friendFormFriendNameUpdate(friendId, friendFormNameInput));

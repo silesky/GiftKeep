@@ -5,7 +5,7 @@ const config = require('./../../mobileconfig.json');
 const { serverUrl } = config
 
 
-export const _createNotification = (text) => {
+export const createNotification = (text) => {
    return dispatch => {
       dispatch({type: 'SET_NOTIFICATION_TEXT', payload: { notificationText: text }});
       dispatch({type: 'BOTTOM_NOTIFICATION_VISIBILITY_TRUE'});
@@ -18,7 +18,7 @@ export const _createNotification = (text) => {
 export const hydrateAll = ({user, visible, friendForm}) => {
   return dispatch => {
       dispatch({type: 'HYDRATE_USER', payload: user})
-      dispatch({type: 'HYDRATE_VISIBLE', payload: visible}); 
+      dispatch({type: 'HYDRATE_VISIBLE', payload: visible});
       dispatch({type: 'HYDRATE_FRIEND_FORM', payload: friendForm});
   }
 }

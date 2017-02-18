@@ -1,7 +1,7 @@
 // [x] eachEvent should have a default object
 // [ ] import from react native calendar datepicker and display
 // react-native-calendar-datepicker
-
+import { LightTheme } from './../themes/'
 import React, {
   Component
 } from 'react'
@@ -37,7 +37,7 @@ import {
   Icon
 
 } from 'native-base'
-
+import * as colors from './../themes/colors'
 import * as Utils from './../utils/utils'
 
 class FriendFormCreateUpdate extends Component {
@@ -47,6 +47,11 @@ class FriendFormCreateUpdate extends Component {
     this.handleEventDateInputChange = this.handleEventDateInputChange.bind(this)
     this.handleEventNameInputChange = this.handleEventNameInputChange.bind(this)
     this.onEventDateInputBoxFocus = this.onEventDateInputBoxFocus.bind(this)
+  }
+
+  handleCreateOrUpdatePressWhenFormIsInvalid (e) {
+    e.preventDefault()
+    // this.props.actions.createNotification('check your form')
   }
 
   handleEventDateInputChange (eventId, eventDateInputArg) {
@@ -82,6 +87,7 @@ class FriendFormCreateUpdate extends Component {
       // bday,
       isUpdating, // id
       actions,
+      bottomNotificationVisibility,
       events
     } = this.props
 
@@ -89,7 +95,8 @@ class FriendFormCreateUpdate extends Component {
     return (isUpdating)
       ? actions.friendFormUpdateAndSave(friendFormUpdatingSelectedFriendId)
       : actions.friendFormCreateAndSave()
-  }
+    }
+
     // two events array: either from 'user reducer' state (permanant) or 'visible reducer' state (temp input)
     const whichEventArray = (isUpdating) ? events : friendFormEventInput
     return (
@@ -148,8 +155,7 @@ class FriendFormCreateUpdate extends Component {
               }
             </List>
           </Content>
-          <Footer>
-
+          <Footer theme={LightTheme}>
             <FooterTab>
               <Button onPress={() => actions.friendFormCancel()}>
                 CANCEL
@@ -159,9 +165,14 @@ class FriendFormCreateUpdate extends Component {
                 ADD EVENT
                     <Icon name='ios-calendar-outline' /> {/* it seems that you can't add custom icons here */}
               </Button>
-              <Button onPress={() => onFriendFormUpdateOrCreate()}>
+              <Button
+                disabled={friendFormNameInputHasError}
+                onPress={friendFormNameInputHasError ? (e) => this.handleCreateOrUpdatePressWhenFormIsInvalid(e) : () => onFriendFormUpdateOrCreate()}>
                 {(isUpdating) ? 'UPDATE' : 'CREATE'}
-                <Icon name='ios-checkbox-outline' />
+                <Icon
+                  name='ios-checkbox-outline'
+                  textColor="red"
+                />
               </Button>
             </FooterTab>
           </Footer>
