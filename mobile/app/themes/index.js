@@ -1,5 +1,6 @@
-export { default as LightTheme } from './LightTheme'
+import LightTheme from './LightTheme'
+export { LightTheme }
 
-
-export { default as colors } from './colors';
+import * as colors from './colors';
+export { colors };
 

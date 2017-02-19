@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as actions from './../actions/'
+import ScrollableTabView from 'react-native-scrollable-tab-view'
 import {
-  Tabs,
   Content
 } from 'native-base'
 // Components
@@ -13,14 +13,14 @@ import {
   Drawer,
   BottomBar
    } from './../components/'
-import { LightTheme } from '../themes/'
+import { colors } from './../themes/'
 import FriendFormCreateUpdate from './../containers/FriendFormCreateUpdate'
 // Containers (not named exports)
 import DrawerContainer from './../containers/DrawerContainer'
 import BodyFriendView from './../containers/BodyFriendView'
 import BodyEventsView from './../containers/BodyEventsView'
 import { getFriendItemById } from './../utils/utils'
-import colors from '../themes/colors';
+
 class AppContainer extends Component {
   constructor (props) {
     super(props)
@@ -39,8 +39,11 @@ class AppContainer extends Component {
           selectedTab={this.props.selectedTab}
           />
 
-          <Tabs
-            theme={LightTheme}
+        <ScrollableTabView
+            tabBarUnderlineStyle={{backgroundColor: colors.$activeTabTextColor }}
+            tabBarInactiveTextColor={colors.$inactiveTabTextColor}
+            tabBarActiveTextColor={colors.$activeTabTextColor}
+            tabBarBackgroundColor={colors.$activeTabBackground}
             initialPage={0}
             //  currentPage={this.props.state.selectedTab} broken unforuntately
             onChangeTab={(selectTabEvent) => this.props.actions.selectTab(selectTabEvent['i'])}>
@@ -58,7 +61,7 @@ class AppContainer extends Component {
               tabLabel='All Gifts'
               isSelected={this.props.selectedTab === 'all gifts'}
               /> */}
-          </Tabs>
+          </ScrollableTabView>
 
         { this.props.bottomNotificationVisibility
           ? <NotificationBottom

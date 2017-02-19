@@ -1,6 +1,7 @@
 import Color from 'color';
 // return Color(this.deepblue).lighten(0.5).hexString(); },
-export default {
+
+module.exports = {
   // old toolbar bg: F8F8F8
   white: '#fff',
   black: '#000',
@@ -18,12 +19,13 @@ export default {
   get $bigHeadingTextColor () { return Color(this.darkgrey).darken(0.3).hexString() },  // used in TopBar
   get $headerFooterTextColor () { return this.red },
   get $activeTabColor () { return Color(this.darkgrey).darken(0.2).hexString() },
-  get $activeTabBackground () { return this.lightgrey },
+  get $activeTabBackground() { return this.lightgrey },
+  get $activeTabTextColor() { return this.darkpurple },
+  get $tabBarInactiveTextColor() { this.$activeTabTextColor },
   get $cardHeaderBg() { return this.darkpurple },
   get $cardBg() { return this.white },
   get $defaultIconColor() { return Color(this.darkpurple).lighten(0.3).hexString()},
-  get $headerFooterBg() { return this.offwhite },
-
+  get $headerFooterBg() { return this.offwhite }
 }
 
 
