@@ -47,7 +47,7 @@ class AppContainer extends Component {
         >
 
         <TopBar
-          testClick={() => this.props.actions.resetAll()}
+          addGift={() => this.props.actions.addGift()}
           friendName={this.props.friendName}
           drawerOpen={() => this._drawer.open()}
           />

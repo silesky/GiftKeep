@@ -38,10 +38,11 @@ class DrawerContainer extends Component {
       <Container>
         <Header theme={LightTheme} backgroundColor={colors.$headerFooterBg}>
            <Button
+              onPress={() => this.props.actions.resetAll()}
               iconRight
               transparent
             >
-          <Icon name='ios-search' />
+            <Icon name='ios-settings' />
         </Button>
         <Title style={{color: colors.$bigHeadingTextColor}}>Friends</Title>
         <Button

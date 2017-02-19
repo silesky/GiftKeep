@@ -2,12 +2,12 @@ import React from 'react';
 import { EI as Icon } from './../icons';
 import {View} from 'react-native';
 // https://exponent.github.io/vector-icons/
-export const SwipeIcon = (name, stylesObj) => {
+export const IconCreator = (name, size, stylesObj = {}) => {
    return [
-     <View key={1} style={{flex: 1, width: 10, height: 10, justifyContent: 'center'}}>
+     <View key={1} style={{flex: 1, justifyContent: 'center', height: size, width: size}}>
         <Icon
           name={name}
-          style={{...stylesObj, alignSelf: 'center'}}
+          style={{alignSelf: 'center', fontSize: 25, ...stylesObj }}
         />
       </View>
   ]
