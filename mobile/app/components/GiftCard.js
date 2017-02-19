@@ -30,6 +30,8 @@ export const GiftCard = ({
                    <Card>
                        <CardItem style={{backgroundColor: colors.$cardHeaderBg}} header>
                         <Input
+                          placeholderTextColor={colors.lightgrey}
+                          placeholder="Title"
                           style={{color: 'white', fontWeight: '700'}}
                           value={giftTitle}
                           onChangeText={(input) => {
@@ -46,7 +48,7 @@ export const GiftCard = ({
                        </CardItem>
                        <CardItem cardBody>
                         <Input
-                          placeholder="your gift description..."
+                          placeholder="description..."
                           multiline={true}
                           value={giftDesc}
                           onChangeText={(input) => {
