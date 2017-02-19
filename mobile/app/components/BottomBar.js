@@ -2,7 +2,7 @@ import React from 'react'
 import { Footer, FooterTab, Button, Icon, Text, Content} from 'native-base'
 import { colors } from '../themes/'
 import { LightTheme } from '../themes/LightTheme';
-export const BottomBar = ({addGift, addEvent, friendFormVisibilityToggle, selectedTab}) => {
+export const BottomBar = ({addGift, addEvent, selectedTab}) => {
   const whichBtn = () => {
     let addBtn = {}
     switch (selectedTab) {
@@ -45,7 +45,6 @@ export const BottomBar = ({addGift, addEvent, friendFormVisibilityToggle, select
 }
 
 BottomBar.PropTypes = {
-  friendFormVisibilityToggle: React.PropTypes.bool,
   selectedTab: React.PropTypes.oneOf(['gifts', 'events', 'all gifts']),
   addBtnHandler: React.PropTypes.obj
 }

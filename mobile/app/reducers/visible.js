@@ -1,10 +1,19 @@
 const initialState = {
   selectedFriendId: null,
   friendFormIsVisible: false,
-  selectedTab: 'gifts'
+  selectedTab: 'gifts',
+  isLeftDrawerOpen: false
 }
 export const visible = (state = initialState, action) => {
   switch (action.type) {
+    case 'SET_LEFT_DRAWER_OPEN_TRUE':
+      {
+        return { ...state, isLeftDrawerOpen: true }
+      }
+    case 'SET_LEFT_DRAWER_OPEN_FALSE':
+      {
+        return { ...state, isLeftDrawerOpen: false }
+      }
     case 'RESET_VISIBLE':
       {
         return initialState

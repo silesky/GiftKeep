@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Drawer from 'react-native-drawer'
 import { bindActionCreators } from 'redux'
 import * as actions from './../actions/'
 import {
@@ -11,8 +10,9 @@ import {
 import {
   NotificationBottom,
   TopBar,
+  Drawer,
   BottomBar
-   } from './../components'
+   } from './../components/'
 import { LightTheme } from '../themes/'
 import FriendFormCreateUpdate from './../containers/FriendFormCreateUpdate'
 // Containers (not named exports)
@@ -20,7 +20,6 @@ import DrawerContainer from './../containers/DrawerContainer'
 import BodyFriendView from './../containers/BodyFriendView'
 import BodyEventsView from './../containers/BodyEventsView'
 import { getFriendItemById } from './../utils/utils'
-
 import colors from '../themes/colors';
 class AppContainer extends Component {
   constructor (props) {
@@ -29,27 +28,15 @@ class AppContainer extends Component {
   render () {
     return (
       <Drawer
-        tapToClose={true}
-        openDrawerOffset={0.3 /* % gap on right side of drawer */}
-        panCloseMask={0.3 /* tightly coupled ^. % of screen can be used to close (if tapToClose=true}    */}
-        ref={(ref) => this._drawer = ref}
-        tweenDuration={70 /* speed */}
-        tweenHandler={(ratio) => { /* transparency effects */
-          return {
-            drawer: { shadowRadius: ratio < 0.2 ? ratio * 5 * 5 : 5 },
-            main: {
-              opacity: (2 - ratio) / 2
-            }
-          }
-        } }
-        negotiatePan
-        content={<DrawerContainer />}
-        >
-
+        handleCloseDrawer={this.props.actions.leftDrawerVisibility.bind(this, false)}
+        isDrawerOpen={this.props.isLeftDrawerOpen}
+        content={<DrawerContainer />}>
         <TopBar
-           addGift={this.props.actions.addGift.bind(this, this.props.selectedFriendId)}
+          addGift={this.props.actions.addGift.bind(this, this.props.selectedFriendId)}
+          addEvent={this.props.actions.friendFormEventCreate.bind(this, this.props.selectedFriendId, undefined, undefined)}
           friendName={this.props.friendName}
-          drawerOpen={() => this._drawer.open()}
+          handleOpenDrawer={this.props.actions.leftDrawerVisibility.bind(this, true)}
+          selectedTab={this.props.selectedTab}
           />
 
           <Tabs
@@ -79,16 +66,6 @@ class AppContainer extends Component {
             : false
         }
         <FriendFormCreateUpdate />
-        {
-          (this.props.selectedTab === 'events')
-            ? <BottomBar
-              addGift={this.props.actions.addGift.bind(this, this.props.selectedFriendId)}
-              addEvent={this.props.actions.friendFormEventCreate.bind(this, this.props.selectedFriendId, undefined, undefined)}
-              selectedTab={this.props.selectedTab}
-              friendFormVisibilityToggle={this.props.actions.friendFormVisibilityToggle}
-              />
-              : false
-        }
       </Drawer>
 
     )
@@ -97,8 +74,9 @@ class AppContainer extends Component {
 
 const mstp = (state) => {
   const { notificationText, bottomNotificationVisibility } = state.notification
-  const { selectedFriendId, selectedTab } = state.visible
+  const { selectedFriendId, selectedTab, isLeftDrawerOpen } = state.visible
   return {
+    isLeftDrawerOpen: isLeftDrawerOpen,
     hasFriends: !!state.user.data.length,
     selectedFriendId,
     selectedTab,

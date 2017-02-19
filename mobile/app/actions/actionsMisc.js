@@ -4,7 +4,13 @@ import * as Utils from './../utils/utils'
 const config = require('./../../mobileconfig.json');
 const { serverUrl } = config
 
-
+export const leftDrawerVisibility = (bool) => {
+  console.log('called!')
+  return bool
+    ? { type: 'SET_LEFT_DRAWER_OPEN_TRUE' }
+    : { type: 'SET_LEFT_DRAWER_OPEN_FALSE' }
+}
+export const setLeftDrawerOpenFalse = () => ({type: 'SET_LEFT_DRAWER_OPEN_FALSE'})
 export const createNotification = (text) => {
    return dispatch => {
       dispatch({type: 'SET_NOTIFICATION_TEXT', payload: { notificationText: text }});
