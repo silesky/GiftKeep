@@ -25,7 +25,6 @@ module.exports = {
   get $activeTabBackground() { return this.lightgrey },
   get $activeTabTextColor() { return this.darkpurple },
   get $activeTabUnderlineColor() { return this.darkpurple },
-  // cards
   get $cardHeaderBg() { return this.darkpurple },
   get $cardBg() { return this.white },
   get $defaultIconColor() { return Color(this.darkpurple).lighten(0.3).hexString()},

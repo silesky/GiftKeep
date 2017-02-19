@@ -36,6 +36,8 @@ class AppContainer extends Component {
           addGift={this.props.actions.addGift.bind(this, this.props.selectedFriendId)}
           addEvent={this.props.actions.friendFormEventCreate.bind(this, this.props.selectedFriendId, undefined, undefined)}
           friendName={this.props.friendName}
+          giftBtnIsDisabled={!this.props.hasFriends}
+          eventBtnIsDisabled={!this.props.hasFriends}
           handleOpenDrawer={this.props.actions.leftDrawerVisibility.bind(this, true)}
           selectedTab={this.props.selectedTab}
           />
