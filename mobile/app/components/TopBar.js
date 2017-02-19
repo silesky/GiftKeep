@@ -31,7 +31,7 @@ export const TopBar = ({ handleOpenDrawer, friendName, addEvent, addGift, select
         <Icon name='ios-menu'/>
       </Button>
       <Title style={{ color: colors.$bigHeadingTextColor }}>
-        {friendName || 'Gifter'}
+        {friendName || 'Add a friend.'}
       </Title>
       {(selectedTab === 'gifts') ? addGiftBtn : false}
       {(selectedTab === 'events') ? addEventBtn : false}

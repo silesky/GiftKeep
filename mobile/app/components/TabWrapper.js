@@ -1,9 +1,19 @@
 import React from 'react'
 import { colors } from './../themes/'
-import ScrollableTabView from 'react-native-scrollable-tab-view'
+import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view'
 export const TabWrapper = ({ children, handleChangeTab }) => (
   <ScrollableTabView
-    tabBarUnderlineStyle={{backgroundColor: colors.$activeTabTextColor }}
+    contentProps={{
+      style: { paddingBottom: 0 }
+    }}
+    renderTabBar={() =>
+      <DefaultTabBar style={{
+        borderTopWidth: 1,
+        height: 45,
+        paddingTop: 5,
+        paddingBottom: 0
+      }} />}
+    tabBarUnderlineStyle={{backgroundColor: colors.$activeTabUnderlineColor }}
     tabBarInactiveTextColor={colors.$inactiveTabTextColor}
     tabBarActiveTextColor={colors.$activeTabTextColor}
     tabBarBackgroundColor={colors.$activeTabBackground}

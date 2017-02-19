@@ -16,12 +16,16 @@ module.exports = {
   red: '#d62246',
   darkpurple: '#8c2b62',
   pink: '#dd85bd',
+
+  get $shadowBorder() { '#ddd' },
   get $bigHeadingTextColor () { return Color(this.darkgrey).darken(0.3).hexString() },  // used in TopBar
-  get $headerFooterTextColor () { return this.red },
-  get $activeTabColor () { return Color(this.darkgrey).darken(0.2).hexString() },
+  get $headerFooterTextColor() { return this.red },
+  // tabs
+  get $inactiveTabTextColor () { return Color(this.darkgrey).darken(0.2).hexString() },
   get $activeTabBackground() { return this.lightgrey },
   get $activeTabTextColor() { return this.darkpurple },
-  get $tabBarInactiveTextColor() { this.$activeTabTextColor },
+  get $activeTabUnderlineColor() { return this.darkpurple },
+  // cards
   get $cardHeaderBg() { return this.darkpurple },
   get $cardBg() { return this.white },
   get $defaultIconColor() { return Color(this.darkpurple).lighten(0.3).hexString()},
