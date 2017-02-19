@@ -11,6 +11,7 @@ import {
   NotificationBottom,
   TopBar,
   Drawer,
+  TabWrapper,
   BottomBar
    } from './../components/'
 import { colors } from './../themes/'
@@ -39,14 +40,7 @@ class AppContainer extends Component {
           selectedTab={this.props.selectedTab}
           />
 
-        <ScrollableTabView
-            tabBarUnderlineStyle={{backgroundColor: colors.$activeTabTextColor }}
-            tabBarInactiveTextColor={colors.$inactiveTabTextColor}
-            tabBarActiveTextColor={colors.$activeTabTextColor}
-            tabBarBackgroundColor={colors.$activeTabBackground}
-            initialPage={0}
-            //  currentPage={this.props.state.selectedTab} broken unforuntately
-            onChangeTab={(selectTabEvent) => this.props.actions.selectTab(selectTabEvent['i'])}>
+        <TabWrapper handleChangeTab={this.props.actions.selectTab}>
             <BodyFriendView
               tabLabel='Gifts'
               isSelected={this.props.selectedTab === 'gifts'}
@@ -56,12 +50,7 @@ class AppContainer extends Component {
               tabLabel='Events'
               isSelected={this.props.selectedTab === 'events'}
               />
-              {/*
-             <BodyAllGiftsView
-              tabLabel='All Gifts'
-              isSelected={this.props.selectedTab === 'all gifts'}
-              /> */}
-          </ScrollableTabView>
+          </TabWrapper>
 
         { this.props.bottomNotificationVisibility
           ? <NotificationBottom
