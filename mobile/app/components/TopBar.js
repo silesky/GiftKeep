@@ -23,7 +23,7 @@ export const TopBar = ({drawerOpen, friendName, addGift}) => {
         color: colors.$bigHeadingTextColor
       }}>{friendName || 'Gifter'}</Title>
       <Button transparent onPress={() => addGift()}>
-        {IconCreator('pencil', 20, { fontSize: 25 })}
+        { IconCreator('FA', 'gift', 20, { fontSize: 25 })}
       </Button>
     </Header>
 

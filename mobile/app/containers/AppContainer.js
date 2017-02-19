@@ -47,7 +47,7 @@ class AppContainer extends Component {
         >
 
         <TopBar
-          addGift={() => this.props.actions.addGift()}
+           addGift={this.props.actions.addGift.bind(this, this.props.selectedFriendId)}
           friendName={this.props.friendName}
           drawerOpen={() => this._drawer.open()}
           />
@@ -80,7 +80,7 @@ class AppContainer extends Component {
         }
         <FriendFormCreateUpdate />
         {
-          (this.props.hasFriends)
+          (this.props.selectedTab === 'events')
             ? <BottomBar
               addGift={this.props.actions.addGift.bind(this, this.props.selectedFriendId)}
               addEvent={this.props.actions.friendFormEventCreate.bind(this, this.props.selectedFriendId, undefined, undefined)}
