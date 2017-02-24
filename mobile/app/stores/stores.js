@@ -12,7 +12,7 @@ import { hydrateAll } from './../actions';
 
 const composeEnhancers = composeWithDevTools({
   name: 'Gifter',
-  shouldRecordChanges: false, // need to manually click record changes, recording slows down app.
+  shouldRecordChanges: true, // need to manually click record changes, recording slows down app.
   actionsBlacklist: ["FRIEND_FORM_NAME_INPUT"] // when I add a seccond item to this array, it doesn't work
 })
 export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
@@ -34,14 +34,14 @@ export const storeStateInDb = () => {
 }
 
 // on first load
-export const hydrateFromAsyncStorage = () => { 
-  return getFromAsyncStorage('store')  
+export const hydrateFromAsyncStorage = () => {
+  return getFromAsyncStorage('store')
       .then(res => {
         const savedState = JSON.parse(res);
         store.dispatch(hydrateAll(savedState))
       })
   }
-  
+
 hydrateFromAsyncStorage();
 store.subscribe(storeStateInAsyncStorage)
 store.subscribe(storeStateInDb)

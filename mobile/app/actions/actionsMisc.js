@@ -153,6 +153,12 @@ export const sendAccessToken = (token) => {
       }
     })
 }
+export const createGiftModalVisibilityTrue = () => {
+  return { type: 'SET_CREATE_GIFT_MODAL_VISIBILITY_TRUE' }
+}
+export const createGiftModalVisibilityFalse = () => {
+  return { type: 'SET_CREATE_GIFT_MODAL_VISIBILITY_FALSE' }
+}
 export const testClick = () => {
   console.log('Action->TEST CLICK...')
   return clear()

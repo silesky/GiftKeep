@@ -2,17 +2,18 @@ const initialState = {
   selectedFriendId: null,
   friendFormIsVisible: false,
   selectedTab: 'gifts',
-  isLeftDrawerOpen: false
+  isLeftDrawerOpen: false,
+  createGiftModalVisibility: true
 }
 export const visible = (state = initialState, action) => {
   switch (action.type) {
     case 'SET_LEFT_DRAWER_OPEN_TRUE':
       {
-        return { ...state, isLeftDrawerOpen: true }
+        return {...state, isLeftDrawerOpen: true }
       }
     case 'SET_LEFT_DRAWER_OPEN_FALSE':
       {
-        return { ...state, isLeftDrawerOpen: false }
+        return {...state, isLeftDrawerOpen: false }
       }
     case 'RESET_VISIBLE':
       {
@@ -24,17 +25,31 @@ export const visible = (state = initialState, action) => {
       }
     case 'HYDRATE_VISIBLE':
       {
-        return action.payload
+        return { ...state, selectedFriendId: action.payload.selectedFriendId } // only save selectedFriendId
       }
     case 'SELECT_FRIEND':
       {
-        return {...state, selectedFriendId: action.payload.friendId }
+        return { ...state, selectedFriendId: action.payload.friendId }
       }
     case 'FRIEND_FORM_VISIBILITY_TOGGLE':
       {
         return {
           ...state,
           friendFormIsVisible: !state.friendFormIsVisible
+        }
+      }
+    case 'SET_CREATE_GIFT_MODAL_VISIBILITY_TRUE':
+      {
+        return {
+          ...state,
+          createGiftModalVisibility: true
+        }
+      }
+    case 'SET_CREATE_GIFT_MODAL_VISIBILITY_FALSE':
+      {
+        return {
+          ...state,
+          createGiftModalVisibility: false
         }
       }
     default:

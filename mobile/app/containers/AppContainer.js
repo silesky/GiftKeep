@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as actions from './../actions/'
-import ScrollableTabView from 'react-native-scrollable-tab-view'
 import {
   Content
 } from 'native-base'
@@ -15,9 +14,13 @@ import {
   BottomBar
    } from './../components/'
 import { colors } from './../themes/'
-import FriendFormCreateUpdate from './../containers/FriendFormCreateUpdate'
-// Containers (not named exports)
-import { DrawerContainer, BodyEventsView, BodyFriendView } from './../containers/'
+
+import {
+  BodyEventsView,
+  BodyFriendView,
+  DrawerContainer,
+  FriendFormCreateUpdate
+} from './../containers/'
 
 import { getFriendItemById } from './../utils/utils'
 

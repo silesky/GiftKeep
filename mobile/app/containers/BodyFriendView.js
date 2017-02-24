@@ -6,10 +6,11 @@ import { Content } from 'native-base';
 import { LightTheme } from './../themes/';
 import {
   NoFriendsAlert,
-
-  GiftCard
+  NoGiftsAlert,
+  GiftCard,
 } from './../components/';
-import { NoGiftsAlert } from './../components/NoGiftsAlert';
+
+import { BodyCreateGiftModal } from './../containers'
 import * as Utils from './../utils/utils';
 import { View } from 'react-native';
 class BodyFriendView extends Component {
@@ -29,7 +30,8 @@ class BodyFriendView extends Component {
 
 
     const body = (
-        <View>
+      <View>
+                <BodyCreateGiftModal />
           { (!hasFriends)
             ? <NoFriendsAlert
               addFriendBtnClick={this.props.actions.friendFormVisibilityToggle}
@@ -57,7 +59,7 @@ class BodyFriendView extends Component {
             )
           })}
         </View>
-        )
+    )
 
     return (
       <Content theme={LightTheme}>
@@ -73,7 +75,7 @@ class BodyFriendView extends Component {
 const mdtp = (dispatch) => ({ actions: bindActionCreators(actions, dispatch) })
 const mstp = (state) => {
   const { bday, friendName, gifts } = Utils.getFriendByFriendId(state, state.visible.selectedFriendId);
-  const newGifts =  gifts && gifts.length ? gifts : [];
+  const newGifts = gifts && gifts.length ? gifts : [];
   return {
     selectedTab: state.visible.selectedTab,
     selectedFriendId: state.visible.selectedFriendId,
@@ -82,6 +84,6 @@ const mstp = (state) => {
     friendName,
     hasFriends: !!state.user.data.length,
     hasGifts: !!newGifts.length,
-}
+  }
 }
 export default connect(mstp, mdtp)(BodyFriendView)
