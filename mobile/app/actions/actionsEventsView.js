@@ -4,4 +4,4 @@ export const selectEventsViewInput = (eventId, inputType) => {
     payload: {eventId, inputType}
   }
 }
-export const resetEventsViewInput = () => ({type: 'RESET_EVENTS_VIEW_INPUT'});
+export const resetEventsViewInput = () => ({type: 'RESET_EVENTS_VIEW_INPUT'})
