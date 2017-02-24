@@ -47,6 +47,7 @@ class AppContainer extends Component {
           />
 
         <TabWrapper handleChangeTab={this.props.actions.selectTab}>
+
             <BodyFriendView
               tabLabel='Gifts'
               isSelected={this.props.selectedTab === 'gifts'}

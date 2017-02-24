@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from './../actions/';
-import { Content } from 'native-base';
+import { Content, Card } from 'native-base';
 import { LightTheme } from './../themes/';
 import {
   NoFriendsAlert,
@@ -25,13 +25,18 @@ class BodyFriendView extends Component {
       gifts,
       hasFriends,
       hasGifts,
-      selectedTab
+      selectedTab,
+      createGiftModalVisibility
     } = this.props;
 
 
     const body = (
       <View>
-         <BodyCreateGiftModal />
+        {createGiftModalVisibility
+          ? <BodyCreateGiftModal
+            isVisible={createGiftModalVisibility}
+          />
+          : false}
           { (!hasFriends)
             ? <NoFriendsAlert
               addFriendBtnClick={this.props.actions.friendFormVisibilityToggle}
@@ -45,7 +50,11 @@ class BodyFriendView extends Component {
             ? <NoGiftsAlert
             addGiftBtnClick={this.props.actions.addGift.bind(this, selectedFriendId)}
             />
-          : undefined }
+          : undefined}
+
+
+
+
           { gifts.map((el, ind) => {
             return (
               <GiftCard
@@ -84,6 +93,7 @@ const mstp = (state) => {
     friendName,
     hasFriends: !!state.user.data.length,
     hasGifts: !!newGifts.length,
+    createGiftModalVisibility: state.visible.createGiftModalVisibility
   }
 }
 export default connect(mstp, mdtp)(BodyFriendView)
