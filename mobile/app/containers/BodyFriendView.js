@@ -31,7 +31,7 @@ class BodyFriendView extends Component {
 
     const body = (
       <View>
-                <BodyCreateGiftModal />
+         <BodyCreateGiftModal />
           { (!hasFriends)
             ? <NoFriendsAlert
               addFriendBtnClick={this.props.actions.friendFormVisibilityToggle}

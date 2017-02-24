@@ -1,10 +1,11 @@
 import React from 'react'
-import { Modal } from 'react-native'
+import Modal from 'react-native-modalbox';
 
 export const ModalFormWrapper = ({ visible, children }) => {
   return (
     <Modal
-      visible={visible}
+      style={{height: 500, width: 300 }}
+      isOpen={true}
       animationType={'slide'}
       transparent={true}
     >

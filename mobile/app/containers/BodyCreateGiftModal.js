@@ -24,13 +24,11 @@ export class BodyCreateGiftModal extends React.Component {
   }
   render () {
     return (
-        <View onPress={() => this.props.actions.createGiftModalVisibilityFalse()}>
-      <ModalFormWrapper visible={this.props.createGiftModalVisibility}
-          style={{ marginTop: 100 }}>
-          <Content contentContainerStyle={{ marginLeft: 10, marginRight: 10 }}>
-            <GiftCard deleteGift={this.props.actions.createGiftModalVisibilityFalse} />
+      <View style={{ position: 'relative', zIndex: 999, top: 10 }} onPress={() => this.props.actions.createGiftModalVisibilityFalse()}>
+        <ModalFormWrapper visible={this.props.createGiftModalVisibility}>
+          <Content>
+          <GiftCard />
           </Content>
-
       </ModalFormWrapper>
      </View>
     )

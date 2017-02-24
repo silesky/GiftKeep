@@ -19,7 +19,8 @@ import {
   BodyEventsView,
   BodyFriendView,
   DrawerContainer,
-  FriendFormCreateUpdate
+  FriendFormCreateUpdate,
+  BodyCreateGiftModal
 } from './../containers/'
 
 import { getFriendItemById } from './../utils/utils'
@@ -34,6 +35,7 @@ class AppContainer extends Component {
         handleCloseDrawer={this.props.actions.leftDrawerVisibility.bind(this, false)}
         isDrawerOpen={this.props.isLeftDrawerOpen}
         content={<DrawerContainer />}>
+
         <TopBar
           addGift={this.props.actions.addGift.bind(this, this.props.selectedFriendId)}
           addEvent={this.props.actions.friendFormEventCreate.bind(this, this.props.selectedFriendId, undefined, undefined)}
