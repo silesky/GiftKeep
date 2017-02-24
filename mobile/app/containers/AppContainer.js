@@ -17,9 +17,8 @@ import {
 import { colors } from './../themes/'
 import FriendFormCreateUpdate from './../containers/FriendFormCreateUpdate'
 // Containers (not named exports)
-import DrawerContainer from './../containers/DrawerContainer'
-import BodyFriendView from './../containers/BodyFriendView'
-import BodyEventsView from './../containers/BodyEventsView'
+import { DrawerContainer, BodyEventsView, BodyFriendView } from './../containers/'
+
 import { getFriendItemById } from './../utils/utils'
 
 class AppContainer extends Component {
