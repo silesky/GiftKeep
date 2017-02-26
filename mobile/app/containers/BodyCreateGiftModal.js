@@ -3,7 +3,10 @@ import { Dimensions } from 'react-native';
 import * as actions from './../actions/'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { ModalFormWrapper, GiftCard } from './../components/'
+import {
+  GiftCard,
+  SimpleModalFormWrapper
+} from './../components/'
 
 import { View } from 'react-native'
 import {
@@ -25,15 +28,12 @@ export class BodyCreateGiftModal extends React.Component {
   render() {
     const { height, width } = Dimensions.get('window') // gets width of entire display
     return (
-      <View style={{position: 'absolute', height: height, width: width, zIndex: 999}}>
-        <ModalFormWrapper
+      <View style={{position: 'absolute', height: height, width: width, zIndex: 999 }}>
+        <SimpleModalFormWrapper
           handleClickAway={this.props.actions.createGiftModalVisibilityFalse}
           isVisible={this.props.createGiftModalVisibility}>
-        >
-          <Text>
-          Hello World
-          </Text>
-        </ModalFormWrapper>
+            <Text>Hello</Text>
+        </SimpleModalFormWrapper>
       </View>
     )
   }

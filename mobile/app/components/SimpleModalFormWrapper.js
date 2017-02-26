@@ -1,14 +1,8 @@
 import React from 'react'
-// import Modal from 'react-native-modalbox'
 import Modal from './SimpleModal'
-import { View, Dimensions, Text} from 'react-native'
-import { Content } from 'native-base'
-// gets width of entire display
 import { colors } from './../themes';
-export const ModalFormWrapper = ({ style, isVisible, handleClickAway, children }) => {
-  const { height, width } = Dimensions.get('window')
+export const SimpleModalFormWrapper = ({ style, isVisible, handleClickAway, children }) => {
   return (
-
     <Modal
       offset={0}
       overlayBackground={'rgba(0, 0, 0, 0.75)'}
@@ -28,7 +22,7 @@ export const ModalFormWrapper = ({ style, isVisible, handleClickAway, children }
         padding: 10,
         backgroundColor: colors.$cardBg
       }}>
-        <Text>This is a form</Text>
+      { children }
     </Modal>
   )
 }
