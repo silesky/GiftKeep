@@ -17,7 +17,6 @@ export const ModalFormWrapper = ({ style, isVisible, handleClickAway, children }
       modalDidOpen={() => undefined}
     closeOnTouchOutside={true}
       modalDidClose={() => handleClickAway()}
-
       position="top"
       open={true}
       animationType={'fade'}
@@ -31,9 +30,7 @@ export const ModalFormWrapper = ({ style, isVisible, handleClickAway, children }
         padding: 10,
         backgroundColor: 'red'
       }}>
-
         <Text>HEsssssssssssssssLLO</Text>
-
     </Modal>
   )
 }

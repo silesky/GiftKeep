@@ -13,6 +13,7 @@ class Modal extends Component {
   constructor () {
     super()
     this.state = {
+      props: undefined,
       opacity: new Animated.Value(0),
       scale: new Animated.Value(0.8),
       offset: new Animated.Value(0)
@@ -99,7 +100,7 @@ class Modal extends Component {
                  this.props.modalStyle,
                   { opacity, transform: [ { scale }, { translateY: offset } ] }
                ]}>
-               {children}
+               { this.state.children || this.props.children }
             </Animated.View>
          </View>
     )
