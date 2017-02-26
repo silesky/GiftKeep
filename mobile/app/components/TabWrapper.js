@@ -6,6 +6,7 @@ export const TabWrapper = ({ children, handleChangeTab }) => (
     contentProps={{
       style: { paddingBottom: 0 }
     }}
+    locked={true}
     renderTabBar={() =>
       <DefaultTabBar style={{
         borderTopWidth: 1,
