@@ -38,7 +38,6 @@ export const GiftCard = ({
           backgroundColor: colors.$cardHeaderBg
         }}
         header>
-
            <GiftCardInputTitle
             giftTitle={giftTitle}
             updateGiftTitle={updateGiftTitle}
@@ -56,8 +55,8 @@ export const GiftCard = ({
       </CardItem>
       <CardItem cardBody>
         <GiftCardInputGiftDescription
-          updateGiftDesc={updateGiftDesc}
           giftDesc={giftDesc}
+          updateGiftDesc={updateGiftDesc}
          />
       </CardItem>
       { footerIsVisible

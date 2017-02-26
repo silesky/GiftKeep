@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from './SimpleModal'
 import { colors } from './../themes';
-export const SimpleModalFormWrapper = ({ style, isVisible, handleClickAway, children }) => {
+export const SimpleModalFormWrapper = ({ style, isVisible, handleClickAway, children, height }) => {
   return (
     <Modal
       offset={0}
@@ -16,10 +16,10 @@ export const SimpleModalFormWrapper = ({ style, isVisible, handleClickAway, chil
         justifyContent: 'flex-start'
       }}
       modalStyle={{
-        height: 100,
+        height: height,
         borderRadius: 2,
         margin: 20,
-        padding: 10,
+        padding: 5,
         backgroundColor: colors.$cardBg
       }}>
       { children }
