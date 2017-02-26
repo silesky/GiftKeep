@@ -1,10 +1,7 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import colors from './../themes/colors'
 import { Input } from 'native-base'
-export const GiftCardTitleInput = ({
-  updateGiftTitle,
-  giftTitle
-}) => (
+export const GiftCardInputTitle = ({ updateGiftTitle, giftTitle }) => (
   <Input
     placeholderTextColor={colors.lightgrey}
     placeholder="Title"
@@ -12,7 +9,9 @@ export const GiftCardTitleInput = ({
       color: 'white',
       fontWeight: '700'
     }}
-  value={ giftTitle }
-  onChangeText={(input) => {
-    updateGiftTitle(input)
-  }}/>)
+    value={giftTitle}
+    onChangeText={(input) => {
+      updateGiftTitle(input)
+    }}
+/>
+)

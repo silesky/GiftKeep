@@ -14,7 +14,11 @@ import {
   Title
 } from 'native-base';
 //import * as Util  from './../utils/utils';
-import { GiftCardTitleInput } from './../components/'
+import {
+  GiftCardInputTitle,
+  GiftCardInputGiftDescription
+
+} from './../components/'
 export const GiftCard = ({
   deleteGift,
   friendId,
@@ -35,7 +39,7 @@ export const GiftCard = ({
         }}
         header>
 
-           <GiftCardTitleInput
+           <GiftCardInputTitle
             giftTitle={giftTitle}
             updateGiftTitle={updateGiftTitle}
           />
@@ -51,14 +55,10 @@ export const GiftCard = ({
         </Button>
       </CardItem>
       <CardItem cardBody>
-        <Input
-          placeholder="description..."
-          multiline={true}
-          value={giftDesc}
-          onChangeText={ (input) => {
-            updateGiftDesc(input)
-          }}
-        />
+        <GiftCardInputGiftDescription
+          updateGiftDesc={updateGiftDesc}
+          giftDesc={giftDesc}
+         />
       </CardItem>
       { footerIsVisible
         ? (
