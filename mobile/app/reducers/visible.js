@@ -3,7 +3,7 @@ const initialState = {
   friendFormIsVisible: false,
   selectedTab: 'gifts',
   isLeftDrawerOpen: false,
-  createGiftModalVisibility: true
+  createGiftModalVisibility: false
 }
 export const visible = (state = initialState, action) => {
   switch (action.type) {

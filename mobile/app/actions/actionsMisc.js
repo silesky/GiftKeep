@@ -4,6 +4,15 @@ import * as Utils from './../utils/utils'
 const config = require('./../../mobileconfig.json')
 const { serverUrl } = config
 
+// friendId
+const _addEmptyGift = (friendId) =>({ type: 'ADD_GIFT', payload: { friendId } })
+export const addGift = (friendId) => {
+  return (dispatch) => {
+    dispatch(_addEmptyGift(friendId));
+    dispatch(createGiftModalVisibilityTrue());
+  }
+}
+
 export const createGiftModalVisibilityTrue = () => {
   return { type: 'SET_CREATE_GIFT_MODAL_VISIBILITY_TRUE' }
 }
@@ -132,15 +141,9 @@ export const _friendEventAdd = (friendId, eventName, eventDate) => {
     payload: { friendId, eventName, eventDate }
   }
 }
-// friendId
-export const addGift = (friendId) => {
-  console.log(friendId, 'addgift called')
-  return {
-    type: 'ADD_GIFT',
-    // e.g {giftTitle: 'new gift'}
-    payload: { friendId }
-  }
-}
+
+
+
 
 export const hydrateUser = (data) => {
   return {
