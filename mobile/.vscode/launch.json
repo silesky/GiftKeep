@@ -2,22 +2,29 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "iOS attach",
-      "program": "${workspaceRoot}/.vscode/launchReactNative.js",
-      "type": "reactnative",
-      "request": "attach",
-      "internalDebuggerPort": 9090,
-      "sourceMaps": true,
-      "outDir": "${workspaceRoot}/.vscode/.react"
-    },
-    {
       "name": "Debug iOS",
       "program": "${workspaceRoot}/.vscode/launchReactNative.js",
       "type": "reactnative",
       "request": "launch",
       "platform": "ios",
+      "sourceMaps": true,
       "target": "iPhone 5s",
-      "internalDebuggerPort": 9090,
+      "preLaunchTask": "kill packager", // kill the packager
+      "outDir": "${workspaceRoot}/.vscode/.react"
+    },
+    {
+      "name": "Attach to packager",
+      "program": "${workspaceRoot}/.vscode/launchReactNative.js",
+      "type": "reactnative",
+      "request": "attach",
+      "sourceMaps": true,
+      "outDir": "${workspaceRoot}/.vscode/.react"
+    },
+    {
+      "name": "iOS attach",
+      "program": "${workspaceRoot}/.vscode/launchReactNative.js",
+      "type": "reactnative",
+      "request": "attach",
       "sourceMaps": true,
       "outDir": "${workspaceRoot}/.vscode/.react"
     },
@@ -50,7 +57,6 @@
       "type": "reactnative",
       "request": "launch",
       "platform": "android",
-      "internalDebuggerPort": 9090,
       "sourceMaps": true,
       "outDir": "${workspaceRoot}/.vscode/.react"
     },
@@ -60,7 +66,6 @@
       "type": "reactnative",
       "request": "launch",
       "platform": "exponent",
-      "internalDebuggerPort": 9090,
       "sourceMaps": true,
       "outDir": "${workspaceRoot}/.vscode/.react"
     }
