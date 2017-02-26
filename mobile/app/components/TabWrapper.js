@@ -14,10 +14,10 @@ export const TabWrapper = ({ children, handleChangeTab }) => (
         paddingTop: 5,
         paddingBottom: 0
       }} />}
-    tabBarUnderlineStyle={{backgroundColor: colors.$activeTabUnderlineColor }}
-    tabBarInactiveTextColor={colors.$inactiveTabTextColor}
-    tabBarActiveTextColor={colors.$activeTabTextColor}
-    tabBarBackgroundColor={colors.$activeTabBackground}
+    tabBarUnderlineStyle={{ backgroundColor: colors.$activeTabUnderlineColor }}
+    tabBarInactiveTextColor={ colors.$inactiveTabTextColor }
+    tabBarActiveTextColor={ colors.$activeTabTextColor }
+    tabBarBackgroundColor={ colors.$activeTabBackground }
     initialPage={0}
     //  currentPage={this.props.state.selectedTab} broken unforuntately
     onChangeTab={(selectTabEvent) => handleChangeTab(selectTabEvent['i'])}
