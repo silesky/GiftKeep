@@ -4,44 +4,21 @@ import * as Utils from './../utils/utils'
 const config = require('./../../mobileconfig.json')
 const { serverUrl } = config
 
-// friendId
-const _addEmptyGift = (friendId) =>({ type: 'ADD_GIFT', payload: { friendId } })
-export const addGift = (friendId) => {
-  return (dispatch) => {
-    dispatch(_addEmptyGift(friendId));
-    dispatch(createGiftModalVisibilityTrue());
-  }
-}
-
-export const createGiftModalVisibilityTrue = () => {
-  return { type: 'SET_CREATE_GIFT_MODAL_VISIBILITY_TRUE' }
-}
-export const createGiftModalVisibilityFalse = () => {
-  return { type: 'SET_CREATE_GIFT_MODAL_VISIBILITY_FALSE' }
-}
-
-export const leftDrawerVisibility = (bool) => {
-  console.log('called!')
-  return bool
-    ? { type: 'SET_LEFT_DRAWER_OPEN_TRUE' }
-    : { type: 'SET_LEFT_DRAWER_OPEN_FALSE' }
-}
-export const setLeftDrawerOpenFalse = () => ({type: 'SET_LEFT_DRAWER_OPEN_FALSE'})
 export const createNotification = (text) => {
   return dispatch => {
-     dispatch({type: 'SET_NOTIFICATION_TEXT', payload: { notificationText: text }})
-     dispatch({type: 'BOTTOM_NOTIFICATION_VISIBILITY_TRUE'})
-     setTimeout(() => {
-        dispatch({type: 'BOTTOM_NOTIFICATION_VISIBILITY_FALSE'})
-        dispatch({ type: 'SET_NOTIFICATION_TEXT', payload: { notificationText: null }})
-      }, 2000)
-   }
+    dispatch({ type: 'SET_NOTIFICATION_TEXT', payload: { notificationText: text } })
+    dispatch({ type: 'BOTTOM_NOTIFICATION_VISIBILITY_TRUE' })
+    setTimeout(() => {
+      dispatch({ type: 'BOTTOM_NOTIFICATION_VISIBILITY_FALSE' })
+      dispatch({ type: 'SET_NOTIFICATION_TEXT', payload: { notificationText: null } })
+    }, 2000)
+  }
 }
-export const hydrateAll = ({user, visible, friendForm}) => {
+export const hydrateAll = ({ user, visible, friendForm }) => {
   return dispatch => {
-    dispatch({type: 'HYDRATE_USER', payload: user})
-    dispatch({type: 'HYDRATE_VISIBLE', payload: visible})
-    dispatch({type: 'HYDRATE_FRIEND_FORM', payload: friendForm})
+    dispatch({ type: 'HYDRATE_USER', payload: user })
+    dispatch({ type: 'HYDRATE_VISIBLE', payload: visible })
+    dispatch({ type: 'HYDRATE_FRIEND_FORM', payload: friendForm })
   }
 }
 export const resetAll = () => {
@@ -142,9 +119,6 @@ export const _friendEventAdd = (friendId, eventName, eventDate) => {
   }
 }
 
-
-
-
 export const hydrateUser = (data) => {
   return {
     type: 'HYDRATE_USER',
@@ -165,7 +139,6 @@ export const sendAccessToken = (token) => {
 }
 
 export const testClick = () => {
-  console.log('Action->TEST CLICK...')
   return clear()
 }
 export const clear = () => ({ type: 'CLEAR' })
@@ -189,7 +162,7 @@ export const saveFbPhoto = (uriOrBase64) => {
 
 export const authTokenAndTryToGetUser = (token) => {
   return dispatch => _sendTokenToServer(token)
-    .then(({payload, payload: {fbId}}) => {
+    .then(({ payload, payload: { fbId } }) => {
       dispatch(hydrateUser(payload))
       Utils.fbGetPicURLById(fbId).then(url => dispatch(saveFbPhoto(url)))
     })
