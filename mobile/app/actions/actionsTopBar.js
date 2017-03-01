@@ -1,11 +1,8 @@
 // friendId
-const _addEmptyGift = (friendId) =>({ type: 'ADD_GIFT', payload: { friendId } })
-export const addGift = (friendId) => {
-  return (dispatch) => {
-    //dispatch(_addEmptyGift(friendId));
-    dispatch(createGiftModalVisibilityTrue());
-  }
-}
+export const createGift = (friendId, giftTitle, giftDesc) =>({
+  type: 'CREATE_GIFT',
+  payload: { friendId, giftTitle, giftDesc }
+})
 
 export const createGiftModalVisibilityTrue = () => {
   return { type: 'SET_CREATE_GIFT_MODAL_VISIBILITY_TRUE' }

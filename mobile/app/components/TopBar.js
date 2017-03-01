@@ -14,32 +14,59 @@ import LightTheme from '../themes/LightTheme'
 import { IconCreator } from './../icons/'
 import { selectTab } from '../actions/actionsMisc'
 
-
-
-export const TopBar = ({ handleOpenDrawer, friendName, eventBtnIsDisabled, giftBtnIsDisabled, addEvent, addGift, selectedTab }) => {
-  const iconColor = { color: colors.$defaultIconColor }
-  const iconOpacity = { opacity: giftBtnIsDisabled ? 0.5 : 1 } // if user has no friends, disable
+export const TopBar = ({
+  handleOpenDrawer,
+  friendName,
+  eventBtnIsDisabled,
+  giftBtnIsDisabled,
+  addEvent,
+  giftModalShow,
+  selectedTab
+}) => {
+  const iconColor = {
+    color: colors.$defaultIconColor
+  }
+  const iconOpacity = {
+    opacity: giftBtnIsDisabled
+      ? 0.5
+      : 1
+  } // if user has no friends, disable
   const addEventBtn = (
-     <Button transparent onPress={() => addEvent()}>
-      {IconCreator('FA', 'calendar-plus-o', 20, {...iconColor, ...iconOpacity, fontSize: 22 })}
-        </Button>
+    <Button transparent onPress={() => addEvent()}>
+      { IconCreator('FA', 'calendar-plus-o', 20, {
+        ...iconColor,
+        ...iconOpacity,
+        fontSize: 22
+      }) }
+    </Button>
   )
   const addGiftBtn = (
-    <Button transparent onPress={() => addGift()}>
-    {IconCreator('FA', 'gift', 20, { ...iconColor, ...iconOpacity, fontSize: 25 })}
+    <Button transparent onPress={() => giftModalShow() }> {/* */}
+      { IconCreator('FA', 'gift', 20, {
+        ...iconColor,
+        ...iconOpacity,
+        fontSize: 25
+      }) }
     </Button>
   )
   return (
     <Header theme={LightTheme} backgroundColor={colors.$headerFooterBg}>
-      <Button
-      transparent onPress={() => handleOpenDrawer() }>
-        <Icon style={{ ...iconColor }}  name='ios-menu'/>
+      <Button transparent onPress={() => handleOpenDrawer()}>
+        <Icon style={{
+          ...iconColor
+        }} name='ios-menu'/>
       </Button>
-      <Title style={{ color: colors.$bigHeadingTextColor }}>
+      <Title style={{
+        color: colors.$bigHeadingTextColor
+      }}>
         {friendName || 'Add a friend.'}
       </Title>
-      {(selectedTab === 'gifts') ? addGiftBtn : false}
-      {(selectedTab === 'events') ? addEventBtn : false}
+      {(selectedTab === 'gifts')
+        ? addGiftBtn
+        : false}
+      {(selectedTab === 'events')
+        ? addEventBtn
+        : false}
     </Header>
 
   )

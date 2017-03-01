@@ -48,7 +48,7 @@ class BodyFriendView extends Component {
 
           { (hasFriends && !hasGifts) //
             ? <NoGiftsAlert
-            addGiftBtnClick={this.props.actions.addGift.bind(this, selectedFriendId)}
+            addGiftBtnClick={this.props.actions.createGiftModalVisibilityTrue}
             />
           : undefined}
 

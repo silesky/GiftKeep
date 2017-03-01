@@ -26,8 +26,8 @@ import {
 import { getFriendItemById } from './../utils/utils'
 
 class AppContainer extends Component {
-  constructor (props) {
-    super(props)
+  addGift (friendId) {
+    this.props.actions.createGiftModalVisibilityTrue(friendId)
   }
   render () {
     return (
@@ -37,7 +37,7 @@ class AppContainer extends Component {
         content={<DrawerContainer />}>
 
         <TopBar
-          addGift={this.props.actions.addGift.bind(this, this.props.selectedFriendId)}
+          giftModalShow={this.props.actions.createGiftModalVisibilityTrue.bind(this, this.props.selectedFriendId)}
           addEvent={this.props.actions.friendFormEventCreate.bind(this, this.props.selectedFriendId, undefined, undefined)}
           friendName={this.props.friendName}
           giftBtnIsDisabled={!this.props.hasFriends}

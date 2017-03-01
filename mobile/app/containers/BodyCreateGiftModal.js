@@ -28,6 +28,13 @@ class BodyCreateGiftModal extends React.Component {
   static PropTypes = {
     CreateGiftModalIsVisible: React.PropTypes.bool
   }
+
+  onCreateGiftPress () {
+    const _giftTitleInput = this.refs.giftTitleInput._textInput._lastNativeText
+    const _giftDescInput = this.refs.giftDescInput._textInput._lastNativeText
+    this.props.actions.createGift(this.props.selectedFriendId, _giftTitleInput, _giftDescInput)
+    this.props.actions.createGiftModalVisibilityFalse();
+  }
   render () {
     const { height, width } = Dimensions.get('window') // gets width of entire display
     const { latestGift, selectedFriendId } = this.props
@@ -40,36 +47,43 @@ class BodyCreateGiftModal extends React.Component {
           zIndex: 999
         }}>
         <SimpleModalFormWrapper
-          height={160}
+          height={170}
           handleClickAway={this.props.actions.createGiftModalVisibilityFalse}
           isVisible={this.props.createGiftModalVisibility}>
           <List>
-          <Title>New Gift</Title>
+          <Title style={{ marginTop: 10 }}>Create Gift</Title>
           <ListItem>
           <InputGroup>
             <Input
-             inlineLabel label="Title"
+              ref="giftTitleInput"
+              placeholder="Title..."
+              inlineLabel label="Title"
               placeholderTextColor='lightgrey'
               multiline={false}
-              giftId={latestGift.giftId}/>
+              />
           </InputGroup>
           </ListItem>
           <ListItem>
             <InputGroup>
             <Input
+              ref="giftDescInput"
               placeholder="Description..."
               inlineLabel label="Description"
-              placeholderTextColor={'lightgrey'}
+              placeholderTextColor='lightgrey'
               multiline={false}
-              giftId={latestGift.giftId}/>
+              onSubmitEditing={() => this.onCreateGiftPress()}
+               />
           </InputGroup>
         </ListItem>
-        <View style={{paddingTop: 5, alignItems: 'flex-end', justifyContent: 'flex-end', flexDirection: 'row'}}>
-           <Button danger>
+        <View style={{marginTop: 10, alignItems: 'flex-end', justifyContent: 'flex-end', flexDirection: 'row'}}>
+           <Button danger
+            onPress={() => this.props.actions.createGiftModalVisibilityFalse()}>
             Cancel
             </Button>
-            <Button style={{marginLeft: 5}} success>
-             OK
+            <Button
+                onPress={() => this.onCreateGiftPress()}
+                style={{marginLeft: 5}} success>
+                OK
             </Button>
           </View>
           </List>
