@@ -93,13 +93,15 @@ export const friendForm = (state = initialStateFirstUser, action) => {
 
     case 'FRIEND_FORM_EVENT_NAME_INPUT_UPDATE_OR_CREATE': {
       const { eventId, eventName } = action.payload;
+
       const _eventDoesNotExistYet = (eventId) => !state.friendFormEventInput.find(el => el.eventId === eventId);
       let newFriendFormEventInput;
       if (_eventDoesNotExistYet(eventId)) {
+        const _tomorrow = Moment().add(1, 'day').toISOString();
         newFriendFormEventInput = [...state.friendFormEventInput, {
           eventId: (eventId) ? eventId : UUID.create().toString(),
-          eventDate: Moment().toISOString(),
-          eventName: eventName,
+          eventDate: _tomorrow,
+          eventName: eventName
         }
         ]
       } else {

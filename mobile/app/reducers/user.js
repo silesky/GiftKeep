@@ -24,7 +24,7 @@ export const user = (state = initialState, action) => {
       {
         return initialState
       }
-    case 'ADD_NEW_EVENT_TO_FRIEND':
+    case 'CREATE_EVENT':
       {
         const { friendId, eventName, eventDate } = action.payload;
         console.log('payload', action.payload);

@@ -4,13 +4,15 @@ export const createGift = (friendId, giftTitle, giftDesc) =>({
   payload: { friendId, giftTitle, giftDesc }
 })
 
-export const createGiftModalVisibilityTrue = () => {
-  return { type: 'SET_CREATE_GIFT_MODAL_VISIBILITY_TRUE' }
-}
-export const createGiftModalVisibilityFalse = () => {
-  return { type: 'SET_CREATE_GIFT_MODAL_VISIBILITY_FALSE' }
-}
+export const createEvent = (friendId, eventName, eventDate) => ({
+  type: 'CREATE_EVENT',
+  payload: { friendId, eventName, eventDate }
+})
 
+export const createGiftModalVisibilityTrue = () => ({type: 'SET_CREATE_GIFT_MODAL_VISIBILITY_TRUE' })
+export const bodyModalVisibilityFalse = () => ({ type: 'SET_BODY_MODAL_VISIBILITY_FALSE'})
+export const createEventModalVisibilityTrue = () => ({ type: 'SET_CREATE_EVENT_MODAL_VISIBILITY_TRUE' })
+export const createEventModalVisibilityFalse = () => ({ type: 'SET_CREATE_EVENT_MODAL_VISIBILITY_FALSE' })
 export const leftDrawerVisibility = (bool) => {
   console.log('called!')
   return bool

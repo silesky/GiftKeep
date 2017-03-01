@@ -1,4 +1,5 @@
 export * from './BottomBar'
+export * from './BodyModalEventDatePicker'
 export * from './Drawer'
 export * from './EventCard'
 export * from './FbLogin'

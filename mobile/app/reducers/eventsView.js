@@ -14,8 +14,8 @@ export const eventsView = (state = initialState, action) => {
         }
       case 'SELECT_EVENTS_VIEW_INPUT':
         {
-          return {...state, 
-            selectedEventsViewInput: { 
+          return {...state,
+            selectedEventsViewInput: {
               eventId: action.payload.eventId,
               inputType: action.payload.inputType
             }

@@ -33,7 +33,7 @@ class BodyCreateGiftModal extends React.Component {
     const _giftTitleInput = this.refs.giftTitleInput._textInput._lastNativeText
     const _giftDescInput = this.refs.giftDescInput._textInput._lastNativeText
     this.props.actions.createGift(this.props.selectedFriendId, _giftTitleInput, _giftDescInput)
-    this.props.actions.createGiftModalVisibilityFalse();
+    this.props.actions.bodyModalVisibilityFalse();
   }
   render () {
     const { height, width } = Dimensions.get('window') // gets width of entire display
@@ -48,7 +48,7 @@ class BodyCreateGiftModal extends React.Component {
         }}>
         <SimpleModalFormWrapper
           height={170}
-          handleClickAway={this.props.actions.createGiftModalVisibilityFalse}
+          handleClickAway={this.props.actions.bodyModalVisibilityFalse}
           isVisible={this.props.createGiftModalVisibility}>
           <List>
           <Title style={{ marginTop: 10 }}>Create Gift</Title>
@@ -77,7 +77,7 @@ class BodyCreateGiftModal extends React.Component {
         </ListItem>
         <View style={{marginTop: 10, alignItems: 'flex-end', justifyContent: 'flex-end', flexDirection: 'row'}}>
            <Button danger
-            onPress={() => this.props.actions.createGiftModalVisibilityFalse()}>
+            onPress={() => this.props.actions.bodyModalVisibilityFalse()}>
             Cancel
             </Button>
             <Button

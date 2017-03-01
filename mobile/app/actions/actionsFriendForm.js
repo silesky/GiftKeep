@@ -144,10 +144,14 @@ export const friendFormBlankEventCreateFromSelectedFriendId = () => {
     })
   }
 }
-  // for when you hit 'ADD EVENT'
 
-export const friendFormEventCreate = (friendId, eventName = '', eventDate = Moment().toISOString()) => { // for when you press the 'add event' button
-  const _friendHasNotBeenCreatedYet = !friendId
+  // for when you hit 'ADD EVENT' in the update friend form a la the drawer
+export const friendFormEventCreate = (
+  friendId,
+  eventName = '',
+  eventDate = Moment().add(1, 'day').toISOString() // tomorrow
+) => { // for when you press the 'add event' button
+const _friendHasNotBeenCreatedYet = !friendId
   return dispatch => {
     if (_friendHasNotBeenCreatedYet) {
       const newId = UUID.create().toString()

@@ -64,12 +64,12 @@ module.exports = () => {
         it('actions should work', () => {
             const store = mockStore(state);
             store.dispatch(actions.friendFormEventCreate(existingFriendId, eventNameToCreate, eventDateToCreate))
-            expect(store.getActions()[0].type).to.equal('ADD_NEW_EVENT_TO_FRIEND'); // since it's an existing friend
+            expect(store.getActions()[0].type).to.equal('CREATE_EVENT'); // since it's an existing friend
         });
-          it('ADD_NEW_EVENT_TO_FRIEND', () => {
-             const newState = rootReducer(state, 
+          it('CREATE_EVENT', () => {
+             const newState = rootReducer(state,
           {
-            type: 'ADD_NEW_EVENT_TO_FRIEND',
+            type: 'CREATE_EVENT',
             payload: {
               friendId: existingFriendId,
               eventName: eventNameToCreate,
@@ -79,7 +79,7 @@ module.exports = () => {
         const { events } = newState.user.data[0];
         expect(last(events).eventName).to.equal(eventNameToCreate);
         expect(last(events).eventDate).to.equal(eventDateToCreate);
-        }); 
+        });
       })
       it('FRIEND_FORM_EVENT_NAME_INPUT_UPDATE_OR_CREATE', () => {
         const newState = rootReducer(state,

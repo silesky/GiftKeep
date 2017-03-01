@@ -16,11 +16,12 @@ import {
 import { colors } from './../themes/'
 
 import {
+  BodyCreateEventModal,
+  BodyCreateGiftModal,
   BodyEventsView,
   BodyFriendView,
   DrawerContainer,
-  FriendFormCreateUpdate,
-  BodyCreateGiftModal
+  FriendFormCreateUpdate
 } from './../containers/'
 
 import { getFriendItemById } from './../utils/utils'
@@ -30,22 +31,30 @@ class AppContainer extends Component {
     this.props.actions.createGiftModalVisibilityTrue(friendId)
   }
   render () {
+
     return (
       <Drawer
         handleCloseDrawer={this.props.actions.leftDrawerVisibility.bind(this, false)}
         isDrawerOpen={this.props.isLeftDrawerOpen}
         content={<DrawerContainer />}>
-
+       { this.props.createGiftModalVisibility &&
+          <BodyCreateGiftModal
+            isVisible={this.props.createGiftModalVisibility }
+          /> }
+          { this.props.createEventModalVisibility &&
+            <BodyCreateEventModal
+             isVisible={this.props.createEventModalVisibility}
+             /> }
         <TopBar
-          giftModalShow={this.props.actions.createGiftModalVisibilityTrue.bind(this, this.props.selectedFriendId)}
-          addEvent={this.props.actions.friendFormEventCreate.bind(this, this.props.selectedFriendId, undefined, undefined)}
-          friendName={this.props.friendName}
+          eventModalShow={ this.props.actions.createEventModalVisibilityTrue.bind(this, this.props.selectedFriendId) }
+          giftModalShow={ this.props.actions.createGiftModalVisibilityTrue.bind(this, this.props.selectedFriendId) }
+          addEvent={ this.props.actions.friendFormEventCreate.bind(this, this.props.selectedFriendId, undefined, undefined) }
+          friendName={ this.props.friendName }
           giftBtnIsDisabled={!this.props.hasFriends}
           eventBtnIsDisabled={!this.props.hasFriends}
           handleOpenDrawer={this.props.actions.leftDrawerVisibility.bind(this, true)}
           selectedTab={this.props.selectedTab}
           />
-
         <TabWrapper handleChangeTab={this.props.actions.selectTab}>
 
             <BodyFriendView
@@ -72,8 +81,17 @@ class AppContainer extends Component {
 }
 
 const mstp = (state) => {
-  const { notificationText, bottomNotificationVisibility } = state.notification
-  const { selectedFriendId, selectedTab, isLeftDrawerOpen } = state.visible
+  const {
+    notificationText,
+    bottomNotificationVisibility
+  } = state.notification
+  const {
+    selectedFriendId,
+    selectedTab,
+    isLeftDrawerOpen,
+    createGiftModalVisibility,
+    createEventModalVisibility
+   } = state.visible
   return {
     isLeftDrawerOpen: isLeftDrawerOpen,
     hasFriends: !!state.user.data.length,
@@ -81,6 +99,8 @@ const mstp = (state) => {
     selectedTab,
     notificationText,
     bottomNotificationVisibility,
+    createGiftModalVisibility,
+    createEventModalVisibility,
     friendName: getFriendItemById(state, selectedFriendId, 'friendName')
   }
 }
