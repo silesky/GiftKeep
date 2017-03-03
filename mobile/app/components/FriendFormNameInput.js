@@ -1,12 +1,12 @@
 import React from 'react'
 import { Input, InputGroup, Icon } from 'native-base'
 
-const InputGroupErrorYesOrNo = ({ hasError, children }) => {
-  return ((hasError)
-    ? <InputGroup error>{children}</InputGroup>
-    : <InputGroup succcess>{children}</InputGroup>)
-}
 
+const InputGroupErrorYesOrNo = ({ hasError, styles, children }) => {
+  return ((hasError)
+    ? <InputGroup style={styles} error>{children}</InputGroup>
+    : <InputGroup style={styles} succcess>{children}</InputGroup>)
+}
 export const FriendFormNameInput = ({
   friendFormNameInputHasError,
   handleOnChangeText,
@@ -16,7 +16,10 @@ export const FriendFormNameInput = ({
   ListItem
 }) => {
   return (
-    <InputGroupErrorYesOrNo hasError={friendFormNameInputHasError}>
+    <InputGroupErrorYesOrNo
+        styles={{ paddingLeft: 10, marginLeft: 5, marginRight: 5, marginBottom: 5 }}
+        hasError={friendFormNameInputHasError}
+    >
       <Input
         defaultValue={defaultValue}
         onChangeText={(input) => handleOnChangeText(input)}

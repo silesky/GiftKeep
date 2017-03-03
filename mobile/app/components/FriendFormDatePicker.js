@@ -38,7 +38,7 @@ export const FriendFormDatePicker = ({
 }) => {
   return (
     <View>
-      <InputGroup style={{ paddingLeft: 10, marginLeft: 5, marginRight: 5 }} borderType="rounded" >
+      <InputGroup style={{ paddingLeft: 10, marginLeft: 5, marginRight: 5 }} borderType="underline" >
         <Input
           placeholder="Click to add a friend event."
           selectionColor={'white'}

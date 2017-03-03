@@ -67,11 +67,7 @@ class AppContainer extends Component {
               />
           </TabWrapper>
 
-        { this.props.bottomNotificationVisibility
-          ? <NotificationBottom
-              notificationText={this.props.notificationText} />
-            : false
-        }
+        { this.props.bottomNotificationVisibility && <NotificationBottom notificationText={this.props.notificationText} /> }
         <FriendFormCreateUpdate />
       </Drawer>
 

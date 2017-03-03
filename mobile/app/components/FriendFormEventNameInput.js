@@ -14,10 +14,9 @@ export const FriendFormEventNameInput = ({ defaultValue, isFocused, handleOnChan
   console.log(defaultValue)
   return (
 <View>
-  <InputGroup style={{ paddingLeft: 10, marginLeft: 5, marginRight: 5, marginBottom: 5 }} borderType="rounded" >
-    <Icon name="md-happy" />
-    <Input
+  <InputGroup style={{ paddingLeft: 10, marginLeft: 5, marginRight: 5, marginBottom: 5 }} borderType="underline" >
 
+    <Input
       autoFocus={isFocused}
       defaultValue={defaultValue}
       onChangeText={(eventNameInputArg) => handleOnChangeText(eventNameInputArg)}
