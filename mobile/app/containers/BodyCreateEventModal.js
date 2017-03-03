@@ -15,20 +15,18 @@ class BodyCreateEventModal extends React.Component {
   }
   static defaultProps = {
     date: Moment().add(1, 'day').toDate(),
-    name: '',
+    name: ''
   };
   constructor (props) {
-    super(props);
-    this.onDateChange = this.onDateChange.bind(this);
+    super(props)
+    this.onDateChange = this.onDateChange.bind(this)
     this.state = {
-       date: this.props.date,
-       name: this.props.name,
+      date: this.props.date,
+      name: this.props.name
     }
   }
-  onDateChange(date) {
-
-    this.setState({date})
-
+  onDateChange (date) {
+    this.setState({ date })
   }
   onCreateEventPress () {
     const _eventName = this.refs.eventName._textInput._lastNativeText

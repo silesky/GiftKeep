@@ -1,27 +1,27 @@
 /*
   {
     "user": {
-      "userName": 
-      "fbId": 
-      "fbAccessToken": 
+      "userName":
+      "fbId":
+      "fbAccessToken":
       "data": [
         {
-          "friendId": 
-          "order": 
-          "friendName": 
-          "bday": 
+          "friendId":
+          "order":
+          "friendName":
+          "bday":
           "events": [
             {
-              "eventId": 
-              "eventName": 
+              "eventId":
+              "eventName":
               "eventDate":
             }
           ],
           "gifts": [
             {
-              "giftTitle": 
-              "giftDesc": 
-              "giftId": 
+              "giftTitle":
+              "giftDesc":
+              "giftId":
               "eventIds": [...]
             }
           ]
@@ -29,20 +29,20 @@
       ]
     },
     "friendForm": {
-     
-      "friendFormUpdatingSelectedFriendId": 
-      "friendFormIsUpdating": 
+
+      "friendFormUpdatingSelectedFriendId":
+      "friendFormIsUpdating":
       "friendFormIsVisible":
-      "friendFormBdayInput": 
+      "friendFormBdayInput":
       "friendFormNameInput":
       "friendFormEventInput: [ {"eventId":..., "eventDate:...", "eventName:..."} ]
       "friendFormEventDatePickerIsVisible":
-     
+
     }
   }
   "visible": {
       "selectedIdFromEventsView"
-      "selectedFriendId": 
+      "selectedFriendId":
       "selectedTab": // 'gifts' OR 'events' OR 'all gifts'
 
   }
@@ -53,14 +53,14 @@ import {
   combineReducers
 } from 'redux'
 
-import { user } from './user';
-import { visible } from './visible';
-import { notification } from './notification';
-import { friendForm } from './friendForm';
-import { eventsView } from './eventsView';
-export { 
-  user, 
-  visible, 
+import { user } from './user'
+import { visible } from './visible'
+import { notification } from './notification'
+import { friendForm } from './friendForm'
+import { eventsView } from './eventsView'
+export {
+  user,
+  visible,
   friendForm,
   notification // for testing
 }
@@ -73,5 +73,4 @@ const rootReducer = combineReducers({
   eventsView
 })
 
-export default rootReducer;
-
+export default rootReducer

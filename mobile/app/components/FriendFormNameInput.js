@@ -1,7 +1,7 @@
 import React from 'react'
-import {Input, InputGroup, Icon} from 'native-base'
+import { Input, InputGroup, Icon } from 'native-base'
 
-const InputGroupErrorYesOrNo = ({hasError, children}) => {
+const InputGroupErrorYesOrNo = ({ hasError, children }) => {
   return ((hasError)
     ? <InputGroup error>{children}</InputGroup>
     : <InputGroup succcess>{children}</InputGroup>)

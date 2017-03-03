@@ -1,14 +1,14 @@
-import Calendar from 'react-native-calendar-datepicker';
+import Calendar from 'react-native-calendar-datepicker'
 import React, {
   Component
-} from 'react';
+} from 'react'
 
 import * as actions from './../actions/'
 import {
   StyleSheet,
   Modal,
   View
-} from 'react-native';
+} from 'react-native'
 import {
   Container,
   Content,
@@ -26,20 +26,19 @@ import {
   Card,
   CardItem
 
-} from 'native-base';
-import Moment from 'moment';
+} from 'native-base'
+import Moment from 'moment'
 export const FriendFormDatePicker = ({
   eventDate,
   calendarModalIsVisible,
   onEventDateInputChange,
   onEventDateInputBoxFocus,
   onEventDateInputOk,
-  onCancel,
+  onCancel
 }) => {
-
   return (
     <View>
-      <InputGroup style={{paddingLeft: 10, marginLeft: 5, marginRight: 5}} borderType="rounded" >
+      <InputGroup style={{ paddingLeft: 10, marginLeft: 5, marginRight: 5 }} borderType="rounded" >
         <Input
           placeholder="Click to add a friend event."
           selectionColor={'white'}
@@ -60,7 +59,7 @@ export const FriendFormDatePicker = ({
           <Card
             style={{
               marginTop: 30,
-              backgroundColor: 'white',
+              backgroundColor: 'white'
             }}>
             <CardItem header>
               <Icon name="md-calendar" />
@@ -89,7 +88,6 @@ export const FriendFormDatePicker = ({
           </Card>
         </Content>
       </Modal>
-
 
     </View>
   )

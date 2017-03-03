@@ -1,6 +1,6 @@
 import React from 'react'
 import { Ion, FA, EI, Entypo, Fdtn } from './../icons'
-import {View} from 'react-native'
+import { View } from 'react-native'
 // https://exponent.github.io/vector-icons/
 export const IconCreator = (type, name, size, stylesObj = {}) => {
   let newIcon

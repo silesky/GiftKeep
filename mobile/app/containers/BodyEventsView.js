@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import LightTheme from './../themes';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import LightTheme from './../themes'
+import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as actions from './../actions/'
-import Moment from 'moment';
+import Moment from 'moment'
 import {
   Container,
   Content,
@@ -17,25 +17,23 @@ import * as Utils from './../utils/utils'
 
 // should get an array of all the gifts
 class BodyEventsView extends Component {
-
-  constructor(props) {
+  constructor (props) {
     super(props)
   }
   static propTypes = {
-    isSelected: React.PropTypes.bool,
+    isSelected: React.PropTypes.bool
   }
 
-  render() {
-
-    const isEventInTheFuture = (date) => Moment(date).format('YYYYMMDD') > Moment().format('YYYYMMDD');
+  render () {
+    const isEventInTheFuture = (date) => Moment(date).format('YYYYMMDD') > Moment().format('YYYYMMDD')
     return (
       <Container>
         <Content>
-          { this.props.events.map(({eventName, eventDate, eventId}, index) => {
-            const eventTimeFromNow = Moment(eventDate).fromNow();
+          { this.props.events.map(({ eventName, eventDate, eventId }, index) => {
+            const eventTimeFromNow = Moment(eventDate).fromNow()
             return (
               <EventCard
-                onFriendEventUpdate={this.props.actions.friendEventUpdateFromEventsView.bind(this, eventId) /* update everything*/}
+                onFriendEventUpdate={this.props.actions.friendEventUpdateFromEventsView.bind(this, eventId) /* update everything */}
                 onFriendEventDelete={this.props.actions.friendEventDelete.bind(this, eventId)}
                 key={index}
                 eventName={eventName}
@@ -50,16 +48,16 @@ class BodyEventsView extends Component {
 
         </Content>
       </Container>
-    );
+    )
   }
 }
 
 const mdtp = (dispatch) => ({ actions: bindActionCreators(actions, dispatch) })
 const mstp = (state) => {
-  let { events } = Utils.getFriendByFriendId(state, state.visible.selectedFriendId);
-  events = (events && events.length) ? events : [];
+  let { events } = Utils.getFriendByFriendId(state, state.visible.selectedFriendId)
+  events = (events && events.length) ? events : []
   return {
     events: events
   }
-};
+}
 export default connect(mstp, mdtp)(BodyEventsView)

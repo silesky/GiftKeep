@@ -92,7 +92,7 @@ class FriendFormCreateUpdate extends Component {
     } = this.props
 
     const onFriendFormUpdateOrCreate = () => {
-    return (isUpdating)
+      return (isUpdating)
       ? actions.friendFormUpdateAndSave(friendFormUpdatingSelectedFriendId)
       : actions.friendFormCreateAndSave()
     }
@@ -124,7 +124,7 @@ class FriendFormCreateUpdate extends Component {
               />
               <ListItem itemDivider><Text>Events</Text></ListItem>
               {
-                whichEventArray.map(({eventId, eventName, eventDate}, eachIndex) => {
+                whichEventArray.map(({ eventId, eventName, eventDate }, eachIndex) => {
                   return (
                      <FriendFormEventSwiper
                         key={eachIndex}

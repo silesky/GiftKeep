@@ -6,7 +6,7 @@ import React from 'react'
 
 import {
   connect
-} from 'react-redux';
+} from 'react-redux'
 import {
   bindActionCreators
 } from 'redux'
@@ -16,7 +16,7 @@ import {
   FriendFormEventSwiper
 
 } from './../components'
-import { View } from 'react-native';
+import { View } from 'react-native'
 export const FriendFormEvent = (props) => {
   const {
   defaultValue,
@@ -30,9 +30,9 @@ export const FriendFormEvent = (props) => {
   onEventDateInputBoxFocus,
   onEventDateInputChange,
   isFocused
-} = props;
+} = props
   return (
-    <View style={{paddingTop: 10, paddingBottom: 10, borderBottomWidth: 1, borderBottomColor: '#d4d4d4'}}>
+    <View style={{ paddingTop: 10, paddingBottom: 10, borderBottomWidth: 1, borderBottomColor: '#d4d4d4' }}>
       <FriendFormEventNameInput
       isFocused={isFocused}
       defaultValue={defaultValue}

@@ -31,7 +31,6 @@ class AppContainer extends Component {
     this.props.actions.createGiftModalVisibilityTrue(friendId)
   }
   render () {
-
     return (
       <Drawer
         handleCloseDrawer={this.props.actions.leftDrawerVisibility.bind(this, false)}

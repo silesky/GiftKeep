@@ -1,21 +1,21 @@
 // this shouldn't show
-import React from 'react';
+import React from 'react'
 import {
   Button,
   Icon,
   Text,
   Card,
-  CardItem,
-} from 'native-base';
+  CardItem
+} from 'native-base'
 
 export const NoFriendsAlert = ({
-  addFriendBtnClick,
+  addFriendBtnClick
 }) => {
   return (
     <Card>
-      <CardItem style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+      <CardItem style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
         <Text>No Friends Added.</Text>
-          <Button 
+          <Button
             danger
             onPress={() => addFriendBtnClick() }>
             <Icon name="ios-person-add" />

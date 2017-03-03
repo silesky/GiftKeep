@@ -7,7 +7,7 @@ import {
   Image,
   StyleSheet,
   View
-} from 'react-native';
+} from 'react-native'
 
 import {
   Thumbnail,
@@ -20,20 +20,20 @@ import {
   List,
   Icon,
   Title
-} from 'native-base';
+} from 'native-base'
 
 import {
   FbLogin,
   FriendListItem
 } from './../components/'
 
-import { LightTheme } from './../themes';
-import colors from './../themes/colors';
+import { LightTheme } from './../themes'
+import colors from './../themes/colors'
 class DrawerContainer extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
   }
-  render() {
+  render () {
     return (
       <Container>
         <Header theme={LightTheme} backgroundColor={colors.$headerFooterBg}>
@@ -44,7 +44,7 @@ class DrawerContainer extends Component {
             >
             <Icon name='ios-settings' />
         </Button>
-        <Title style={{color: colors.$bigHeadingTextColor}}>Friends</Title>
+        <Title style={{ color: colors.$bigHeadingTextColor }}>Friends</Title>
         <Button
               iconRight
               onPress={() => this.props.actions.friendFormVisibilityToggle()}
@@ -80,10 +80,8 @@ class DrawerContainer extends Component {
 
     )
   }
-
 }
 
-
 const mdtp = (dispatch) => ({ actions: bindActionCreators(actions, dispatch) })
-const mstp = (state) => ({ state });
+const mstp = (state) => ({ state })
 export default connect(mstp, mdtp)(DrawerContainer)

@@ -10,11 +10,11 @@ export const visible = (state = initialState, action) => {
   switch (action.type) {
     case 'SET_LEFT_DRAWER_OPEN_TRUE':
       {
-        return {...state, isLeftDrawerOpen: true }
+        return { ...state, isLeftDrawerOpen: true }
       }
     case 'SET_LEFT_DRAWER_OPEN_FALSE':
       {
-        return {...state, isLeftDrawerOpen: false }
+        return { ...state, isLeftDrawerOpen: false }
       }
     case 'RESET_VISIBLE':
       {
@@ -22,7 +22,7 @@ export const visible = (state = initialState, action) => {
       }
     case 'SELECT_TAB':
       {
-        return {...state, selectedTab: action.payload.selectedTab }
+        return { ...state, selectedTab: action.payload.selectedTab }
       }
     case 'HYDRATE_VISIBLE':
       {
@@ -55,7 +55,7 @@ export const visible = (state = initialState, action) => {
           createGiftModalVisibility: false
         }
       }
-       case 'SET_CREATE_EVENT_MODAL_VISIBILITY_TRUE':
+    case 'SET_CREATE_EVENT_MODAL_VISIBILITY_TRUE':
       {
         return {
           ...state,

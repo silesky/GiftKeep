@@ -1,7 +1,7 @@
 export const selectEventsViewInput = (eventId, inputType) => {
   return {
     type: 'SELECT_EVENTS_VIEW_INPUT',
-    payload: {eventId, inputType}
+    payload: { eventId, inputType }
   }
 }
-export const resetEventsViewInput = () => ({type: 'RESET_EVENTS_VIEW_INPUT'})
+export const resetEventsViewInput = () => ({ type: 'RESET_EVENTS_VIEW_INPUT' })

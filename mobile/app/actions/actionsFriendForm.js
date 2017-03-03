@@ -151,7 +151,7 @@ export const friendFormEventCreate = (
   eventName = '',
   eventDate = Moment().add(1, 'day').toISOString() // tomorrow
 ) => { // for when you press the 'add event' button
-const _friendHasNotBeenCreatedYet = !friendId
+  const _friendHasNotBeenCreatedYet = !friendId
   return dispatch => {
     if (_friendHasNotBeenCreatedYet) {
       const newId = UUID.create().toString()

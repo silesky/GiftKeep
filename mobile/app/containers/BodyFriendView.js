@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as actions from './../actions/';
-import { Content, Card } from 'native-base';
-import { LightTheme } from './../themes/';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as actions from './../actions/'
+import { Content, Card } from 'native-base'
+import { LightTheme } from './../themes/'
 import {
   NoFriendsAlert,
   NoGiftsAlert,
-  GiftCard,
-} from './../components/';
+  GiftCard
+} from './../components/'
 
 import { BodyCreateGiftModal } from './../containers'
-import * as Utils from './../utils/utils';
-import { View } from 'react-native';
+import * as Utils from './../utils/utils'
+import { View } from 'react-native'
 class BodyFriendView extends Component {
-  constructor() {
-    super();
+  constructor () {
+    super()
   }
-  render() {
+  render () {
     const {
       selectedFriendId,
       bday,
@@ -27,8 +27,7 @@ class BodyFriendView extends Component {
       hasGifts,
       selectedTab,
       createGiftModalVisibility
-    } = this.props;
-
+    } = this.props
 
     const body = (
       <View>
@@ -48,9 +47,6 @@ class BodyFriendView extends Component {
             />
           : undefined}
 
-
-
-
           { gifts.map((el, ind) => {
             return (
               <GiftCard
@@ -69,18 +65,17 @@ class BodyFriendView extends Component {
     return (
       <Content theme={LightTheme}>
       {
-        (selectedTab === 'gifts') ? body : false //selectedTab related to this bug https://trello.com/c/jMfL798g/127-should-not-be-transparent-when-i-m-selecting-events-view
+        (selectedTab === 'gifts') ? body : false // selectedTab related to this bug https://trello.com/c/jMfL798g/127-should-not-be-transparent-when-i-m-selecting-events-view
       }
       </Content>
     )
   }
 }
 
-
 const mdtp = (dispatch) => ({ actions: bindActionCreators(actions, dispatch) })
 const mstp = (state) => {
-  const { bday, friendName, gifts } = Utils.getFriendByFriendId(state, state.visible.selectedFriendId);
-  const newGifts = gifts && gifts.length ? gifts : [];
+  const { bday, friendName, gifts } = Utils.getFriendByFriendId(state, state.visible.selectedFriendId)
+  const newGifts = gifts && gifts.length ? gifts : []
   return {
     selectedTab: state.visible.selectedTab,
     selectedFriendId: state.visible.selectedFriendId,

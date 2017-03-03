@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react';
-import {StyleSheet} from 'react-native';
-import { colors } from './../themes/';
+import React, { PropTypes } from 'react'
+import { StyleSheet } from 'react-native'
+import { colors } from './../themes/'
 import {
   Button,
   Container,
@@ -12,8 +12,8 @@ import {
   InputGroup,
   Text,
   Title
-} from 'native-base';
-//import * as Util  from './../utils/utils';
+} from 'native-base'
+// import * as Util  from './../utils/utils';
 import {
   GiftCardInputTitle,
   GiftCardInputGiftDescription
@@ -77,7 +77,7 @@ export const GiftCard = ({
       }
     </Card>
 
-  );
+  )
 }
 
 const styles = StyleSheet.create({

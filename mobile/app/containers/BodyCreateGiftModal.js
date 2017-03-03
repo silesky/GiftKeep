@@ -33,7 +33,7 @@ class BodyCreateGiftModal extends React.Component {
     const _giftTitleInput = this.refs.giftTitleInput._textInput._lastNativeText
     const _giftDescInput = this.refs.giftDescInput._textInput._lastNativeText
     this.props.actions.createGift(this.props.selectedFriendId, _giftTitleInput, _giftDescInput)
-    this.props.actions.bodyModalVisibilityFalse();
+    this.props.actions.bodyModalVisibilityFalse()
   }
   render () {
     const { height, width } = Dimensions.get('window') // gets width of entire display
@@ -75,14 +75,14 @@ class BodyCreateGiftModal extends React.Component {
                />
           </InputGroup>
         </ListItem>
-        <View style={{marginTop: 10, alignItems: 'flex-end', justifyContent: 'flex-end', flexDirection: 'row'}}>
+        <View style={{ marginTop: 10, alignItems: 'flex-end', justifyContent: 'flex-end', flexDirection: 'row' }}>
            <Button danger
             onPress={() => this.props.actions.bodyModalVisibilityFalse()}>
             Cancel
             </Button>
             <Button
                 onPress={() => this.onCreateGiftPress()}
-                style={{marginLeft: 5}} success>
+                style={{ marginLeft: 5 }} success>
                 OK
             </Button>
           </View>

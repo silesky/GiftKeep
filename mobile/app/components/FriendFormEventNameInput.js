@@ -10,11 +10,11 @@ import {
 
 } from 'native-base'
 import { View } from 'react-native'
-export const FriendFormEventNameInput = ({defaultValue, isFocused, handleOnChangeText}) => {
+export const FriendFormEventNameInput = ({ defaultValue, isFocused, handleOnChangeText }) => {
   console.log(defaultValue)
   return (
 <View>
-  <InputGroup  style={{paddingLeft: 10, marginLeft: 5, marginRight: 5, marginBottom: 5}} borderType="rounded" >
+  <InputGroup style={{ paddingLeft: 10, marginLeft: 5, marginRight: 5, marginBottom: 5 }} borderType="rounded" >
     <Icon name="md-happy" />
     <Input
 
@@ -26,5 +26,5 @@ export const FriendFormEventNameInput = ({defaultValue, isFocused, handleOnChang
       />
   </InputGroup>
   </View>
-)
+  )
 }

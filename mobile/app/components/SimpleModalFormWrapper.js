@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dimensions, View } from 'react-native'
 import Modal from './SimpleModal'
-import { colors } from './../themes';
+import { colors } from './../themes'
 
 export const SimpleModalFormWrapper = ({ style, isVisible, handleClickAway, children, modalHeight }) => {
   const { height, width } = Dimensions.get('window') // gets width of entire display

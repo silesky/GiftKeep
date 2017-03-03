@@ -1,26 +1,26 @@
 // this shouldn't show
-import React from 'react';
-import moment from 'moment';
+import React from 'react'
+import moment from 'moment'
 import {
     Button,
     Icon,
     Text,
-    List, 
+    List,
     ListItem,
     Header,
     Card,
     CardItem,
     Title
-} from 'native-base';
+} from 'native-base'
 
 export const NoEventsAlert = ({
-  addEventBtnClick,
+  addEventBtnClick
 }) => {
-    return (
+  return (
              <Card>
-                <CardItem style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+                <CardItem style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                  <Text>'No Events Added.'</Text>
-                    <Button 
+                    <Button
                       info
                       onPress={() => addEventBtnClick() }>
                       <Icon name="md-calendar" />
@@ -28,10 +28,6 @@ export const NoEventsAlert = ({
                     </Button>
                     </CardItem>
                 </Card>
-           
-          
 
-        )    
-   }
-
-
+  )
+}
