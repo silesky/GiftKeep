@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import {StyleSheet} from 'react-native';
-import colors from './../themes/colors';
+import { colors } from './../themes/';
 import {
   Button,
   Container,

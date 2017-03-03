@@ -9,7 +9,7 @@ import {
   Container
 } from 'native-base'
 
-import colors from '../themes/colors'
+import  { colors } from '../themes/'
 import LightTheme from '../themes/LightTheme'
 import { IconCreator } from './../icons/'
 import { selectTab } from '../actions/actionsMisc'

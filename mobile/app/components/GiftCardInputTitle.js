@@ -1,5 +1,5 @@
 import React from 'react'
-import colors from './../themes/colors'
+import { colors } from './../themes/'
 import { Input } from 'native-base'
 export const GiftCardInputTitle = ({ updateGiftTitle, giftTitle }) => (
   <Input
