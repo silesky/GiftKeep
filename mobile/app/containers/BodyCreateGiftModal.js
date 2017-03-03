@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { Input } from 'native-base'
 import { GiftCardInputGiftDescription, GiftCardInputTitle, SimpleModalFormWrapper } from './../components/'
 import { getFriendByFriendId } from './../utils/'
-import { View } from 'react-native'
+import { View, LayoutAnimation } from 'react-native'
 import {
   Body,
   Card,
@@ -33,11 +33,15 @@ class BodyCreateGiftModal extends React.Component {
     const _giftTitleInput = this.refs.giftTitleInput._textInput._lastNativeText
     const _giftDescInput = this.refs.giftDescInput._textInput._lastNativeText
     this.props.actions.createGift(this.props.selectedFriendId, _giftTitleInput, _giftDescInput)
+    this.close()
+  }
+  close () {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
     this.props.actions.bodyModalVisibilityFalse()
   }
   render () {
     const { height, width } = Dimensions.get('window') // gets width of entire display
-    const { latestGift, selectedFriendId } = this.props
+
     return (
       <View
         style={{
@@ -77,7 +81,7 @@ class BodyCreateGiftModal extends React.Component {
         </ListItem>
         <View style={{ marginTop: 10, alignItems: 'flex-end', justifyContent: 'flex-end', flexDirection: 'row' }}>
            <Button danger
-            onPress={() => this.props.actions.bodyModalVisibilityFalse()}>
+            onPress={() => this.close()}>
             Cancel
             </Button>
             <Button

@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { Input } from 'native-base'
 import { SimpleModalFormWrapper, BodyModalEventDatePicker } from './../components/'
 import { getFriendByFriendId } from './../utils/'
-import { View, DatePickerIOS, Keyboard } from 'react-native'
+import { View, DatePickerIOS, Keyboard, LayoutAnimation } from 'react-native'
 import { List, ListItem, Title, InputGroup, Button } from 'native-base'
 
 class BodyCreateEventModal extends React.Component {
@@ -32,6 +32,10 @@ class BodyCreateEventModal extends React.Component {
     const _eventName = this.refs.eventName._textInput._lastNativeText
     const _eventDate = this.state.date.toISOString()
     this.props.actions.createEvent(this.props.selectedFriendId, _eventName, _eventDate)
+    this.close()
+  }
+  close () {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
     this.props.actions.bodyModalVisibilityFalse()
   }
   render () {
@@ -86,7 +90,7 @@ class BodyCreateEventModal extends React.Component {
               justifyContent: 'flex-end',
               flexDirection: 'row'
             }}>
-            <Button danger onPress={() => this.props.actions.bodyModalVisibilityFalse()}>
+            <Button danger onPress={() => this.close()}>
               Cancel
             </Button>
             <Button
@@ -104,9 +108,7 @@ class BodyCreateEventModal extends React.Component {
   }
 }
 const mstp = (state) => {
-  const { gifts } = getFriendByFriendId(state, state.visible.selectedFriendId)
   return {
-    latestGift: gifts[gifts.length - 1],
     createGiftModalVisibility: state.visible.createEventModalVisibility,
     selectedFriendId: state.visible.selectedFriendId
   }
