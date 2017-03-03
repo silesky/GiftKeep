@@ -12,7 +12,7 @@ import {
   bindActionCreators
 } from 'redux'
 import {
-  FriendFormEventSwiper,
+  SwiperWrapper,
   FriendFormEvent,
   FriendFormNameInput
  } from './../components'
@@ -126,7 +126,7 @@ class FriendFormCreateUpdate extends Component {
               {
                 whichEventArray.map(({ eventId, eventName, eventDate }, eachIndex) => {
                   return (
-                     <FriendFormEventSwiper
+                     <SwiperWrapper
                         key={eachIndex}
                         onSwipeDelete={actions.friendEventDelete.bind(this, eventId)}
                         >
@@ -147,7 +147,7 @@ class FriendFormCreateUpdate extends Component {
                         onEventDateInputBoxFocus={this.onEventDateInputBoxFocus.bind(this, eventId)}
                         onEventDateInputChange={this.handleEventDateInputChange.bind(this, eventId)}
                     />
-                   </FriendFormEventSwiper>
+                   </SwiperWrapper>
                   )
                 })
               }

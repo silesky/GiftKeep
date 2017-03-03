@@ -3,21 +3,15 @@ import { StyleSheet } from 'react-native'
 import { colors } from './../themes/'
 import {
   Button,
-  Container,
   Card,
   CardItem,
-  Content,
-  Icon,
-  Input,
-  InputGroup,
-  Text,
-  Title
+  Icon
 } from 'native-base'
 // import * as Util  from './../utils/utils';
 import {
   GiftCardInputTitle,
-  GiftCardInputGiftDescription
-
+  GiftCardInputGiftDescription,
+  SwiperWrapper
 } from './../components/'
 export const GiftCard = ({
   deleteGift,
@@ -32,35 +26,26 @@ export const GiftCard = ({
   // should take a name, birthday and text prop, along with being editable and so
   // forth
   return (
+    <SwiperWrapper
+      onSwipeDelete={() => deleteGift()}
+    >
     <Card>
       <CardItem
         style={{
           backgroundColor: colors.$cardHeaderBg
-        }}
-        header>
+        }}header>
            <GiftCardInputTitle
             giftTitle={giftTitle}
             updateGiftTitle={updateGiftTitle}
           />
-        <Button transparent>
-          <Icon
-            name='ios-close-circle-outline'
-            style={{
-              color: 'white',
-              fontSize: 30
-            }}
-            onPress={ () => deleteGift() }
-          />
-        </Button>
       </CardItem>
-      <CardItem cardBody>
+      <CardItem body>
         <GiftCardInputGiftDescription
           giftDesc={giftDesc}
           updateGiftDesc={updateGiftDesc}
          />
       </CardItem>
-      { footerIsVisible
-        ? (
+      { footerIsVisible &&
           <CardItem style={styles.footerCard}>
             <Button
               style={styles.button}
@@ -72,10 +57,9 @@ export const GiftCard = ({
               { friendName.toUpperCase() || '' }
             </Button>
           </CardItem>
-        )
-        : false
       }
     </Card>
+    </SwiperWrapper>
 
   )
 }

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { StyleSheet } from 'react-native'
 import { EI } from '../icons/'
-import { FriendFormEventSwiper } from '../components/'
+import { SwiperWrapper } from '../components/'
 import {
   Button,
   Container,
@@ -25,7 +25,7 @@ export const EventCard = ({
 }) => {
   // should take a name, birthday and text prop, along with being editable and so forth
   return (
-     <FriendFormEventSwiper
+     <SwiperWrapper
 
         onSwipeUpdate={() => onFriendEventUpdate()}
         onSwipeDelete={() => onFriendEventDelete()}
@@ -36,7 +36,7 @@ export const EventCard = ({
                   <Text>{eventName ? `${eventName.trim()}... ${eventTime}.` : `${eventTime}` }</Text>
               </CardItem>
             </Card>
-            </FriendFormEventSwiper>
+            </SwiperWrapper>
 
   )
 }

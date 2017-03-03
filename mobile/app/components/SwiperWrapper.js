@@ -5,7 +5,7 @@ import Swipeout from 'react-native-swipeout'
 import { SwipeIcon } from '../components/'
 
 // types could be an array  ['edit', 'delete']
-export const FriendFormEventSwiper = ({ onSwipeDelete, onSwipeUpdate, children }) => {
+export const SwiperWrapper = ({ onSwipeDelete, onSwipeUpdate, children }) => {
   const deleteBtn = {
     type: 'delete',
     component: SwipeIcon('trash', { fontSize: 50 }),

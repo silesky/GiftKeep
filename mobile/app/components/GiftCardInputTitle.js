@@ -7,6 +7,7 @@ export const GiftCardInputTitle = ({ updateGiftTitle, giftTitle }) => (
     placeholder="Title"
     style={{
       color: 'white',
+      height: 12,
       fontWeight: '700'
     }}
     value={giftTitle}

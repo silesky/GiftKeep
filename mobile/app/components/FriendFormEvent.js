@@ -13,7 +13,7 @@ import {
 import {
   FriendFormDatePicker,
   FriendFormEventNameInput,
-  FriendFormEventSwiper
+  SwiperWrapper
 
 } from './../components'
 import { View } from 'react-native'
