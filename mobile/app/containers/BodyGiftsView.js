@@ -13,7 +13,7 @@ import {
 import { BodyCreateGiftModal } from './../containers'
 import * as Utils from './../utils/utils'
 import { View } from 'react-native'
-class BodyFriendView extends Component {
+class BodyGiftsView extends Component {
   constructor () {
     super()
   }
@@ -87,4 +87,4 @@ const mstp = (state) => {
     createGiftModalVisibility: state.visible.createGiftModalVisibility
   }
 }
-export default connect(mstp, mdtp)(BodyFriendView)
+export default connect(mstp, mdtp)(BodyGiftsView)

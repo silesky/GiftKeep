@@ -19,7 +19,7 @@ import {
   BodyCreateEventModal,
   BodyCreateGiftModal,
   BodyEventsView,
-  BodyFriendView,
+  BodyGiftsView,
   DrawerContainer,
   FriendFormCreateUpdate
 } from './../containers/'
@@ -56,7 +56,7 @@ class AppContainer extends Component {
           />
         <TabWrapper handleChangeTab={this.props.actions.selectTab}>
 
-            <BodyFriendView
+            <BodyGiftsView
               tabLabel='Gifts'
               isSelected={this.props.selectedTab === 'gifts'}
               friendId={this.props.selectedFriendId}
