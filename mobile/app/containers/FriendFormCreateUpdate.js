@@ -1,7 +1,7 @@
 // [x] eachEvent should have a default object
 // [ ] import from react native calendar datepicker and display
 // react-native-calendar-datepicker
-import { LightTheme } from './../themes/'
+import { LightTheme, themeList } from './../themes/'
 import React, {
   Component
 } from 'react'
@@ -14,7 +14,8 @@ import {
 import {
   SwiperWrapper,
   FriendFormEvent,
-  FriendFormNameInput
+  FriendFormNameInput,
+  ListItemDivider
  } from './../components'
 import * as actions from './../actions/'
 import {
@@ -35,9 +36,9 @@ import {
   Button,
   Title,
   Icon
-
 } from 'native-base'
 import * as colors from './../themes/colors'
+import { overrides } from './../themes/'
 import * as Utils from './../utils/utils'
 
 class FriendFormCreateUpdate extends Component {
@@ -110,19 +111,19 @@ class FriendFormCreateUpdate extends Component {
             <Button transparent>
               <Text></Text>
             </Button>
-            <Title>{isUpdating ? `Update ${friendName}` : `Create Friend`}
+            <Title style={{color: colors.$bigHeadingTextColor }}>{isUpdating ? `Update ${friendName}` : `Create Friend`}
             </Title>
           </Header>
           <Content>
             <List>
-            <ListItem itemDivider><Text>Name</Text></ListItem>
+            <ListItemDivider heading="Name" />
             <FriendFormNameInput
                 friendFormNameInputHasError={friendFormNameInputHasError}
                 handleOnChangeText={actions.friendFormFriendNameInputUpdate}
                 defaultValue={isUpdating ? friendName : ''}
                 placeholder={isUpdating ? friendName : 'Please Enter a Name'}
               />
-              <ListItem itemDivider><Text>Events</Text></ListItem>
+            <ListItemDivider heading="Events" />
               {
                 whichEventArray.map(({ eventId, eventName, eventDate }, eachIndex) => {
                   return (
