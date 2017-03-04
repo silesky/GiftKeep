@@ -30,10 +30,10 @@ export const GiftCard = ({
       onSwipeDelete={() => deleteGift()}
     >
     <Card>
-      <CardItem
+      <CardItem header
         style={{
           backgroundColor: colors.$cardHeaderBg
-        }}header>
+        }}>
            <GiftCardInputTitle
             giftTitle={giftTitle}
             updateGiftTitle={updateGiftTitle}

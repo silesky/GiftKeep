@@ -13,6 +13,7 @@
     "testdbw": "npm run testdb -- --watch"
   },
   "dependencies": {
+    "color": "^1.0.3",
     "json-loader": "^0.5.4",
     "moment": "^2.15.2",
     "native-base": "~0.5.13",

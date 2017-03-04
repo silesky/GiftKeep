@@ -1,5 +1,5 @@
 import Color from 'color'
-// return Color(this.deepblue).lighten(0.5).hexString(); },
+// return Color(this.deepblue).lighten(0.5); },
 
 module.exports = {
   // old toolbar bg: F8F8F8
@@ -18,15 +18,14 @@ module.exports = {
   pink: '#dd85bd',
 
   get $shadowBorder () { '#ddd' },
-  get $bigHeadingTextColor () { return Color(this.darkgrey).darken(0.3).hexString() },  // used in TopBar
+  get $bigHeadingTextColor () { return Color(this.darkgrey).darken(0.3).hex() },  // used in TopBar
   get $headerFooterTextColor () { return this.red },
   // tabs
-  get $inactiveTabTextColor () { return Color(this.darkgrey).darken(0.2).hexString() },
   get $activeTabBackground () { return this.lightgrey },
   get $activeTabTextColor () { return this.darkpurple },
   get $activeTabUnderlineColor () { return this.darkpurple },
   get $cardHeaderBg () { return this.darkpurple },
   get $cardBg () { return this.white },
-  get $defaultIconColor () { return Color(this.darkpurple).lighten(0.3).hexString() },
+  get $defaultIconColor () { return Color(this.darkpurple).lighten(0.3).hex() },
   get $headerFooterBg () { return this.offwhite }
 }

@@ -121,7 +121,7 @@ export default {
   toolbarInverseBg: '#222',
   toolbarTextColor: (Platform.OS === 'ios') ? '#000' : '#fff',
   get statusBarColor () {
-    return Color(this.toolbarDefaultBg).darken(0.2).hexString()
+    return Color(this.toolbarDefaultBg).darken(0.2).hex()
   },
 
     // Icon
@@ -175,7 +175,7 @@ export default {
   radioColor: '#7e7e7e',
 
   get radioSelectedColor () {
-    return Color(this.radioColor).darken(0.2).hexString()
+    return Color(this.radioColor).darken(0.2).hex()
   },
 
     // Spinner
@@ -183,7 +183,7 @@ export default {
   inverseSpinnerColor: '#1A191B',
 
     // Tabs
-  tabBgColor: Color(colors.$headerFooterBg).darken(0.1).hexString(),
+  tabBgColor: Color(colors.$headerFooterBg).darken(0.1).hex(),
   tabFontSize: 16,
   tabTextColor: colors.$activeTabColor, // works
 
@@ -202,7 +202,7 @@ export default {
   contentPadding: 10,
 
   get darkenHeader () {
-    return Color(this.tabBgColor).darken(0.03).hexString()
+    return Color(this.tabBgColor).darken(0.03).hex()
   },
 
   dropdownBg: '#000',
