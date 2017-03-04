@@ -28,7 +28,7 @@ import {
 
 } from 'native-base'
 import Moment from 'moment'
-export const FriendFormDatePicker = ({
+export const FriendFormEventDatePicker = ({
   eventDate,
   calendarModalIsVisible,
   onEventDateInputChange,
@@ -92,7 +92,7 @@ export const FriendFormDatePicker = ({
     </View>
   )
 }
-FriendFormDatePicker.PropTypes = {
+FriendFormEventDatePicker.PropTypes = {
   eventWithFocus: React.PropTypes.object,
   eventDate: React.PropTypes.string,
   isVisible: React.PropTypes.bool,
