@@ -4,7 +4,7 @@ import {
   StyleSheet,
   View
 } from 'react-native'
-import { Text, Container } from 'native-base'
+import { Text, Container } from  './../sporks/native-base'
 
 export const NotificationBottom = ({ notificationText }) => {
   NotificationBottom.PropTypes = {

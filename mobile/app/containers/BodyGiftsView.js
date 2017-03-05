@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as actions from './../actions/'
-import { Content, Card } from 'native-base'
+import { Content, Card } from  './../sporks/native-base'
 import { LightTheme } from './../themes/'
 import {
   NoFriendsAlert,

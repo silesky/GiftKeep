@@ -11,7 +11,7 @@ import {
     Card,
     CardItem,
     Title
-} from 'native-base'
+} from  './../sporks/native-base'
 
 export const NoEventsAlert = ({
   addEventBtnClick

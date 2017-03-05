@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import * as actions from './../actions/'
 import {
   Content
-} from 'native-base'
+} from  './../sporks/native-base'
 // Components
 import {
   NotificationBottom,

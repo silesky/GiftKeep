@@ -5,7 +5,7 @@ import {
     Text,
     Card,
     CardItem
-} from 'native-base'
+} from  './../sporks/native-base'
 
 export const NoGiftsAlert = ({
   addGiftBtnClick

@@ -2,7 +2,7 @@ import React from 'react'
 import Calendar from 'react-native-calendar-datepicker'
 import Moment from 'moment'
 import { View } from 'react-native'
-import { ListItem, Button } from 'native-base'
+import { ListItem, Button } from  './../sporks/native-base'
 export const BodyModalEventDatePicker = ({
   calendarModalIsVisible,
   onEventDateInputChange,

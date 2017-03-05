@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListItem, Text } from 'native-base'
+import { ListItem, Text } from  './../sporks/native-base'
 import { LightTheme } from './../themes/';
 export const ListItemDivider = ({ heading }) => {
   return (

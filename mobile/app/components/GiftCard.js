@@ -6,7 +6,7 @@ import {
   Card,
   CardItem,
   Icon
-} from 'native-base'
+} from  './../sporks/native-base'
 // import * as Util  from './../utils/utils';
 import {
   GiftCardInputTitle,

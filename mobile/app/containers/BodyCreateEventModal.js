@@ -3,11 +3,11 @@ import Moment from 'moment'
 import * as actions from './../actions/'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Input } from 'native-base'
+import { Input } from  './../sporks/native-base'
 import { SimpleModalFormWrapper, BodyModalEventDatePicker } from './../components/'
 import { getFriendByFriendId } from './../utils/'
 import { View, DatePickerIOS, Keyboard, LayoutAnimation } from 'react-native'
-import { List, ListItem, Title, InputGroup, Button } from 'native-base'
+import { List, ListItem, Title, InputGroup, Button } from  './../sporks/native-base'
 
 class BodyCreateEventModal extends React.Component {
   static PropTypes = {

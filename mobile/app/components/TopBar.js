@@ -7,7 +7,7 @@ import {
   Text,
   Icon,
   Container
-} from 'native-base'
+} from  './../sporks/native-base'
 
 import { colors } from '../themes/'
 import LightTheme from '../themes/LightTheme'

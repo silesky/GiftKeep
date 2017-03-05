@@ -8,7 +8,7 @@ import {
   Title,
   Container
 
-} from 'native-base'
+} from  './../sporks/native-base'
 import { EI as Icon } from './../icons'
 import Swipeout from 'react-native-swipeout'
 import { SwipeIcon } from './../components'

@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native'
 import * as actions from './../actions/'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Input } from 'native-base'
+import { Input } from  './../sporks/native-base'
 import { GiftCardInputGiftDescription, GiftCardInputTitle, SimpleModalFormWrapper } from './../components/'
 import { getFriendByFriendId } from './../utils/'
 import { View, LayoutAnimation } from 'react-native'
@@ -22,7 +22,7 @@ import {
   InputGroup,
   Button,
   Icon
-} from 'native-base'
+} from  './../sporks/native-base'
 
 class BodyCreateGiftModal extends React.Component {
   static PropTypes = {

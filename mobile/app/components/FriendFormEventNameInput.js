@@ -8,7 +8,7 @@ import {
 
   Icon
 
-} from 'native-base'
+} from  './../sporks/native-base'
 import { View } from 'react-native'
 export const FriendFormEventNameInput = ({ defaultValue, isFocused, handleOnChangeText }) => {
   console.log(defaultValue)

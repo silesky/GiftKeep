@@ -2,7 +2,7 @@ import React from 'react'
 
 import {
   Thumbnail
-} from 'native-base'
+} from  './../sporks/native-base'
 
 const FbProfImage = ({ fbImage }) => (
   <Thumbnail

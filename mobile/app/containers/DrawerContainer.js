@@ -16,12 +16,12 @@ import {
   Container,
   Content,
   Footer,
-  Header,
   List,
   Icon,
   Title
-} from 'native-base'
+} from  './../sporks/native-base'
 
+import { Header } from './../sporks/native-base'
 import {
   FbLogin,
   FriendListItem

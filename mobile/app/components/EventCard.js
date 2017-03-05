@@ -13,7 +13,7 @@ import {
   InputGroup,
   Text,
   Title
-} from 'native-base'
+} from  './../sporks/native-base'
 // import * as Util  from './../utils/utils';
 
 export const EventCard = ({
