@@ -1,6 +1,6 @@
 import React from 'react'
 import { default as RnDrawer } from 'react-native-drawer'
-export const Drawer = ({ children, content, handleCloseDrawer, isDrawerOpen }) => {
+export const DrawerWrapper = ({ children, content, handleCloseDrawer, isDrawerOpen }) => {
   // cont
   return (
     <RnDrawer

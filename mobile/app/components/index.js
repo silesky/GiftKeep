@@ -1,6 +1,6 @@
 export * from './BodyModalEventDatePicker'
 export * from './BottomBar'
-export * from './Drawer'
+export * from './DrawerWrapper'
 export * from './EventCard'
 export * from './FbLogin'
 export * from './FriendFormEventDatePicker'

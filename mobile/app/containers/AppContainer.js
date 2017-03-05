@@ -9,7 +9,7 @@ import {
 import {
   NotificationBottom,
   TopBar,
-  Drawer,
+  DrawerWrapper,
   TabWrapper,
   BottomBar
    } from './../components/'
@@ -32,7 +32,7 @@ class AppContainer extends Component {
   }
   render () {
     return (
-      <Drawer
+      <DrawerWrapper
         handleCloseDrawer={this.props.actions.leftDrawerVisibility.bind(this, false)}
         isDrawerOpen={this.props.isLeftDrawerOpen}
         content={<DrawerContainer />}>
@@ -69,7 +69,7 @@ class AppContainer extends Component {
 
         { this.props.bottomNotificationVisibility && <NotificationBottom notificationText={this.props.notificationText} /> }
         <FriendFormCreateUpdate />
-      </Drawer>
+      </DrawerWrapper>
 
     )
   }
