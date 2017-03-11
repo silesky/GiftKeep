@@ -32,20 +32,19 @@ class BodyGiftsView extends Component {
     const body = (
       <View>
 
-          { (!hasFriends)
-            ? <NoFriendsAlert
+          { !hasFriends &&
+            <NoFriendsAlert
               addFriendBtnClick={this.props.actions.friendFormVisibilityToggle}
               friendName={friendName}
               bday={bday}
               />
-              : undefined
             }
 
-          { (hasFriends && !hasGifts) //
-            ? <NoGiftsAlert
+          { hasFriends && !hasGifts &&
+            <NoGiftsAlert
             addGiftBtnClick={this.props.actions.createGiftModalVisibilityTrue}
             />
-          : undefined}
+          }
 
           { gifts.map((el, ind) => {
             return (

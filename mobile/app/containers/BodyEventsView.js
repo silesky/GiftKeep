@@ -31,6 +31,7 @@ class BodyEventsView extends Component {
   render () {
     const {
       bday,
+      hasEvents,
       hasFriends,
       friendName
     } = this.props
@@ -43,8 +44,15 @@ class BodyEventsView extends Component {
               addFriendBtnClick={this.props.actions.friendFormVisibilityToggle}
               friendName={friendName}
               bday={bday}
-              />
+             />
            }
+
+           { hasFriends && !hasEvents &&
+             <NoEventsAlert
+              addEventBtnClick={this.props.actions.createEventModalVisibilityTrue.bind(this, this.props.selectedFriendId)}
+             />
+           }
+
           { this.props.events.map(({ eventName, eventDate, eventId }, index) => {
             const eventTimeFromNow = Moment(eventDate).fromNow()
             return (
@@ -53,10 +61,7 @@ class BodyEventsView extends Component {
                 onFriendEventDelete={this.props.actions.friendEventDelete.bind(this, eventId)}
                 key={index}
                 eventName={eventName}
-                eventTime={isEventInTheFuture(eventDate)
-                        ? eventTimeFromNow
-                        : 'Event has passed.'
-                  }
+                eventTime={isEventInTheFuture(eventDate) ? eventTimeFromNow : 'Event has passed.'}
               />
             )
           })
@@ -78,7 +83,7 @@ const mstp = (state) => {
     bday,
     friendName,
     hasFriends: !!state.user.data.length,
-
+    hasEvents: !!events.length,
 
   }
 }

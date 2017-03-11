@@ -19,7 +19,7 @@ export const NoEventsAlert = ({
   return (
              <Card>
                 <CardItem style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                 <Text>'No Events Added.'</Text>
+                 <Text>No Events Added.</Text>
                     <Button
                       info
                       onPress={() => addEventBtnClick() }>
