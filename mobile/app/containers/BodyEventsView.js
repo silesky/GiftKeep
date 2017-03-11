@@ -12,7 +12,11 @@ import {
   Title,
   Text
 } from  './../sporks/native-base'
-import { EventCard } from './../components/'
+import {
+  EventCard,
+  NoEventsAlert,
+  NoFriendsAlert
+} from './../components/'
 import * as Utils from './../utils/utils'
 
 // should get an array of all the gifts
@@ -25,10 +29,22 @@ class BodyEventsView extends Component {
   }
 
   render () {
+    const {
+      bday,
+      hasFriends,
+      friendName
+    } = this.props
     const isEventInTheFuture = (date) => Moment(date).format('YYYYMMDD') > Moment().format('YYYYMMDD')
     return (
       <Container>
         <Content>
+           { !hasFriends &&
+             <NoFriendsAlert
+              addFriendBtnClick={this.props.actions.friendFormVisibilityToggle}
+              friendName={friendName}
+              bday={bday}
+              />
+           }
           { this.props.events.map(({ eventName, eventDate, eventId }, index) => {
             const eventTimeFromNow = Moment(eventDate).fromNow()
             return (
@@ -54,10 +70,16 @@ class BodyEventsView extends Component {
 
 const mdtp = (dispatch) => ({ actions: bindActionCreators(actions, dispatch) })
 const mstp = (state) => {
-  let { events } = Utils.getFriendByFriendId(state, state.visible.selectedFriendId)
+
+  let { bday, events, friendName } = Utils.getFriendByFriendId(state, state.visible.selectedFriendId)
   events = (events && events.length) ? events : []
   return {
-    events: events
+    events,
+    bday,
+    friendName,
+    hasFriends: !!state.user.data.length,
+
+
   }
 }
 export default connect(mstp, mdtp)(BodyEventsView)
