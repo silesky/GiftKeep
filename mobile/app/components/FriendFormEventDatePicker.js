@@ -1,14 +1,17 @@
-import Calendar from 'react-native-calendar-datepicker'
+
 import React, {
   Component
 } from 'react'
-
 import * as actions from './../actions/'
 import {
   StyleSheet,
   Modal,
   View
 } from 'react-native'
+import Moment from 'moment'
+import {
+  FriendFormEventDatePickerCalendar
+} from './../components/'
 import {
   Container,
   Content,
@@ -27,7 +30,7 @@ import {
   CardItem
 
 } from  './../sporks/native-base'
-import Moment from 'moment'
+
 export const FriendFormEventDatePicker = ({
   eventDate,
   calendarModalIsVisible,
@@ -36,6 +39,7 @@ export const FriendFormEventDatePicker = ({
   onEventDateInputOk,
   onCancel
 }) => {
+
   return (
     <View>
       <InputGroup style={{ paddingLeft: 10, marginLeft: 5, marginRight: 5 }} borderType="underline" >
@@ -66,13 +70,9 @@ export const FriendFormEventDatePicker = ({
               <Text>Select an Event Date</Text>
             </CardItem>
             <CardItem cardBody>
-
-              <Calendar
-                startStage="month"
-                minDate={Moment().startOf('day')}
-                maxDate={Moment().add(10, 'years').startOf('day')}
-                selected={eventDate}
-                onChange={(eventDateInputArg) => onEventDateInputChange(eventDateInputArg)}
+            <FriendFormEventDatePickerCalendar
+                selectedEventDate={eventDate}
+                onEventDateInputChange={onEventDateInputChange.bind(this)}
                 />
             </CardItem>
             <CardItem footer>
