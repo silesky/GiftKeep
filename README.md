@@ -31,6 +31,6 @@
 * [Trello](https://trello.com/b/kOwrKDAC/giftr)
 
 ## Potential non-cross platform components
-* CreateFriendForm -> Modal (react-native)
-* Swipeout
-* View (in FbLoggiedInImageBar)
+* CreateFriendForm -> `Modal` (react-native)
+* `Swipeout`
+* `DatePickerIOS`
