@@ -2,11 +2,6 @@ import React from 'react'
 import { Input, InputGroup, Icon } from  './../sporks/native-base'
 
 
-const InputGroupErrorYesOrNo = ({ hasError, styles, children }) => {
-  return ((hasError)
-    ? <InputGroup style={styles} error>{children}</InputGroup>
-    : <InputGroup style={styles} succcess>{children}</InputGroup>)
-}
 export const FriendFormNameInput = ({
   friendFormNameInputHasError,
   handleOnChangeText,
@@ -16,10 +11,7 @@ export const FriendFormNameInput = ({
   ListItem
 }) => {
   return (
-    <InputGroupErrorYesOrNo
-        styles={{ paddingLeft: 10, marginLeft: 5, marginRight: 5, marginBottom: 5 }}
-        hasError={friendFormNameInputHasError}
-    >
+    <InputGroup style={{ paddingLeft: 10, marginLeft: 5, marginRight: 5, marginBottom: 5, borderWidth: 0 }}>
       <Input
         defaultValue={defaultValue}
         onChangeText={(input) => handleOnChangeText(input)}
@@ -29,7 +21,7 @@ export const FriendFormNameInput = ({
         name='ios-person'
         style={{ color: friendFormNameInputHasError ? 'red' : 'green' }}
       />
-    </InputGroupErrorYesOrNo>
+    </InputGroup>
 
   )
 }
