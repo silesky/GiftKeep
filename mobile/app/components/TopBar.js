@@ -33,7 +33,7 @@ export const TopBar = ({
       : 1
   } // if user has no friends, disable
   const addEventBtn = (
-    <Button transparent onPress={() => eventModalShow()}>
+    <Button disabled={eventBtnIsDisabled} transparent onPress={() => eventModalShow()}>
       { IconCreator('FA', 'calendar-plus-o', 20, {
         ...iconColor,
         ...iconOpacity,
@@ -42,7 +42,7 @@ export const TopBar = ({
     </Button>
   )
   const addGiftBtn = (
-    <Button transparent onPress={() => giftModalShow() }> {/* */}
+    <Button disabled={giftBtnIsDisabled} transparent onPress={() => giftModalShow() }> {/* */}
       { IconCreator('FA', 'gift', 20, {
         ...iconColor,
         ...iconOpacity,
