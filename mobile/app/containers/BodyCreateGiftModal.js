@@ -5,6 +5,8 @@ import {
   LayoutAnimation,
 } from 'react-native'
 import * as actions from './../actions/'
+
+import { IconCreator } from './../icons/'
 import { bindActionCreators, } from 'redux'
 import { connect, } from 'react-redux'
 import {
@@ -57,7 +59,11 @@ class BodyCreateGiftModal extends React.Component {
         isVisible={this.props.createGiftModalVisibility}
        >
         <List>
-          <Title style={{ marginTop: 10, marginBottom: 10, }}>Create Gift</Title>
+
+          <Title style={{ marginTop: 10, marginBottom: 10, }}>
+          { IconCreator('FA', 'gift', 30, { paddingRight: 10, paddingTop: 5, }) }
+            Create Gift
+         </Title>
           <ListItem>
           <InputGroup>
             <Input
