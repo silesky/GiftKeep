@@ -55,7 +55,7 @@ class BodyCreateGiftModal extends React.Component {
           handleClickAway={this.props.actions.bodyModalVisibilityFalse}
           isVisible={this.props.createGiftModalVisibility}>
           <List>
-          <Title style={{ marginTop: 10 }}>Create Gift</Title>
+          <Title style={{ marginTop: 10, marginBottom: 10 }}>Create Gift</Title>
           <ListItem>
           <InputGroup>
             <Input
@@ -79,14 +79,14 @@ class BodyCreateGiftModal extends React.Component {
                />
           </InputGroup>
         </ListItem>
-        <View style={{ marginTop: 10, alignItems: 'flex-end', justifyContent: 'flex-end', flexDirection: 'row' }}>
+        <View style={{ marginTop: 15, marginBottom: 10, marginRight: 15, alignItems: 'flex-end', justifyContent: 'flex-end', flexDirection: 'row' }}>
            <Button danger
             onPress={() => this.close()}>
             Cancel
             </Button>
             <Button
                 onPress={() => this.onCreateGiftPress()}
-                style={{ marginLeft: 5 }} success>
+                style={{ marginLeft: 10 }} success>
                 OK
             </Button>
           </View>
