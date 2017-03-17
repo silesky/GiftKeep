@@ -17,8 +17,10 @@ module.exports = {
   red: '#d62246',
   darkpurple: '#8c2b62',
   pink: '#dd85bd',
+  accent: '#b6387f', // same as darkpurple.lighten(0.3)
+  shadow: '#ddd',
 
-  get $shadowBorder () { return '#ddd' },
+  get $shadowBorder () { return Color('#ddd').lighten(0.1).hex() },
   get $bigHeadingTextColor () { return Color(this.darkgrey).darken(0.3).hex() },  // used in TopBar
   get $headerFooterTextColor () { return this.red },
   // tabs
@@ -28,6 +30,6 @@ module.exports = {
   get $activeTabUnderlineColor () { return this._tabColor },
   get $cardHeaderBg () { return this.darkpurple },
   get $cardBg () { return this.white },
-  get $defaultIconColor () { return Color(this.darkpurple).lighten(0.3).hex() },
+  get $defaultIconColor () { return this.accent },
   get $headerFooterBg () { return this.offwhite }
 }

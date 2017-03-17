@@ -17,6 +17,8 @@ import {
 
 } from './../components'
 import { View } from 'react-native'
+
+import { colors } from './../themes/'
 export const FriendFormEvent = (props) => {
   const {
   defaultValue,
@@ -32,7 +34,7 @@ export const FriendFormEvent = (props) => {
   isFocused
 } = props
   return (
-    <View style={{ paddingTop: 10, paddingBottom: 10, borderBottomWidth: 1, borderBottomColor: '#d4d4d4' }}>
+    <View style={{ paddingBottom: 1, borderBottomWidth: 2, borderBottomColor: colors.$shadowBorder }}>
       <FriendFormEventNameInput
       isFocused={isFocused}
       defaultValue={defaultValue}
