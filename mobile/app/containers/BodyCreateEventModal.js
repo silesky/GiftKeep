@@ -1,32 +1,45 @@
 import React from 'react'
 import Moment from 'moment'
 import * as actions from './../actions/'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { Input } from  './../sporks/native-base'
-import { SimpleModalFormWrapper, BodyModalEventDatePicker } from './../components/'
-import { getFriendByFriendId } from './../utils/'
-import { View, DatePickerIOS, Keyboard, LayoutAnimation } from 'react-native'
-import { List, ListItem, Title, InputGroup, Button } from  './../sporks/native-base'
+import { bindActionCreators, } from 'redux'
+import { connect, } from 'react-redux'
+import { Input, } from './../sporks/native-base'
+import {
+  SimpleModalFormWrapper,
+} from './../components/'
+import {
+  View,
+  DatePickerIOS,
+  Keyboard,
+  LayoutAnimation,
+} from 'react-native'
+import {
+  List,
+  ListItem,
+  Title,
+  InputGroup,
+  Button, }
+from './../sporks/native-base'
 
+import { IconCreator, } from './../icons'
 class BodyCreateEventModal extends React.Component {
   static PropTypes = {
-    isVisible: React.PropTypes.bool
+    isVisible: React.PropTypes.bool,
   }
   static defaultProps = {
     date: Moment().add(1, 'day').toDate(),
-    name: ''
+    name: '',
   };
   constructor (props) {
     super(props)
     this.onDateChange = this.onDateChange.bind(this)
     this.state = {
       date: this.props.date,
-      name: this.props.name
+      name: this.props.name,
     }
   }
   onDateChange (date) {
-    this.setState({ date })
+    this.setState({ date, })
   }
   onCreateEventPress () {
     const _eventName = this.refs.eventName._textInput._lastNativeText
@@ -41,13 +54,14 @@ class BodyCreateEventModal extends React.Component {
   render () {
     return (
       <SimpleModalFormWrapper
-        modalHeight={390}
+        modalHeight={420}
         handleClickAway={this.props.actions.bodyModalVisibilityFalse}
         isVisible={this.props.createGiftModalVisibility}>
         <List>
-          <Title style={{
-            marginTop: 10
-          }}>Create Event</Title>
+          <Title style={{ marginTop: 10, marginBottom: 10, }}>
+          { IconCreator('FA', 'calendar-plus-o', 30, { paddingRight: 10, paddingTop: 5, }) }
+            Create Event
+         </Title>
           <ListItem>
             <InputGroup>
               <Input
@@ -78,17 +92,14 @@ class BodyCreateEventModal extends React.Component {
             date={this.state.date}
 
           />
-
-          {/* <BodyModalEventDatePicker
-            calendarModalIsVisible={false}
-              /> */}
-
           <View
             style={{
-              marginTop: 10,
+              marginTop: 15,
+              marginBottom: 10,
+              marginRight: 15,
               alignItems: 'flex-end',
               justifyContent: 'flex-end',
-              flexDirection: 'row'
+              flexDirection: 'row',
             }}>
             <Button danger onPress={() => this.close()}>
               Cancel
@@ -96,7 +107,7 @@ class BodyCreateEventModal extends React.Component {
             <Button
               onPress={() => this.onCreateEventPress()}
               style={{
-                marginLeft: 5
+                marginLeft: 10,
               }}
               success>
               OK
@@ -110,10 +121,10 @@ class BodyCreateEventModal extends React.Component {
 const mstp = (state) => {
   return {
     createGiftModalVisibility: state.visible.createEventModalVisibility,
-    selectedFriendId: state.visible.selectedFriendId
+    selectedFriendId: state.visible.selectedFriendId,
   }
 }
 const mdtp = (dispatch) => ({
-  actions: bindActionCreators(actions, dispatch)
+  actions: bindActionCreators(actions, dispatch),
 })
 export default connect(mstp, mdtp)(BodyCreateEventModal)
