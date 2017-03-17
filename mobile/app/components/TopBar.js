@@ -1,18 +1,13 @@
 import React from 'react'
-
 import {
   Header,
   Title,
   Button,
-  Text,
   Icon,
-  Container
-} from  './../sporks/native-base'
-
-import { colors } from '../themes/'
+} from './../sporks/native-base'
+import { colors, } from '../themes/'
 import LightTheme from '../themes/LightTheme'
-import { IconCreator } from './../icons/'
-import { selectTab } from '../actions/actionsMisc'
+import { IconCreator, } from './../icons/'
 
 export const TopBar = ({
   handleOpenDrawer,
@@ -22,22 +17,22 @@ export const TopBar = ({
   giftBtnIsDisabled,
   addEvent,
   giftModalShow,
-  selectedTab
+  selectedTab,
 }) => {
   const iconColor = {
-    color: colors.$defaultIconColor
+    color: colors.$defaultIconColor,
   }
   const iconOpacity = {
     opacity: giftBtnIsDisabled
       ? 0.5
-      : 1
+      : 1,
   } // if user has no friends, disable
   const addEventBtn = (
     <Button disabled={eventBtnIsDisabled} transparent onPress={() => eventModalShow()}>
       { IconCreator('FA', 'calendar-plus-o', 20, {
         ...iconColor,
         ...iconOpacity,
-        fontSize: 22
+        fontSize: 22,
       }) }
     </Button>
   )
@@ -46,7 +41,7 @@ export const TopBar = ({
       { IconCreator('FA', 'gift', 20, {
         ...iconColor,
         ...iconOpacity,
-        fontSize: 25
+        fontSize: 25,
       }) }
     </Button>
   )
@@ -54,11 +49,11 @@ export const TopBar = ({
     <Header theme={LightTheme} backgroundColor={colors.$headerFooterBg}>
       <Button transparent onPress={() => handleOpenDrawer()}>
         <Icon style={{
-          ...iconColor
+          ...iconColor,
         }} name='ios-menu'/>
       </Button>
       <Title style={{
-        color: colors.$bigHeadingTextColor
+        color: colors.$bigHeadingTextColor,
       }}>
         {friendName || 'Add a friend.'}
       </Title>
