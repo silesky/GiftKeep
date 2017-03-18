@@ -45,9 +45,9 @@ class BodyCreateEventModal extends React.Component {
     const _eventName = this.refs.eventName._textInput._lastNativeText
     const _eventDate = this.state.date.toISOString()
     this.props.actions.createEvent(this.props.selectedFriendId, _eventName, _eventDate)
-    this.close()
+    this.onCancelPress()
   }
-  close () {
+  onCancelPress () {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
     this.props.actions.bodyModalVisibilityFalse()
   }
@@ -101,7 +101,7 @@ class BodyCreateEventModal extends React.Component {
               justifyContent: 'flex-end',
               flexDirection: 'row',
             }}>
-            <Button danger onPress={() => this.close()}>
+            <Button danger onPress={() => this.onCancelPress()}>
               Cancel
             </Button>
             <Button

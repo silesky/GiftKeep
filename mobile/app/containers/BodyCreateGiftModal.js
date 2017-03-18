@@ -36,7 +36,7 @@ class BodyCreateGiftModal extends React.Component {
     const _giftTitleInput = this.refs.giftTitleInput._textInput._lastNativeText
     const _giftDescInput = this.refs.giftDescInput._textInput._lastNativeText
     this.props.actions.createGift(this.props.selectedFriendId, _giftTitleInput, _giftDescInput)
-    this.close()
+    this.onCancelPress()
   }
   onCancelPress () {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
