@@ -1,21 +1,20 @@
-import React, { Component } from 'react'
+import React, { Component, } from 'react'
 import LightTheme from './../themes'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import { connect, } from 'react-redux'
+import { bindActionCreators, } from 'redux'
 import * as actions from './../actions/'
-import Moment from 'moment'
 import {
   Container,
   Content,
   Card,
   CardItem,
   Title,
-  Text
-} from  './../sporks/native-base'
+  Text,
+} from './../sporks/native-base'
 import {
   EventCard,
   NoEventsAlert,
-  NoFriendsAlert
+  NoFriendsAlert,
 } from './../components/'
 import * as Utils from './../utils/utils'
 
@@ -25,7 +24,7 @@ class BodyEventsView extends Component {
     super(props)
   }
   static propTypes = {
-    isSelected: React.PropTypes.bool
+    isSelected: React.PropTypes.bool,
   }
 
   render () {
@@ -33,9 +32,9 @@ class BodyEventsView extends Component {
       bday,
       hasEvents,
       hasFriends,
-      friendName
+      friendName,
     } = this.props
-    const isEventInTheFuture = (date) => Moment(date).format('YYYYMMDD') > Moment().format('YYYYMMDD')
+
     return (
       <Container>
         <Content>
@@ -53,15 +52,14 @@ class BodyEventsView extends Component {
              />
            }
 
-          { this.props.events.map(({ eventName, eventDate, eventId }, index) => {
-            const eventTimeFromNow = Moment(eventDate).fromNow()
+          { this.props.events.map(({ eventName, eventDate, eventId, }, index) => {
             return (
               <EventCard
                 onFriendEventUpdate={this.props.actions.friendEventUpdateFromEventsView.bind(this, eventId) /* update everything */}
                 onFriendEventDelete={this.props.actions.friendEventDelete.bind(this, eventId)}
                 key={index}
                 eventName={eventName}
-                eventTime={isEventInTheFuture(eventDate) ? eventTimeFromNow : 'Event has passed.'}
+                eventDateIso={eventDate}
               />
             )
           })
@@ -73,10 +71,9 @@ class BodyEventsView extends Component {
   }
 }
 
-const mdtp = (dispatch) => ({ actions: bindActionCreators(actions, dispatch) })
+const mdtp = (dispatch) => ({ actions: bindActionCreators(actions, dispatch), })
 const mstp = (state) => {
-
-  let { bday, events, friendName } = Utils.getFriendByFriendId(state, state.visible.selectedFriendId)
+  let { bday, events, friendName, } = Utils.getFriendByFriendId(state, state.visible.selectedFriendId)
   events = (events && events.length) ? events : []
   return {
     events,
