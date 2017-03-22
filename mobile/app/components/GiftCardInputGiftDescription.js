@@ -7,6 +7,7 @@ export const GiftCardInputGiftDescription = ({
   isSelected,
 }) => (
         <Input
+          style={{marginRight: 25, marginLeft: 10}}
           height={isSelected ? 100 : 50}
           onFocus={() => onGiftInputFocus()}
           placeholder="description..."

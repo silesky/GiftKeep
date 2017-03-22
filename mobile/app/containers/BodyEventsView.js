@@ -1,8 +1,15 @@
 import React, { Component, } from 'react'
+
+import { LayoutAnimation, } from 'react-native'
+
 import LightTheme from './../themes'
+
 import { connect, } from 'react-redux'
+
 import { bindActionCreators, } from 'redux'
+
 import * as actions from './../actions/'
+
 import {
   Container,
   Content,
@@ -11,22 +18,25 @@ import {
   Title,
   Text,
 } from './../sporks/native-base'
+
 import {
   EventCard,
   NoEventsAlert,
   NoFriendsAlert,
 } from './../components/'
+
 import * as Utils from './../utils/utils'
 
 // should get an array of all the gifts
 class BodyEventsView extends Component {
-  constructor (props) {
-    super(props)
-  }
   static propTypes = {
     isSelected: React.PropTypes.bool,
   }
 
+  onFriendEventDelete (eventId) {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
+    this.props.actions.friendEventDelete(eventId);
+  }
   render () {
     const {
       bday,
@@ -56,7 +66,7 @@ class BodyEventsView extends Component {
             return (
               <EventCard
                 onFriendEventUpdate={this.props.actions.friendEventUpdateFromEventsView.bind(this, eventId) /* update everything */}
-                onFriendEventDelete={this.props.actions.friendEventDelete.bind(this, eventId)}
+                onFriendEventDelete={ () => this.onFriendEventDelete(eventId)}
                 key={index}
                 eventName={eventName}
                 eventDateIso={eventDate}

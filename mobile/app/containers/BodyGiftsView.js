@@ -13,15 +13,18 @@ import {
 
 import { BodyCreateGiftModal } from './../containers'
 import * as Utils from './../utils/utils'
-import { View, LayoutAnimation } from 'react-native'
+import { View, LayoutAnimation, } from 'react-native'
 class BodyGiftsView extends Component {
   constructor () {
     super()
   }
-
-  onGiftInputFocus(id) {
+  onGiftDelete (selectedFriendId, giftId) {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
-    this.props.actions.giftInputFocus(id);
+    this.props.actions.deleteGift(selectedFriendId, giftId)
+  }
+  onGiftInputFocus (id) {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
+    this.props.actions.giftInputFocus(id)
   }
   render () {
     const {
@@ -57,7 +60,7 @@ class BodyGiftsView extends Component {
               <GiftCard
                 isSelected={this.props.selectedGiftId === el.giftId}
                 onGiftInputFocus={() => this.onGiftInputFocus(el.giftId)}
-                deleteGift={this.props.actions.deleteGift.bind(this, selectedFriendId, el.giftId)}
+                deleteGift={() => this.onGiftDelete(selectedFriendId, el.giftId)}
                 giftDesc={el.giftDesc}
                 updateGiftTitle={this.props.actions.updateGiftTitle.bind(this, selectedFriendId, el.giftId)}
                 updateGiftDesc={this.props.actions.updateGiftDesc.bind(this, selectedFriendId, el.giftId)}
