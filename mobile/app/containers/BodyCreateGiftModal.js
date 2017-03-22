@@ -33,9 +33,9 @@ class BodyCreateGiftModal extends React.Component {
     CreateGiftModalIsVisible: React.PropTypes.bool,
   }
   onCreateGiftPress () {
-    const _giftTitleInput = this.refs.giftTitleInput._textInput._lastNativeText
+    // const _giftTitleInput = this.refs.giftTitleInput._textInput._lastNativeText
     const _giftDescInput = this.refs.giftDescInput._textInput._lastNativeText
-    this.props.actions.createGift(this.props.selectedFriendId, _giftTitleInput, _giftDescInput)
+    this.props.actions.createGift(this.props.selectedFriendId, /*_giftTitleInput*/ '', _giftDescInput)
     this.onCancelPress()
   }
   onCancelPress () {
@@ -64,8 +64,10 @@ class BodyCreateGiftModal extends React.Component {
           { IconCreator('FA', 'gift', 30, { paddingRight: 10, paddingTop: 5, }) }
             Create Gift
          </Title>
-          <ListItem>
-          <InputGroup>
+
+          {/*
+              <ListItem>
+            <InputGroup>
             <Input
               ref="giftTitleInput"
               placeholder="Title..."
@@ -75,14 +77,16 @@ class BodyCreateGiftModal extends React.Component {
               />
           </InputGroup>
           </ListItem>
+          */}
+
           <ListItem>
             <InputGroup>
             <Input
               ref="giftDescInput"
               placeholder="Description..."
-              inlineLabel label="Description"
               placeholderTextColor='lightgrey'
-              multiline={false}
+              multiline={true}
+              style={{height: 200}}
               onSubmitEditing={() => this.onCreateGiftPress()}
             />
           </InputGroup>
