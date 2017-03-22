@@ -1,19 +1,20 @@
 import React from 'react'
 import { View } from 'react-native'
 import Swipeout from 'react-native-swipeout'
-
+import * as colors from './../themes/colors'
 import { SwipeIcon } from '../components/'
 
 // types could be an array  ['edit', 'delete']
-export const SwiperWrapper = ({ onSwipeDelete, onSwipeUpdate, children }) => {
+export const SwiperWrapper = ({ onSwipeDelete, onSwipeUpdate, children, fontSize = 50 }) => {
+
   const deleteBtn = {
     type: 'delete',
-    component: SwipeIcon('trash', { fontSize: 50 }),
+    component: SwipeIcon('trash', { fontSize }),
     onPress: () => onSwipeDelete()
   }
   const updateBtn = {
     type: 'secondary',
-    component: SwipeIcon('pencil', { fontSize: 50 }),
+    component: SwipeIcon('pencil', { fontSize }),
     onPress: () => onSwipeUpdate()
   }
 
@@ -23,11 +24,11 @@ export const SwiperWrapper = ({ onSwipeDelete, onSwipeUpdate, children }) => {
 
   return (
     <Swipeout
-      backgroundColor="white"
+      backgroundColor={colors.electricBlue}
       autoClose={true}
       right={swipeoutBtns}
       >
-      <View>{ children }</View>
+      <View style={{backgroundColor: 'white'}}>{ children }</View>
     </Swipeout>
   )
 }
