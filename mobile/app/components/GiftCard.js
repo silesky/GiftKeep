@@ -29,7 +29,7 @@ export const GiftCard = ({
     <SwiperWrapper
       onSwipeDelete={() => deleteGift()}
     >
-    <Card>
+    <Card style={{ borderWidth: 0.5, borderRadius: 0, borderColor: 'darkgrey' }}>
       <CardItem header
         style={{
           backgroundColor: colors.$cardHeaderBg

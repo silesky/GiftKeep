@@ -8,13 +8,11 @@ import { SwipeIcon } from '../components/'
 export const SwiperWrapper = ({ onSwipeDelete, onSwipeUpdate, children, fontSize = 50 }) => {
 
   const deleteBtn = {
-    type: 'delete',
-    component: SwipeIcon('trash', { fontSize }),
+    component: SwipeIcon('trash', { fontSize }, { backgroundColor: 'red' }),
     onPress: () => onSwipeDelete()
   }
   const updateBtn = {
-    type: 'secondary',
-    component: SwipeIcon('pencil', { fontSize }),
+    component: SwipeIcon('pencil', { fontSize },  { backgroundColor: 'orange'}),
     onPress: () => onSwipeUpdate()
   }
 
@@ -24,11 +22,13 @@ export const SwiperWrapper = ({ onSwipeDelete, onSwipeUpdate, children, fontSize
 
   return (
     <Swipeout
-      backgroundColor={colors.electricBlue}
+      backgroundColor='white'
       autoClose={true}
       right={swipeoutBtns}
       >
-      <View style={{backgroundColor: 'white'}}>{ children }</View>
+      <View style={{ backgroundColor: 'white' }}>
+        { children }
+      </View>
     </Swipeout>
   )
 }
