@@ -3,7 +3,12 @@ import * as Utils from './../utils/utils'
 
 const config = require('./../../mobileconfig.json')
 const { serverUrl } = config
-
+export const giftInputFocus = (selectedGiftId) => {
+  return {
+    type: 'FOCUS_GIFT_INPUT',
+    payload: { selectedGiftId, },
+  }
+}
 export const createNotification = (text) => {
   return dispatch => {
     dispatch({ type: 'SET_NOTIFICATION_TEXT', payload: { notificationText: text } })

@@ -4,10 +4,15 @@ const initialState = {
   selectedTab: 'gifts',
   isLeftDrawerOpen: false,
   createGiftModalVisibility: false,
-  createEventModalVisibility: false
+  createEventModalVisibility: false,
+  selectedGiftId: null,
 }
 export const visible = (state = initialState, action) => {
   switch (action.type) {
+    case 'FOCUS_GIFT_INPUT' :
+    {
+      return {...state, selectedGiftId: action.payload.selectedGiftId }
+  }
     case 'SET_LEFT_DRAWER_OPEN_TRUE':
       {
         return { ...state, isLeftDrawerOpen: true }

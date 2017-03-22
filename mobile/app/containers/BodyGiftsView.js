@@ -49,6 +49,8 @@ class BodyGiftsView extends Component {
           { gifts.map((el, ind) => {
             return (
               <GiftCard
+                isSelected={this.props.selectedGiftId === el.giftId}
+                onGiftInputSelect={this.props.actions.giftInputFocus.bind(this, el.giftId)}
                 deleteGift={this.props.actions.deleteGift.bind(this, selectedFriendId, el.giftId)}
                 giftDesc={el.giftDesc}
                 updateGiftTitle={this.props.actions.updateGiftTitle.bind(this, selectedFriendId, el.giftId)}
@@ -76,6 +78,7 @@ const mstp = (state) => {
   const { bday, friendName, gifts } = Utils.getFriendByFriendId(state, state.visible.selectedFriendId)
   const newGifts = gifts && gifts.length ? gifts : []
   return {
+    selectedGiftId: state.visible.selectedGiftId,
     selectedTab: state.visible.selectedTab,
     selectedFriendId: state.visible.selectedFriendId,
     bday,

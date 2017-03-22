@@ -11,6 +11,7 @@ module.exports = {
   darkgreen: '#5a8e0b',
   lightgreen: '#58b21c',
   coolblue: '#dccfec',
+  paleyellow: '#ffffe0',
   soothingblue: '#b8c1dd',
   deepblue: '#0800ff',
   electricBlue: '#0892d0',
@@ -29,7 +30,7 @@ module.exports = {
   get $activeTabTextColor () { return this._tabColor },
   get $activeTabUnderlineColor () { return this._tabColor },
   get $cardHeaderBg () { return this.darkpurple },
-  get $cardBg () { return this.white },
+  get $cardBg () { return this.offwhite },
   get $defaultIconColor () { return this.accent },
   get $headerFooterBg () { return this.offwhite }
 }

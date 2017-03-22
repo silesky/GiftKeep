@@ -19,28 +19,32 @@ export const GiftCard = ({
   friendName,
   giftDesc,
   giftTitle,
+  isSelected,
   updateGiftDesc,
   updateGiftTitle,
-  footerIsVisible
+  footerIsVisible,
+  onGiftInputSelect,
 }) => {
   // should take a name, birthday and text prop, along with being editable and so
   // forth
+  const selectedCardStyles = isSelected
+  ? { }
+  : { opacity: 0.5, }
+
   return (
     <SwiperWrapper
       onSwipeDelete={() => deleteGift()}
     >
-    <Card style={{ borderWidth: 0.5, borderRadius: 0, borderColor: 'darkgrey' }}>
-      <CardItem header
-        style={{
-          backgroundColor: colors.$cardHeaderBg
-        }}>
-           <GiftCardInputTitle
-            giftTitle={giftTitle}
-            updateGiftTitle={updateGiftTitle}
-          />
-      </CardItem>
-      <CardItem body>
+    <Card style={{
+      borderWidth: 0.5,
+      borderRadius: 0,
+      borderColor: 'darkgrey',
+      backgroundColor: colors.paleyellow,
+      ...selectedCardStyles,  }}>
+      <CardItem>
         <GiftCardInputGiftDescription
+          isSelected={isSelected}
+          onGiftInputSelect={onGiftInputSelect}
           giftDesc={giftDesc}
           updateGiftDesc={updateGiftDesc}
          />
