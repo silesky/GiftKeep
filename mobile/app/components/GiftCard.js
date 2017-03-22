@@ -23,7 +23,7 @@ export const GiftCard = ({
   updateGiftDesc,
   updateGiftTitle,
   footerIsVisible,
-  onGiftInputSelect,
+  onGiftInputFocus,
 }) => {
   // should take a name, birthday and text prop, along with being editable and so
   // forth
@@ -44,7 +44,7 @@ export const GiftCard = ({
       <CardItem>
         <GiftCardInputGiftDescription
           isSelected={isSelected}
-          onGiftInputSelect={onGiftInputSelect}
+          onGiftInputFocus={onGiftInputFocus}
           giftDesc={giftDesc}
           updateGiftDesc={updateGiftDesc}
          />
