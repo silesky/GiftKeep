@@ -74,8 +74,9 @@ class BodyGiftsView extends Component {
 
     return (
       <Content theme={LightTheme}>
-      {
-        (selectedTab === 'gifts') ? body : false // selectedTab related to this bug https://trello.com/c/jMfL798g/127-should-not-be-transparent-when-i-m-selecting-events-view
+      { (selectedTab === 'gifts') && body
+      /* selectedTab related to this bug
+       https://trello.com/c/jMfL798g/127-should-not-be-transparent-when-i-m-selecting-events-view */
       }
       </Content>
     )
