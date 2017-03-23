@@ -1,9 +1,9 @@
 import React from 'react'
 import { ListItem, Text } from  './../sporks/native-base'
-import { LightTheme } from './../themes/';
+import { colors } from './../themes/';
 export const ListItemDivider = ({ heading }) => {
   return (
-    <ListItem theme={LightTheme} itemDivider>
+    <ListItem style={{backgroundColor: colors.darkgrey}} itemDivider>
       <Text style={{
         color: 'white'
       }}>{heading}</Text>

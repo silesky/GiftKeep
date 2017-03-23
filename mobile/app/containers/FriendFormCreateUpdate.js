@@ -107,7 +107,7 @@ class FriendFormCreateUpdate extends Component {
         transparent={false}
         >
         <Container style={{ height: 50 }}>
-          <Header>
+          <Header style={{backgroundColor: colors.$headerFooterBg}}>
             <Button transparent>
               <Text></Text>
             </Button>

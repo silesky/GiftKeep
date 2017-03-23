@@ -22,15 +22,18 @@ module.exports = {
   shadow: '#ddd',
 
   get $shadowBorder () { return Color('#ddd').lighten(0.1).hex() },
-  get $bigHeadingTextColor () { return Color(this.darkgrey).darken(0.3).hex() },  // used in TopBar
+
   get $headerFooterTextColor () { return this.red },
   // tabs
+  get $listDividerBg () { return this.lightgrey },
   get _tabColor () { return this.electricBlue },
   get $activeTabBackground () { return this.lightgrey },
   get $activeTabTextColor () { return this._tabColor },
   get $activeTabUnderlineColor () { return this._tabColor },
   get $cardHeaderBg () { return this.darkpurple },
   get $cardBg () { return this.offwhite },
-  get $defaultIconColor () { return this.accent },
-  get $headerFooterBg () { return this.offwhite }
+  get $headerFooterTextColor () { return this.white },
+  get $defaultIconColor () { return this.white },
+  get $bigHeadingTextColor () { return this.white },  // used in TopBar
+  get $headerFooterBg () { return Color(this.lightgreen).hex() }
 }

@@ -160,7 +160,7 @@ export default {
 
     // List
   listBorderColor: '#ddd',
-  listDividerBg: colors.electricBlue,
+  listDividerBg: "darkgrey",
   listItemHeight: 45,
   listItemPadding: (Platform.OS === 'ios') ? 12 : 16,
   listNoteColor: '#808080',
