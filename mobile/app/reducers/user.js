@@ -188,11 +188,11 @@ export const user = (state = initialState, action) => {
         const { friendId, giftTitle, giftDesc } = action.payload
         let newData = state.data.map(el => {
           if (el.friendId === friendId) {
-            el.gifts = [ ...el.gifts, {
+            el.gifts = [{
               giftTitle,
               giftDesc,
               giftId: UUID.create().toString()
-            } ]
+            },  ...el.gifts ]
           }
           return el
         })
