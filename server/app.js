@@ -1,9 +1,7 @@
 const fetch = require('node-fetch');
 const Storage = require('./storage');
 const { fbGetUserPhoto } = require('./graphApi');
-const { app, listen } = require('./server');
-
-listen();
+const { app } = require('./server');
 // get all
 app.get('/api', (undefined, resCb, next) => {
   Storage.getAllData()
