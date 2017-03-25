@@ -1,17 +1,9 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
 const fetch = require('node-fetch');
 const Storage = require('./storage');
-const fs = require('fs');
-const https = require('https');
 const { fbGetUserPhoto } = require('./graphApi');
-const app = express();
-app.use(bodyParser.json());
-app.use(cookieParser());
-app.use(express.static('./public'));
-const DB = require('./db');
-DB.connect();
+const { app, listen } = require('./server');
+
+listen();
 // get all
 app.get('/api', (undefined, resCb, next) => {
   Storage.getAllData()
@@ -166,5 +158,4 @@ app.post('/oauthcallback', (req, resCb) => {
 //     key: fs.readFileSync('./server.key'),
 //     cert: fs.readFileSync('./server.crt')
 // }, app).listen(3000);
-app.listen(3000);
-console.log("listening on http://gifter.sethsilesky.com:3000");
+

@@ -10,7 +10,7 @@
     "watch": "nodemon --debug --nolazy ./*.js --delay 4",
     "debug": "node-debug",
     "seed": "seed",
-		"gulp": "gulp"
+    "gulp": "gulp"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +20,7 @@
     "es6-promise": "^4.0.5",
     "express": "^4.14.0",
     "fs": "0.0.1-security",
+    "greenlock-express": "^2.0.9",
     "https": "^1.0.0",
     "isomorphic-fetch": "^2.2.1",
     "mongodb": "^2.2.10",
