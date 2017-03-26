@@ -25,6 +25,10 @@
   * DB_PASS=//optional
   * HTTP_PORT=//3000
   * HTTPS_PORT=//3001
+  # Prod only
+  * PROD_SSL_CERT_PATH=//e.g /etc/letsencrypt/archive/timeshark.org/cert1.pem
+  * PROD_SSL_CA_PATH=//e.g /etc/letsencrypt/archive/timeshark.org/chain1.pem
+  * PROD_SSL_PRIVKEY_PATH=//e.g /etc/letsencrypt/timeshark.org/privkey.pem
   * create a .env.test file in the test folder with the following properties
 * If `DEV_SSL_IS_ACTIVE=true`, generate a self-signed key)
  ```
