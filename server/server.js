@@ -12,13 +12,25 @@ const
   http = require('http'),
   https = require('https')
 ;
-const { HTTPS_PORT, HTTP_PORT, NODE_ENV } = process.env;
+
+const { HTTPS_PORT, HTTP_PORT, NODE_ENV, DEV_SSL_IS_ACTIVE } = process.env;
 
 const httpServer = () => http.createServer(app).listen(HTTP_PORT, () => {
       console.log(`Insecure HTTP server (${NODE_ENV}) listening on port ${HTTP_PORT}`);
  });
 
-const sslServer = () => https.createServer({
+const sslDevServer = () => https.createServer({
+      key: fs.readFileSync('./ssl/server.key'),
+      cert: fs.readFileSync('./ssl/server.crt'),
+      ca: fs.readFileSync('./ssl/ca.crt'),
+      requestCert: true,
+      rejectUnauthorized: false
+  }, app).listen(HTTPS_PORT, () => {
+      console.log(`Secure HTTPS server (${NODE_ENV}) listening on port ${HTTPS_PORT}`);
+  });
+
+  const sslProdServer = () => https.createServer({
+     // fix
       key: fs.readFileSync('./ssl/server.key'),
       cert: fs.readFileSync('./ssl/server.crt'),
       ca: fs.readFileSync('./ssl/ca.crt'),
@@ -26,15 +38,17 @@ const sslServer = () => https.createServer({
       rejectUnauthorized: false
   }, app).listen(HTTPS_PORT, () => {
       console.log(`Secure Express server (${NODE_ENV}) listening on port ${HTTPS_PORT}`);
-  });
+  })
 
 const listen = () => {
-  if (NODE_ENV === 'development') {
-    httpServer();
-  } else { //
-    sslServer()
-    httpServer();
+  httpServer();
+  if (NODE_ENV === 'production') {
+    sslProdServer()
+  } else if (NODE_ENV === 'development' && DEV_SSL_IS_ACTIVE ) {
+    sslDevServer()
   }
 }
+
 listen()
+
 module.exports = { app }
