@@ -13,7 +13,7 @@
 * check `package.json` for commands
 
 ## Server
-* Set up environment variables
+* Set up environment variables (see env-example.png)
   * create a .env file in the server folder with the following properties:
   * CLIENT_ID=//e.g MYCLIENTID122r13f1
   * APP_ACCESS_TOKEN=//e.g MYCLIENTID123|MYAXXTOKEN456
@@ -26,9 +26,9 @@
   * HTTP_PORT=//3000
   * HTTPS_PORT=//3001
   # Prod only
-  * PROD_SSL_CERT_PATH=//e.g /etc/letsencrypt/archive/timeshark.org/cert1.pem
-  * PROD_SSL_CA_PATH=//e.g /etc/letsencrypt/archive/timeshark.org/chain1.pem
-  * PROD_SSL_PRIVKEY_PATH=//e.g /etc/letsencrypt/timeshark.org/privkey.pem
+  * PROD_SSL_CERT_PATH=//
+  * PROD_SSL_CA_PATH=//
+  * PROD_SSL_PRIVKEY_PATH=//
   * create a .env.test file in the test folder with the following properties
 * If `DEV_SSL_IS_ACTIVE=true`, generate a self-signed key)
  ```
