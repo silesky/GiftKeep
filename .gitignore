@@ -13,3 +13,4 @@ Gifter.postman_test_run.json
 .env
 .env.*
 settings.json
+**/node_modules/**
