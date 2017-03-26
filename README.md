@@ -22,8 +22,21 @@
   * DB_HOST=//e.g mongodb://127.0.0.1:27017/giftr
   * DB_USER=//optional
   * DB_PASS=//optional
+  * HTTP_PORT=//3000
+  * HTTPS_PORT=//3001
   * create a .env.test file in the test folder with the following properties
-
+* To use with SSL (and the production flag), generate a self-signed key)
+ ```
+* `pwgen 50 1 -s > passphrase`
+* `openssl genrsa -des3 -out ca.key 1024`
+* `openssl req -new -key ca.key -out ca.csr`
+* `openssl x509 -req -days 365 -in ca.csr -out ca.crt -signkey ca.key`
+* `openssl genrsa -des3 -out server.key 1024`
+* `openssl req -new -key server.key -out server.csr`
+* `cp server.key server.key.passphrase`
+* `openssl rsa -in server.key.passphrase -out server.key`
+* `openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt`
+```
 ## Mongo
 * [Install MongoDB](https://www.evernote.com/shard/s557/nl/2147483647/d3d477c4-fa9c-43de-8167-86eac44c801b/)
 

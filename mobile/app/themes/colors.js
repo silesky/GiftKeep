@@ -32,8 +32,8 @@ module.exports = {
   get $activeTabUnderlineColor () { return this._tabColor },
   get $cardHeaderBg () { return this.darkpurple },
   get $cardBg () { return this.offwhite },
-  get $headerFooterTextColor () { return this.white },
-  get $defaultIconColor () { return this.white },
-  get $bigHeadingTextColor () { return this.white },  // used in TopBar
-  get $headerFooterBg () { return Color(this.lightgreen).hex() }
+  get $headerFooterTextColor () { return this.white }, // header text color
+  get $defaultIconColor () { return this.white }, // header icon color
+  get $bigHeadingTextColor () { return this.white },  // main text color
+  get $headerFooterBg () { return Color(this.lightgreen).hex() } // main top and bottom color, drawerContainer
 }
