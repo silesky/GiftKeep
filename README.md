@@ -19,10 +19,12 @@
   * APP_ACCESS_TOKEN=//e.g MYCLIENTID123|MYAXXTOKEN456
   * CLIENT_SECRET=//e.g. abc123456
   * NODE_ENV=development
-  * DB_HOST=//e.g mongodb://127.0.0.1:27017/giftr
+  * DB_HOST=127.0.0.1:27017
+  * DB_NAME=giftr
   * DEV_SSL_IS_ACTIVE=false // you need to generate
-  * DB_USER=//optional
-  * DB_PASS=//optional
+  * USES_AUTHENTICATION=false // if true, specify DB_USER and DB_PASS
+  * DB_USER=//only if ^ is true
+  * DB_PASS=//only if ^ is true
   * HTTP_PORT=//3000
   * HTTPS_PORT=//3001
   # Prod only
@@ -31,6 +33,8 @@
   * PROD_SSL_PRIVKEY_PATH=//
   * create a .env.test file in the test folder with the following properties
 * If `DEV_SSL_IS_ACTIVE=true`, generate a self-signed key)
+
+
  ```
 * `pwgen 50 1 -s > passphrase`
 * `openssl genrsa -des3 -out ca.key 1024`

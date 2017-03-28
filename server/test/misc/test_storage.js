@@ -10,6 +10,7 @@ module.exports = () => {
   describe('STORAGE', function () { // use function declaration so this.timeout works
     let userCollection;
     before(() => {
+  // broken because it's trying to connect to mongo and failing
       this.timeout(3000);
       MongoClient.connect(process.env.DB_HOST, (err, db) => {
         db.createCollection('userCollection')
@@ -28,7 +29,7 @@ module.exports = () => {
     })
 
     describe('updateUserByAccessToken,', () => {
-   
+
       it('given the old access token, it should update the new one', (done) => {
 
         const oldToken = 'f1'
