@@ -1,5 +1,5 @@
 
-import * as Utils from './../utils/utils'
+import * as Utils from './../utils/'
 
 import { SERVER_URL } from './../serverConfig/'
 
@@ -155,8 +155,10 @@ export const saveFbPhoto = (uriOrBase64) => {
 
 export const authTokenAndTryToGetUser = (token) => {
   return dispatch => _sendTokenToServer(token)
-    .then(({ payload, payload: { fbId } }) => {
-      dispatch(hydrateUser(payload))
-      Utils.fbGetPicURLById(fbId).then(url => dispatch(saveFbPhoto(url)))
+  .then(args => {
+    console.log(args);
+      // console.log(payload);
+      // dispatch(hydrateUser(payload))
+      // Utils.fbGetPicURLById(fbId).then(url => dispatch(saveFbPhoto(url)))
     })
 }
