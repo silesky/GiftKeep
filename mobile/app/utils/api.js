@@ -2,6 +2,7 @@ import {
   SERVER_URL,
 } from './../serverConfig/';
 
+/*
 export const fetchPost = (route, data) => {
   const fullRoute = `${SERVER_URL}/${route}`
   return fetch(fullRoute, {
@@ -12,7 +13,8 @@ export const fetchPost = (route, data) => {
     body: JSON.stringify({ data: data })
   })
 }
-export const sendFbAccessTokenToNode = (token) => {
+*/
+export const sendFbAccessTokenToNodeAndGetData = (token) => {
   const fullRoute = `${SERVER_URL}/api/auth/fb`
   return fetch(fullRoute, {
     method: 'POST',
@@ -20,7 +22,7 @@ export const sendFbAccessTokenToNode = (token) => {
     headers: {
       'Content-Type': 'application/json'
     }
-  })
+  }).then(res => res.json())
 }
 export const updateUserDataByAccessToken = (token, data) => {
   const fullRoute = `${SERVER_URL}/api/user/data/${token}`

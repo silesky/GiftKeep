@@ -1,5 +1,5 @@
 
-import * as Utils from './../utils/utils'
+import * as Utils from './../utils/'
 
 import { SERVER_URL } from './../serverConfig/'
 
@@ -136,16 +136,6 @@ export const testClick = () => {
 }
 export const clear = () => ({ type: 'CLEAR' })
 
-const _sendTokenToServer = (token) => {
-  return fetch(`${SERVER_URL}/api/auth/fb`,
-    {
-      method: 'POST',
-      body: JSON.stringify({ token }),
-      headers: { 'Content-Type': 'application/json' }
-    })
-    .then(res => res.json())
-}
-
 export const saveFbPhoto = (uriOrBase64) => {
   return {
     type: 'SAVE_FB_PHOTO',
@@ -154,7 +144,7 @@ export const saveFbPhoto = (uriOrBase64) => {
 }
 
 export const authTokenAndTryToGetUser = (token) => {
-  return dispatch => _sendTokenToServer(token)
+  return dispatch => Utils.sendFbAccessTokenToNodeAndGetData(token)
     .then(({ payload, payload: { fbId } }) => {
       dispatch(hydrateUser(payload))
       Utils.fbGetPicURLById(fbId).then(url => dispatch(saveFbPhoto(url)))
