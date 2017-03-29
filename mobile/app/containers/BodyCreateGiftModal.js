@@ -104,7 +104,6 @@ class BodyCreateGiftModal extends React.Component {
 const mstp = (state) => {
   const { gifts, } = getFriendByFriendId(state, state.visible.selectedFriendId)
   return {
-    latestGift: gifts[gifts.length - 1],
     createGiftModalVisibility: state.visible.createGiftModalVisibility,
     selectedFriendId: state.visible.selectedFriendId,
   }

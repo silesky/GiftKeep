@@ -1,8 +1,8 @@
 
 import * as Utils from './../utils/utils'
 
-const config = require('./../../mobileconfig.json')
-const { serverUrl } = config
+import { SERVER_URL } from './../serverConfig/'
+
 export const giftInputFocus = (selectedGiftId) => {
   return {
     type: 'FOCUS_GIFT_INPUT',
@@ -130,18 +130,6 @@ export const hydrateUser = (data) => {
     payload: data
   }
 }
-export const sendAccessToken = (token) => {
-  const route = 'http://localhost:3000/api/auth/fb'
-  return fetch(route,
-    {
-      method: 'POST',
-      body: JSON.stringify({ data: token }),
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-}
 
 export const testClick = () => {
   return clear()
@@ -149,7 +137,7 @@ export const testClick = () => {
 export const clear = () => ({ type: 'CLEAR' })
 
 const _sendTokenToServer = (token) => {
-  return fetch(`${serverUrl}/api/auth/fb`,
+  return fetch(`${SERVER_URL}/api/auth/fb`,
     {
       method: 'POST',
       body: JSON.stringify({ token }),

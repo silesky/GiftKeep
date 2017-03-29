@@ -1,5 +1,4 @@
 import { AsyncStorage } from 'react-native'
-const _serverUrl = 'http://localhost:3000'
 
 export const getEventArrByEventId = (state, eventId) => {
  // getEventArrByEventId(state['user'], 111)
@@ -53,46 +52,7 @@ export const getFriendItemById = (state, friendId, key) => {
   return (friend && friend.hasOwnProperty(key)) ? friend[key] : defItem
 }
 
-export const fetchPost = (route, data) => {
-  const fullRoute = `${_serverUrl}/${route}`
-  return fetch(fullRoute, {
-    method: 'POST',
-    headers: new Headers({
-      'Content-Type': 'application/json'
-    }),
-    body: JSON.stringify({ data: data })
-  })
-}
-export const sendFbAccessTokenToNode = (token) => {
-  const fullRoute = `${_serverUrl}/api/auth/fb`
-  return fetch(fullRoute, {
-    method: 'POST',
-    body: JSON.stringify({ token }),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-}
-export const updateUserDataByAccessToken = (token, data) => {
-  const fullRoute = `${_serverUrl}/api/user/data/${token}`
-  return fetch(fullRoute, {
-    method: 'PUT',
-    body: JSON.stringify(data),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }).then(res => res.json())
-}
-export const updateUserByBody = (user) => {
-  const fullRoute = `${_serverUrl}/api/user/`
-  return fetch(fullRoute, {
-    method: 'PUT',
-    body: JSON.stringify(user),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }).then(res => res.json())
-}
+
 
 export const saveToAsyncStorage = async (key, value, callback) => {
   const valueStr = (typeof value === 'object' || 'array') ? JSON.stringify(value) : value
