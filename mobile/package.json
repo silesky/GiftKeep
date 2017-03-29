@@ -20,7 +20,6 @@
     "react": "15.3.2",
     "react-native": "0.36.0",
     "react-native-autosuggest": "git+git@github.com:silesky/react-native-autosuggest.git",
-    "react-native-calendar-datepicker": "1.0.11",
     "react-native-drawer": "~2.3.0",
     "react-native-fbsdk": "~0.4.0",
     "react-native-fetch-blob": "~0.10.0",

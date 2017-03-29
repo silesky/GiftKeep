@@ -90,7 +90,6 @@ class BodyCreateEventModal extends React.Component {
             mode="date"
             onDateChange={(date) => this.onDateChange(date)}
             date={this.state.date}
-
           />
           <View
             style={{

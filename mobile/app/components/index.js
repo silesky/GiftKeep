@@ -1,5 +1,4 @@
 export * from './BodyCreateGiftFooterBtn'
-export * from './BodyModalEventDatePicker'
 export * from './BottomBar'
 export * from './DrawerWrapper'
 export * from './EventCard'

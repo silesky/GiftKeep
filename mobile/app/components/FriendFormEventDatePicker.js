@@ -72,7 +72,7 @@ export const FriendFormEventDatePicker = ({
             <CardItem cardBody>
             <FriendFormEventDatePickerCalendar
                 selectedEventDate={eventDate}
-                onEventDateInputChange={onEventDateInputChange.bind(this)}
+                onEventDateInputChange={onEventDateInputChange}
                 />
             </CardItem>
             <CardItem footer>
