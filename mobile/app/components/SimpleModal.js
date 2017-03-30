@@ -9,7 +9,7 @@ import {
    BackAndroid
 } from 'react-native'
 
-class Modal extends Component {
+class SimpleModal extends Component {
   constructor () {
     super()
     this.state = {
@@ -120,7 +120,7 @@ class Modal extends Component {
   }
 }
 
-Modal.propTypes = {
+SimpleModal.propTypes = {
   open: PropTypes.bool,
   offset: PropTypes.number,
   overlayBackground: PropTypes.string,
@@ -131,7 +131,7 @@ Modal.propTypes = {
   closeOnTouchOutside: PropTypes.bool
 }
 
-Modal.defaultProps = {
+SimpleModal.defaultProps = {
   open: false,
   offset: 0,
   overlayBackground: 'rgba(0, 0, 0, 0.75)',
@@ -168,4 +168,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Modal
+export default SimpleModal

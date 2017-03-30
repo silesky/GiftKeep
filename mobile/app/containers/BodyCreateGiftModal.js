@@ -6,7 +6,7 @@ import {
 } from 'react-native'
 import * as actions from './../actions/'
 
-import { IconCreator } from './../icons/'
+import { IconCreator, } from './../icons/'
 import { bindActionCreators, } from 'redux'
 import { connect, } from 'react-redux'
 import {
@@ -32,20 +32,21 @@ class BodyCreateGiftModal extends React.Component {
   static PropTypes = {
     CreateGiftModalIsVisible: React.PropTypes.bool,
   }
+
   onCreateGiftPress () {
-    // const _giftTitleInput = this.refs.giftTitleInput._textInput._lastNativeText
     const _giftDescInput = this.refs.giftDescInput._textInput._lastNativeText
-    this.props.actions.createGift(this.props.selectedFriendId, /*_giftTitleInput*/ '', _giftDescInput)
+    this.props.actions.createGift(this.props.selectedFriendId, /* _giftTitleInput */ '', _giftDescInput)
     this.onCancelPress()
   }
   onCancelPress () {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
     this.props.actions.bodyModalVisibilityFalse()
   }
-  render () {
-  const { height, width, } = Dimensions.get('window') // gets width of entire display
 
-  return (
+  render () {
+    const { height, width, } = Dimensions.get('window') // gets width of entire display
+
+    return (
     <View
       style={{
         position: 'absolute',
@@ -54,52 +55,36 @@ class BodyCreateGiftModal extends React.Component {
         zIndex: 999,
       }}>
       <SimpleModalFormWrapper
-        height={170}
-        handleClickAway={this.props.actions.bodyModalVisibilityFalse}
-        isVisible={this.props.createGiftModalVisibility}
+        modalHeight={ 320 }
+        handleClickAway={ this.props.actions.bodyModalVisibilityFalse }
+        isVisible={ this.props.createGiftModalVisibility }
        >
         <List>
-
           <Title style={{ marginTop: 10, marginBottom: 10, }}>
           { IconCreator('FA', 'gift', 30, { paddingRight: 10, paddingTop: 5, }) }
             Create Gift
-         </Title>
-
-          {/*
-              <ListItem>
-            <InputGroup>
-            <Input
-              ref="giftTitleInput"
-              placeholder="Title..."
-              inlineLabel label="Title"
-              placeholderTextColor='lightgrey'
-              multiline={false}
-              />
-          </InputGroup>
-          </ListItem>
-          */}
-
+          </Title>
           <ListItem>
             <InputGroup>
-            <Input
-              ref="giftDescInput"
-              placeholder="Description..."
-              placeholderTextColor='lightgrey'
-              multiline={true}
-              style={{height: 200}}
-              onSubmitEditing={() => this.onCreateGiftPress()}
-            />
+              <Input
+                ref="giftDescInput"
+                placeholder="Description..."
+                placeholderTextColor='lightgrey'
+                multiline={ true }
+                style={{ height: 100, }}
+                onSubmitEditing={ () => this.onCreateGiftPress() }
+              />
           </InputGroup>
         </ListItem>
         <BodyCreateGiftFooterBtn
-          onOkPress={this.onCreateGiftPress}
-          onCancelPress={this.onCancelPress}
-          />
+          onOkPress={ this.onCreateGiftPress }
+          onCancelPress={ this.onCancelPress }
+        />
       </List>
     </SimpleModalFormWrapper>
   </View>
-  )
-}
+    )
+  }
 }
 const mstp = (state) => {
   const { gifts, } = getFriendByFriendId(state, state.visible.selectedFriendId)

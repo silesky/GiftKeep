@@ -1,19 +1,25 @@
 import React from 'react'
-import { Dimensions, View } from 'react-native'
-import Modal from './SimpleModal'
-import { colors } from './../themes'
+import { Dimensions, View, } from 'react-native'
+import SimpleModal from './SimpleModal'
+import { colors, } from './../themes'
 
-export const SimpleModalFormWrapper = ({ style, isVisible, handleClickAway, children, modalHeight }) => {
-  const { height, width } = Dimensions.get('window') // gets width of entire display
+export const SimpleModalFormWrapper = ({ style, isVisible, handleClickAway, children, modalHeight, }) => {
+  const { height, width, } = Dimensions.get('window') // gets width of entire display
   return (
     <View
     style={{
       position: 'absolute',
       height: height,
       width: width,
-      zIndex: 999
+      zIndex: 999,
     }}>
-    <Modal
+    <SimpleModal
+      modalStyle={{
+        borderRadius: 2,
+        margin: 30,
+        padding: 5,
+        backgroundColor: colors.$cardBg,
+      }}
       offset={0}
       overlayBackground={'rgba(0, 0, 0, 0.75)'}
       animationDuration={200}
@@ -23,17 +29,11 @@ export const SimpleModalFormWrapper = ({ style, isVisible, handleClickAway, chil
       modalDidClose={() => handleClickAway()}
       open={isVisible}
       containerStyle={{
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
       }}
-      modalStyle={{
-        height: modalHeight,
-        borderRadius: 2,
-        margin: 20,
-        padding: 5,
-        backgroundColor: colors.$cardBg
-      }}>
+      >
       { children }
-    </Modal>
+    </SimpleModal>
     </View>
   )
 }

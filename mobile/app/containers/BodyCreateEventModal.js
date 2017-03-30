@@ -65,10 +65,10 @@ class BodyCreateEventModal extends React.Component {
           <ListItem>
             <InputGroup>
               <Input
-                ref="eventName"
+                ref='eventName'
                 inlineLabel
-                label="Name"
-                placeholder="Event Name..."
+                label='Name'
+                placeholder='Event Name...'
                 placeholderTextColor='lightgrey'
                 multiline={false}/>
             </InputGroup>
