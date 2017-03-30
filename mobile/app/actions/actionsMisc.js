@@ -16,7 +16,7 @@ export const createNotification = (text) => {
     setTimeout(() => {
       dispatch({ type: 'BOTTOM_NOTIFICATION_VISIBILITY_FALSE' })
       dispatch({ type: 'SET_NOTIFICATION_TEXT', payload: { notificationText: null } })
-    }, 1000)
+    }, 1300)
   }
 }
 export const hydrateAll = ({ user, visible, friendForm }) => {

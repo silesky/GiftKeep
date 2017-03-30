@@ -199,5 +199,6 @@ export const friendFormUpdateAndSave = (friendId) => { // for when you hit creat
     dispatch(_friendFormEventInputClear())
     dispatch(resetEventsViewInput())
     dispatch(friendFormVisibilityToggle())
+    dispatch(createNotification('friend updated.'))
   }
 }
