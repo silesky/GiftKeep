@@ -20,10 +20,10 @@ module.exports = {
   pink: '#dd85bd',
   accent: '#b6387f', // same as darkpurple.lighten(0.3)
   shadow: '#ddd',
+  almostwhite: '#f4f4f4',
 
-  get $shadowBorder () { return Color('#ddd').lighten(0.1).hex() },
-
-  get $headerFooterTextColor () { return this.red },
+  get $shadowBorder () { return Color('#ddd').darken(0.1).hex() },
+  get $friendFormEventCardBackgroundColor () { return Color(this.almostwhite).hex()}, //almost white
   // tabs
   get $listDividerBg () { return this.lightgrey },
   get _tabColor () { return this.electricBlue },

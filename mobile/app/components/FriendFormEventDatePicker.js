@@ -32,17 +32,19 @@ import {
 } from  './../sporks/native-base'
 
 export const FriendFormEventDatePicker = ({
+  borderType,
   eventDate,
   calendarModalIsVisible,
+  inputGroupStyle,
   onEventDateInputChange,
   onEventDateInputBoxFocus,
   onEventDateInputOk,
-  onCancel
+  onCancel,
 }) => {
 
   return (
     <View>
-      <InputGroup style={{ paddingLeft: 10, marginLeft: 5, marginRight: 5 }} borderType="underline" >
+      <InputGroup style={{...inputGroupStyle, marginTop: 10 }} borderType={borderType} >
         <Input
           placeholder="Click to add a friend event."
           selectionColor={'white'}

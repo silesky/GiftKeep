@@ -1,0 +1,12 @@
+// http://prettydiff.com/documentation.xhtml
+// not sure why it's a jsbeautifyrc, it's a prettydiff config...
+{
+    "tabSize": 2,
+    "insertSpaces": true,
+    "neverflatten": true,
+    "semicolon": false,
+    "ternaryline": true,
+    "methodchain":"chain",
+    "functionname": true // doesn't work?
+}
+

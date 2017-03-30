@@ -3,7 +3,7 @@ import React from 'react'
 // [x] eachEvent should have a default object
 // [ ] import from react native calendar datepicker and display
 // react-native-calendar-datepicker
-
+import { Card } from './../sporks/native-base'
 import {
   connect
 } from 'react-redux'
@@ -19,8 +19,7 @@ import {
 import { View } from 'react-native'
 
 import { colors } from './../themes/'
-export const FriendFormEvent = (props) => {
-  const {
+export const FriendFormEvent = ({
   defaultValue,
   handleOnChangeText,
   calendarModalIsVisible,
@@ -31,16 +30,33 @@ export const FriendFormEvent = (props) => {
   onEventDateInputOk,
   onEventDateInputBoxFocus,
   onEventDateInputChange,
-  isFocused
-} = props
+  isFocused,
+}) => {
+  const inputGroupStyle = {
+    paddingLeft: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    backgroundColor: 'white',
+  }
+  const borderType = 'rounded'
   return (
-    <View style={{ paddingBottom: 1, borderBottomWidth: 2, borderBottomColor: colors.$shadowBorder }}>
-      <FriendFormEventNameInput
-      isFocused={isFocused}
-      defaultValue={defaultValue}
-      handleOnChangeText={(eventNameInput) => handleOnChangeText(eventNameInput)}
-      />
+    <View style={{
+      paddingBottom: 10,
+      paddingTop: 10,
+      borderBottomWidth: 0.5,
+      backgroundColor: colors.$friendFormEventCardBackgroundColor,
+      borderBottomColor: colors.$shadowBorder,
+     }}>
+       <FriendFormEventNameInput
+        inputGroupStyle={inputGroupStyle}
+        borderType={borderType}
+        isFocused={isFocused}
+        defaultValue={defaultValue}
+        handleOnChangeText={(eventNameInput) => handleOnChangeText(eventNameInput)}
+        />
         <FriendFormEventDatePicker
+          inputGroupStyle={inputGroupStyle}
+          borderType={borderType}
           calendarModalIsVisible={calendarModalIsVisible}
           eventDate={eventDate}
           isUpdating={isUpdating}

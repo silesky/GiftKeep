@@ -10,12 +10,11 @@ import {
 
 } from  './../sporks/native-base'
 import { View } from 'react-native'
-export const FriendFormEventNameInput = ({ defaultValue, isFocused, handleOnChangeText }) => {
+export const FriendFormEventNameInput = ({ borderType, inputGroupStyle, defaultValue, isFocused, handleOnChangeText }) => {
   console.log(defaultValue)
   return (
 <View>
-  <InputGroup style={{ paddingLeft: 10, marginLeft: 5, marginRight: 5, marginBottom: 5 }} borderType="underline" >
-
+  <InputGroup style={inputGroupStyle} borderType={borderType} >
     <Input
       autoFocus={isFocused}
       defaultValue={defaultValue}
