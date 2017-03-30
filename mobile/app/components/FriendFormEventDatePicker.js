@@ -64,19 +64,18 @@ export const FriendFormEventDatePicker = ({
         <Content>
           <Card
             style={{
+              margin: 20,
               marginTop: 30,
               backgroundColor: 'white'
             }}>
-            <CardItem header>
+            <View style={{padding: 15, paddingBottom: 0, justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
               <Icon name="md-calendar" />
-              <Text>Select an Event Date</Text>
-            </CardItem>
-            <CardItem cardBody>
+              <Title style={{paddingLeft: 10}}>Select an Event Date</Title>
+            </View>
             <FriendFormEventDatePickerCalendar
                 selectedEventDate={eventDate}
                 onEventDateInputChange={onEventDateInputChange}
                 />
-            </CardItem>
             <CardItem footer>
               <Button style={{ alignSelf: 'center' }} danger
                 onPress={() => onCancel()}>
