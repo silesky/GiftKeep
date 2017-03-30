@@ -120,7 +120,7 @@ export const deleteFriend = (friendId) => {
 export const _friendEventAdd = (friendId, eventName, eventDate) => {
   return {
     type: 'CREATE_EVENT',
-    payload: { friendId, eventName, eventDate }
+    payload: { friendId, eventName, eventDate, }
   }
 }
 
