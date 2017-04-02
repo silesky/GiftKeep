@@ -56,8 +56,11 @@ class FriendFormCreateUpdate extends Component {
   }
 
   handleEventDateInputChange (eventId, eventDateInputArg) {
-    const isoDateInputString = eventDateInputArg.toISOString()
-    this.props.actions.friendFormEventDateInputUpdate(eventId, isoDateInputString)
+    const { isUpdating, } = this.props
+    const isoDateInputString = eventDateInputArg.toISOString();
+    console.log('isUpdating', isUpdating, 'event date to update', isoDateInputString);
+  this.props.actions.friendFormEventDateInputUpdate(eventId, isoDateInputString)
+
   }
 
   handleEventNameInputChange (eventId, eventNameInputArg) {
