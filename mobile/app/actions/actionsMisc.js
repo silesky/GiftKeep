@@ -116,7 +116,7 @@ export const deleteFriend = (friendId) => {
     dispatch(_deleteFriend(friendId))
   }
 }
-
+export const updateEvent = (eventId, eventDate) => ({type: 'UPDATE_EVENT', payload: {eventId, eventDate, } })
 export const _friendEventAdd = (friendId, eventName, eventDate) => {
   return {
     type: 'CREATE_EVENT',

@@ -1,14 +1,14 @@
 import UUID from 'uuid-js'
 import * as Utils from './../utils/utils'
 
-const initialState = { 'data': [] }
+const initialState = { 'data': [], }
 export const user = (state = initialState, action) => {
   const _getGiftArrByFriendId = (friendId) => state.data.find(el => el.friendId === friendId).gifts
   const _getSingleGiftObj = (friendId, giftId) => _getGiftArrByFriendId(friendId).find((el) => el.giftId === giftId)
   switch (action.type) {
     case 'FRIEND_EVENT_DELETE':
       {
-        const { eventId } = action.payload
+        const { eventId, } = action.payload
         const newEventArr = Utils.getEventArrAndDeleteEvent(state, eventId)
         const data = state.data.map((eachFriend) => {
           eachFriend.events.forEach((eachEvent) => {
@@ -18,7 +18,7 @@ export const user = (state = initialState, action) => {
           })
           return eachFriend
         })
-        return { ...state, data }
+        return { ...state, data, }
       }
     case 'RESET_USER':
       {
@@ -26,20 +26,20 @@ export const user = (state = initialState, action) => {
       }
     case 'CREATE_EVENT':
       {
-        const { friendId, eventName, eventDate } = action.payload
+        const { friendId, eventName, eventDate, } = action.payload
         console.log('payload', action.payload)
         let data = state.data.map(el => {
           if (el.friendId === friendId) {
             el.events = [ ...el.events, {
               eventName: eventName,
               eventDate: eventDate,
-              eventId: UUID.create().toString()
-            } ]
+              eventId: UUID.create().toString(),
+            }, ]
           }
           return el
         })
         console.log('newdata', data)
-        return { ...state, data }
+        return { ...state, data, }
       }
       // TODO: implement
     case 'UPDATE_FRIEND_NAME':
@@ -50,7 +50,21 @@ export const user = (state = initialState, action) => {
           }
           return el
         })
-        return { ...state, data }
+        return { ...state, data, }
+      }
+    case 'UPDATE_EVENT':
+      {
+        const { eventId, eventDate, } = action.payload
+        const data = state.data.map(eachUser => {
+          const events = eachUser.events.map(eachEvent => {
+            if (eachEvent.eventId === eventId) {
+              eachEvent.eventDate = eventDate
+            }
+            return eachEvent
+          })
+          return { ...eachUser, events, }
+        })
+        return { ...state, data, }
       }
       // TODO: break up
     case 'UPDATE_OR_CREATE_FRIEND_EVENTS':
@@ -66,18 +80,18 @@ export const user = (state = initialState, action) => {
               eventPayload.forEach((eachPayloadEvent) => {
                   // bug where the eventToCreate array was getting populated with existing events
                 const payloadEventDoesNotExistYet = !eachFriend.events.find(eventObj => eventObj.eventId === eachPayloadEvent.eventId)
-                  // find eventId in the payload matches the one in the events array
-                  // seach the whole array yo see if it's found
+                    // find eventId in the payload matches the one in the events array
+                    // seach the whole array yo see if it's found
                 if (eachEvent.eventId === eachPayloadEvent.eventId) {
-                  eachEvent.eventDate = eachPayloadEvent.eventDate
-                  eachEvent.eventName = eachPayloadEvent.eventName
-                } else if (payloadEventDoesNotExistYet) {
-                  eventsToCreate.push({
-                    eventId: eachPayloadEvent.eventId,
-                    eventDate: eachPayloadEvent.eventDate,
-                    eventName: eachPayloadEvent.eventName
-                  })
-                }
+                    eachEvent.eventDate = eachPayloadEvent.eventDate
+                    eachEvent.eventName = eachPayloadEvent.eventName
+                  } else if (payloadEventDoesNotExistYet) {
+                    eventsToCreate.push({
+                      eventId: eachPayloadEvent.eventId,
+                      eventDate: eachPayloadEvent.eventDate,
+                      eventName: eachPayloadEvent.eventName,
+                    })
+                  }
               }) // end eachPayloadEvent iterator
                 // should be called once for each Event
               return eachEvent
@@ -90,7 +104,7 @@ export const user = (state = initialState, action) => {
           }
           return eachFriend // end eachFriend iterator
         })
-        const newState = Object.assign({}, state, { data: newData })
+        const newState = Object.assign({}, state, { data: newData, })
         return newState
       }
 
@@ -102,7 +116,7 @@ export const user = (state = initialState, action) => {
       }
     case 'CLEAR':
       {
-        return { 'data': [] }
+        return { 'data': [], }
       }
     case 'UPDATE_GIFT_TITLE':
       {
@@ -117,7 +131,7 @@ export const user = (state = initialState, action) => {
           if (el.friendId === friendId) el.gifts = newGiftArr
           return el
         })
-        let newState = Object.assign({}, state, { data: newData })
+        let newState = Object.assign({}, state, { data: newData, })
         return newState
       }
     case 'DELETE_GIFT':
@@ -130,7 +144,7 @@ export const user = (state = initialState, action) => {
           if (el.friendId === friendId) el.gifts = newGiftArr
           return el
         })
-        let newState = Object.assign({}, state, { data: newData })
+        let newState = Object.assign({}, state, { data: newData, })
 
         return newState
       }
@@ -139,7 +153,7 @@ export const user = (state = initialState, action) => {
       {
         let friendId = action.payload.friendId
         let newData = state.data.filter(el => el.friendId !== friendId)
-        let newState = Object.assign({}, state, { data: newData })
+        let newState = Object.assign({}, state, { data: newData, })
 
         return newState
       }
@@ -157,7 +171,7 @@ export const user = (state = initialState, action) => {
           if (el.friendId === friendId) el.gifts = newGiftArr
           return el
         })
-        let newState = { ...state, data: newData }
+        let newState = { ...state, data: newData, }
         return newState
       }
 
@@ -166,7 +180,7 @@ export const user = (state = initialState, action) => {
         const {
           friendId,
           friendName,
-          friendFormEventInput
+          friendFormEventInput,
         } = action.payload
         return {
           ...state,
@@ -175,28 +189,28 @@ export const user = (state = initialState, action) => {
             friendName: friendName,
             bday: null,
             gifts: [],
-            events: friendFormEventInput
-          } ]
+            events: friendFormEventInput,
+          }, ],
         }
       }
     case 'SAVE_FB_PHOTO':
       {
-        return { ...state, fbImage: action.payload.fbImage }
+        return { ...state, fbImage: action.payload.fbImage, }
       }
     case 'CREATE_GIFT':
       {
-        const { friendId, giftTitle, giftDesc } = action.payload
+        const { friendId, giftTitle, giftDesc, } = action.payload
         let newData = state.data.map(el => {
           if (el.friendId === friendId) {
-            el.gifts = [{
+            el.gifts = [ {
               giftTitle,
               giftDesc,
-              giftId: UUID.create().toString()
-            },  ...el.gifts ]
+              giftId: UUID.create().toString(),
+            }, ...el.gifts, ]
           }
           return el
         })
-        return { ...state, data: newData }
+        return { ...state, data: newData, }
       }
 
     default:

@@ -1,26 +1,26 @@
 // [x] eachEvent should have a default object
 // [ ] import from react native calendar datepicker and display
 // react-native-calendar-datepicker
-import { LightTheme, themeList } from './../themes/'
+import { LightTheme, themeList, } from './../themes/'
 import React, {
-  Component
+  Component,
 } from 'react'
 import {
-  connect
+  connect,
 } from 'react-redux'
 import {
-  bindActionCreators
+  bindActionCreators,
 } from 'redux'
 import {
   SwiperWrapper,
   FriendFormEvent,
   FriendFormNameInput,
-  ListItemDivider
+  ListItemDivider,
  } from './../components'
 import * as actions from './../actions/'
 import {
   // StyleSheet,
-  Modal
+  Modal,
 } from 'react-native'
 import {
   Container,
@@ -35,10 +35,10 @@ import {
   Text,
   Button,
   Title,
-  Icon
-} from  './../sporks/native-base'
+  Icon,
+} from './../sporks/native-base'
 import * as colors from './../themes/colors'
-import { overrides } from './../themes/'
+import { overrides, } from './../themes/'
 import * as Utils from './../utils/utils'
 
 class FriendFormCreateUpdate extends Component {
@@ -57,18 +57,21 @@ class FriendFormCreateUpdate extends Component {
 
   handleEventDateInputChange (eventId, eventDateInputArg) {
     const { isUpdating, } = this.props
-    const isoDateInputString = eventDateInputArg.toISOString();
-    console.log('isUpdating', isUpdating, 'event date to update', isoDateInputString);
-  this.props.actions.friendFormEventDateInputUpdate(eventId, isoDateInputString)
-
+    const isoDateInputString = eventDateInputArg.toISOString()
+    console.log('isUpdating', isUpdating, 'event date to update', isoDateInputString)
+    isUpdating
+    ? this.props.actions.updateEvent(eventId, isoDateInputString)
+    : this.props.actions.friendFormEventDateInputUpdate(eventId, isoDateInputString)
   }
 
   handleEventNameInputChange (eventId, eventNameInputArg) {
     this.props.actions.friendFormEventNameInputUpdate(eventId, eventNameInputArg)
   }
 
+// when updating: you click 'ADD EVENT', it adds an event object to the following state slice: user -> events array
+// when creating (updating === false): you click click 'ADD EVENT', it adds an event object to the following state slice: friendForm -> friendForm array
   onfriendFormEventCreateForNewFriendOrExistingFriend () {
-    const { friendFormUpdatingSelectedFriendId } = this.props
+    const { friendFormUpdatingSelectedFriendId, } = this.props
     this.props.actions.friendFormEventCreate(friendFormUpdatingSelectedFriendId, undefined, undefined) // default eventName, default eventDate     // uses default params
   }
 
@@ -92,7 +95,7 @@ class FriendFormCreateUpdate extends Component {
       isUpdating, // id
       actions,
       bottomNotificationVisibility,
-      events
+      events,
     } = this.props
 
     const onFriendFormUpdateOrCreate = () => {
@@ -101,7 +104,7 @@ class FriendFormCreateUpdate extends Component {
       : actions.friendFormCreateAndSave()
     }
 
-    // two events array: either from 'user reducer' state (permanant) or 'visible reducer' state (temp input)
+    // two events array: either from 'user reducer' state (permanant) or 'visible reducer' state (temp input, just used for crea)
     const whichEventArray = (isUpdating) ? events : friendFormEventInput
     return (
       <Modal
@@ -109,12 +112,12 @@ class FriendFormCreateUpdate extends Component {
         animationType={'slide'}
         transparent={false}
         >
-        <Container style={{ height: 50 }}>
-          <Header style={{backgroundColor: colors.electricBlue }}>
+        <Container style={{ height: 50, }}>
+          <Header style={{ backgroundColor: colors.electricBlue, }}>
             <Button transparent>
               <Text></Text>
             </Button>
-            <Title style={{color: colors.$bigHeadingTextColor }}>{isUpdating ? `Update ${friendName}` : `Create Friend`}
+            <Title style={{ color: colors.$bigHeadingTextColor, }}>{isUpdating ? `Update ${friendName}` : `Create Friend`}
             </Title>
           </Header>
           <Content>
@@ -128,7 +131,7 @@ class FriendFormCreateUpdate extends Component {
               />
             <ListItemDivider heading="Events" />
               {
-                whichEventArray.map(({ eventId, eventName, eventDate }, eachIndex) => {
+                whichEventArray.map(({ eventId, eventName, eventDate, }, eachIndex) => {
                   return (
                      <SwiperWrapper
                         key={eachIndex}
@@ -195,16 +198,16 @@ const mstp = (state) => {
     friendFormNameInput,
     friendFormBdayInput,
     friendFormEventInput, // [{"eventId":..., "eventDate:...", "eventName:..."}
-    friendFormUpdatingSelectedFriendId
+    friendFormUpdatingSelectedFriendId,
   } = state.friendForm
   let {
     bday,
     events,
-    friendName
+    friendName,
   } = Utils.getFriendByFriendId(state, friendFormUpdatingSelectedFriendId)
   events = (events && events.length) ? events : []
 
-  let { selectedEventsViewInput } = state.eventsView
+  let { selectedEventsViewInput, } = state.eventsView
   selectedEventsViewInput = selectedEventsViewInput || {}
   friendFormEventInput = (friendFormEventInput && friendFormEventInput.length) ? friendFormEventInput : []  // show an empty event
 
@@ -222,12 +225,12 @@ const mstp = (state) => {
     friendFormEventDatePickerIsVisible,
 
     friendFormBdayInput,
-    friendFormUpdatingSelectedFriendId
+    friendFormUpdatingSelectedFriendId,
   }
 }
 const mdtp = (dispatch) => {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(actions, dispatch),
   }
 }
 export default connect(mstp, mdtp)(FriendFormCreateUpdate)

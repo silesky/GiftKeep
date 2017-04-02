@@ -146,6 +146,9 @@ export const friendFormBlankEventCreateFromSelectedFriendId = () => {
 }
 
   // for when you hit 'ADD EVENT' in the update friend form a la the drawer
+
+/*
+*/
 export const friendFormEventCreate = (
   friendId,
   eventName = '',
