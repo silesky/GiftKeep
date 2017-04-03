@@ -1,6 +1,5 @@
 import * as Utils from './../utils/'
 
-import { SERVER_URL } from './../serverConfig/'
 
 export const giftInputFocus = (selectedGiftId) => {
   return {
@@ -60,7 +59,6 @@ export const selectTab = (tabNum) => {
 }
 
 export const updateGiftDesc = (friendId, giftId, giftDesc) => {
-  console.log('updateGift', friendId, giftId, giftDesc)
   return {
     type: 'UPDATE_GIFT_DESC',
     payload: {
@@ -72,7 +70,6 @@ export const updateGiftDesc = (friendId, giftId, giftDesc) => {
 }
 
 export const updateGiftTitle = (friendId, giftId, giftTitle) => {
-  console.log('updateGift', friendId, giftId, giftTitle)
   return {
     type: 'UPDATE_GIFT_TITLE',
     payload: {
@@ -84,7 +81,6 @@ export const updateGiftTitle = (friendId, giftId, giftTitle) => {
 }
 
 export const deleteGift = (friendId, giftId) => {
-  console.log('deleteGift:', friendId, giftId)
   return {
     type: 'DELETE_GIFT',
     payload: {
@@ -140,12 +136,12 @@ export const deleteFriend = (friendId) => {
     // the friend you're looking at isn't the last one in the deck, you should go to
     // the next one. otherwise, it doesn't matter... just delete
     if (friendArr.length > 1 && friendId === selectedFriendId) {
-      console.log(friendArr.length, 'friendArr')
       dispatch(_selectNextFriend(friendId))
     }
     dispatch(_deleteFriend(friendId))
   }
 }
+
 export const updateEvent = (eventId, eventDate) => ({
   type: 'UPDATE_EVENT',
   payload: {
@@ -153,6 +149,7 @@ export const updateEvent = (eventId, eventDate) => ({
     eventDate,
   },
 })
+
 export const _friendEventAdd = (friendId, eventName, eventDate) => {
   return {
     type: 'CREATE_EVENT',
