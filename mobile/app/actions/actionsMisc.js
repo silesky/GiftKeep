@@ -1,4 +1,3 @@
-
 import * as Utils from './../utils/'
 
 import { SERVER_URL } from './../serverConfig/'
@@ -6,16 +5,26 @@ import { SERVER_URL } from './../serverConfig/'
 export const giftInputFocus = (selectedGiftId) => {
   return {
     type: 'FOCUS_GIFT_INPUT',
-    payload: { selectedGiftId, },
+    payload: { selectedGiftId },
   }
 }
 export const createNotification = (text) => {
   return dispatch => {
-    dispatch({ type: 'SET_NOTIFICATION_TEXT', payload: { notificationText: text } })
+    dispatch({
+      type: 'SET_NOTIFICATION_TEXT',
+      payload: {
+        notificationText: text,
+      },
+    })
     dispatch({ type: 'BOTTOM_NOTIFICATION_VISIBILITY_TRUE' })
     setTimeout(() => {
       dispatch({ type: 'BOTTOM_NOTIFICATION_VISIBILITY_FALSE' })
-      dispatch({ type: 'SET_NOTIFICATION_TEXT', payload: { notificationText: null } })
+      dispatch({
+        type: 'SET_NOTIFICATION_TEXT',
+        payload: {
+          notificationText: null,
+        },
+      })
     }, 1300)
   }
 }
@@ -47,16 +56,18 @@ export const selectTab = (tabNum) => {
     default:
       selectedTab = 'no tab selected'
   }
-  return {
-    type: 'SELECT_TAB', payload: { selectedTab }
-  }
+  return { type: 'SELECT_TAB', payload: { selectedTab } }
 }
 
 export const updateGiftDesc = (friendId, giftId, giftDesc) => {
   console.log('updateGift', friendId, giftId, giftDesc)
   return {
     type: 'UPDATE_GIFT_DESC',
-    payload: { friendId, giftId, giftDesc }
+    payload: {
+      friendId,
+      giftId,
+      giftDesc,
+    },
   }
 }
 
@@ -64,7 +75,11 @@ export const updateGiftTitle = (friendId, giftId, giftTitle) => {
   console.log('updateGift', friendId, giftId, giftTitle)
   return {
     type: 'UPDATE_GIFT_TITLE',
-    payload: { friendId, giftId, giftTitle }
+    payload: {
+      friendId,
+      giftId,
+      giftTitle,
+    },
   }
 }
 
@@ -72,18 +87,24 @@ export const deleteGift = (friendId, giftId) => {
   console.log('deleteGift:', friendId, giftId)
   return {
     type: 'DELETE_GIFT',
-    payload: { friendId, giftId }
+    payload: {
+      friendId,
+      giftId,
+    },
   }
 }
 
 export const selectFriend = (friendId) => {
-  return {
-    type: 'SELECT_FRIEND',
-    payload: { friendId }
-  }
+  return { type: 'SELECT_FRIEND',
+    payload: {
+      friendId,
+    } }
 }
 
-const _deleteFriend = (friendId) => ({ type: 'DELETE_FRIEND', payload: { friendId } })
+const _deleteFriend = (friendId) => ({ type: 'DELETE_FRIEND',
+  payload: {
+    friendId,
+  } })
 
 export const _selectLastFriend = () => {
   return (dispatch, getState) => {
@@ -93,12 +114,21 @@ export const _selectLastFriend = () => {
   }
 }
 
+export const _selectFirstFriend = () => {
+  return (dispatch, getState) => {
+    const state = getState().user.data
+    const firstFriend = state[0] ? state[0].friendId : null
+    if (firstFriend) dispatch(selectFriend(firstFriend))
+  }
+}
+
 const _selectNextFriend = (currentFriendId) => {
-  console.log('selectNextFriend')
   return (dispatch, getState) => {
     const state = getState().user.data
     const nextInd = state.findIndex(el => el.friendId === currentFriendId) + 1 // get index
-    if (state[nextInd]) dispatch(selectFriend(state[nextInd].friendId))
+    if (state[nextInd]) {
+      dispatch(selectFriend(state[nextInd].friendId))
+    }
   }
 }
 
@@ -106,9 +136,9 @@ export const deleteFriend = (friendId) => {
   return (dispatch, getState) => {
     const friendArr = getState().user.data
     const selectedFriendId = getState().visible.selectedFriendId
-    // if you are deleting the same friend you're looking at, go to the next one.
-    // if the friend you're looking at isn't the last one in the deck, you should go to the next one.
-    // otherwise, it doesn't matter... just delete
+    // if you are deleting the same friend you're looking at, go to the next one. if
+    // the friend you're looking at isn't the last one in the deck, you should go to
+    // the next one. otherwise, it doesn't matter... just delete
     if (friendArr.length > 1 && friendId === selectedFriendId) {
       console.log(friendArr.length, 'friendArr')
       dispatch(_selectNextFriend(friendId))
@@ -116,19 +146,26 @@ export const deleteFriend = (friendId) => {
     dispatch(_deleteFriend(friendId))
   }
 }
-export const updateEvent = (eventId, eventDate) => ({type: 'UPDATE_EVENT', payload: {eventId, eventDate, } })
+export const updateEvent = (eventId, eventDate) => ({
+  type: 'UPDATE_EVENT',
+  payload: {
+    eventId,
+    eventDate,
+  },
+})
 export const _friendEventAdd = (friendId, eventName, eventDate) => {
   return {
     type: 'CREATE_EVENT',
-    payload: { friendId, eventName, eventDate, }
+    payload: {
+      friendId,
+      eventName,
+      eventDate,
+    },
   }
 }
 
 export const hydrateUser = (data) => {
-  return {
-    type: 'HYDRATE_USER',
-    payload: data
-  }
+  return { type: 'HYDRATE_USER', payload: data }
 }
 
 export const testClick = () => {
@@ -139,14 +176,18 @@ export const clear = () => ({ type: 'CLEAR' })
 export const saveFbPhoto = (uriOrBase64) => {
   return {
     type: 'SAVE_FB_PHOTO',
-    payload: { fbImage: uriOrBase64 }
+    payload: {
+      fbImage: uriOrBase64,
+    },
   }
 }
 
 export const authTokenAndTryToGetUser = (token) => {
-  return dispatch => Utils.sendFbAccessTokenToNodeAndGetData(token)
+  return dispatch =>
+  Utils.sendFbAccessTokenToNodeAndGetData(token)
     .then(({ payload, payload: { fbId } }) => {
       dispatch(hydrateUser(payload))
       Utils.fbGetPicURLById(fbId).then(url => dispatch(saveFbPhoto(url)))
+      dispatch(_selectFirstFriend())
     })
 }
