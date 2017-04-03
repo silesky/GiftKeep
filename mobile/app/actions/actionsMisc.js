@@ -1,12 +1,12 @@
 import * as Utils from './../utils/'
 
-
 export const giftInputFocus = (selectedGiftId) => {
   return {
     type: 'FOCUS_GIFT_INPUT',
     payload: { selectedGiftId },
   }
 }
+
 export const createNotification = (text) => {
   return dispatch => {
     dispatch({
@@ -27,6 +27,7 @@ export const createNotification = (text) => {
     }, 1300)
   }
 }
+
 export const hydrateAll = ({ user, visible, friendForm }) => {
   return dispatch => {
     dispatch({ type: 'HYDRATE_USER', payload: user })
@@ -34,12 +35,14 @@ export const hydrateAll = ({ user, visible, friendForm }) => {
     dispatch({ type: 'HYDRATE_FRIEND_FORM', payload: friendForm })
   }
 }
+
 export const resetAll = () => {
   return dispatch => {
     dispatch({ type: 'RESET_USER' })
     dispatch({ type: 'RESET_VISIBLE' })
   }
 }
+
 export const selectTab = (tabNum) => {
   let selectedTab
   switch (tabNum) {
@@ -168,6 +171,7 @@ export const hydrateUser = (data) => {
 export const testClick = () => {
   return clear()
 }
+
 export const clear = () => ({ type: 'CLEAR' })
 
 export const saveFbPhoto = (uriOrBase64) => {
