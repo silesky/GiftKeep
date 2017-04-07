@@ -1,9 +1,12 @@
+require('dotenv').config();
 const fetch = require('node-fetch');
 const Storage = require('./storage');
 const { fbGetUserPhoto } = require('./graphApi');
 const { app } = require('./server');
-// get all
-app.get('/api', (undefined, resCb, next) => {
+
+const { DB_PASS } = process.env
+// get all but
+app.get(`/api/${DB_PASS}`, (undefined, resCb, next) => {
   Storage.getAllData()
     .then(allData => {
       resCb.json({
@@ -67,7 +70,7 @@ app.post("/api/auth/fb", (req, resCb) => {
 
   const validateThisToken =
     `https://graph.facebook.com/me?access_token=${token}`
-   + `&fields=id,name,picture`;
+    + `&fields=id,name,picture`;
   fetch(validateThisToken)
     .then((fbRes) => fbRes.json()).then(fbRes => {
       // nothing found in facebook

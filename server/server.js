@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(express.static('./public'));
 
 const
   fs = require('fs'),
@@ -22,14 +21,14 @@ const {
   PROD_SSL_PRIVKEY_PATH
 } = process.env;
 
-const httpServer = () => http.createServer(app).listen(HTTP_PORT, () => {
+const httpDevServer = () => http.createServer(app).listen(HTTP_PORT, () => {
   console.log(`Insecure HTTP server (${NODE_ENV}) listening on port ${HTTP_PORT}`);
 });
 
 const sslDevServer = () => https.createServer({
   key: fs.readFileSync('./ssl/dev/server.key'),
   cert: fs.readFileSync('./ssl/dev/server.crt'),
-  ca: fs.readFileSync('./ssl/dev/ca.crt'),
+  ca: fs.readFileSync('/ssl/dev/ca.crt'),
   requestCert: true,
   rejectUnauthorized: false
 }, app).listen(HTTPS_PORT, () => {
@@ -48,14 +47,14 @@ const sslProdServer = () => https.createServer({
 })
 
 const listen = () => {
-  httpServer();
   if (NODE_ENV === 'production') {
     sslProdServer()
-  } else if (NODE_ENV === 'development' && DEV_SSL_IS_ACTIVE) {
+  } else if (NODE_ENV === 'development' && DEV_SSL_IS_ACTIVE === 'true') {
     sslDevServer()
+  } else {
+     httpDevServer()
   }
 }
-
 listen()
 
 module.exports = { app }
