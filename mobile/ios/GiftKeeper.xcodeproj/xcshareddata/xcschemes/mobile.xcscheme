@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
                BuildableName = "mobile.app"
-               BlueprintName = "mobile"
-               ReferencedContainer = "container:mobile.xcodeproj">
+               BlueprintName = "GiftKeeper"
+               ReferencedContainer = "container:GiftKeeper.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "mobileTests.xctest"
-               BlueprintName = "mobileTests"
-               ReferencedContainer = "container:mobile.xcodeproj">
+               BuildableName = "GiftKeeperTests.xctest"
+               BlueprintName = "GiftKeeperTests"
+               ReferencedContainer = "container:GiftKeeper.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "mobileTests.xctest"
-               BlueprintName = "mobileTests"
-               ReferencedContainer = "container:mobile.xcodeproj">
+               BuildableName = "GiftKeeperTests.xctest"
+               BlueprintName = "GiftKeeperTests"
+               ReferencedContainer = "container:GiftKeeper.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -58,8 +58,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
             BuildableName = "mobile.app"
-            BlueprintName = "mobile"
-            ReferencedContainer = "container:mobile.xcodeproj">
+            BlueprintName = "GiftKeeper"
+            ReferencedContainer = "container:GiftKeeper.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -81,8 +81,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
             BuildableName = "mobile.app"
-            BlueprintName = "mobile"
-            ReferencedContainer = "container:mobile.xcodeproj">
+            BlueprintName = "GiftKeeper"
+            ReferencedContainer = "container:GiftKeeper.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -100,8 +100,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
             BuildableName = "mobile.app"
-            BlueprintName = "mobile"
-            ReferencedContainer = "container:mobile.xcodeproj">
+            BlueprintName = "GiftKeeper"
+            ReferencedContainer = "container:GiftKeeper.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

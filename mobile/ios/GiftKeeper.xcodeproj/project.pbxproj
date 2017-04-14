@@ -42,6 +42,7 @@
 		C5A5AC20963A4DB1ABD4E3F0 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E1073F9331CD4709955F2962 /* Ionicons.ttf */; };
 		C87721F9813C42C68C16070E /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA9C9773C25A4C578A8CDAE8 /* Zocial.ttf */; };
 		CA6BC05E2D6A4DB79A9F264C /* Arial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 629B21B7925E4E12B61B3AC1 /* Arial.ttf */; };
+		D3349FA61EA0411300530147 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3349FA51EA0411300530147 /* Default-568h@2x.png */; };
 		D3379AC91DC5202900CC6839 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = D3379AC81DC5202900CC6839 /* Fonts */; };
 		D38053141DD4F77400400D03 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38053131DD4F77400400D03 /* FBSDKCoreKit.framework */; };
 		D38053161DD4F77F00400D03 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38053151DD4F77F00400D03 /* Bolts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -245,6 +246,7 @@
 		A8D1F946A3D84C99A9BBF3B3 /* Skia.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Skia.ttf; path = "../node_modules/native-base/Fonts/Skia.ttf"; sourceTree = "<group>"; };
 		AE38B87152DF4054AF4CEDD4 /* libRCTFBSDK.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTFBSDK.a; sourceTree = "<group>"; };
 		B836F7EDE125470CBADA421A /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
+		D3349FA51EA0411300530147 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D3379AC81DC5202900CC6839 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = "../node_modules/react-native-vector-icons/Fonts"; sourceTree = "<group>"; };
 		D38053131DD4F77400400D03 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		D38053151DD4F77F00400D03 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../../../../Documents/FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
@@ -438,6 +440,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				D3349FA51EA0411300530147 /* Default-568h@2x.png */,
 				D38053121DD4F75B00400D03 /* Frameworks */,
 				13B07FAE1A68108700A75B9A /* mobile */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -524,9 +527,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* mobileTests */ = {
+		00E356ED1AD99517003FC87E /* GiftKeeperTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "mobileTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "GiftKeeperTests" */;
 			buildPhases = (
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
@@ -537,14 +540,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = mobileTests;
+			name = GiftKeeperTests;
 			productName = mobileTests;
 			productReference = 00E356EE1AD99517003FC87E /* mobileTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* mobile */ = {
+		13B07F861A680F5B00A75B9A /* GiftKeeper */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "mobile" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "GiftKeeper" */;
 			buildPhases = (
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
@@ -555,7 +558,7 @@
 			);
 			dependencies = (
 			);
-			name = mobile;
+			name = GiftKeeper;
 			productName = "Hello World";
 			productReference = 13B07F961A680F5B00A75B9A /* mobile.app */;
 			productType = "com.apple.product-type.application";
@@ -580,7 +583,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "mobile" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "GiftKeeper" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -647,8 +650,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* mobile */,
-				00E356ED1AD99517003FC87E /* mobileTests */,
+				13B07F861A680F5B00A75B9A /* GiftKeeper */,
+				00E356ED1AD99517003FC87E /* GiftKeeperTests */,
 			);
 		};
 /* End PBXProject section */
@@ -831,6 +834,7 @@
 				A2F09DF3A6CD4064B4C9FA76 /* MaterialIcons.ttf in Resources */,
 				6E1ED56F52A3439E8CA97F1A /* Octicons.ttf in Resources */,
 				9BC552A5BEBD4D72B57BE178 /* SimpleLineIcons.ttf in Resources */,
+				D3349FA61EA0411300530147 /* Default-568h@2x.png in Resources */,
 				C87721F9813C42C68C16070E /* Zocial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -877,7 +881,7 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* mobile */;
+			target = 13B07F861A680F5B00A75B9A /* GiftKeeper */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -913,7 +917,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mobile.app/mobile";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GiftKeeper.app/GiftKeeper";
 			};
 			name = Debug;
 		};
@@ -932,7 +936,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mobile.app/mobile";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GiftKeeper.app/GiftKeeper";
 			};
 			name = Release;
 		};
@@ -962,7 +966,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sethsilesky.giftr.rn.mobile;
-				PRODUCT_NAME = mobile;
+				PRODUCT_NAME = GiftKeeper;
 				PROVISIONING_PROFILE = "be2e4885-c287-4561-b20f-0e57c08b387f";
 				PROVISIONING_PROFILE_SPECIFIER = "Giftr App Distrib Prof";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -995,7 +999,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sethsilesky.giftr.rn.mobile;
-				PRODUCT_NAME = mobile;
+				PRODUCT_NAME = GiftKeeper;
 				PROVISIONING_PROFILE = "be2e4885-c287-4561-b20f-0e57c08b387f";
 				PROVISIONING_PROFILE_SPECIFIER = "Giftr App Distrib Prof";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1103,7 +1107,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "mobileTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "GiftKeeperTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -1112,7 +1116,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "mobile" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "GiftKeeper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -1121,7 +1125,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "mobile" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "GiftKeeper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
