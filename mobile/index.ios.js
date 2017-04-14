@@ -17,4 +17,4 @@ const Root = () => {
   )
 }
 store.subscribe(Root)
-AppRegistry.registerComponent('mobile', () => Root)
+AppRegistry.registerComponent('GiftKeeper', () => Root)
