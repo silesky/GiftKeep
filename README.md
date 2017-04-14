@@ -36,15 +36,15 @@
 
 
  ```
-* `pwgen 50 1 -s > passphrase`
-* `openssl genrsa -des3 -out ca.key 1024`
-* `openssl req -new -key ca.key -out ca.csr`
-* `openssl x509 -req -days 365 -in ca.csr -out ca.crt -signkey ca.key`
-* `openssl genrsa -des3 -out server.key 1024`
-* `openssl req -new -key server.key -out server.csr`
-* `cp server.key server.key.passphrase`
-* `openssl rsa -in server.key.passphrase -out server.key`
-* `openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt`
+*  pwgen 50 1 -s > passphrase
+*  openssl genrsa -des3 -out ca.key 1024
+*  openssl req -new -key ca.key -out ca.csr
+*  openssl x509 -req -days 365 -in ca.csr -out ca.crt -signkey ca.key
+*  openssl genrsa -des3 -out server.key 1024
+*  openssl req -new -key server.key -out server.csr
+*  cp server.key server.key.passphrase
+*  openssl rsa -in server.key.passphrase -out server.key
+*  openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 ```
 ## Mongo
 * [Install MongoDB](https://www.evernote.com/shard/s557/nl/2147483647/d3d477c4-fa9c-43de-8167-86eac44c801b/)
@@ -56,3 +56,7 @@
 * CreateFriendForm -> `Modal` (react-native)
 * `Swipeout`
 * `DatePickerIOS`
+
+ ## Generate Splash Screens / Icons
+* "generator-icons": "yo rn-toolbox:assets --icon img/app_icon_blue.png",
+* "generatore-splash": "yo rn-toolbox:assets --splash img/splash.jpg",
