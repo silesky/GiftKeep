@@ -58,7 +58,6 @@
 * `DatePickerIOS`
 
  ## Generate Splash Screens / Icons
-* "generator-icons": "yo rn-toolbox:assets --icon img/app_icon_blue.png",
-* "generatore-splash": "yo rn-toolbox:assets --splash img/splash.jpg",
-/Users/ssilesky/projects/giftr/mobile/ios/mobile.xcodeproj/project.pbxproj doesn't exist
-/Users/ssilesky/projects/giftr/mobile/ios/mobile.xcodeproj/project.pbxproj
+ * `npm install -g yo generator-rn-toolbox`
+ * `yo rn-toolbox:assets --icon img/app_icon_blue.png`
+ * `yo rn-toolbox:assets --splash img/splash.jpg`
