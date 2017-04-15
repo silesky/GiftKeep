@@ -5,7 +5,8 @@ import {
   Button,
   Card,
   CardItem,
-  Icon
+  Icon,
+  Content
 } from  './../sporks/native-base'
 // import * as Util  from './../utils/utils';
 import {
@@ -35,10 +36,8 @@ export const GiftCard = ({
     <SwiperWrapper
       onSwipeDelete={() => deleteGift()}
     >
+    <Content>
     <Card style={{
-      borderWidth: 0.5,
-      borderRadius: 0,
-      borderColor: 'darkgrey',
       backgroundColor: colors.paleyellow,
       ...selectedCardStyles,  }}>
       <CardItem>
@@ -63,8 +62,8 @@ export const GiftCard = ({
           </CardItem>
       }
     </Card>
+    </Content>
     </SwiperWrapper>
-
   )
 }
 

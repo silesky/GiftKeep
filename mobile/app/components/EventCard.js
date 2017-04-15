@@ -28,7 +28,7 @@ export const EventCard = ({
         onSwipeUpdate={() => onFriendEventUpdate()}
         onSwipeDelete={() => onFriendEventDelete()}
       >
-          <Card style={{ borderWidth: 0.5, borderRadius: 0, borderColor: 'darkgrey' }}>
+          <Card>
             <CardItem>
               <Icon name='md-calendar'/>
               <Text>{eventName && eventName.trim()}</Text>
