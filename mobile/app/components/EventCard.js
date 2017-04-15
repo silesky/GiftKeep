@@ -29,10 +29,10 @@ export const EventCard = ({
         onSwipeDelete={() => onFriendEventDelete()}
       >
           <Card>
-            <CardItem>
-              <Icon name='md-calendar'/>
-              <Text>{eventName && eventName.trim()}</Text>
-              <Text note>{ timeDisplayString }</Text>
+            <CardItem style={{height: 100, marginTop: 10}}>
+              <Icon style={{fontSize: 40, marginLeft: 5, marginRight: 10}} name='md-calendar'/>
+              <Text style={{fontSize: 22}}>{eventName && eventName.trim()}</Text>
+              <Text style={{fontSize: 20}} note>{ timeDisplayString }</Text>
           </CardItem>
         </Card>
      </SwiperWrapper>

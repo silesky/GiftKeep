@@ -8,9 +8,11 @@ export const TabWrapper = ({ children, handleChangeTab }) => (
     }}
     locked={true}
     renderTabBar={() =>
-      <DefaultTabBar style={{
+      <DefaultTabBar
+     textStyle={{fontSize: 18}}
+      style={{
         borderTopWidth: 1,
-        height: 45
+        height: 60,
       }}
       underlineStyle={{height: 100}}
       tabStyle={{padding: 0 /* spacing between underline and bar */}}
