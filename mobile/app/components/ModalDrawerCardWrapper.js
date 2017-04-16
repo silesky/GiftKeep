@@ -11,7 +11,7 @@ import {
   View,
   Modal,
 } from 'react-native'
-export class ModalCardWrapper extends React.Component {
+export class ModalDrawerCardWrapper extends React.Component {
   constructor (props) {
     super(props)
     this.state = { isVisible: props.isVisible }
@@ -29,7 +29,7 @@ export class ModalCardWrapper extends React.Component {
       onSubmit,
       } = this.props
     return (
-      <Modal visible={isVisible} animationType={'fade'} transparent={false}>
+      <Modal visible={isVisible} animationType={'fade'} transparent={true}>
         <Content>
           <Card
             style={{
@@ -48,8 +48,13 @@ export class ModalCardWrapper extends React.Component {
               <Icon name={iconName}/>
               <Title style={{
                 paddingLeft: 10,
-              }}>{title}</Title>
+              }}>
+              { title }
+              </Title>
             </View>
+
+            { this.props.children }
+
             <CardItem footer>
               <Button
                 style={{

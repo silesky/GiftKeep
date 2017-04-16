@@ -145,7 +145,7 @@ class FriendFormCreateUpdate extends Component {
                         isFocused={this.props.selectedEventsViewInput.eventId === eventId /*
                           this.props.selectedIdFromEventsView === eventId
                           it should auto scroll to the box that's focused */}
-                        calendarModalIsVisible={eventId === friendFormEventDatePickerSelectedEventId}
+                        friendFormEventDatePickerIsVisible={eventId === friendFormEventDatePickerSelectedEventId}
                         eventDate={eventDate /* needs to be an isostring */}
                         isUpdating={isUpdating}
                         isVisible={friendFormEventDatePickerIsVisible}

@@ -22,7 +22,7 @@ import { colors } from './../themes/'
 export const FriendFormEvent = ({
   defaultValue,
   handleOnChangeText,
-  calendarModalIsVisible,
+  friendFormEventDatePickerIsVisible,
   eventDate,
   isUpdating,
   isVisible,
@@ -57,7 +57,7 @@ export const FriendFormEvent = ({
         <FriendFormEventDateInput
           inputGroupStyle={inputGroupStyle}
           borderType={borderType}
-          calendarModalIsVisible={calendarModalIsVisible}
+          friendFormEventDatePickerIsVisible={friendFormEventDatePickerIsVisible}
           eventDate={eventDate}
           isUpdating={isUpdating}
           isVisible={isVisible}
