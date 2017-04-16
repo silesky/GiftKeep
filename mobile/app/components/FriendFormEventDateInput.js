@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import Moment from 'moment'
 import {
-  FriendFormEventDatePickerCalendar
+  FriendFormEventDatePicker
 } from './../components/'
 import {
   Container,
@@ -72,7 +72,7 @@ export const FriendFormEventDateInput = ({
               <Icon name="md-calendar" />
               <Title style={{paddingLeft: 10}}>Select an Event Date</Title>
             </View>
-            <FriendFormEventDatePickerCalendar
+            <FriendFormEventDatePicker
                 selectedEventDate={eventDate}
                 onEventDateInputChange={onEventDateInputChange}
                 />
