@@ -3,14 +3,12 @@ import React from 'react'
 import { Picker, View } from 'react-native'
 import UUID from 'uuid-js'
 export class FriendFormEventNamePicker extends React.Component {
-  constructor() {
-    super()
-    this.state = { pickerVal: null}
-  }
-  onPickerChange(val) {this.setState({pickerVal: val})
-  }
   render () {
-    const { onEventNamePick, labelArr } = this.props
+    const {
+      onEventNamePick,
+      selectedValue,
+      labelArr,
+    } = this.props
     const labels = labelArr.map(eachLabel =>
     <Picker.Item
       key={UUID.create().toString()}
@@ -18,8 +16,9 @@ export class FriendFormEventNamePicker extends React.Component {
       value={eachLabel}/>)
     return (
       <Picker
-      selectedValue={this.state.pickerVal}
-      onValueChange={(val) => onEventNamePick(val)}>
+        selectedValue={selectedValue}
+        onValueChange={(eventNameStr) => onEventNamePick(eventNameStr)}
+      >
         {labels}
       </Picker>
     )

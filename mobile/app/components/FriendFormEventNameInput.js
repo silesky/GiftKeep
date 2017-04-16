@@ -45,6 +45,7 @@ export class FriendFormEventNameInput extends Component {
         </InputGroup>
         { this.state.pickerVisibility &&
           <FriendFormEventNamePicker
+              selectedValue={defaultValue}
               onEventNamePick={(eventName) => {
                 handleOnChangeText(eventName)
                 setTimeout(this.togglePicker.bind(this, false), 200)
