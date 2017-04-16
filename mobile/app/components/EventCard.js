@@ -29,9 +29,9 @@ export const EventCard = ({
         onSwipeDelete={() => onFriendEventDelete()}
       >
           <Card>
-            <CardItem style={{height: 100, marginTop: 10}}>
+            <CardItem style={{height: 120, marginTop: 10, justifyContent: 'center'}}>
               <Icon style={{fontSize: 40, marginLeft: 5, marginRight: 10}} name='md-calendar'/>
-              <Text style={{fontSize: 22}}>{eventName && eventName.trim()}</Text>
+              <Text style={{fontSize: 24, lineHeight: 24, marginTop: 5 }}>{eventName && eventName.trim()}</Text>
               <Text style={{fontSize: 20}} note>{ timeDisplayString }</Text>
           </CardItem>
         </Card>
