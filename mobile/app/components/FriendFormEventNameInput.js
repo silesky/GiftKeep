@@ -8,6 +8,7 @@ import {
   Title,
   Button,
   CardItem,
+  LayoutAnimation
 } from 'react-native'
 import { FriendFormEventNamePicker } from './../components/'
 export class FriendFormEventNameInput extends Component {
@@ -18,6 +19,7 @@ export class FriendFormEventNameInput extends Component {
     }
   }
   togglePicker (bool) {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
     this.setState({ pickerVisibility: bool })
   }
   render () {
