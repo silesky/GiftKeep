@@ -22,7 +22,7 @@ export const SwiperWrapper = ({ onSwipeDelete, onSwipeUpdate, children, fontSize
 
   return (
     <Swipeout
-      backgroundColor='white'
+      backgroundColor={'red' /* you so there's a continuuty between delete and edit*/}
       autoClose={true}
       right={swipeoutBtns}
       >
