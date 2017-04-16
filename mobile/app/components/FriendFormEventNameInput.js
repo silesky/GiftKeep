@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import {Input, InputGroup, Icon} from './../sporks/native-base'
+import React, { Component } from 'react'
+import { Input, InputGroup, Icon } from './../sporks/native-base'
 import {
   View,
   Modal,
@@ -7,39 +7,51 @@ import {
   Card,
   Title,
   Button,
-  CardItem
+  CardItem,
 } from 'react-native'
+import { FriendFormEventNamePicker } from './../components/'
 export class FriendFormEventNameInput extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      inputIsFocused: props.isFocused,
+      pickerVisibility: props.isFocused,
     }
   }
-  toggleFocus (bool) {
-    this.setState({ inputIsFocused: bool })
+  togglePicker (bool) {
+    this.setState({ pickerVisibility: bool })
   }
-
-  render() {
+  render () {
     const {
       borderType,
-      handleOnNameInputFocus,
       inputGroupStyle,
       defaultValue,
       isFocused,
-      handleOnChangeText
+      handleOnChangeText,
     } = this.props
+    const labelArr = [ 'Anniversary', 'Birthday', 'Christmas', 'Chanukah']
+    const placeholderString = labelArr
+    .filter((el, ind) => ind < 3)
+    .join(', ')
     return (
       <View>
         <InputGroup style={inputGroupStyle} borderType={borderType}>
           <Input
-            onFocus={() => this.toggleFocus(true)}
-            autoFocus={this.state.inputIsFocused}
+            onFocus={() => this.togglePicker(true)}
+            autoFocus={isFocused}
             defaultValue={defaultValue}
-            onChangeText={(eventNameInputArg) => handleOnChangeText(eventNameInputArg)}
-            placeholder='Birthday, graduation, anniversary...'
+            onChangeText={(eventName) => handleOnChangeText()}
+            placeholder={`${placeholderString}...`}
             placeholderTextColor='#c9c9c9'/>
         </InputGroup>
+        { this.state.pickerVisibility &&
+          <FriendFormEventNamePicker
+              onEventNamePick={(eventName) => {
+                handleOnChangeText(eventName)
+                setTimeout(this.togglePicker.bind(this, false), 200)
+              }}
+              labelArr={labelArr}
+            />
+        }
       </View>
     )
   }
