@@ -9,12 +9,10 @@ import {
 import Moment from 'moment'
 
 const DatePicker = Platform.OS === 'ios' ? DatePickerIOS : DatePickerAndroid
-
-export const FriendFormEventDateInput = ({
+export const FriendFormEventNamePicker = ({
     selectedEventDate,
     onEventDateInputChange,
   }) => {
-console.log('new event date:', Moment(selectedEventDate).toDate());
   return (
       <DatePicker
         date={ Moment(selectedEventDate).toDate() /* needs to be a date object */ }
