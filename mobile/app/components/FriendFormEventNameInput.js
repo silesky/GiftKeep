@@ -30,7 +30,7 @@ export class FriendFormEventNameInput extends Component {
       isFocused,
       handleOnChangeText,
     } = this.props
-    const labelArr = [ 'Anniversary', 'Birthday', 'Christmas', 'Chanukah']
+    const labelArr = [ 'Anniversary', 'Birthday', 'Christmas', 'Chanukah' ]
     const placeholderString = labelArr
     .filter((el, ind) => ind < 3)
     .join(', ')
@@ -42,6 +42,7 @@ export class FriendFormEventNameInput extends Component {
             autoFocus={isFocused}
             defaultValue={defaultValue}
             onChangeText={(eventName) => handleOnChangeText()}
+            onSubmitEditing={() => this.togglePicker(false)}
             placeholder={`${placeholderString}...`}
             placeholderTextColor='#c9c9c9'/>
         </InputGroup>
