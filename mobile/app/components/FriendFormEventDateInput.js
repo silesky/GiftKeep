@@ -31,7 +31,7 @@ import {
 
 } from  './../sporks/native-base'
 
-export const FriendFormEventDatePicker = ({
+export const FriendFormEventDateInput = ({
   borderType,
   eventDate,
   calendarModalIsVisible,
@@ -93,7 +93,7 @@ export const FriendFormEventDatePicker = ({
     </View>
   )
 }
-FriendFormEventDatePicker.PropTypes = {
+FriendFormEventDateInput.PropTypes = {
   eventWithFocus: React.PropTypes.object,
   eventDate: React.PropTypes.string,
   isVisible: React.PropTypes.bool,

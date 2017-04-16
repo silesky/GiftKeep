@@ -11,7 +11,7 @@ import {
   bindActionCreators
 } from 'redux'
 import {
-  FriendFormEventDatePicker,
+  FriendFormEventDateInput,
   FriendFormEventNameInput,
   SwiperWrapper
 
@@ -54,7 +54,7 @@ export const FriendFormEvent = ({
         defaultValue={defaultValue}
         handleOnChangeText={(eventNameInput) => handleOnChangeText(eventNameInput)}
         />
-        <FriendFormEventDatePicker
+        <FriendFormEventDateInput
           inputGroupStyle={inputGroupStyle}
           borderType={borderType}
           calendarModalIsVisible={calendarModalIsVisible}
