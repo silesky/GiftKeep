@@ -20,7 +20,7 @@ import { View } from 'react-native'
 
 import { colors } from './../themes/'
 export const FriendFormEvent = ({
-  defaultValue,
+  eventName,
   handleOnChangeText,
   friendFormEventDatePickerIsVisible,
   eventDate,
@@ -51,7 +51,7 @@ export const FriendFormEvent = ({
         inputGroupStyle={inputGroupStyle}
         borderType={borderType}
         isFocused={isFocused}
-        defaultValue={defaultValue}
+        eventName={eventName}
         handleOnChangeText={(eventNameInput) => handleOnChangeText(eventNameInput)}
         />
         <FriendFormEventDateInput

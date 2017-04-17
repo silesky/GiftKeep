@@ -26,7 +26,7 @@ export class FriendFormEventNameInput extends Component {
     const {
       borderType,
       inputGroupStyle,
-      defaultValue,
+      eventName,
       isFocused,
       handleOnChangeText,
     } = this.props
@@ -39,7 +39,7 @@ export class FriendFormEventNameInput extends Component {
         { this.state.pickerVisibility &&
           <FriendFormEventNamePicker
               pickerStyle={{height: 150}}
-              selectedValue={defaultValue}
+              selectedValue={eventName}
               onEventNamePick={(eventName) => {
                 handleOnChangeText(eventName)
                 setTimeout(this.togglePicker.bind(this, false), 200)
@@ -51,7 +51,7 @@ export class FriendFormEventNameInput extends Component {
           <Input
             onFocus={() => this.togglePicker(true)}
             autoFocus={isFocused}
-            defaultValue={defaultValue}
+            defaultValue={eventName}
             onChangeText={(eventName) => handleOnChangeText()}
             onSubmitEditing={() => this.togglePicker(false)}
             placeholder={`${placeholderString}...`}
