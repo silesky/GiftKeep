@@ -19,7 +19,7 @@ import {
  } from './../components'
 import * as actions from './../actions/'
 import {
-  // StyleSheet,
+  LayoutAnimation,
   Modal,
 } from 'react-native'
 import {
@@ -56,16 +56,19 @@ class FriendFormCreateUpdate extends Component {
   }
 
   handleEventDateInputChange (eventId, eventDateInputArg) {
-    const { isUpdating, } = this.props
+    const { isUpdating } = this.props
     const isoDateInputString = eventDateInputArg.toISOString()
     console.log('isUpdating', isUpdating, 'event date to update', isoDateInputString)
     isUpdating
     ? this.props.actions.updateEvent(eventId, undefined, isoDateInputString)
     : this.props.actions.friendFormEventDateInputUpdate(eventId, isoDateInputString)
   }
-
+  handleFriendEventDelete (eventId) {
+     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
+     this.props.actions.friendEventDelete(eventId)
+  }
   handleEventNameInputChange (eventId, eventNameInputArg) {
-    const { isUpdating, } = this.props
+    const { isUpdating } = this.props
     isUpdating
     ? this.props.actions.updateEvent(eventId, eventNameInputArg, undefined)
     : this.props.actions.friendFormEventNameInputUpdate(eventId, eventNameInputArg)
@@ -79,6 +82,7 @@ class FriendFormCreateUpdate extends Component {
   }
 
   onEventDateInputBoxFocus (eventId) {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     this.props.actions.friendFormEventDatePickerVisibilityStatusChange(true)
     this.props.actions.friendFormEventDatePickerSelectEvent(eventId)
   }
@@ -116,11 +120,11 @@ class FriendFormCreateUpdate extends Component {
         transparent={false}
         >
         <Container style={{ height: 50, }}>
-          <Header style={{ backgroundColor: colors.electricBlue, }}>
+          <Header style={{ backgroundColor: colors.electricBlue }}>
             <Button transparent>
               <Text></Text>
             </Button>
-            <Title style={{ color: colors.$bigHeadingTextColor, }}>{isUpdating ? `Update ${friendName}` : `Create Friend`}
+            <Title style={{ color: colors.$bigHeadingTextColor }}>{isUpdating ? `Update ${friendName}` : `Create Friend`}
             </Title>
           </Header>
           <Content>
@@ -134,13 +138,11 @@ class FriendFormCreateUpdate extends Component {
               />
             <ListItemDivider heading="Events" />
               {
-                whichEventArray.map(({ eventId, eventName, eventDate, }, eachIndex) => {
-                  console.log('isUpdating is:', isUpdating);
-                  console.log('eventName is: ', eventName);
+                whichEventArray.map(({ eventId, eventName, eventDate }, eachIndex) => {
                   return (
                      <SwiperWrapper
                         key={eachIndex}
-                        onSwipeDelete={actions.friendEventDelete.bind(this, eventId)}
+                        onSwipeDelete={this.handleFriendEventDelete.bind(this, eventId)}
                         >
                       <FriendFormEvent
                         eventName={eventName}
