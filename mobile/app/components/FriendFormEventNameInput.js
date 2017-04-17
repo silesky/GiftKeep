@@ -36,6 +36,17 @@ export class FriendFormEventNameInput extends Component {
     .join(', ')
     return (
       <View>
+        { this.state.pickerVisibility &&
+          <FriendFormEventNamePicker
+              pickerStyle={{height: 150}}
+              selectedValue={defaultValue}
+              onEventNamePick={(eventName) => {
+                handleOnChangeText(eventName)
+                setTimeout(this.togglePicker.bind(this, false), 200)
+              }}
+              labelArr={labelArr}
+            />
+        }
         <InputGroup style={inputGroupStyle} borderType={borderType}>
           <Input
             onFocus={() => this.togglePicker(true)}
@@ -46,16 +57,6 @@ export class FriendFormEventNameInput extends Component {
             placeholder={`${placeholderString}...`}
             placeholderTextColor='#c9c9c9'/>
         </InputGroup>
-        { this.state.pickerVisibility &&
-          <FriendFormEventNamePicker
-              selectedValue={defaultValue}
-              onEventNamePick={(eventName) => {
-                handleOnChangeText(eventName)
-                setTimeout(this.togglePicker.bind(this, false), 200)
-              }}
-              labelArr={labelArr}
-            />
-        }
       </View>
     )
   }
