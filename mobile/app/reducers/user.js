@@ -1,5 +1,19 @@
 import UUID from 'uuid-js'
 import * as Utils from './../utils/utils'
+    /*
+      "user": {
+        "data": [
+          {
+          "friendId":
+          "friendName":
+          "bday": ,
+          "gifts": [],
+          "events": [{
+            "eventName": "",
+            "eventDate": ""
+            "eventId":
+          }
+       */
 
 const initialState = { 'data': [], }
 export const user = (state = initialState, action) => {
@@ -54,11 +68,12 @@ export const user = (state = initialState, action) => {
       }
     case 'UPDATE_EVENT':
       {
-        const { eventId, eventDate, } = action.payload
+        const { eventId, eventName, eventDate } = action.payload
         const data = state.data.map(eachUser => {
           const events = eachUser.events.map(eachEvent => {
             if (eachEvent.eventId === eventId) {
-              eachEvent.eventDate = eventDate
+              if (eventName) eachEvent.eventName = eventName
+              if (eventDate) eachEvent.eventDate = eventDate
             }
             return eachEvent
           })
@@ -88,8 +103,8 @@ export const user = (state = initialState, action) => {
                   } else if (payloadEventDoesNotExistYet) {
                     eventsToCreate.push({
                       eventId: eachPayloadEvent.eventId,
-                      eventDate: eachPayloadEvent.eventDate,
                       eventName: eachPayloadEvent.eventName,
+                      eventDate: eachPayloadEvent.eventDate
                     })
                   }
               }) // end eachPayloadEvent iterator

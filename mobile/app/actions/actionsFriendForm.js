@@ -28,11 +28,13 @@ export const friendEventUpdateFromDrawer = (friendId) => {
 export const friendEventDelete = (eventId) => {
   return (dispatch, getState) => {
     const { friendFormIsUpdating, friendFormIsVisible } = getState().friendForm
+    dispatch({ type: 'FRIEND_FORM_EVENT_INPUT_DELETE', payload: { eventId } })
     if (friendFormIsVisible && !friendFormIsUpdating) {
       // if we're adding/updating events at the beginning, via 'create friend'
       dispatch({ type: 'FRIEND_FORM_EVENT_INPUT_DELETE', payload: { eventId } })
         // if we're adding/updating via the edit friend swipe in the form or in the events view)
     } else {
+      dispatch({ type: 'FRIEND_FORM_EVENT_INPUT_DELETE', payload: { eventId } })
       dispatch({ type: 'FRIEND_EVENT_DELETE', payload: { eventId } })
     }
   }

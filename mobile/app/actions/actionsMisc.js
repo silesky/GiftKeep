@@ -145,11 +145,12 @@ export const deleteFriend = (friendId) => {
   }
 }
 
-export const updateEvent = (eventId, eventDate) => ({
+export const updateEvent = (eventId, eventName = '', eventDate = '' ) => ({
   type: 'UPDATE_EVENT',
   payload: {
     eventId,
-    eventDate,
+    eventName,
+    eventDate
   },
 })
 

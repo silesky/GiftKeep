@@ -60,12 +60,15 @@ class FriendFormCreateUpdate extends Component {
     const isoDateInputString = eventDateInputArg.toISOString()
     console.log('isUpdating', isUpdating, 'event date to update', isoDateInputString)
     isUpdating
-    ? this.props.actions.updateEvent(eventId, isoDateInputString)
+    ? this.props.actions.updateEvent(eventId, undefined, isoDateInputString)
     : this.props.actions.friendFormEventDateInputUpdate(eventId, isoDateInputString)
   }
 
   handleEventNameInputChange (eventId, eventNameInputArg) {
-    this.props.actions.friendFormEventNameInputUpdate(eventId, eventNameInputArg)
+    const { isUpdating, } = this.props
+    isUpdating
+    ? this.props.actions.updateEvent(eventId, eventNameInputArg, undefined)
+    : this.props.actions.friendFormEventNameInputUpdate(eventId, eventNameInputArg)
   }
 
 // when updating: you click 'ADD EVENT', it adds an event object to the following state slice: user -> events array
@@ -132,6 +135,8 @@ class FriendFormCreateUpdate extends Component {
             <ListItemDivider heading="Events" />
               {
                 whichEventArray.map(({ eventId, eventName, eventDate, }, eachIndex) => {
+                  console.log('isUpdating is:', isUpdating);
+                  console.log('eventName is: ', eventName);
                   return (
                      <SwiperWrapper
                         key={eachIndex}
