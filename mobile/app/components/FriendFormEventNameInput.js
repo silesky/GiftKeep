@@ -10,7 +10,7 @@ import {
   CardItem,
   LayoutAnimation
 } from 'react-native'
-import { FriendFormEventNamePicker } from './../components/'
+import { EventNamePicker } from './../components/'
 export class FriendFormEventNameInput extends Component {
   constructor (props) {
     super(props)
@@ -37,7 +37,7 @@ export class FriendFormEventNameInput extends Component {
     return (
       <View>
         { this.state.pickerVisibility &&
-          <FriendFormEventNamePicker
+          <EventNamePicker
               pickerStyle={{height: 150}}
               selectedValue={eventName}
               onEventNamePick={(eventName) => {

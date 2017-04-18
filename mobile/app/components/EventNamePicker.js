@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Picker, View } from 'react-native'
 import UUID from 'uuid-js'
-export class FriendFormEventNamePicker extends React.Component {
+export class EventNamePicker extends React.Component {
   static defaultProps = {
     pickerStyle: {},
     onEventNamePick: null,
