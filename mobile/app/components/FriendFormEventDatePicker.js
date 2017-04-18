@@ -14,10 +14,10 @@ export const FriendFormEventDatePicker = ({
     selectedEventDate,
     onEventDateInputChange,
   }) => {
-console.log('new event date:', Moment(selectedEventDate).toDate());
   return (
       <DatePicker
-        date={ Moment(selectedEventDate).toDate() /* needs to be a date object */ }
+        minimumDate={new Date()}
+        date={Moment(selectedEventDate).toDate()}
         onDateChange={ (input) => onEventDateInputChange(input) }
         mode="date"
         />
