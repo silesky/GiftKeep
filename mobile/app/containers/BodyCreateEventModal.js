@@ -1,12 +1,15 @@
 import React from 'react'
 import Moment from 'moment'
 import * as actions from './../actions/'
-import { bindActionCreators, } from 'redux'
-import { connect, } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-import { Input, } from 'native-base'
+import { Input } from 'native-base'
 import {
   EventDatePicker,
+  EventDateInputPicker,
+  FriendFormEventNameInput,
+  FriendFormEventDateInput,
   SimpleModalFormWrapper,
 } from './../components/'
 import {
@@ -20,10 +23,10 @@ import {
   ListItem,
   Title,
   InputGroup,
-  Button, }
+  Button }
 from 'native-base'
 
-import { IconCreator, } from './../icons'
+import { IconCreator } from './../icons'
 class BodyCreateEventModal extends React.Component {
   static PropTypes = {
     isVisible: React.PropTypes.bool,
@@ -34,17 +37,22 @@ class BodyCreateEventModal extends React.Component {
   };
   constructor (props) {
     super(props)
-    this.onDateChange = this.onDateChange.bind(this)
+    this.onEventNameChange = this.onEventNameChange.bind(this)
+    this.onEventDateChange = this.onEventDateChange.bind(this)
     this.state = {
       date: this.props.date,
       name: this.props.name,
     }
   }
-  onDateChange (date) {
-    this.setState({ date, })
+
+  onEventDateChange (date) {
+    this.setState({ date })
+  }
+  onEventNameChange (name) {
+    this.setState({ name })
   }
   onCreateEventPress () {
-    const _eventName = this.refs.eventName._textInput._lastNativeText
+    const _eventName = this.state.name
     const _eventDate = this.state.date.toISOString()
     this.props.actions.createEvent(this.props.selectedFriendId, _eventName, _eventDate)
     this.onCancelPress()
@@ -60,36 +68,18 @@ class BodyCreateEventModal extends React.Component {
         handleClickAway={this.props.actions.bodyModalVisibilityFalse}
         isVisible={this.props.createGiftModalVisibility}>
         <List>
-          <Title style={{ marginTop: 10, marginBottom: 10, }}>
-          { IconCreator('FA', 'calendar-plus-o', 30, { paddingRight: 10, paddingTop: 5, }) }
+          <Title style={{ marginTop: 10 }}>
+          { IconCreator('FA', 'calendar-plus-o', 30, { paddingRight: 10, paddingTop: 5 }) }
             Create Event
          </Title>
-          <ListItem>
-            <InputGroup>
-              <Input
-                ref='eventName'
-                inlineLabel
-                label='Name'
-                placeholder='Event Name...'
-                placeholderTextColor='lightgrey'
-                multiline={false}/>
-            </InputGroup>
-          </ListItem>
-          <ListItem>
-            <InputGroup>
-              <Input
-                onFocus={() => Keyboard.dismiss() /* this input is 'dumb', it only is for display purposes. It could just as well not be an input */}
-                editable="false"
-                inlineLabel
-                label="Date"
-                value={Moment(this.state.date).format('MM-DD-YYYY')}
+        <FriendFormEventNameInput
+            placeholder={'Birthday, graduation, etc'}
+            eventName={this.state.name}
+            handleOnChangeText={this.onEventNameChange}
                />
-            </InputGroup>
-
-          </ListItem>
-          <EventDatePicker
-          selectedEventDate={this.state.date}
-          onEventDateInputChange={this.onDateChange}
+           <EventDateInputPicker
+            selectedEventDate={this.state.date}
+            handleOnEventDateChange={this.onEventDateChange}
           />
           <View
             style={{
@@ -100,15 +90,18 @@ class BodyCreateEventModal extends React.Component {
               justifyContent: 'flex-end',
               flexDirection: 'row',
             }}>
-            <Button danger onPress={() => this.onCancelPress()}>
+            <Button
+              danger
+              onPress={() => this.onCancelPress()}>
               Cancel
             </Button>
             <Button
+              success
               onPress={() => this.onCreateEventPress()}
               style={{
                 marginLeft: 10,
               }}
-              success>
+              >
               OK
             </Button>
           </View>

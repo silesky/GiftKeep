@@ -42,16 +42,16 @@ export const FriendFormEventDateInput = ({
       }}
         borderType={borderType}>
         <Input
-          placeholder="Click to add a friend event."
-          selectionColor={'white'}
+          placeholder='Click to add a friend event.'
+          selectionColor='white'
           editable={false}
           value={Moment(eventDate).format('MM-DD-YYYY')}
           onFocus={() => onEventDateInputBoxFocus()}/>
-        <Icon name="md-calendar"/>
+        <Icon name='md-calendar'/>
       </InputGroup>
       <ModalDrawerCardWrapper
-        title="Select an Event Date."
-        iconName="md-calendar"
+        title='Select Event'
+        iconName='md-calendar'
         isVisible={friendFormEventDatePickerIsVisible}
         onCancel={() => onCancel()}
         onSubmit={() => onEventDateInputOk()}>

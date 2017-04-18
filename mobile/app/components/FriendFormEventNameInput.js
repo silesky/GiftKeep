@@ -1,17 +1,23 @@
 import React, { Component } from 'react'
-import { Input, InputGroup, Icon } from 'native-base'
+import { Input, InputGroup } from 'native-base'
 import {
   View,
-  Modal,
-  Content,
-  Card,
-  Title,
-  Button,
-  CardItem,
-  LayoutAnimation
+  LayoutAnimation,
 } from 'react-native'
 import { EventNamePicker } from './../components/'
+
 export class FriendFormEventNameInput extends Component {
+  static defaultProps = {
+    placeholder: 'Anniversary, Birthday...',
+    inputProps: {},
+    borderType: '',
+    inputGroupStyle: {},
+    eventName: null,
+    isFocused: false,
+    handleOnChangeText: null,
+    labelArr: [ 'Anniversary', 'Birthday', 'Christmas', 'Confirmation', 'Chanukah', 'Graduation', 'Easter' ],
+  }
+
   constructor (props) {
     super(props)
     this.state = {
@@ -24,21 +30,18 @@ export class FriendFormEventNameInput extends Component {
   }
   render () {
     const {
+      placeholder,
       borderType,
       inputGroupStyle,
       eventName,
       isFocused,
       handleOnChangeText,
+      labelArr,
     } = this.props
-    const labelArr = [ 'Anniversary', 'Birthday', 'Christmas', 'Confirmation', 'Chanukah', 'Graduation', 'Easter']
-    const placeholderString = labelArr
-    .filter((el, ind) => ind < 3)
-    .join(', ')
+
     return (
       <View>
-        { this.state.pickerVisibility &&
-          <EventNamePicker
-              pickerStyle={{height: 150}}
+        { this.state.pickerVisibility && <EventNamePicker
               selectedValue={eventName}
               onEventNamePick={(eventName) => {
                 handleOnChangeText(eventName)
@@ -54,8 +57,9 @@ export class FriendFormEventNameInput extends Component {
             defaultValue={eventName}
             onChangeText={(eventName) => handleOnChangeText()}
             onSubmitEditing={() => this.togglePicker(false)}
-            placeholder={`${placeholderString}...`}
-            placeholderTextColor='#c9c9c9'/>
+            placeholder={placeholder}
+            placeholderTextColor='#c9c9c9'
+            />
         </InputGroup>
       </View>
     )
