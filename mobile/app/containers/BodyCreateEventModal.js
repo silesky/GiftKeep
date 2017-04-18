@@ -3,8 +3,10 @@ import Moment from 'moment'
 import * as actions from './../actions/'
 import { bindActionCreators, } from 'redux'
 import { connect, } from 'react-redux'
+
 import { Input, } from 'native-base'
 import {
+  EventDatePicker,
   SimpleModalFormWrapper,
 } from './../components/'
 import {
@@ -85,11 +87,9 @@ class BodyCreateEventModal extends React.Component {
             </InputGroup>
 
           </ListItem>
-          <DatePickerIOS
-            minimimumDate={new Date()}
-            mode="date"
-            onDateChange={(date) => this.onDateChange(date)}
-            date={this.state.date}
+          <EventDatePicker
+          selectedEventDate={this.state.date}
+          onEventDateInputChange={this.onDateChange}
           />
           <View
             style={{

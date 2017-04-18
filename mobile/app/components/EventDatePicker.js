@@ -10,7 +10,7 @@ import Moment from 'moment'
 
 const DatePicker = Platform.OS === 'ios' ? DatePickerIOS : DatePickerAndroid
 
-export const FriendFormEventDatePicker = ({
+export const EventDatePicker = ({
     selectedEventDate,
     onEventDateInputChange,
   }) => {

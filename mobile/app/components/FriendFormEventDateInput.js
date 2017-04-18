@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import * as actions from './../actions/'
 import {StyleSheet, Modal, View} from 'react-native'
 import Moment from 'moment'
-import {ModalDrawerCardWrapper, FriendFormEventDatePicker} from './../components/'
+import {ModalDrawerCardWrapper, EventDatePicker} from './../components/'
 import {
   Container,
   Content,
@@ -55,7 +55,7 @@ export const FriendFormEventDateInput = ({
         isVisible={friendFormEventDatePickerIsVisible}
         onCancel={() => onCancel()}
         onSubmit={() => onEventDateInputOk()}>
-        <FriendFormEventDatePicker
+        <EventDatePicker
           selectedEventDate={eventDate}
           onEventDateInputChange={onEventDateInputChange}/>
       </ModalDrawerCardWrapper>
