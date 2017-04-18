@@ -1,6 +1,6 @@
 import React from 'react'
 import { colors } from './../themes/'
-import { Input } from  './../sporks/native-base'
+import { Input } from  'native-base'
 export const GiftCardInputTitle = ({ updateGiftTitle, giftTitle }) => (
   <Input
     placeholderTextColor={colors.lightgrey}

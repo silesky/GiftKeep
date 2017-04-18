@@ -4,7 +4,7 @@ import {
   Title,
   Button,
   Icon,
-} from './../sporks/native-base'
+} from 'native-base'
 import { colors, } from '../themes/'
 import LightTheme from '../themes/LightTheme'
 import { IconCreator, } from './../icons/'

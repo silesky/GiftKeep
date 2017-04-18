@@ -17,7 +17,7 @@ import {
   CardItem,
   Title,
   Text,
-} from './../sporks/native-base'
+} from 'native-base'
 
 import {
   EventCard,

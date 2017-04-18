@@ -23,11 +23,11 @@ import {
   List,
   Icon,
   Title
-} from './../sporks/native-base'
+} from 'native-base'
 
 import {
   Header
-} from './../sporks/native-base'
+} from 'native-base'
 import {
   FbLogin,
   FriendListItem

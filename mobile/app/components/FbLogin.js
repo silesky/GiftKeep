@@ -5,7 +5,7 @@ import {
 } from 'react-native'
 import {
   Button
-} from  './../sporks/native-base'
+} from  'native-base'
 import {
   LoginButton,
   AccessToken

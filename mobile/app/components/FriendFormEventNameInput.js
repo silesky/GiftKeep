@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Input, InputGroup, Icon } from './../sporks/native-base'
+import { Input, InputGroup, Icon } from 'native-base'
 import {
   View,
   Modal,
@@ -30,7 +30,7 @@ export class FriendFormEventNameInput extends Component {
       isFocused,
       handleOnChangeText,
     } = this.props
-    const labelArr = [ 'Anniversary', 'Birthday', 'Christmas', 'Chanukah' ]
+    const labelArr = [ 'Anniversary', 'Birthday', 'Christmas', 'Confirmation', 'Chanukah', 'Graduation', 'Easter']
     const placeholderString = labelArr
     .filter((el, ind) => ind < 3)
     .join(', ')

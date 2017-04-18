@@ -5,7 +5,7 @@ import {
   CardItem,
   Icon,
   Text,
-} from './../sporks/native-base'
+} from 'native-base'
 // import * as Util  from './../utils/utils';
 import Moment from 'moment'
 import 'moment-duration-format'

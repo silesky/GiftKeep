@@ -3,7 +3,7 @@ import React from 'react'
 // [x] eachEvent should have a default object
 // [ ] import from react native calendar datepicker and display
 // react-native-calendar-datepicker
-import { Card } from './../sporks/native-base'
+import { Card } from 'native-base'
 import {
   connect
 } from 'react-redux'

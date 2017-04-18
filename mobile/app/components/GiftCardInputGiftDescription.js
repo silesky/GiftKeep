@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input } from  './../sporks/native-base'
+import { Input } from  'native-base'
 export const GiftCardInputGiftDescription = ({
   updateGiftDesc,
   giftDesc,

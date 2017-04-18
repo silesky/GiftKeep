@@ -21,7 +21,7 @@ import {
   ListItem,
   Title,
   InputGroup,
-} from './../sporks/native-base'
+} from 'native-base'
 
 class BodyCreateGiftModal extends React.Component {
   constructor () {

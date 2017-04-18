@@ -1,5 +1,5 @@
 import React from 'react'
-import { Footer, FooterTab, Button, Icon, Text, Content } from  './../sporks/native-base'
+import { Footer, FooterTab, Button, Icon, Text, Content } from  'native-base'
 import { colors } from '../themes/'
 import { LightTheme } from '../themes/LightTheme'
 export const BottomBar = ({ addGift, addEvent, selectedTab }) => {

@@ -36,7 +36,7 @@ import {
   Button,
   Title,
   Icon,
-} from './../sporks/native-base'
+} from 'native-base'
 import * as colors from './../themes/colors'
 import { overrides, } from './../themes/'
 import * as Utils from './../utils/utils'

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, InputGroup, Icon } from  './../sporks/native-base'
+import { Input, InputGroup, Icon } from  'native-base'
 
 
 export const FriendFormNameInput = ({

@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, } from 'react-native'
-import { Button, } from './../sporks/native-base'
+import { Button, } from 'native-base'
 export const BodyCreateGiftFooterBtn = ({
     onCancelPress,
     onOkPress,

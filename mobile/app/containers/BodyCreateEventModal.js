@@ -3,7 +3,7 @@ import Moment from 'moment'
 import * as actions from './../actions/'
 import { bindActionCreators, } from 'redux'
 import { connect, } from 'react-redux'
-import { Input, } from './../sporks/native-base'
+import { Input, } from 'native-base'
 import {
   SimpleModalFormWrapper,
 } from './../components/'
@@ -19,7 +19,7 @@ import {
   Title,
   InputGroup,
   Button, }
-from './../sporks/native-base'
+from 'native-base'
 
 import { IconCreator, } from './../icons'
 class BodyCreateEventModal extends React.Component {

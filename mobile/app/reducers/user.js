@@ -2,6 +2,9 @@ import UUID from 'uuid-js'
 import * as Utils from './../utils/utils'
     /*
       "user": {
+        "userName"
+        "fbId"
+        "fbAccessToken"
         "data": [
           {
           "friendId":

@@ -3,7 +3,7 @@ import {
   ListItem,
   Text,
   Content
-} from './../sporks/native-base'
+} from 'native-base'
 import {
   SwiperWrapper,
 } from './../components'

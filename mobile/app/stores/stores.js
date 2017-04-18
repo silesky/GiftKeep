@@ -9,10 +9,6 @@ import thunk from 'redux-thunk'
 import rootReducer from './../reducers/'
 
 import {
-  composeWithDevTools
-} from 'remote-redux-devtools'
-
-import {
   saveToAsyncStorage,
   getFromAsyncStorage,
   updateUserDataByAccessToken,
@@ -23,8 +19,11 @@ import {
   hydrateAll
 } from './../actions'
 
+import { composeWithDevTools } from 'remote-redux-devtools'
 const composeEnhancers = composeWithDevTools({
-  name: 'Gifter',
+  name: 'GiftKeep',
+  port: 8080, // works in conjunction remotedev --hostname=localhost --port=8080
+  realtime: true,
   shouldRecordChanges: true, // need to manually click record changes, recording slows down app.
   actionsBlacklist: ['FRIEND_FORM_NAME_INPUT'], // when I add a seccond item to this array, it doesn't work
 })

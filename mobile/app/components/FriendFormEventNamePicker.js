@@ -7,7 +7,7 @@ export class FriendFormEventNamePicker extends React.Component {
     pickerStyle: {},
     onEventNamePick: null,
     selectedValue: null,
-    labelArr: [],
+    labelArr: [ 'Anniversary', 'Birthday', 'Christmas', 'Chanukah' ],
   }
   render () {
     const {
