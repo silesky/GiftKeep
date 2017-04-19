@@ -1,25 +1,11 @@
-import React, {Component} from 'react'
-import * as actions from './../actions/'
-import {StyleSheet, Modal, View} from 'react-native'
+import React from 'react'
+import { View } from 'react-native'
 import Moment from 'moment'
-import {ModalDrawerCardWrapper, EventDatePicker} from './../components/'
+import { ModalDrawerCardWrapper, EventDatePicker } from './../components/'
 import {
-  Container,
-  Content,
-  Footer,
-  FooterTab,
-  Header,
   Input,
   InputGroup,
-  List,
-  ListItem,
-  Text,
-  Button,
-  Title,
   Icon,
-  Card,
-  CardItem
-
 } from 'native-base'
 
 export const FriendFormEventDateInput = ({
@@ -30,16 +16,15 @@ export const FriendFormEventDateInput = ({
   onEventDateInputChange,
   onEventDateInputBoxFocus,
   onEventDateInputOk,
-  onCancel
+  onCancel,
 }) => {
-
   return (
     <View>
       <InputGroup
         style={{
-        ...inputGroupStyle,
-        marginTop: 10
-      }}
+          ...inputGroupStyle,
+          marginTop: 10,
+        }}
         borderType={borderType}>
         <Input
           placeholder='Click to add a friend event.'
@@ -69,6 +54,6 @@ FriendFormEventDateInput.PropTypes = {
   onEventDateInputChange: React.PropTypes.func,
   onEventDateInputBoxFocus: React.PropTypes.func,
   onEventDateInputOk: React.PropTypes.func,
-  onCancel: React.PropTypes.func
+  onCancel: React.PropTypes.func,
 
 }

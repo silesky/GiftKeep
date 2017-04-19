@@ -7,16 +7,16 @@ export class EventNamePicker extends React.Component {
     pickerStyle: {},
     onEventNamePick: null,
     selectedValue: null,
-    labelArr: [ 'Anniversary', 'Birthday', 'Christmas', 'Chanukah' ],
+    eventNameList: [ 'Anniversary', 'Birthday', 'Christmas', 'Chanukah' ],
   }
   render () {
     const {
       pickerStyle,
       onEventNamePick,
       selectedValue,
-      labelArr,
+      eventNameList,
     } = this.props
-    const labels = labelArr.map(eachLabel =>
+    const labels = eventNameList.map(eachLabel =>
     <Picker.Item
       key={UUID.create().toString()}
       label={eachLabel}

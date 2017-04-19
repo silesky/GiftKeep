@@ -73,6 +73,7 @@ class BodyCreateEventModal extends React.Component {
             Create Event
          </Title>
         <FriendFormEventNameInput
+            eventNameList={this.props.eventNameList}
             placeholder={'Birthday, graduation, etc'}
             eventName={this.state.name}
             handleOnChangeText={this.onEventNameChange}
@@ -111,7 +112,9 @@ class BodyCreateEventModal extends React.Component {
   }
 }
 const mstp = (state) => {
+  console.log(state.user.eventNameList);
   return {
+    eventNameList: state.user.eventNameList,
     createGiftModalVisibility: state.visible.createEventModalVisibility,
     selectedFriendId: state.visible.selectedFriendId,
   }

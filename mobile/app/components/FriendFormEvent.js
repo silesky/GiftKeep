@@ -24,6 +24,7 @@ export const FriendFormEvent = ({
   handleOnChangeText,
   friendFormEventDatePickerIsVisible,
   eventDate,
+  eventNameList,
   isUpdating,
   isVisible,
   onCancel,
@@ -48,6 +49,7 @@ export const FriendFormEvent = ({
       borderBottomColor: colors.$shadowBorder,
      }}>
        <FriendFormEventNameInput
+        eventNameList={eventNameList}
         inputGroupStyle={inputGroupStyle}
         borderType={borderType}
         isFocused={isFocused}

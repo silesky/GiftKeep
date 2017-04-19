@@ -103,6 +103,7 @@ class FriendFormCreateUpdate extends Component {
       actions,
       bottomNotificationVisibility,
       events,
+      eventNameList,
     } = this.props
 
     const onFriendFormUpdateOrCreate = () => {
@@ -145,6 +146,7 @@ class FriendFormCreateUpdate extends Component {
                         onSwipeDelete={this.handleFriendEventDelete.bind(this, eventId)}
                         >
                       <FriendFormEvent
+                        eventNameList={eventNameList}
                         eventName={eventName}
                         handleOnChangeText={this.handleEventNameInputChange.bind(this, eventId)}
                         isFocusedInputType={'name'}
@@ -229,7 +231,7 @@ const mstp = (state) => {
     friendName,
     friendFormIsVisible,
     friendFormEventDatePickerIsVisible,
-
+    eventNameList: state.user.eventNameList,
     friendFormBdayInput,
     friendFormUpdatingSelectedFriendId,
   }

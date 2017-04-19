@@ -15,7 +15,7 @@ export class FriendFormEventNameInput extends Component {
     eventName: null,
     isFocused: false,
     handleOnChangeText: null,
-    labelArr: [ 'Anniversary', 'Birthday', 'Christmas', 'Confirmation', 'Chanukah', 'Graduation', 'Easter' ],
+    eventNameList: [],
   }
 
   constructor (props) {
@@ -36,7 +36,7 @@ export class FriendFormEventNameInput extends Component {
       eventName,
       isFocused,
       handleOnChangeText,
-      labelArr,
+      eventNameList,
     } = this.props
 
     return (
@@ -47,7 +47,7 @@ export class FriendFormEventNameInput extends Component {
                 handleOnChangeText(eventName)
                 setTimeout(this.togglePicker.bind(this, false), 200)
               }}
-              labelArr={labelArr}
+              eventNameList={eventNameList}
             />
         }
         <InputGroup style={inputGroupStyle} borderType={borderType}>

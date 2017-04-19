@@ -1,5 +1,6 @@
 import * as Utils from './../utils/'
-
+export const deleteEventName = (eventName) => ({type: 'EVENT_NAME_DELETE', payload: eventName })
+export const addEventName = (eventName) => ({type: 'EVENT_NAME_ADD', payload: eventName })
 export const giftInputFocus = (selectedGiftId) => {
   return {
     type: 'FOCUS_GIFT_INPUT',
@@ -165,8 +166,8 @@ export const _friendEventAdd = (friendId, eventName, eventDate) => {
   }
 }
 
-export const hydrateUser = (data) => {
-  return { type: 'HYDRATE_USER', payload: data }
+export const hydrateUser = (savedState) => {
+  return { type: 'HYDRATE_USER', payload: savedState }
 }
 
 export const testClick = () => {
