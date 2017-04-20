@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "droid": "emulator -avd mydevice && react-native run-android",
     "remotedev-start": "remotedev --hostname=localhost --port=8080",
     "reset": "npm start -- --reset-cache",
     "reset-all": "watchman watch-del-all && rm -rf node_modules/ && npm cache clean && npm install && npm start -- --reset-cache",
