@@ -1,6 +1,4 @@
 <resources>
-
-
-
     <string name="app_name">GiftKeeper</string>
+    <string name="facebook_app_id">336395990074206</string>
 </resources>
