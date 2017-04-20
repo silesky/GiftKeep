@@ -116,6 +116,7 @@ class FriendFormCreateUpdate extends Component {
     const whichEventArray = (isUpdating) ? events : friendFormEventInput
     return (
       <Modal
+        onRequestClose={() => console.log('TODO android complains if this prop is not here')}
         visible={friendFormIsVisible}
         animationType={'slide'}
         transparent={false}

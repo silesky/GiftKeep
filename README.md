@@ -16,7 +16,7 @@
 * rename `/server/.env.example` and `/server/test/.env.example` -> `.env`.
 * Guide to env. variables:
   * create a .env file in the server folder with the following properties:
-  * CLIENT_ID=//e.g MYCLIENTID122r13f1
+  * CLIENT_ID=//AKA APPID e.g 1999999999999999
   * APP_ACCESS_TOKEN=//e.g MYCLIENTID123|MYAXXTOKEN456
   * CLIENT_SECRET=//e.g. abc123456
   * NODE_ENV=//development or production
