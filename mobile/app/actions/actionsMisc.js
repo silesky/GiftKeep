@@ -1,6 +1,11 @@
 import * as Utils from './../utils/'
+
+export const setAllGiftsVisibility = (bool) => ({type: 'SET_ALLGIFTS_VISIBILITY', payload: { bool } })
+
 export const deleteEventName = (eventName) => ({type: 'EVENT_NAME_DELETE', payload: eventName })
+
 export const addEventName = (eventName) => ({type: 'EVENT_NAME_ADD', payload: eventName })
+
 export const giftInputFocus = (selectedGiftId) => {
   return {
     type: 'FOCUS_GIFT_INPUT',
@@ -94,12 +99,8 @@ export const deleteGift = (friendId, giftId) => {
   }
 }
 
-export const selectFriend = (friendId) => {
-  return { type: 'SELECT_FRIEND',
-    payload: {
-      friendId,
-    } }
-}
+
+export const selectFriend = (friendId) => ({ type: 'SELECT_FRIEND', payload: { friendId } })
 
 const _deleteFriend = (friendId) => ({ type: 'DELETE_FRIEND',
   payload: {

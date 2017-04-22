@@ -2,7 +2,6 @@ import React from 'react'
 import {
   ListItem,
   Text,
-  Content
 } from 'native-base'
 import {
   SwiperWrapper,

@@ -6,13 +6,18 @@ const initialState = {
   createGiftModalVisibility: false,
   createEventModalVisibility: false,
   selectedGiftId: null,
+  allGiftsVisibility: false,
 }
 export const visible = (state = initialState, action) => {
   switch (action.type) {
-    case 'FOCUS_GIFT_INPUT' :
+    case 'SET_ALLGIFTS_VISIBILITY':
     {
-      return {...state, selectedGiftId: action.payload.selectedGiftId }
-  }
+      return {...state, allGiftsVisibility: action.payload.bool }
+    }
+    case 'FOCUS_GIFT_INPUT' :
+      {
+        return { ...state, selectedGiftId: action.payload.selectedGiftId }
+      }
     case 'SET_LEFT_DRAWER_OPEN_TRUE':
       {
         return { ...state, isLeftDrawerOpen: true }
@@ -35,13 +40,13 @@ export const visible = (state = initialState, action) => {
       }
     case 'SELECT_FRIEND':
       {
-        return { ...state, selectedFriendId: action.payload.friendId }
+        return { ...state, allGiftsVisibility: false, selectedFriendId: action.payload.friendId }
       }
     case 'FRIEND_FORM_VISIBILITY_TOGGLE':
       {
         return {
           ...state,
-          friendFormIsVisible: !state.friendFormIsVisible
+          friendFormIsVisible: !state.friendFormIsVisible,
         }
       }
     case 'SET_CREATE_GIFT_MODAL_VISIBILITY_TRUE':
@@ -49,7 +54,7 @@ export const visible = (state = initialState, action) => {
         return {
           ...state,
           createGiftModalVisibility: true,
-          createEventModalVisibility: false
+          createEventModalVisibility: false,
         }
       }
     case 'SET_BODY_MODAL_VISIBILITY_FALSE':
@@ -57,7 +62,7 @@ export const visible = (state = initialState, action) => {
         return {
           ...state,
           createEventModalVisibility: false,
-          createGiftModalVisibility: false
+          createGiftModalVisibility: false,
         }
       }
     case 'SET_CREATE_EVENT_MODAL_VISIBILITY_TRUE':
@@ -65,7 +70,7 @@ export const visible = (state = initialState, action) => {
         return {
           ...state,
           createEventModalVisibility: true,
-          createGiftModalVisibility: false
+          createGiftModalVisibility: false,
         }
       }
     default:

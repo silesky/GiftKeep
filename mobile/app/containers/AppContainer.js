@@ -3,15 +3,15 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as actions from './../actions/'
 import {
-  Content
-} from  'native-base'
+  Content,
+} from 'native-base'
 // Components
 import {
   NotificationBottom,
   TopBar,
   DrawerWrapper,
   TabWrapper,
-  BottomBar
+  BottomBar,
    } from './../components/'
 import { colors } from './../themes/'
 
@@ -21,7 +21,7 @@ import {
   BodyEventsView,
   BodyGiftsView,
   DrawerContainer,
-  FriendFormCreateUpdate
+  FriendFormCreateUpdate,
 } from './../containers/'
 
 import { getFriendItemById } from './../utils/utils'
@@ -48,7 +48,7 @@ class AppContainer extends Component {
           eventModalShow={ this.props.actions.createEventModalVisibilityTrue.bind(this, this.props.selectedFriendId) }
           giftModalShow={ this.props.actions.createGiftModalVisibilityTrue.bind(this, this.props.selectedFriendId) }
           addEvent={ this.props.actions.friendFormEventCreate.bind(this, this.props.selectedFriendId, undefined, undefined) }
-          friendName={ this.props.friendName }
+          friendName={ this.props.headerTitle }
           giftBtnIsDisabled={!this.props.hasFriends}
           eventBtnIsDisabled={!this.props.hasFriends}
           handleOpenDrawer={this.props.actions.leftDrawerVisibility.bind(this, true)}
@@ -78,15 +78,27 @@ class AppContainer extends Component {
 const mstp = (state) => {
   const {
     notificationText,
-    bottomNotificationVisibility
+    bottomNotificationVisibility,
   } = state.notification
   const {
     selectedFriendId,
     selectedTab,
     isLeftDrawerOpen,
     createGiftModalVisibility,
-    createEventModalVisibility
+    createEventModalVisibility,
+    allGiftsVisibility,
    } = state.visible
+
+  let headerTitle
+  if (allGiftsVisibility && selectedTab === 'gifts') {
+     headerTitle = 'All Gifts'
+   } else if (allGiftsVisibility && selectedTab === 'events') {
+     headerTitle = 'All Events'
+   } else if (!allGiftsVisibility) {
+     const friendName = getFriendItemById(state, selectedFriendId, 'friendName')
+     headerTitle = friendName
+   }
+
   return {
     isLeftDrawerOpen: isLeftDrawerOpen,
     hasFriends: !!state.user.data.length,
@@ -96,7 +108,7 @@ const mstp = (state) => {
     bottomNotificationVisibility,
     createGiftModalVisibility,
     createEventModalVisibility,
-    friendName: getFriendItemById(state, selectedFriendId, 'friendName')
+    headerTitle,
   }
 }
 // no more store.dispatch(actions.friendFormCreateAndSave())

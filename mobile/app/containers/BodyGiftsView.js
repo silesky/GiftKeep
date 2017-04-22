@@ -3,17 +3,17 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as actions from './../actions/'
-import { Content, Card } from  'native-base'
+import { Content, Card } from 'native-base'
 import { LightTheme } from './../themes/'
 import {
   NoFriendsAlert,
   NoGiftsAlert,
-  GiftCard
+  GiftCard,
 } from './../components/'
 
 import { BodyCreateGiftModal } from './../containers'
 import * as Utils from './../utils/utils'
-import { View, LayoutAnimation, } from 'react-native'
+import { View, LayoutAnimation } from 'react-native'
 class BodyGiftsView extends Component {
   constructor () {
     super()
@@ -35,7 +35,7 @@ class BodyGiftsView extends Component {
       hasFriends,
       hasGifts,
       selectedTab,
-      createGiftModalVisibility
+      createGiftModalVisibility,
     } = this.props
 
     const body = (
@@ -86,17 +86,23 @@ class BodyGiftsView extends Component {
 const mdtp = (dispatch) => ({ actions: bindActionCreators(actions, dispatch) })
 const mstp = (state) => {
   const { bday, friendName, gifts } = Utils.getFriendByFriendId(state, state.visible.selectedFriendId)
-  const newGifts = gifts && gifts.length ? gifts : []
+  const { allGiftsVisibility } = state.visible
+  let whichGifts
+  if (allGiftsVisibility === true) {
+    whichGifts = Utils.getAllGifts(state)
+  } else {
+    whichGifts = gifts && gifts.length ? gifts : []
+  }
   return {
     selectedGiftId: state.visible.selectedGiftId,
     selectedTab: state.visible.selectedTab,
     selectedFriendId: state.visible.selectedFriendId,
     bday,
-    gifts: newGifts,
+    gifts: whichGifts,
     friendName,
     hasFriends: !!state.user.data.length,
-    hasGifts: !!newGifts.length,
-    createGiftModalVisibility: state.visible.createGiftModalVisibility
+    hasGifts: !!whichGifts.length,
+    createGiftModalVisibility: state.visible.createGiftModalVisibility,
   }
 }
 export default connect(mstp, mdtp)(BodyGiftsView)
