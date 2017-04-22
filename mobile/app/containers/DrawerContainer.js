@@ -14,6 +14,7 @@ import * as actions from './../actions/'
 
 import {
   LayoutAnimation,
+  View,
 } from 'react-native'
 
 import {
@@ -40,9 +41,8 @@ import {
 
 import {
   LightTheme,
-  colors,
+  colors
 } from './../themes'
-
 
 import { getFriendByFriendId } from './../utils/'
 class DrawerContainer extends Component {
@@ -59,7 +59,7 @@ class DrawerContainer extends Component {
       selectFriend,
       clear,
     } = this.props.actions
-    const { allFriendsVisibility } = this.props
+    const { allFriendsVisibility, allFriendsColor } = this.props
     return (
       <Container>
         <Header theme={LightTheme} backgroundColor={colors.$headerFooterBg}>
@@ -76,18 +76,19 @@ class DrawerContainer extends Component {
         </Header>
         <Content theme={LightTheme}>
           <List>
-          <ListItem button
-            style={{
-              height: 60
-            }}
-            onPress={() => setallFriendsVisibility(true) }
-            >
-                <Text style={{
-                  fontSize: 20,
-                  color: this.props.allFriendsColor,
-                }}
-                >All Friends</Text>
-              </ListItem>
+          <View style={{
+            backgroundColor: allFriendsColor.backgroundColor,
+          }}>
+            <ListItem button style={{height: 60}}
+              onPress={() => setallFriendsVisibility(true) }
+              >
+                  <Text style={{
+                    fontSize: 20,
+                    color: allFriendsColor.color
+                  }}
+                  >All Friends</Text>
+                </ListItem>
+              </View>
             {
             this.props.data.map((el, index) => (
               <FriendListItem
@@ -124,10 +125,14 @@ const mstp = (state) => {
   const { friendName } = getFriendByFriendId(state, state.visible.selectedFriendId)
   const { allFriendsVisibility } = state.visible
   const drawerHeaderTitle = allFriendsVisibility
-    ? 'All Gifts'
+    ? 'All Friends'
     : friendName
+
+  const createColors = (color, backgroundColor) => ({ color, backgroundColor })
   return {
-    allFriendsColor: allFriendsVisibility ? colors.$activeTabTextColor : 'black',
+    allFriendsColor: allFriendsVisibility
+      ? createColors(colors.$tabTextColorActive, colors.$tabBgActive)
+      : createColors(colors.$tabTextColorInactive, colors.$tabBgInactive),
     selectedFriendId: state.visible.selectedFriendId,
     drawerHeaderTitle,
     data: state.user.data,

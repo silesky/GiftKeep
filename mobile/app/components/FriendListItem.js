@@ -21,7 +21,7 @@ export const FriendListItem = ({
       onSwipeDelete={() => onSwipeDelete()}>
       <ListItem style={{height: 80}} button onPress={() => selectFriend()}>
         <Text style={{
-          color: isSelected ? colors.$activeTabTextColor : 'black',
+          color: isSelected ? colors.$tabTextColorActive : 'black',
           fontSize: 20
         }}>{friendName}</Text>
       </ListItem>

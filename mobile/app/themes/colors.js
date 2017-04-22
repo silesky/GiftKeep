@@ -26,10 +26,17 @@ module.exports = {
   get $friendFormEventCardBackgroundColor () { return Color(this.almostwhite).hex()}, //almost white
   // tabs
   get $listDividerBg () { return this.lightgrey },
+
   get _tabColor () { return this.electricBlue },
-  get $activeTabBackground () { return this.lightgrey },
-  get $activeTabTextColor () { return this._tabColor },
-  get $activeTabUnderlineColor () { return this._tabColor },
+
+  get $tabBgActive () { return this.lightgrey },
+  get $tabBgInactive () { return Color(this.lightgrey).lighten(0.05).hex() },
+
+  get $tabTextColorActive () { return this._tabColor },
+  get $tabTextColorInactive () { return Color(this.$tabTextColorActive).desaturate(0.7).lighten(0.5).hex() },
+
+  get $tabUnderlineColorActive () { return this._tabColor },
+
   get $cardHeaderBg () { return this.darkpurple },
   get $cardBg () { return this.offwhite },
   get $headerFooterTextColor () { return this.white }, // header text color
