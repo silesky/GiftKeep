@@ -1,13 +1,13 @@
 import React, {
-  Component
+  Component,
 } from 'react'
 
 import {
-  connect
+  connect,
 } from 'react-redux'
 
 import {
-  bindActionCreators
+  bindActionCreators,
 } from 'redux'
 
 import * as actions from './../actions/'
@@ -26,24 +26,25 @@ import {
   List,
   Icon,
   ListItem,
-  Title
+  Title,
 } from 'native-base'
 
 import {
-  Header
+  Header,
 } from 'native-base'
 
 import {
   FbLogin,
-  FriendListItem
+  FriendListItem,
 } from './../components/'
 
 import {
-  LightTheme
+  LightTheme,
+  colors,
 } from './../themes'
 
-import colors from './../themes/colors'
 
+import { getFriendByFriendId } from './../utils/'
 class DrawerContainer extends Component {
   onSwipeDelete (friendId) {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
@@ -51,20 +52,21 @@ class DrawerContainer extends Component {
   }
   render () {
     const {
-      setAllGiftsVisibility,
+      setallFriendsVisibility,
       authTokenAndTryToGetUser,
       friendFormVisibilityToggle,
       friendFormUpdateActivate,
       selectFriend,
       clear,
     } = this.props.actions
+    const { allFriendsVisibility } = this.props
     return (
       <Container>
         <Header theme={LightTheme} backgroundColor={colors.$headerFooterBg}>
           <Button transparent>{``}</Button>
           <Title style={{
-            color: colors.$bigHeadingTextColor
-          }}>Friends</Title>
+            color: colors.$bigHeadingTextColor,
+          }}>{this.props.drawerHeaderTitle}</Title>
           <Button
             iconRight
             onPress={() => friendFormVisibilityToggle()}
@@ -74,10 +76,22 @@ class DrawerContainer extends Component {
         </Header>
         <Content theme={LightTheme}>
           <List>
-
+          <ListItem button
+            style={{
+              height: 60
+            }}
+            onPress={() => setallFriendsVisibility(true) }
+            >
+                <Text style={{
+                  fontSize: 20,
+                  color: this.props.allFriendsColor,
+                }}
+                >All Friends</Text>
+              </ListItem>
             {
             this.props.data.map((el, index) => (
               <FriendListItem
+                isSelected={this.props.selectedFriendId === el.friendId}
                 onSwipeUpdate={friendFormUpdateActivate.bind(this, el.friendId)}
                 onSwipeDelete={() => this.onSwipeDelete(el.friendId)}
                 selectFriend={selectFriend.bind(this, el.friendId)}
@@ -87,9 +101,7 @@ class DrawerContainer extends Component {
             ))
             }
 
-          <ListItem style={{height: 80, alignSelf: 'flex-end'}} button onPress={() => setAllGiftsVisibility(true)}>
-            <Text style={{fontSize: 20}}>All Friends</Text>
-          </ListItem>
+
         </List>
         </Content>
         <Footer backgroundColor={colors.$headerFooterBg}>
@@ -106,10 +118,18 @@ class DrawerContainer extends Component {
 }
 
 const mdtp = (dispatch) => ({
-  actions: bindActionCreators(actions, dispatch)
+  actions: bindActionCreators(actions, dispatch),
 })
 const mstp = (state) => {
+  const { friendName } = getFriendByFriendId(state, state.visible.selectedFriendId)
+  const { allFriendsVisibility } = state.visible
+  const drawerHeaderTitle = allFriendsVisibility
+    ? 'All Gifts'
+    : friendName
   return {
+    allFriendsColor: allFriendsVisibility ? colors.$activeTabTextColor : 'black',
+    selectedFriendId: state.visible.selectedFriendId,
+    drawerHeaderTitle,
     data: state.user.data,
     userName: state.userName,
     fbImage: state.fbImage,

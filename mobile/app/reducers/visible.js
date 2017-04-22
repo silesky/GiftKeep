@@ -6,13 +6,13 @@ const initialState = {
   createGiftModalVisibility: false,
   createEventModalVisibility: false,
   selectedGiftId: null,
-  allGiftsVisibility: false,
+  allFriendsVisibility: false,
 }
 export const visible = (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_ALLGIFTS_VISIBILITY':
+    case 'SET_ALLFRIENDS_VISIBILITY':
     {
-      return {...state, allGiftsVisibility: action.payload.bool }
+      return {...state, allFriendsVisibility: action.payload.bool, selectedFriendId: null }
     }
     case 'FOCUS_GIFT_INPUT' :
       {
@@ -40,7 +40,7 @@ export const visible = (state = initialState, action) => {
       }
     case 'SELECT_FRIEND':
       {
-        return { ...state, allGiftsVisibility: false, selectedFriendId: action.payload.friendId }
+        return { ...state, selectedFriendId: action.payload.friendId, allFriendsVisibility: false }
       }
     case 'FRIEND_FORM_VISIBILITY_TOGGLE':
       {

@@ -84,10 +84,11 @@ class BodyEventsView extends Component {
 const mdtp = (dispatch) => ({ actions: bindActionCreators(actions, dispatch), })
 const mstp = (state) => {
   let { bday, events, friendName, } = Utils.getFriendByFriendId(state, state.visible.selectedFriendId)
- const { allGiftsVisibility } = state.visible
+ const { allFriendsVisibility } = state.visible
   let whichEvents
-  if (allGiftsVisibility === true) {
-    whichEvents = Utils.getAllEvents(state)
+  if (allFriendsVisibility) {
+    const allEvents = Utils.getAllEvents(state)
+    whichEvents = allEvents;
   } else {
     whichEvents = events && events.length ? events : []
   }
@@ -96,7 +97,7 @@ const mstp = (state) => {
     bday,
     friendName,
     hasFriends: !!state.user.data.length,
-    hasEvents: !!events.length,
+    hasEvents: !!whichEvents.length,
 
   }
 }

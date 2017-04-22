@@ -1,6 +1,6 @@
 import * as Utils from './../utils/'
 
-export const setAllGiftsVisibility = (bool) => ({type: 'SET_ALLGIFTS_VISIBILITY', payload: { bool } })
+export const setallFriendsVisibility = (bool) => ({type: 'SET_ALLFRIENDS_VISIBILITY', payload: { bool } })
 
 export const deleteEventName = (eventName) => ({type: 'EVENT_NAME_DELETE', payload: eventName })
 

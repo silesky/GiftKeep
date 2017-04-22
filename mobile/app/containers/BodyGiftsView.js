@@ -35,7 +35,6 @@ class BodyGiftsView extends Component {
       hasFriends,
       hasGifts,
       selectedTab,
-      createGiftModalVisibility,
     } = this.props
 
     const body = (
@@ -86,9 +85,9 @@ class BodyGiftsView extends Component {
 const mdtp = (dispatch) => ({ actions: bindActionCreators(actions, dispatch) })
 const mstp = (state) => {
   const { bday, friendName, gifts } = Utils.getFriendByFriendId(state, state.visible.selectedFriendId)
-  const { allGiftsVisibility } = state.visible
+  const { allFriendsVisibility } = state.visible
   let whichGifts
-  if (allGiftsVisibility === true) {
+  if (allFriendsVisibility) {
     whichGifts = Utils.getAllGifts(state)
   } else {
     whichGifts = gifts && gifts.length ? gifts : []

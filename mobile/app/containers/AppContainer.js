@@ -86,15 +86,15 @@ const mstp = (state) => {
     isLeftDrawerOpen,
     createGiftModalVisibility,
     createEventModalVisibility,
-    allGiftsVisibility,
+    allFriendsVisibility,
    } = state.visible
 
   let headerTitle
-  if (allGiftsVisibility && selectedTab === 'gifts') {
+  if (allFriendsVisibility && selectedTab === 'gifts') {
      headerTitle = 'All Gifts'
-   } else if (allGiftsVisibility && selectedTab === 'events') {
+   } else if (allFriendsVisibility && selectedTab === 'events') {
      headerTitle = 'All Events'
-   } else if (!allGiftsVisibility) {
+   } else if (!allFriendsVisibility) {
      const friendName = getFriendItemById(state, selectedFriendId, 'friendName')
      headerTitle = friendName
    }

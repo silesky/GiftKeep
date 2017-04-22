@@ -14,7 +14,6 @@ export const bodyModalVisibilityFalse = () => ({ type: 'SET_BODY_MODAL_VISIBILIT
 export const createEventModalVisibilityTrue = () => ({ type: 'SET_CREATE_EVENT_MODAL_VISIBILITY_TRUE' })
 export const createEventModalVisibilityFalse = () => ({ type: 'SET_CREATE_EVENT_MODAL_VISIBILITY_FALSE' })
 export const leftDrawerVisibility = (bool) => {
-  console.log('called!')
   return bool
     ? { type: 'SET_LEFT_DRAWER_OPEN_TRUE' }
     : { type: 'SET_LEFT_DRAWER_OPEN_FALSE' }

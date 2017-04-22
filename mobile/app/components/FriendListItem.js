@@ -1,4 +1,5 @@
 import React from 'react'
+import { colors } from './../themes/'
 import {
   ListItem,
   Text,
@@ -11,6 +12,7 @@ export const FriendListItem = ({
   selectFriend,
   onSwipeDelete,
   onSwipeUpdate,
+  isSelected
 }) => {
   return (
     <SwiperWrapper
@@ -18,7 +20,10 @@ export const FriendListItem = ({
       onSwipeUpdate={() => onSwipeUpdate()}
       onSwipeDelete={() => onSwipeDelete()}>
       <ListItem style={{height: 80}} button onPress={() => selectFriend()}>
-        <Text style={{fontSize: 20}}>{friendName}</Text>
+        <Text style={{
+          color: isSelected ? colors.$activeTabTextColor : 'black',
+          fontSize: 20
+        }}>{friendName}</Text>
       </ListItem>
     </SwiperWrapper>
   )
