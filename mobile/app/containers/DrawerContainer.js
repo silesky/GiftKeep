@@ -18,16 +18,12 @@ import {
 } from 'react-native'
 
 import {
-  Thumbnail,
-  Button,
   Text,
   Container,
   Content,
   Footer,
   List,
-  Icon,
   ListItem,
-  Title,
 } from 'native-base'
 
 import {
@@ -37,6 +33,7 @@ import {
 import {
   FbLogin,
   FriendListItem,
+  DrawerHeader,
 } from './../components/'
 
 import {
@@ -62,24 +59,18 @@ class DrawerContainer extends Component {
     const { allFriendsVisibility, allFriendsColor } = this.props
     return (
       <Container>
-        <Header backgroundColor={colors.$headerFooterBg}>
-          <Button transparent>{``}</Button>
-          <Title style={{
-            color: colors.$bigHeadingTextColor,
-          }}>{this.props.drawerHeaderTitle}</Title>
-          <Button
-            style={{color: colors.$defaultIconColor}}
-            iconRight
-            onPress={() => friendFormVisibilityToggle()}
-            transparent>
-            <Icon style={{color: colors.$defaultIconColor}} name='ios-person-add'/>
-          </Button>
-        </Header>
+      {/* extra wrapping view because header won't display otherwise */}
+        <View>
+          <DrawerHeader
+            drawerHeaderTitle={this.props.drawerHeaderTitle}
+            friendFormVisibilityToggle={friendFormVisibilityToggle}
+           />
+           </View>
         <Content>
           <List>
-          <View style={{
-            backgroundColor: allFriendsColor.backgroundColor,
-          }}>
+            <View style={{
+              backgroundColor: allFriendsColor.backgroundColor,
+            }}>
             <ListItem button style={{height: 60}}
               onPress={() => setallFriendsVisibility(true) }
               >
@@ -89,7 +80,7 @@ class DrawerContainer extends Component {
                   }}
                   >All Friends</Text>
                 </ListItem>
-              </View>
+           </View>
             {
             this.props.data.map((el, index) => (
               <FriendListItem
@@ -102,8 +93,6 @@ class DrawerContainer extends Component {
               />
             ))
             }
-
-
         </List>
         </Content>
         <Footer backgroundColor={colors.$headerFooterBg}>
