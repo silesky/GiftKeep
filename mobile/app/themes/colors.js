@@ -27,18 +27,19 @@ module.exports = {
   // tabs
   get $listDividerBg () { return this.lightgrey },
 
-  get _tabColor () { return this.electricBlue },
 
   get $tabBgActive () { return this.lightgrey },
   get $tabBgInactive () { return Color(this.lightgrey).lighten(0.05).hex() },
 
-  get $tabTextColorActive () { return this._tabColor },
+  get $tabTextColorActive () { return this.electricBlue },
   get $tabTextColorInactive () { return Color(this.$tabTextColorActive).desaturate(0.7).lighten(0.5).hex() },
 
-  get $tabUnderlineColorActive () { return this._tabColor },
+  get $tabUnderlineColorActive () { return this.electricBlue },
 
   get $cardHeaderBg () { return this.darkpurple },
   get $cardBg () { return this.offwhite },
+
+
   get $headerFooterTextColor () { return this.white }, // header text color
   get $defaultIconColor () { return this.white }, // header icon color
   get $bigHeadingTextColor () { return this.white },  // main text color
