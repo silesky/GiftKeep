@@ -31,9 +31,7 @@ export const DrawerHeader = ({
         onPress={() => friendFormVisibilityToggle()}
         transparent>
         <Icon
-          style={{
-            color: colors.$defaultIconColor,
-          }}
+          style={Styles.Icon}
           name='ios-person-add'/>
       </Button>
     </Header>
@@ -44,6 +42,9 @@ export const DrawerHeader = ({
 const Styles = StyleSheet.create({
   Header: {
     backgroundColor: colors.$headerFooterBg,
+  },
+  Icon: {
+    color: colors.$defaultIconColor,
   },
   Title: {
     color: colors.$bigHeadingTextColor,

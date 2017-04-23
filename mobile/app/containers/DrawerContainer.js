@@ -34,6 +34,7 @@ import {
   FbLogin,
   FriendListItem,
   DrawerHeader,
+  AllFriendsBtn,
 } from './../components/'
 
 import {
@@ -56,7 +57,7 @@ class DrawerContainer extends Component {
       selectFriend,
       clear,
     } = this.props.actions
-    const { allFriendsVisibility, allFriendsColor } = this.props
+    const { allFriendsColor } = this.props
     return (
       <Container>
       {/* extra wrapping view because header won't display otherwise */}
@@ -68,19 +69,10 @@ class DrawerContainer extends Component {
            </View>
         <Content>
           <List>
-            <View style={{
-              backgroundColor: allFriendsColor.backgroundColor,
-            }}>
-            <ListItem button style={{height: 60}}
-              onPress={() => setallFriendsVisibility(true) }
-              >
-                  <Text style={{
-                    fontSize: 20,
-                    color: allFriendsColor.color
-                  }}
-                  >All Friends</Text>
-                </ListItem>
-           </View>
+            <AllFriendsBtn
+            onBtnPress={setallFriendsVisibility.bind(this, true)}
+            isSelected={this.props.allFriendsVisibility}
+            />
             {
             this.props.data.map((el, index) => (
               <FriendListItem
@@ -120,9 +112,7 @@ const mstp = (state) => {
 
   const createColors = (color, backgroundColor) => ({ color, backgroundColor })
   return {
-    allFriendsColor: allFriendsVisibility
-      ? createColors(colors.$tabTextColorActive, colors.$tabBgActive)
-      : createColors(colors.$tabTextColorInactive, colors.$tabBgInactive),
+    allFriendsVisibility,
     selectedFriendId: state.visible.selectedFriendId,
     drawerHeaderTitle,
     data: state.user.data,
