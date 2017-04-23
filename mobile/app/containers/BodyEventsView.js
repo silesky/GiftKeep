@@ -2,8 +2,6 @@ import React, { Component, } from 'react'
 
 import { LayoutAnimation, } from 'react-native'
 
-import LightTheme from './../themes'
-
 import { connect, } from 'react-redux'
 
 import { bindActionCreators, } from 'redux'

@@ -1,7 +1,6 @@
 // [x] eachEvent should have a default object
 // [ ] import from react native calendar datepicker and display
 // react-native-calendar-datepicker
-import { LightTheme, themeList, } from './../themes/'
 import React, {
   Component,
 } from 'react'
@@ -169,7 +168,7 @@ class FriendFormCreateUpdate extends Component {
               }
             </List>
           </Content>
-          <Footer theme={LightTheme}>
+          <Footer>
             <FooterTab>
               <Button onPress={() => actions.friendFormCancel()}>
                 CANCEL
