@@ -54,7 +54,7 @@ class BodyGiftsView extends Component {
             />
           }
 
-          { gifts.map((el, ind) => {
+          { gifts.map((el) => {
             return (
               <GiftCard
                 isSelected={this.props.selectedGiftId === el.giftId}
@@ -65,7 +65,7 @@ class BodyGiftsView extends Component {
                 updateGiftDesc={this.props.actions.updateGiftDesc.bind(this, selectedFriendId, el.giftId)}
                 giftId={el.giftId}
                 giftTitle={el.giftTitle}
-                key={ind} />
+                key={el.giftId} />
             )
           })}
         </View>

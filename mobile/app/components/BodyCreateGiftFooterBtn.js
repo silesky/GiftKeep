@@ -1,9 +1,11 @@
 import React from 'react'
 import { View, } from 'react-native'
 import { Button, } from 'native-base'
+import { FriendSelector } from './../components/'
 export const BodyCreateGiftFooterBtn = ({
     onCancelPress,
     onOkPress,
+    onFriendSelectPress,
 }) => (
 <View
   style={{
@@ -14,6 +16,8 @@ export const BodyCreateGiftFooterBtn = ({
     justifyContent: 'flex-end',
     flexDirection: 'row',
   }}>
+
+  <FriendSelector />
   <Button danger onPress={() => onCancelPress()}>
     Cancel
   </Button>
@@ -25,5 +29,7 @@ export const BodyCreateGiftFooterBtn = ({
     success>
     OK
   </Button>
+
+
 </View>
 )

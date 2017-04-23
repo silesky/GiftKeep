@@ -14,7 +14,9 @@ import {
   SimpleModalFormWrapper,
 }
 from './../components/'
-import { getFriendByFriendId, } from './../utils/'
+import { getFriendByFriendId,
+
+ } from './../utils/'
 import {
   Input,
   List,

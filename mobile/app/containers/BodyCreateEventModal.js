@@ -82,6 +82,7 @@ class BodyCreateEventModal extends React.Component {
             selectedEventDate={this.state.date}
             handleOnEventDateChange={this.onEventDateChange}
           />
+
           <View
             style={{
               marginTop: 15,
