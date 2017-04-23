@@ -5,9 +5,8 @@ import {
   Button,
   Icon,
 } from 'native-base'
-import { colors, } from '../themes/'
-import LightTheme from '../themes/LightTheme'
-import { IconCreator, } from './../icons/'
+import { colors } from '../themes/'
+import { IconCreator } from './../icons/'
 
 export const TopBar = ({
   handleOpenDrawer,
@@ -46,7 +45,7 @@ export const TopBar = ({
     </Button>
   )
   return (
-    <Header theme={LightTheme} backgroundColor={colors.$headerFooterBg}>
+    <Header backgroundColor={colors.$headerFooterBg}>
       <Button transparent onPress={() => handleOpenDrawer()}>
         <Icon style={{
           ...iconColor,

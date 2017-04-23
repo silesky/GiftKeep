@@ -62,19 +62,20 @@ class DrawerContainer extends Component {
     const { allFriendsVisibility, allFriendsColor } = this.props
     return (
       <Container>
-        <Header theme={LightTheme} backgroundColor={colors.$headerFooterBg}>
+        <Header backgroundColor={colors.$headerFooterBg}>
           <Button transparent>{``}</Button>
           <Title style={{
             color: colors.$bigHeadingTextColor,
           }}>{this.props.drawerHeaderTitle}</Title>
           <Button
+            style={{color: colors.$defaultIconColor}}
             iconRight
             onPress={() => friendFormVisibilityToggle()}
             transparent>
-            <Icon name='ios-person-add'/>
+            <Icon style={{color: colors.$defaultIconColor}} name='ios-person-add'/>
           </Button>
         </Header>
-        <Content theme={LightTheme}>
+        <Content>
           <List>
           <View style={{
             backgroundColor: allFriendsColor.backgroundColor,
