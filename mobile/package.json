@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "lintfix": "$NVM_DIR/versions/node/v6.10.1/bin/eslint --fix app/**/*.js",
+    "format": "prettier-standard app/**/*.js && npm run lintfix",
     "emu-droid": "emulator -avd mydevice",
     "remotedev-start": "remotedev --hostname=localhost --port=8080",
     "reset": "npm start -- --reset-cache",
