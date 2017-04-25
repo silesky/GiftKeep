@@ -1,16 +1,6 @@
 import React from 'react'
-import {
-  Content,
-  Card,
-  Title,
-  Button,
-  CardItem,
-  Icon,
-} from 'native-base'
-import {
-  View,
-  Modal,
-} from 'react-native'
+import { Content, Card, Title, Button, CardItem, Icon } from 'native-base'
+import { View, Modal } from 'react-native'
 export class ModalDrawerCardWrapper extends React.Component {
   constructor (props) {
     super(props)
@@ -18,16 +8,10 @@ export class ModalDrawerCardWrapper extends React.Component {
   }
   toggleVisible (bool) {
     this.setState({ isVisible: bool })
-    this.props.onCancel();
+    this.props.onCancel()
   }
   render () {
-    const {
-      isVisible,
-      iconName,
-      title,
-      onCancel,
-      onSubmit,
-      } = this.props
+    const { isVisible, iconName, title, onCancel, onSubmit } = this.props
     return (
       <Modal visible={isVisible} animationType={'fade'} transparent={true}>
         <Content>
@@ -36,7 +20,8 @@ export class ModalDrawerCardWrapper extends React.Component {
               margin: 20,
               marginTop: 30,
               backgroundColor: 'white',
-            }}>
+            }}
+          >
             <View
               style={{
                 padding: 15,
@@ -44,16 +29,19 @@ export class ModalDrawerCardWrapper extends React.Component {
                 justifyContent: 'center',
                 alignItems: 'center',
                 flexDirection: 'row',
-              }}>
-              <Icon name={iconName}/>
-              <Title style={{
-                paddingLeft: 10,
-              }}>
-              { title }
+              }}
+            >
+              <Icon name={iconName} />
+              <Title
+                style={{
+                  paddingLeft: 10,
+                }}
+              >
+                {title}
               </Title>
             </View>
 
-            { this.props.children }
+            {this.props.children}
 
             <CardItem footer>
               <Button
@@ -61,7 +49,8 @@ export class ModalDrawerCardWrapper extends React.Component {
                   alignSelf: 'center',
                 }}
                 danger
-                onPress={() => this.toggleVisible()}>
+                onPress={() => this.toggleVisible()}
+              >
                 CANCEL
               </Button>
               <Button
@@ -69,7 +58,8 @@ export class ModalDrawerCardWrapper extends React.Component {
                   alignSelf: 'center',
                 }}
                 success
-                onPress={() => onSubmit()}>
+                onPress={() => onSubmit()}
+              >
                 OK
               </Button>
             </CardItem>

@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as actions from './../actions/'
-import {
-  Content,
-} from 'native-base'
+import { Content } from 'native-base'
 // Components
 import {
   NotificationBottom,
@@ -12,7 +10,7 @@ import {
   DrawerWrapper,
   TabWrapper,
   BottomBar,
-   } from './../components/'
+} from './../components/'
 import { colors } from './../themes/'
 
 import {
@@ -33,53 +31,68 @@ class AppContainer extends Component {
   render () {
     return (
       <DrawerWrapper
-        handleCloseDrawer={this.props.actions.leftDrawerVisibility.bind(this, false)}
+        handleCloseDrawer={this.props.actions.leftDrawerVisibility.bind(
+          this,
+          false
+        )}
         isDrawerOpen={this.props.isLeftDrawerOpen}
-        content={<DrawerContainer />}>
-       { this.props.createGiftModalVisibility &&
+        content={<DrawerContainer />}
+      >
+        {this.props.createGiftModalVisibility &&
           <BodyCreateGiftModal
-            isVisible={this.props.createGiftModalVisibility }
-          /> }
-          { this.props.createEventModalVisibility &&
-            <BodyCreateEventModal
-             isVisible={this.props.createEventModalVisibility}
-             /> }
+            isVisible={this.props.createGiftModalVisibility}
+          />}
+        {this.props.createEventModalVisibility &&
+          <BodyCreateEventModal
+            isVisible={this.props.createEventModalVisibility}
+          />}
         <TopBar
-          eventModalShow={ this.props.actions.createEventModalVisibilityTrue.bind(this, this.props.selectedFriendId) }
-          giftModalShow={ this.props.actions.createGiftModalVisibilityTrue.bind(this, this.props.selectedFriendId) }
-          addEvent={ this.props.actions.friendFormEventCreate.bind(this, this.props.selectedFriendId, undefined, undefined) }
-          friendName={ this.props.headerTitle }
+          eventModalShow={this.props.actions.createEventModalVisibilityTrue.bind(
+            this,
+            this.props.selectedFriendId
+          )}
+          giftModalShow={this.props.actions.createGiftModalVisibilityTrue.bind(
+            this,
+            this.props.selectedFriendId
+          )}
+          addEvent={this.props.actions.friendFormEventCreate.bind(
+            this,
+            this.props.selectedFriendId,
+            undefined,
+            undefined
+          )}
+          friendName={this.props.headerTitle}
           giftBtnIsDisabled={!this.props.hasFriends}
           eventBtnIsDisabled={!this.props.hasFriends}
-          handleOpenDrawer={this.props.actions.leftDrawerVisibility.bind(this, true)}
+          handleOpenDrawer={this.props.actions.leftDrawerVisibility.bind(
+            this,
+            true
+          )}
           selectedTab={this.props.selectedTab}
-          />
+        />
         <TabWrapper handleChangeTab={this.props.actions.selectTab}>
 
-            <BodyGiftsView
-              tabLabel='Gifts'
-              isSelected={this.props.selectedTab === 'gifts'}
-              friendId={this.props.selectedFriendId}
-              />
-            <BodyEventsView
-              tabLabel='Events'
-              isSelected={this.props.selectedTab === 'events'}
-              />
-          </TabWrapper>
+          <BodyGiftsView
+            tabLabel='Gifts'
+            isSelected={this.props.selectedTab === 'gifts'}
+            friendId={this.props.selectedFriendId}
+          />
+          <BodyEventsView
+            tabLabel='Events'
+            isSelected={this.props.selectedTab === 'events'}
+          />
+        </TabWrapper>
 
-        { this.props.bottomNotificationVisibility && <NotificationBottom notificationText={this.props.notificationText} /> }
+        {this.props.bottomNotificationVisibility &&
+          <NotificationBottom notificationText={this.props.notificationText} />}
         <FriendFormCreateUpdate />
       </DrawerWrapper>
-
     )
   }
 }
 
-const mstp = (state) => {
-  const {
-    notificationText,
-    bottomNotificationVisibility,
-  } = state.notification
+const mstp = state => {
+  const { notificationText, bottomNotificationVisibility } = state.notification
   const {
     selectedFriendId,
     selectedTab,
@@ -87,17 +100,17 @@ const mstp = (state) => {
     createGiftModalVisibility,
     createEventModalVisibility,
     allFriendsVisibility,
-   } = state.visible
+  } = state.visible
 
   let headerTitle
   if (allFriendsVisibility && selectedTab === 'gifts') {
-     headerTitle = 'All Gifts'
-   } else if (allFriendsVisibility && selectedTab === 'events') {
-     headerTitle = 'All Events'
-   } else if (!allFriendsVisibility) {
-     const friendName = getFriendItemById(state, selectedFriendId, 'friendName')
-     headerTitle = friendName
-   }
+    headerTitle = 'All Gifts'
+  } else if (allFriendsVisibility && selectedTab === 'events') {
+    headerTitle = 'All Events'
+  } else if (!allFriendsVisibility) {
+    const friendName = getFriendItemById(state, selectedFriendId, 'friendName')
+    headerTitle = friendName
+  }
 
   return {
     isLeftDrawerOpen: isLeftDrawerOpen,
@@ -112,7 +125,7 @@ const mstp = (state) => {
   }
 }
 // no more store.dispatch(actions.friendFormCreateAndSave())
-const mdtp = (dispatch) => {
+const mdtp = dispatch => {
   return { actions: bindActionCreators(actions, dispatch) }
 }
 export default connect(mstp, mdtp)(AppContainer)

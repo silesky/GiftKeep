@@ -1,5 +1,5 @@
 import React from 'react'
-import { Footer, FooterTab, Button, Icon, Text, Content } from  'native-base'
+import { Footer, FooterTab, Button, Icon, Text, Content } from 'native-base'
 import { colors } from '../themes/'
 import { LightTheme } from '../themes/LightTheme'
 export const BottomBar = ({ addGift, addEvent, selectedTab }) => {
@@ -10,21 +10,21 @@ export const BottomBar = ({ addGift, addEvent, selectedTab }) => {
         addBtn = {
           text: 'ADD GIFT',
           handler: addGift,
-          icon: 'ios-add-circle-outline'
+          icon: 'ios-add-circle-outline',
         }
         break
       case 'events':
         addBtn = {
           text: 'ADD EVENT',
           handler: addEvent,
-          icon: 'md-calendar'
+          icon: 'md-calendar',
         }
         break
       case 'all gifts':
         addBtn = {
           text: 'ADD GIFT',
           handler: addGift,
-          icon: 'ios-add'
+          icon: 'ios-add',
         }
         break
     }
@@ -37,7 +37,7 @@ export const BottomBar = ({ addGift, addEvent, selectedTab }) => {
       <FooterTab>
         <Button transparent>
           <Text>{whichBtn().text}</Text>
-          <Icon name={whichBtn().icon}/>
+          <Icon name={whichBtn().icon} />
         </Button>
       </FooterTab>
     </Footer>
@@ -46,5 +46,5 @@ export const BottomBar = ({ addGift, addEvent, selectedTab }) => {
 
 BottomBar.PropTypes = {
   selectedTab: React.PropTypes.oneOf([ 'gifts', 'events', 'all gifts' ]),
-  addBtnHandler: React.PropTypes.obj
+  addBtnHandler: React.PropTypes.obj,
 }

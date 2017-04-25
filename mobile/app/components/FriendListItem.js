@@ -1,29 +1,29 @@
 import React from 'react'
 import { colors } from './../themes/'
-import {
-  ListItem,
-  Text,
-} from 'native-base'
-import {
-  SwiperWrapper,
-} from './../components'
+import { ListItem, Text } from 'native-base'
+import { SwiperWrapper } from './../components'
 export const FriendListItem = ({
   friendName,
   selectFriend,
   onSwipeDelete,
   onSwipeUpdate,
-  isSelected
+  isSelected,
 }) => {
   return (
     <SwiperWrapper
       fontSize={40}
       onSwipeUpdate={() => onSwipeUpdate()}
-      onSwipeDelete={() => onSwipeDelete()}>
-      <ListItem style={{height: 80}} button onPress={() => selectFriend()}>
-        <Text style={{
-          color: isSelected ? colors.$tabTextColorActive : 'black',
-          fontSize: 20
-        }}>{friendName}</Text>
+      onSwipeDelete={() => onSwipeDelete()}
+    >
+      <ListItem style={{ height: 80 }} button onPress={() => selectFriend()}>
+        <Text
+          style={{
+            color: isSelected ? colors.$tabTextColorActive : 'black',
+            fontSize: 20,
+          }}
+        >
+          {friendName}
+        </Text>
       </ListItem>
     </SwiperWrapper>
   )

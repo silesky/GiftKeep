@@ -1,8 +1,6 @@
 import React from 'react'
 
-import {
-  Thumbnail
-} from  'native-base'
+import { Thumbnail } from 'native-base'
 
 const FbProfImage = ({ fbImage }) => (
   <Thumbnail
@@ -10,7 +8,7 @@ const FbProfImage = ({ fbImage }) => (
       uri: fbImage,
       width: 25,
       height: 25,
-      scale: 3
+      scale: 3,
     }}
   />
 )

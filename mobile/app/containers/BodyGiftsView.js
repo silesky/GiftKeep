@@ -5,11 +5,7 @@ import { bindActionCreators } from 'redux'
 import * as actions from './../actions/'
 import { Content, Card } from 'native-base'
 import { LightTheme } from './../themes/'
-import {
-  NoFriendsAlert,
-  NoGiftsAlert,
-  GiftCard,
-} from './../components/'
+import { NoFriendsAlert, NoGiftsAlert, GiftCard } from './../components/'
 
 import { BodyCreateGiftModal } from './../containers'
 import * as Utils from './../utils/utils'
@@ -40,51 +36,62 @@ class BodyGiftsView extends Component {
     const body = (
       <View>
 
-          { !hasFriends &&
-            <NoFriendsAlert
-              addFriendBtnClick={this.props.actions.friendFormVisibilityToggle}
-              friendName={friendName}
-              bday={bday}
-              />
-            }
+        {!hasFriends &&
+          <NoFriendsAlert
+            addFriendBtnClick={this.props.actions.friendFormVisibilityToggle}
+            friendName={friendName}
+            bday={bday}
+          />}
 
-          { hasFriends && !hasGifts &&
-            <NoGiftsAlert
+        {hasFriends &&
+          !hasGifts &&
+          <NoGiftsAlert
             addGiftBtnClick={this.props.actions.createGiftModalVisibilityTrue}
-            />
-          }
+          />}
 
-          { gifts.map((el) => {
-            return (
-              <GiftCard
-                isSelected={this.props.selectedGiftId === el.giftId}
-                onGiftInputFocus={() => this.onGiftInputFocus(el.giftId)}
-                deleteGift={() => this.onGiftDelete(selectedFriendId, el.giftId)}
-                giftDesc={el.giftDesc}
-                updateGiftTitle={this.props.actions.updateGiftTitle.bind(this, selectedFriendId, el.giftId)}
-                updateGiftDesc={this.props.actions.updateGiftDesc.bind(this, selectedFriendId, el.giftId)}
-                giftId={el.giftId}
-                giftTitle={el.giftTitle}
-                key={el.giftId} />
-            )
-          })}
-        </View>
+        {gifts.map(el => {
+          return (
+            <GiftCard
+              isSelected={this.props.selectedGiftId === el.giftId}
+              onGiftInputFocus={() => this.onGiftInputFocus(el.giftId)}
+              deleteGift={() => this.onGiftDelete(selectedFriendId, el.giftId)}
+              giftDesc={el.giftDesc}
+              updateGiftTitle={this.props.actions.updateGiftTitle.bind(
+                this,
+                selectedFriendId,
+                el.giftId
+              )}
+              updateGiftDesc={this.props.actions.updateGiftDesc.bind(
+                this,
+                selectedFriendId,
+                el.giftId
+              )}
+              giftId={el.giftId}
+              giftTitle={el.giftTitle}
+              key={el.giftId}
+            />
+          )
+        })}
+      </View>
     )
 
     return (
       <Content theme={LightTheme}>
-      { (selectedTab === 'gifts') && body
-      /* selectedTab related to this bug
+        {selectedTab === 'gifts' && body
+        /* selectedTab related to this bug
        https://trello.com/c/jMfL798g/127-should-not-be-transparent-when-i-m-selecting-events-view */
-      }
+        }
       </Content>
     )
   }
 }
 
-const mdtp = (dispatch) => ({ actions: bindActionCreators(actions, dispatch) })
-const mstp = (state) => {
-  const { bday, friendName, gifts } = Utils.getFriendByFriendId(state, state.visible.selectedFriendId)
+const mdtp = dispatch => ({ actions: bindActionCreators(actions, dispatch) })
+const mstp = state => {
+  const { bday, friendName, gifts } = Utils.getFriendByFriendId(
+    state,
+    state.visible.selectedFriendId
+  )
   const { allFriendsVisibility } = state.visible
   let whichGifts
   if (allFriendsVisibility) {

@@ -1,18 +1,18 @@
 import React from 'react'
 import { colors } from './../themes/'
-import { Input } from  'native-base'
+import { Input } from 'native-base'
 export const GiftCardInputTitle = ({ updateGiftTitle, giftTitle }) => (
   <Input
     placeholderTextColor={colors.lightgrey}
-    placeholder="Title"
+    placeholder='Title'
     style={{
       color: 'white',
       height: 12,
-      fontWeight: '700'
+      fontWeight: '700',
     }}
     value={giftTitle}
-    onChangeText={(input) => {
+    onChangeText={input => {
       updateGiftTitle(input)
     }}
-/>
+  />
 )

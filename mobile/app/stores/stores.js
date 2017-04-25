@@ -1,9 +1,6 @@
 // TODO: The NEW Access Token is not being saved to the DB on login
 
-import {
-  createStore,
-  applyMiddleware
-} from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 
 import rootReducer from './../reducers/'
@@ -12,12 +9,10 @@ import {
   saveToAsyncStorage,
   getFromAsyncStorage,
   updateUserDataByAccessToken,
-  updateUserByBody
+  updateUserByBody,
 } from './../utils/'
 
-import {
-  hydrateAll
-} from './../actions'
+import { hydrateAll } from './../actions'
 
 import { composeWithDevTools } from 'remote-redux-devtools'
 const composeEnhancers = composeWithDevTools({
@@ -25,10 +20,13 @@ const composeEnhancers = composeWithDevTools({
   port: 8080, // works in conjunction remotedev --hostname=localhost --port=8080
   realtime: true,
   shouldRecordChanges: true, // need to manually click record changes, recording slows down app.
-  actionsBlacklist: ['FRIEND_FORM_NAME_INPUT'], // when I add a seccond item to this array, it doesn't work
+  actionsBlacklist: [ 'FRIEND_FORM_NAME_INPUT' ], // when I add a seccond item to this array, it doesn't work
 })
 
-export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
+export const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(thunk))
+)
 
 console.log('store created.')
 
@@ -44,8 +42,8 @@ export const storeStateInAsyncStorage = () => {
 export const storeStateInDb = () => {
   const state = store.getState()
   updateUserByBody({ user: state.user })
-  .then(successOrFail => successOrFail) // get rid of console
-  .catch(err => console.log('stores.js', err))
+    .then(successOrFail => successOrFail) // get rid of console
+    .catch(err => console.log('stores.js', err))
 }
 
 // on first load

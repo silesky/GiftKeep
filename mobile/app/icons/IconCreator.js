@@ -19,8 +19,11 @@ export const IconCreator = (type, name, size, stylesObj = {}) => {
       break
   }
   return [
-    <View key={1} style={{ flex: 1, justifyContent: 'center', height: size, width: size }}>
+    <View
+      key={1}
+      style={{ flex: 1, justifyContent: 'center', height: size, width: size }}
+    >
       {newIcon}
-    </View>
+    </View>,
   ]
 }

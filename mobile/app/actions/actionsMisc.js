@@ -1,19 +1,28 @@
 import * as Utils from './../utils/'
 
-export const setallFriendsVisibility = (bool) => ({type: 'SET_ALLFRIENDS_VISIBILITY', payload: { bool } })
+export const setallFriendsVisibility = bool => ({
+  type: 'SET_ALLFRIENDS_VISIBILITY',
+  payload: { bool },
+})
 
-export const deleteEventName = (eventName) => ({type: 'EVENT_NAME_DELETE', payload: eventName })
+export const deleteEventName = eventName => ({
+  type: 'EVENT_NAME_DELETE',
+  payload: eventName,
+})
 
-export const addEventName = (eventName) => ({type: 'EVENT_NAME_ADD', payload: eventName })
+export const addEventName = eventName => ({
+  type: 'EVENT_NAME_ADD',
+  payload: eventName,
+})
 
-export const giftInputFocus = (selectedGiftId) => {
+export const giftInputFocus = selectedGiftId => {
   return {
     type: 'FOCUS_GIFT_INPUT',
     payload: { selectedGiftId },
   }
 }
 
-export const createNotification = (text) => {
+export const createNotification = text => {
   return dispatch => {
     dispatch({
       type: 'SET_NOTIFICATION_TEXT',
@@ -49,7 +58,7 @@ export const resetAll = () => {
   }
 }
 
-export const selectTab = (tabNum) => {
+export const selectTab = tabNum => {
   let selectedTab
   switch (tabNum) {
     case 0:
@@ -99,13 +108,17 @@ export const deleteGift = (friendId, giftId) => {
   }
 }
 
+export const selectFriend = friendId => ({
+  type: 'SELECT_FRIEND',
+  payload: { friendId },
+})
 
-export const selectFriend = (friendId) => ({ type: 'SELECT_FRIEND', payload: { friendId } })
-
-const _deleteFriend = (friendId) => ({ type: 'DELETE_FRIEND',
+const _deleteFriend = friendId => ({
+  type: 'DELETE_FRIEND',
   payload: {
     friendId,
-  } })
+  },
+})
 
 export const _selectLastFriend = () => {
   return (dispatch, getState) => {
@@ -123,7 +136,7 @@ export const _selectFirstFriend = () => {
   }
 }
 
-const _selectNextFriend = (currentFriendId) => {
+const _selectNextFriend = currentFriendId => {
   return (dispatch, getState) => {
     const state = getState().user.data
     const nextInd = state.findIndex(el => el.friendId === currentFriendId) + 1 // get index
@@ -133,7 +146,7 @@ const _selectNextFriend = (currentFriendId) => {
   }
 }
 
-export const deleteFriend = (friendId) => {
+export const deleteFriend = friendId => {
   return (dispatch, getState) => {
     const friendArr = getState().user.data
     const selectedFriendId = getState().visible.selectedFriendId
@@ -147,12 +160,12 @@ export const deleteFriend = (friendId) => {
   }
 }
 
-export const updateEvent = (eventId, eventName = '', eventDate = '' ) => ({
+export const updateEvent = (eventId, eventName = '', eventDate = '') => ({
   type: 'UPDATE_EVENT',
   payload: {
     eventId,
     eventName,
-    eventDate
+    eventDate,
   },
 })
 
@@ -167,7 +180,7 @@ export const _friendEventAdd = (friendId, eventName, eventDate) => {
   }
 }
 
-export const hydrateUser = (savedState) => {
+export const hydrateUser = savedState => {
   return { type: 'HYDRATE_USER', payload: savedState }
 }
 
@@ -177,7 +190,7 @@ export const testClick = () => {
 
 export const clear = () => ({ type: 'CLEAR' })
 
-export const saveFbPhoto = (uriOrBase64) => {
+export const saveFbPhoto = uriOrBase64 => {
   return {
     type: 'SAVE_FB_PHOTO',
     payload: {
@@ -186,10 +199,11 @@ export const saveFbPhoto = (uriOrBase64) => {
   }
 }
 
-export const authTokenAndTryToGetUser = (token) => {
+export const authTokenAndTryToGetUser = token => {
   return dispatch =>
-  Utils.sendFbAccessTokenToNodeAndGetData(token)
-    .then(({ payload, payload: { fbId } }) => {
+    Utils.sendFbAccessTokenToNodeAndGetData(
+      token
+    ).then(({ payload, payload: { fbId } }) => {
       dispatch(hydrateUser(payload))
       Utils.fbGetPicURLById(fbId).then(url => dispatch(saveFbPhoto(url)))
       dispatch(_selectFirstFriend())

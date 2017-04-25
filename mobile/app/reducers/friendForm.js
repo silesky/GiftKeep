@@ -1,4 +1,3 @@
-
 import UUID from 'uuid-js'
 import Moment from 'moment'
 
@@ -26,7 +25,7 @@ const initialStateFirstUser = {
   friendFormEventInput: [],
   friendFormEventDatePickerIsVisible: false,
   friendFormEventDatePickerSelectedEventId: null,
-  friendFormBdayInput: '01-10'
+  friendFormBdayInput: '01-10',
 }
 
 export const friendForm = (state = initialStateFirstUser, action) => {
@@ -36,11 +35,15 @@ export const friendForm = (state = initialStateFirstUser, action) => {
         ...action.payload,
         friendFormIsVisible: false, // no matter what, don't display this stuff
         friendFormEventDatePickerIsVisible: false,
-        friendFormEventDatePickerSelectedEventId: null
+        friendFormEventDatePickerSelectedEventId: null,
       }
     }
-    case 'FRIEND_FORM_EVENT_DATEPICKER_SELECT_EVENT': { // which box is selected with onfocus
-      return { ...state, friendFormEventDatePickerSelectedEventId: action.payload.eventId }
+    case 'FRIEND_FORM_EVENT_DATEPICKER_SELECT_EVENT': {
+      // which box is selected with onfocus
+      return {
+        ...state,
+        friendFormEventDatePickerSelectedEventId: action.payload.eventId,
+      }
     }
     case 'FRIEND_FORM_EVENT_DATEPICKER_VISIBILITY_FALSE': {
       return { ...state, friendFormEventDatePickerIsVisible: false }
@@ -50,13 +53,23 @@ export const friendForm = (state = initialStateFirstUser, action) => {
     }
     case 'FRIEND_FORM_INPUT_HYDRATE': {
       const {
-        friendFormNameInput, friendFormEventInput, friendFormBdayInput
+        friendFormNameInput,
+        friendFormEventInput,
+        friendFormBdayInput,
       } = action.payload
-      return { ...state, friendFormNameInput, friendFormEventInput, friendFormBdayInput }
+      return {
+        ...state,
+        friendFormNameInput,
+        friendFormEventInput,
+        friendFormBdayInput,
+      }
     }
 
     case 'FRIEND_FORM_UPDATING_SELECTED_FRIEND_ID':
-      return { ...state, friendFormUpdatingSelectedFriendId: action.payload.friendId }
+      return {
+        ...state,
+        friendFormUpdatingSelectedFriendId: action.payload.friendId,
+      }
 
     case 'FRIEND_FORM_UPDATING_STATUS_TRUE':
       return { ...state, friendFormIsUpdating: true }
@@ -70,14 +83,17 @@ export const friendForm = (state = initialStateFirstUser, action) => {
 
     case 'FRIEND_FORM_EVENT_DATE_INPUT_UPDATE_OR_CREATE': {
       const { eventId, eventDate } = action.payload
-      const _eventDoesNotExistYet = (eventId) => !state.friendFormEventInput.find(el => el.eventId === eventId)
+      const _eventDoesNotExistYet = eventId =>
+        !state.friendFormEventInput.find(el => el.eventId === eventId)
       let newFriendFormEventInput
       if (_eventDoesNotExistYet(eventId)) {
-        newFriendFormEventInput = [ ...state.friendFormEventInput, {
-          eventId: (eventId) || UUID.create().toString(),
-          eventDate: eventDate,
-          eventName: ''
-        }
+        newFriendFormEventInput = [
+          ...state.friendFormEventInput,
+          {
+            eventId: eventId || UUID.create().toString(),
+            eventDate: eventDate,
+            eventName: '',
+          },
         ]
       } else {
         newFriendFormEventInput = state.friendFormEventInput.map(eachEvent => {
@@ -93,15 +109,18 @@ export const friendForm = (state = initialStateFirstUser, action) => {
     case 'FRIEND_FORM_EVENT_NAME_INPUT_UPDATE_OR_CREATE': {
       const { eventId, eventName } = action.payload
 
-      const _eventDoesNotExistYet = (eventId) => !state.friendFormEventInput.find(el => el.eventId === eventId)
+      const _eventDoesNotExistYet = eventId =>
+        !state.friendFormEventInput.find(el => el.eventId === eventId)
       let newFriendFormEventInput
       if (_eventDoesNotExistYet(eventId)) {
         const _tomorrow = Moment().add(1, 'day').toISOString()
-        newFriendFormEventInput = [ ...state.friendFormEventInput, {
-          eventId: (eventId) || UUID.create().toString(),
-          eventDate: _tomorrow,
-          eventName: eventName
-        }
+        newFriendFormEventInput = [
+          ...state.friendFormEventInput,
+          {
+            eventId: eventId || UUID.create().toString(),
+            eventDate: _tomorrow,
+            eventName: eventName,
+          },
         ]
       } else {
         newFriendFormEventInput = state.friendFormEventInput.map(eachEvent => {
@@ -116,9 +135,11 @@ export const friendForm = (state = initialStateFirstUser, action) => {
     }
     case 'FRIEND_FORM_EVENT_INPUT_DELETE': {
       const { eventId } = action.payload
-      const newFriendFormEventInput = state.friendFormEventInput.filter(eachEvent => {
-        if (eachEvent.eventId !== eventId) return eachEvent
-      })
+      const newFriendFormEventInput = state.friendFormEventInput.filter(
+        eachEvent => {
+          if (eachEvent.eventId !== eventId) return eachEvent
+        }
+      )
       return { ...state, friendFormEventInput: newFriendFormEventInput }
     }
     case 'FRIEND_FORM_NAME_INPUT':
@@ -130,7 +151,7 @@ export const friendForm = (state = initialStateFirstUser, action) => {
     case 'FRIEND_FORM_VISIBILITY_TOGGLE':
       return {
         ...state,
-        friendFormIsVisible: !state.friendFormIsVisible
+        friendFormIsVisible: !state.friendFormIsVisible,
       }
 
     default:

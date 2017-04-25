@@ -22,26 +22,52 @@ module.exports = {
   shadow: '#ddd',
   almostwhite: '#f4f4f4',
 
-  get $shadowBorder () { return Color('#ddd').darken(0.1).hex() },
-  get $friendFormEventCardBackgroundColor () { return Color(this.almostwhite).hex()}, //almost white
+  get $shadowBorder () {
+    return Color('#ddd').darken(0.1).hex()
+  },
+  get $friendFormEventCardBackgroundColor () {
+    return Color(this.almostwhite).hex()
+  }, // almost white
   // tabs
-  get $listDividerBg () { return this.lightgrey },
+  get $listDividerBg () {
+    return this.lightgrey
+  },
 
+  get $tabBgActive () {
+    return this.lightgrey
+  },
+  get $tabBgInactive () {
+    return Color(this.lightgrey).lighten(0.05).hex()
+  },
 
-  get $tabBgActive () { return this.lightgrey },
-  get $tabBgInactive () { return Color(this.lightgrey).lighten(0.05).hex() },
+  get $tabTextColorActive () {
+    return this.electricBlue
+  },
+  get $tabTextColorInactive () {
+    return Color(this.$tabTextColorActive).desaturate(0.7).lighten(0.5).hex()
+  },
 
-  get $tabTextColorActive () { return this.electricBlue },
-  get $tabTextColorInactive () { return Color(this.$tabTextColorActive).desaturate(0.7).lighten(0.5).hex() },
+  get $tabUnderlineColorActive () {
+    return this.electricBlue
+  },
 
-  get $tabUnderlineColorActive () { return this.electricBlue },
+  get $cardHeaderBg () {
+    return this.darkpurple
+  },
+  get $cardBg () {
+    return this.offwhite
+  },
 
-  get $cardHeaderBg () { return this.darkpurple },
-  get $cardBg () { return this.offwhite },
-
-
-  get $headerFooterTextColor () { return this.white }, // header text color
-  get $defaultIconColor () { return this.white }, // header icon color
-  get $bigHeadingTextColor () { return this.white },  // main text color
-  get $headerFooterBg () { return Color(this.lightgreen).hex() } // main top and bottom color, drawerContainer
+  get $headerFooterTextColor () {
+    return this.white
+  }, // header text color
+  get $defaultIconColor () {
+    return this.white
+  }, // header icon color
+  get $bigHeadingTextColor () {
+    return this.white
+  }, // main text color
+  get $headerFooterBg () {
+    return Color(this.lightgreen).hex()
+  }, // main top and bottom color, drawerContainer
 }

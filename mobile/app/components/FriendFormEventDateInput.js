@@ -2,11 +2,7 @@ import React from 'react'
 import { View } from 'react-native'
 import Moment from 'moment'
 import { ModalDrawerCardWrapper, EventDatePicker } from './../components/'
-import {
-  Input,
-  InputGroup,
-  Icon,
-} from 'native-base'
+import { Input, InputGroup, Icon } from 'native-base'
 
 export const FriendFormEventDateInput = ({
   borderType,
@@ -25,24 +21,28 @@ export const FriendFormEventDateInput = ({
           ...inputGroupStyle,
           marginTop: 10,
         }}
-        borderType={borderType}>
+        borderType={borderType}
+      >
         <Input
           placeholder='Click to add a friend event.'
           selectionColor='white'
           editable={false}
           value={Moment(eventDate).format('MM-DD-YYYY')}
-          onFocus={() => onEventDateInputBoxFocus()}/>
-        <Icon name='md-calendar'/>
+          onFocus={() => onEventDateInputBoxFocus()}
+        />
+        <Icon name='md-calendar' />
       </InputGroup>
       <ModalDrawerCardWrapper
         title='Select Event'
         iconName='md-calendar'
         isVisible={friendFormEventDatePickerIsVisible}
         onCancel={() => onCancel()}
-        onSubmit={() => onEventDateInputOk()}>
+        onSubmit={() => onEventDateInputOk()}
+      >
         <EventDatePicker
           selectedEventDate={eventDate}
-          onEventDateInputChange={onEventDateInputChange}/>
+          onEventDateInputChange={onEventDateInputChange}
+        />
       </ModalDrawerCardWrapper>
     </View>
   )
@@ -55,5 +55,4 @@ FriendFormEventDateInput.PropTypes = {
   onEventDateInputBoxFocus: React.PropTypes.func,
   onEventDateInputOk: React.PropTypes.func,
   onCancel: React.PropTypes.func,
-
 }

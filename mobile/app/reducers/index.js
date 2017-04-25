@@ -49,28 +49,22 @@
 */
 
 /************************************************************************************/
-import {
-  combineReducers
-} from 'redux'
+import { combineReducers } from 'redux'
 
 import { user } from './user'
 import { visible } from './visible'
 import { notification } from './notification'
 import { friendForm } from './friendForm'
 import { eventsView } from './eventsView'
-export {
-  user,
-  visible,
-  friendForm,
-  notification // for testing
-}
+// for testing
+export { user, visible, friendForm, notification }
 
 const rootReducer = combineReducers({
   user,
   visible,
   friendForm,
   notification,
-  eventsView
+  eventsView,
 })
 
 export default rootReducer

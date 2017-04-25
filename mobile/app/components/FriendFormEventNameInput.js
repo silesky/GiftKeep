@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import { Input, InputGroup } from 'native-base'
-import {
-  View,
-  LayoutAnimation,
-} from 'react-native'
+import { View, LayoutAnimation } from 'react-native'
 import { EventNamePicker } from './../components/'
 
 export class FriendFormEventNameInput extends Component {
@@ -41,25 +38,25 @@ export class FriendFormEventNameInput extends Component {
 
     return (
       <View>
-        { this.state.pickerVisibility && <EventNamePicker
-              selectedValue={eventName}
-              onEventNamePick={(eventName) => {
-                handleOnChangeText(eventName)
-                setTimeout(this.togglePicker.bind(this, false), 200)
-              }}
-              eventNameList={eventNameList}
-            />
-        }
+        {this.state.pickerVisibility &&
+          <EventNamePicker
+            selectedValue={eventName}
+            onEventNamePick={eventName => {
+              handleOnChangeText(eventName)
+              setTimeout(this.togglePicker.bind(this, false), 200)
+            }}
+            eventNameList={eventNameList}
+          />}
         <InputGroup style={inputGroupStyle} borderType={borderType}>
           <Input
             onFocus={() => this.togglePicker(true)}
             autoFocus={isFocused}
             defaultValue={eventName}
-            onChangeText={(eventName) => handleOnChangeText()}
+            onChangeText={eventName => handleOnChangeText()}
             onSubmitEditing={() => this.togglePicker(false)}
             placeholder={placeholder}
             placeholderTextColor='#c9c9c9'
-            />
+          />
         </InputGroup>
       </View>
     )

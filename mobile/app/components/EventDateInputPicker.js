@@ -9,7 +9,7 @@ import {
   Button,
   CardItem,
   LayoutAnimation,
-    Keyboard,
+  Keyboard,
 } from 'react-native'
 import { EventDatePicker } from './../components/'
 import Moment from 'moment'
@@ -18,7 +18,6 @@ export class EventDateInputPicker extends Component {
     handleOnEventDateChange: null,
     selectedEventDate: new Date(),
     isFocused: false,
-
   }
   constructor (props) {
     super(props)
@@ -36,7 +35,6 @@ export class EventDateInputPicker extends Component {
     setTimeout(this.togglePicker.bind(this, false), 200)
   }
   render () {
-
     const {
       selectedEventDate,
       inputGroupStyle,
@@ -45,19 +43,18 @@ export class EventDateInputPicker extends Component {
     } = this.props
     return (
       <View>
-        { this.state.pickerVisibility &&
+        {this.state.pickerVisibility &&
           <EventDatePicker
-              selectedEventDate={selectedEventDate}
-              onEventDateInputChange={this.onEventDateInputChange}
-            />
-        }
+            selectedEventDate={selectedEventDate}
+            onEventDateInputChange={this.onEventDateInputChange}
+          />}
         <InputGroup style={inputGroupStyle} borderType={borderType}>
           <Input
             onFocus={() => this.togglePicker(true)}
             autoFocus={isFocused}
             value={Moment(selectedEventDate).format('MM-DD-YYYY')}
             editable={false}
-            />
+          />
         </InputGroup>
       </View>
     )

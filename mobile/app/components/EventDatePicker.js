@@ -1,25 +1,21 @@
 import React from 'react'
 
-import {
-  Platform,
-  DatePickerIOS,
-  DatePickerAndroid,
-} from 'react-native'
+import { Platform, DatePickerIOS, DatePickerAndroid } from 'react-native'
 
 import Moment from 'moment'
 
 const DatePicker = Platform.OS === 'ios' ? DatePickerIOS : DatePickerAndroid
 
 export const EventDatePicker = ({
-    selectedEventDate,
-    onEventDateInputChange,
-  }) => {
+  selectedEventDate,
+  onEventDateInputChange,
+}) => {
   return (
-      <DatePicker
-        minimumDate={new Date()}
-        date={Moment(selectedEventDate).toDate()}
-        onDateChange={ (input) => onEventDateInputChange(input) }
-        mode="date"
-        />
+    <DatePicker
+      minimumDate={new Date()}
+      date={Moment(selectedEventDate).toDate()}
+      onDateChange={input => onEventDateInputChange(input)}
+      mode='date'
+    />
   )
 }

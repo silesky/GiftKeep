@@ -16,17 +16,19 @@ export class EventNamePicker extends React.Component {
       selectedValue,
       eventNameList,
     } = this.props
-    const labels = eventNameList.map(eachLabel =>
-    <Picker.Item
-      key={UUID.create().toString()}
-      label={eachLabel}
-      value={eachLabel}/>)
+    const labels = eventNameList.map(eachLabel => (
+      <Picker.Item
+        key={UUID.create().toString()}
+        label={eachLabel}
+        value={eachLabel}
+      />
+    ))
     return (
       <Picker
         style={pickerStyle}
         selectedValue={selectedValue}
-        onValueChange={(eventNameStr) => onEventNamePick(eventNameStr)}
-        >
+        onValueChange={eventNameStr => onEventNamePick(eventNameStr)}
+      >
         {labels}
       </Picker>
     )

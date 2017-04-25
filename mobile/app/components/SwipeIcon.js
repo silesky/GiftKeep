@@ -4,11 +4,11 @@ import { View } from 'react-native'
 // https://exponent.github.io/vector-icons/
 export const SwipeIcon = (name, iconStylesObj = {}, wrapperStylesObj = {}) => {
   return [
-    <View key={1} style={{ flex: 1, justifyContent: 'center', ...wrapperStylesObj, }}>
-        <Icon
-          name={name}
-          style={{ ...iconStylesObj, alignSelf: 'center' }}
-        />
-      </View>
+    <View
+      key={1}
+      style={{ flex: 1, justifyContent: 'center', ...wrapperStylesObj }}
+    >
+      <Icon name={name} style={{ ...iconStylesObj, alignSelf: 'center' }} />
+    </View>,
   ]
 }
