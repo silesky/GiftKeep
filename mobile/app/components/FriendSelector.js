@@ -2,13 +2,21 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { StyleSheet, View, LayoutAnimation } from 'react-native'
-import { Text, List, Button, ListItem } from 'native-base'
+import {
+  Text,
+  List,
+  Button,
+  ListItem,
+  Card,
+  CardItem,
+  Icon,
+ } from 'native-base'
 import * as actions from './../actions/'
 class FriendSelector extends React.Component {
   constructor (props) {
     super(props)
     this.toggleFriendSelectorVisibility = this.toggleFriendSelectorVisibility.bind(
-      this
+    this
     )
     this.state = {
       friendSelectorIsVisible: false,
@@ -29,22 +37,26 @@ class FriendSelector extends React.Component {
     return (
       <View>
         <Button onPress={() => this.toggleFriendSelectorVisibility()}>
-          {selectedFriendName}
+            <Icon name='ios-person-add' />
         </Button>
         {this.state.friendSelectorIsVisible &&
           <View style={styles.container}>
             <List style={styles.list}>
               {friendList.map(({ friendId, friendName }) => {
                 const isSelected = friendId === selectedFriendId
+                const checkBox = isSelected
+                  ? <Icon name="ios-checkbox-outline"/>
+                  : <Icon name="ios-square-outline" />
                 return (
-                  <ListItem
-                    onPress={() => this.handleSelectFriend(friendId)}
+                  <Card
                     key={friendId}
-                    button
                     style={styles.listItem}
                   >
+                  <CardItem button onPress={() => this.handleSelectFriend(friendId)}>
+                   { checkBox }
                     <Text>{friendName}</Text>
-                  </ListItem>
+                  </CardItem>
+                  </Card>
                 )
               })}
             </List>
@@ -56,7 +68,6 @@ class FriendSelector extends React.Component {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    backgroundColor: 'white',
     zIndex: 999,
     width: 200,
     left: -40,
