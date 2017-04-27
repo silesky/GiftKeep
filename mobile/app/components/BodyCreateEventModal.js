@@ -11,6 +11,7 @@ import {
   FriendFormEventNameInput,
   FriendFormEventDateInput,
   SimpleModalFormWrapper,
+  BodyCreateThingModalFooterBtn
 } from './../components/'
 import { View, DatePickerIOS, Keyboard, LayoutAnimation } from 'react-native'
 import { List, ListItem, Title, InputGroup, Button } from 'native-base'
@@ -26,6 +27,8 @@ class BodyCreateEventModal extends React.Component {
   }
   constructor (props) {
     super(props)
+    this.onCancelPress = this.onCancelPress.bind(this)
+    this.onCreateEventPress = this.onCreateEventPress.bind(this)
     this.onEventNameChange = this.onEventNameChange.bind(this)
     this.onEventDateChange = this.onEventDateChange.bind(this)
     this.state = {
@@ -79,30 +82,10 @@ class BodyCreateEventModal extends React.Component {
             selectedEventDate={this.state.date}
             handleOnEventDateChange={this.onEventDateChange}
           />
-
-          <View
-            style={{
-              marginTop: 15,
-              marginBottom: 10,
-              marginRight: 15,
-              alignItems: 'flex-end',
-              justifyContent: 'flex-end',
-              flexDirection: 'row',
-            }}
-          >
-            <Button danger onPress={() => this.onCancelPress()}>
-              Cancel
-            </Button>
-            <Button
-              success
-              onPress={() => this.onCreateEventPress()}
-              style={{
-                marginLeft: 10,
-              }}
-            >
-              OK
-            </Button>
-          </View>
+          <BodyCreateThingModalFooterBtn
+            onOkPress={this.onCreateEventPress}
+            onCancelPress={this.onCancelPress}
+          />
         </List>
       </SimpleModalFormWrapper>
     )
@@ -119,4 +102,5 @@ const mstp = state => {
 const mdtp = dispatch => ({
   actions: bindActionCreators(actions, dispatch),
 })
-export default connect(mstp, mdtp)(BodyCreateEventModal)
+const connected = connect(mstp, mdtp)(BodyCreateEventModal);
+export { connected as BodyCreateEventModal }

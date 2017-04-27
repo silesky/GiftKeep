@@ -5,9 +5,8 @@ import { bindActionCreators } from 'redux'
 import * as actions from './../actions/'
 import { Content, Card } from 'native-base'
 import { LightTheme } from './../themes/'
-import { NoFriendsAlert, NoGiftsAlert, GiftCard } from './../components/'
+import {BodyCreateGiftModal, NoFriendsAlert, NoGiftsAlert, GiftCard } from './../components/'
 
-import { BodyCreateGiftModal } from './../containers'
 import * as Utils from './../utils/utils'
 import { View, LayoutAnimation } from 'react-native'
 class BodyGiftsView extends Component {

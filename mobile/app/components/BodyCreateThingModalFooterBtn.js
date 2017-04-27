@@ -2,7 +2,7 @@ import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Button } from 'native-base'
 import { FriendSelector } from './../components/'
-export const BodyCreateGiftFooterBtn = ({
+export const BodyCreateThingModalFooterBtn = ({
   onCancelPress,
   onOkPress,
   onFriendSelectPress

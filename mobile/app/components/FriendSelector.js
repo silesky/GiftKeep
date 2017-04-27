@@ -102,4 +102,5 @@ const mdtp = dispatch => ({
   actions: bindActionCreators(actions, dispatch),
 })
 
-export default connect(mstp, mdtp)(FriendSelector)
+const connected = connect(mstp, mdtp)(FriendSelector)
+export { connected as FriendSelector }

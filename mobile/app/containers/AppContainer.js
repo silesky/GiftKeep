@@ -10,17 +10,19 @@ import {
   DrawerWrapper,
   TabWrapper,
   BottomBar,
-} from './../components/'
-import { colors } from './../themes/'
-
-import {
-  BodyCreateEventModal,
   BodyCreateGiftModal,
+  BodyCreateEventModal,
+} from './../components/'
+
+import { colors } from './../themes/'
+import {
+
   BodyEventsView,
   BodyGiftsView,
   DrawerContainer,
   FriendFormCreateUpdate,
 } from './../containers/'
+
 
 import { getFriendItemById } from './../utils/utils'
 

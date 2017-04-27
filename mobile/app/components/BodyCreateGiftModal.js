@@ -5,7 +5,7 @@ import * as actions from './../actions/'
 import { IconCreator } from './../icons/'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { BodyCreateGiftFooterBtn, SimpleModalFormWrapper } from './../components/'
+import { BodyCreateThingModalFooterBtn, SimpleModalFormWrapper } from './../components/'
 import { getFriendByFriendId } from './../utils/'
 import { Input, List, ListItem, Title, InputGroup } from 'native-base'
 
@@ -67,7 +67,7 @@ class BodyCreateGiftModal extends React.Component {
                 />
               </InputGroup>
             </ListItem>
-            <BodyCreateGiftFooterBtn
+            <BodyCreateThingModalFooterBtn
               onOkPress={this.onCreateGiftPress}
               onCancelPress={this.onCancelPress}
             />
@@ -87,4 +87,5 @@ const mstp = state => {
 const mdtp = dispatch => ({
   actions: bindActionCreators(actions, dispatch),
 })
-export default connect(mstp, mdtp)(BodyCreateGiftModal)
+const connected = connect(mstp, mdtp)(BodyCreateGiftModal)
+export { connected as BodyCreateGiftModal }
