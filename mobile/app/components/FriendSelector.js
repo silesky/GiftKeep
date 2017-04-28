@@ -6,7 +6,6 @@ import {
   Text,
   List,
   Button,
-  ListItem,
   Card,
   CardItem,
   Icon,
@@ -34,10 +33,15 @@ class FriendSelector extends React.Component {
   }
   render () {
     const { friendList, selectedFriendId, selectedFriendName } = this.props
+    const btnStyle = !!selectedFriendId
+    ? {backgroundColor: 'blue'}
+    : {backgroundColor: 'orange'}
     return (
-      <View>
-        <Button onPress={() => this.toggleFriendSelectorVisibility()}>
-            <Icon name='ios-person-add' />
+      <View style={styles.wrapper}>
+        <Button style={btnStyle} onPress={() => this.toggleFriendSelectorVisibility()}>
+            <Icon
+            name='ios-person-add'
+            />
         </Button>
         {this.state.friendSelectorIsVisible &&
           <View style={styles.container}>
@@ -66,6 +70,9 @@ class FriendSelector extends React.Component {
   }
 }
 const styles = StyleSheet.create({
+  wrapper: {
+
+  },
   container: {
     position: 'absolute',
     zIndex: 999,
