@@ -68,6 +68,7 @@ class BodyCreateGiftModal extends React.Component {
               </InputGroup>
             </ListItem>
             <BodyCreateThingModalFooterBtn
+              okDisabled={!this.props.selectedFriendId}
               onOkPress={this.onCreateGiftPress}
               onCancelPress={this.onCancelPress}
             />

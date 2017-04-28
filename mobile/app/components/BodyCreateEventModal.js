@@ -83,6 +83,7 @@ class BodyCreateEventModal extends React.Component {
             handleOnEventDateChange={this.onEventDateChange}
           />
           <BodyCreateThingModalFooterBtn
+            okDisabled={!this.props.selectedFriendId}
             onOkPress={this.onCreateEventPress}
             onCancelPress={this.onCancelPress}
           />
