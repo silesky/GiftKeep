@@ -93,7 +93,6 @@ class BodyCreateEventModal extends React.Component {
   }
 }
 const mstp = state => {
-  console.log(state.user.eventNameList)
   return {
     eventNameList: state.user.eventNameList,
     createGiftModalVisibility: state.visible.createEventModalVisibility,
