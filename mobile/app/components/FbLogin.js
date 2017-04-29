@@ -51,7 +51,7 @@ class FbLogin extends React.Component {
           }}
         />
       </Button>
-      <FbProfImage fbId={this.props.fbId} />
+      { this.props.isLoggedIn && <FbProfImage fbId={this.props.fbId} /> }
     </View>
   )
 }
@@ -62,9 +62,9 @@ const mdtp = dispatch => ({
 })
 const mstp = state => {
   return {
+    isLoggedIn: !!state.user.fbId,
     fbId: state.user.fbId,
-    fbAccessToken: state.user.fbAccessToken
-
+    fbAccessToken: state.user.fbAccessToken,
   }
 }
 

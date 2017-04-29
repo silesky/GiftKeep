@@ -190,14 +190,6 @@ export const testClick = () => {
 
 export const clear = () => ({ type: 'CLEAR' })
 
-export const saveFbPhoto = uriOrBase64 => {
-  return {
-    type: 'SAVE_FB_PHOTO',
-    payload: {
-      fbImage: uriOrBase64,
-    },
-  }
-}
 
 export const authTokenAndTryToGetUser = token => {
   console.log(token)
@@ -206,7 +198,6 @@ export const authTokenAndTryToGetUser = token => {
       token
     ).then(({ payload, payload: { fbId } }) => {
       dispatch(hydrateUser(payload))
-      Utils.fbGetPicURLById(fbId).then(url => dispatch(saveFbPhoto(url)))
       dispatch(_selectFirstFriend())
     })
 }

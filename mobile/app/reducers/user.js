@@ -17,9 +17,13 @@ import * as Utils from './../utils/utils'
             "eventDate": ""
             "eventId":
           }
-       */
+      */
 
 const initialState = {
+  labels: null,
+  userName: null,
+  fbId: null,
+  fbAccessToken: null,
   data: [],
   eventNameList: [
     `Anniversary`,
@@ -226,9 +230,6 @@ export const user = (state = initialState, action) => {
           },
         ],
       }
-    }
-    case 'SAVE_FB_PHOTO': {
-      return { ...state, fbImage: action.payload.fbImage }
     }
     case 'CREATE_GIFT': {
       const { friendId, giftTitle, giftDesc } = action.payload
