@@ -44,7 +44,7 @@ module.exports = {
     return this.electricBlue
   },
   get $tabTextColorInactive () {
-    return Color(this.$tabTextColorActive).desaturate(0.7).lighten(0.5).hex()
+    return Color(this.$tabTextColorActive).desaturate(0.7).lighten(0.8).hex()
   },
 
   get $tabUnderlineColorActive () {
