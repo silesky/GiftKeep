@@ -11,7 +11,7 @@ import {
   ListItemDivider,
 } from './../components'
 import * as actions from './../actions/'
-import { LayoutAnimation, Modal } from 'react-native'
+import { LayoutAnimation, Modal, Keyboard } from 'react-native'
 import {
   Container,
   Content,
@@ -87,6 +87,7 @@ class FriendFormCreateUpdate extends Component {
   }
 
   onEventDateInputBoxFocus (eventId) {
+    Keyboard.dismiss()
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
     this.props.actions.friendFormEventDatePickerVisibilityStatusChange(true)
     this.props.actions.friendFormEventDatePickerSelectEvent(eventId)

@@ -24,8 +24,13 @@ export class EventDateInputPicker extends Component {
     this.state = {
       pickerVisibility: props.isOpen,
     }
+    this.onFocus = this.onFocus.bind(this)
     this.onEventDateInputChange = this.onEventDateInputChange.bind(this)
   }
+  onFocus() {
+    this.togglePicker(true)
+    Keyboard.dismiss()
+}
   togglePicker (bool) {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
     this.setState({ pickerVisibility: bool })
@@ -50,7 +55,8 @@ export class EventDateInputPicker extends Component {
           />}
         <InputGroup style={inputGroupStyle} borderType={borderType}>
           <Input
-            onFocus={() => this.togglePicker(true)}
+            editable={false}
+            onFocus={() => this.onFocus() }
             autoFocus={isFocused}
             value={Moment(selectedEventDate).format('MM-DD-YYYY')}
             editable={false}
