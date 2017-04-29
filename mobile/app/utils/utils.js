@@ -117,6 +117,9 @@ export const getFriendByEventId = (state, eventId) => {
   })
   return friendObj.friendId ? friendObj : false
 }
+
+
+// img src="https://graph.facebook.com/v2.8/105456176609093/picture" works fine.. DON'T NEED
 // not using any more
 export const fbGetPicURLById = fbId => {
   return fetch(`https://graph.facebook.com/v2.8/${fbId}/picture`).then(

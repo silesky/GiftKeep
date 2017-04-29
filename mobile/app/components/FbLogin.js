@@ -1,15 +1,21 @@
 import React, { Component } from 'react'
 import { View, StyleSheet } from 'react-native'
+import { connect } from 'react-redux'
+
+import { bindActionCreators } from 'redux'
+import * as actions from './../actions/'
 import { Button } from 'native-base'
 import { LoginButton, AccessToken } from 'react-native-fbsdk'
 import FbProfImage from './../components/FbProfImage'
+import * as Utils from './../utils/'
+class FbLogin extends React.Component {
+  render () {
+  const
+  {
+    userName,
+    fbImage,
+  } = this.props
 
-export const FbLogin = ({
-  authTokenAndTryToGetUser,
-  clear,
-  userName,
-  fbImage,
-}) => {
   return (
     <View style={{ flexDirection: 'row' }}>
       <Button style={{ marginRight: 20 }} transparent>
@@ -35,17 +41,32 @@ export const FbLogin = ({
               AccessToken.getCurrentAccessToken().then(data => {
                 const token = data.accessToken.toString()
                 console.log('data access token acquired... sending to node...')
-                authTokenAndTryToGetUser(token)
+                this.props.actions.authTokenAndTryToGetUser(token)
               })
             }
           }}
           onLogoutFinished={() => {
-            clear()
+            this.props.actions.clear()
             console.log('User logged out')
           }}
         />
       </Button>
-      <FbProfImage fbImage={fbImage} />
+      <FbProfImage fbId={this.props.fbId} />
     </View>
   )
 }
+}
+
+const mdtp = dispatch => ({
+  actions: bindActionCreators(actions, dispatch),
+})
+const mstp = state => {
+  return {
+    fbId: state.user.fbId,
+    fbAccessToken: state.user.fbAccessToken
+
+  }
+}
+
+const connected = connect(mstp, mdtp)(FbLogin)
+export { connected as FbLogin }

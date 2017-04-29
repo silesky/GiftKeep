@@ -200,6 +200,7 @@ export const saveFbPhoto = uriOrBase64 => {
 }
 
 export const authTokenAndTryToGetUser = token => {
+  console.log(token)
   return dispatch =>
     Utils.sendFbAccessTokenToNodeAndGetData(
       token
