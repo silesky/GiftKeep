@@ -35,7 +35,7 @@ class BodyCreateGiftModal extends React.Component {
 
   render () {
     const { height, width } = Dimensions.get('window') // gets width of entire display
-
+    const IconGift = IconCreator('FA', 'gift', 30, { paddingRight: 10, paddingTop: 5 })
     return (
       <View
         style={{
@@ -52,7 +52,7 @@ class BodyCreateGiftModal extends React.Component {
         >
           <List>
             <Title style={{ marginTop: 10, marginBottom: 10 }}>
-              {IconCreator('FA', 'gift', 30, { paddingRight: 10, paddingTop: 5 })}
+            { IconGift }
               Create Gift
             </Title>
             <ListItem>

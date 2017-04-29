@@ -27,8 +27,8 @@ export const BodyCreateThingModalFooterBtn = ({
 }
 const styles = StyleSheet.create({
   container: {
-    padding: 15,
-    marginTop: 15,
+    padding: 10,
+    paddingBottom: 5,
   },
   container__buttons: {
     flexDirection: 'row',

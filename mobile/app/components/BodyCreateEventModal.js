@@ -11,10 +11,10 @@ import {
   FriendFormEventNameInput,
   FriendFormEventDateInput,
   SimpleModalFormWrapper,
-  BodyCreateThingModalFooterBtn
+  BodyCreateThingModalFooterBtn,
 } from './../components/'
 import { View, DatePickerIOS, Keyboard, LayoutAnimation } from 'react-native'
-import { List, ListItem, Title, InputGroup, Button } from 'native-base'
+import { List, ListItem, Title,  } from 'native-base'
 
 import { IconCreator } from './../icons'
 class BodyCreateEventModal extends React.Component {
@@ -58,6 +58,10 @@ class BodyCreateEventModal extends React.Component {
     this.props.actions.bodyModalVisibilityFalse()
   }
   render () {
+    const iconCalendar = IconCreator('FA', 'calendar', 30,
+     {fontSize: 20, marginRight: 10}, // fontSize needs to be larger than container
+     {marginTop: 5} // looks ok, but bring icon needs to same level as title
+    )
     return (
       <SimpleModalFormWrapper
         modalHeight={420}
@@ -65,11 +69,8 @@ class BodyCreateEventModal extends React.Component {
         isVisible={this.props.createGiftModalVisibility}
       >
         <List>
-          <Title style={{ marginTop: 10 }}>
-            {IconCreator('FA', 'calendar-plus-o', 30, {
-              paddingRight: 10,
-              paddingTop: 5,
-            })}
+          <Title>
+            {iconCalendar}
             Create Event
           </Title>
           <FriendFormEventNameInput
@@ -102,5 +103,5 @@ const mstp = state => {
 const mdtp = dispatch => ({
   actions: bindActionCreators(actions, dispatch),
 })
-const connected = connect(mstp, mdtp)(BodyCreateEventModal);
+const connected = connect(mstp, mdtp)(BodyCreateEventModal)
 export { connected as BodyCreateEventModal }

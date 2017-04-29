@@ -23,7 +23,7 @@ export const SimpleModalFormWrapper = ({
       <SimpleModal
         modalStyle={{
           borderRadius: 2,
-          margin: 30,
+          margin: 15,
           padding: 5,
           backgroundColor: colors.$cardBg,
         }}

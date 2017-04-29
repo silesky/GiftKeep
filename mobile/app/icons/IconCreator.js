@@ -2,9 +2,9 @@ import React from 'react'
 import { Ion, FA, EI, Entypo, Fdtn } from './../icons'
 import { View } from 'react-native'
 // https://exponent.github.io/vector-icons/
-export const IconCreator = (type, name, size, stylesObj = {}) => {
+export const IconCreator = (type, name, containerSize, stylesObj = {}, containerStyles = {}) => {
   let newIcon
-  const iconStyles = { alignSelf: 'center', fontSize: 25, ...stylesObj }
+  const iconStyles = { fontSize: 25, ...stylesObj }
   switch (type) {
     case 'EI':
       newIcon = <EI name={name} style={iconStyles} />
@@ -21,7 +21,7 @@ export const IconCreator = (type, name, size, stylesObj = {}) => {
   return [
     <View
       key={1}
-      style={{ flex: 1, justifyContent: 'center', height: size, width: size }}
+      style={{ flex: 1, justifyContent: 'center', alignItems: 'center', height: containerSize, width: containerSize, ...containerStyles }}
     >
       {newIcon}
     </View>,
