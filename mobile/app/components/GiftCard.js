@@ -51,7 +51,7 @@ export const GiftCard = ({
                   color: 'white',
                 }}
               >
-                {friendName.toUpperCase() || ''}
+                { friendName.toUpperCase() }
               </Button>
             </CardItem>}
         </Card>

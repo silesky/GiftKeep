@@ -10,9 +10,7 @@ import {BodyCreateGiftModal, NoFriendsAlert, NoGiftsAlert, GiftCard } from './..
 import * as Utils from './../utils/utils'
 import { View, LayoutAnimation } from 'react-native'
 class BodyGiftsView extends Component {
-  constructor () {
-    super()
-  }
+
   onGiftDelete (selectedFriendId, giftId) {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
     this.props.actions.deleteGift(selectedFriendId, giftId)
@@ -23,6 +21,9 @@ class BodyGiftsView extends Component {
   }
   render () {
     const {
+      getFriendByGiftId,
+      footerIsVisible,
+      selectedGiftId,
       selectedFriendId,
       bday,
       friendName,
@@ -48,26 +49,19 @@ class BodyGiftsView extends Component {
             addGiftBtnClick={this.props.actions.createGiftModalVisibilityTrue}
           />}
 
-        {gifts.map(el => {
+        { gifts.map(({ giftDesc, giftId }) => {
           return (
             <GiftCard
-              isSelected={this.props.selectedGiftId === el.giftId}
-              onGiftInputFocus={() => this.onGiftInputFocus(el.giftId)}
-              deleteGift={() => this.onGiftDelete(selectedFriendId, el.giftId)}
-              giftDesc={el.giftDesc}
-              updateGiftTitle={this.props.actions.updateGiftTitle.bind(
-                this,
-                selectedFriendId,
-                el.giftId
-              )}
-              updateGiftDesc={this.props.actions.updateGiftDesc.bind(
-                this,
-                selectedFriendId,
-                el.giftId
-              )}
-              giftId={el.giftId}
-              giftTitle={el.giftTitle}
-              key={el.giftId}
+              footerIsVisible={footerIsVisible}
+              friendName={getFriendByGiftId(giftId).friendName}
+              isSelected={selectedGiftId === giftId}
+              onGiftInputFocus={() => this.onGiftInputFocus(giftId)}
+              deleteGift={() => this.onGiftDelete(selectedFriendId, giftId)}
+              giftDesc={giftDesc}
+              updateGiftTitle={this.props.actions.updateGiftTitle.bind(this, selectedFriendId, giftId)}
+              updateGiftDesc={this.props.actions.updateGiftDesc.bind(this, selectedFriendId, giftId)}
+              giftId={giftId}
+              key={giftId}
             />
           )
         })}
@@ -98,13 +92,15 @@ const mstp = state => {
   } else {
     whichGifts = gifts && gifts.length ? gifts : []
   }
+
   return {
+    footerIsVisible: !!state.visible.allFriendsVisibility,
     selectedGiftId: state.visible.selectedGiftId,
     selectedTab: state.visible.selectedTab,
     selectedFriendId: state.visible.selectedFriendId,
     bday,
     gifts: whichGifts,
-    friendName,
+    getFriendByGiftId: Utils.getFriendByGiftId.bind(this, state),
     hasFriends: !!state.user.data.length,
     hasGifts: !!whichGifts.length,
     createGiftModalVisibility: state.visible.createGiftModalVisibility,
