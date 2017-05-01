@@ -13,7 +13,7 @@ export const GiftEventCardFooter = ({ friendName, onBtnPress }) => {
           color: 'white'
         }}
       >
-        {friendName.toUpperCase()}
+        { friendName }
       </Button>
     </CardItem>
   )

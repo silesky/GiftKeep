@@ -17,7 +17,7 @@ import * as Utils from './../utils/utils'
 // should get an array of all the gifts
 class BodyEventsView extends Component {
   static propTypes = {
-    isSelected: React.PropTypes.bool,
+    isSelected: React.PropTypes.bool
   }
 
   onFriendEventDelete (eventId) {
@@ -46,20 +46,28 @@ class BodyEventsView extends Component {
               )}
             />}
 
-          {this.props.events.map(({ eventName, eventDate, eventId }, index) => {
-            return (
-              <EventCard
-                onFriendEventUpdate={this.props.actions.friendEventUpdateFromEventsView.bind(
-                  this,
-                  eventId
-                ) /* update everything */}
-                onFriendEventDelete={() => this.onFriendEventDelete(eventId)}
-                key={index}
-                eventName={eventName}
-                eventDateIso={eventDate}
-              />
-            )
-          })}
+          {this.props.events
+            .sort((a, b) => {
+              // if firstDate is larger aka farther in the future than the secondDate, first date wins (sorted to a larger index aka goes later)
+              return a.eventDate > b.eventDate ? 1 : -1
+            })
+            .map(({ eventName, eventDate, eventId }, index, arr) => {
+              const { friendName } = this.props.getFriendByEventId(eventId)
+              return (
+                <EventCard
+                  footerIsVisible={this.props.footerIsVisible}
+                  friendName={friendName}
+                  onFriendEventUpdate={this.props.actions.friendEventUpdateFromEventsView.bind(
+                    this,
+                    eventId
+                  )}
+                  onFriendEventDelete={() => this.onFriendEventDelete(eventId)}
+                  key={index}
+                  eventName={eventName}
+                  eventDateIso={eventDate}
+                />
+              )
+            })}
 
         </Content>
       </Container>
@@ -82,11 +90,13 @@ const mstp = state => {
     whichEvents = events && events.length ? events : []
   }
   return {
+    footerIsVisible: !!allFriendsVisibility,
+    getFriendByEventId: Utils.getFriendByEventId.bind(this, state),
     events: whichEvents,
     bday,
     friendName,
     hasFriends: !!state.user.data.length,
-    hasEvents: !!whichEvents.length,
+    hasEvents: !!whichEvents.length
   }
 }
 export default connect(mstp, mdtp)(BodyEventsView)

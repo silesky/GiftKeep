@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { SwiperWrapper } from '../components/'
+import { SwiperWrapper, GiftEventCardFooter } from '../components/'
 import { Card, CardItem, Icon, Text } from 'native-base'
 // import * as Util  from './../utils/utils';
 import Moment from 'moment'
@@ -11,9 +11,10 @@ export const EventCard = ({
   onFriendEventDelete,
   eventName,
   eventDateIso,
+  friendName,
+  footerIsVisible,
 }) => {
-  const _isEventInTheFuture =
-    Moment(eventDateIso).format('YYYYMMDD') > Moment().format('YYYYMMDD')
+  const _isEventInTheFuture = Moment(eventDateIso).format('YYYYMMDD') > Moment().format('YYYYMMDD')
   const _howManySecondsTill = Moment(eventDateIso).diff(Moment(), 'seconds')
   const timeDisplayString = _isEventInTheFuture
     ? Moment.duration(_howManySecondsTill, 'seconds').format(
@@ -39,6 +40,11 @@ export const EventCard = ({
           </Text>
           <Text style={{ fontSize: 20 }} note>{timeDisplayString}</Text>
         </CardItem>
+        { footerIsVisible &&
+        <GiftEventCardFooter
+          friendName={friendName}
+        />
+        }
       </Card>
     </SwiperWrapper>
   )
