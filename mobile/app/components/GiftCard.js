@@ -7,6 +7,7 @@ import {
   GiftCardInputTitle,
   GiftCardInputGiftDescription,
   SwiperWrapper,
+  GiftEventCardFooter,
 } from './../components/'
 export const GiftCard = ({
   deleteGift,
@@ -41,36 +42,19 @@ export const GiftCard = ({
               updateGiftDesc={updateGiftDesc}
             />
           </CardItem>
-          {footerIsVisible &&
-            <CardItem style={styles.footerCard}>
-              <Button
-                style={styles.button}
-                disabled
-                small
-                textStyle={{
-                  color: 'white',
-                }}
-              >
-                { friendName.toUpperCase() }
-              </Button>
-            </CardItem>}
+          { footerIsVisible &&
+          <GiftEventCardFooter
+            friendName={friendName}
+            isVisible={footerIsVisible}
+          />
+          }
         </Card>
       </Content>
     </SwiperWrapper>
   )
 }
 
-const styles = StyleSheet.create({
-  footerCard: {
-    flex: 1,
-    alignItems: 'center',
-    paddingTop: 5,
-    paddingBottom: 5,
-  },
-  button: {
-    backgroundColor: 'purple',
-  },
-})
+
 GiftCard.PropTypes = {
   deleteGift: React.PropTypes.func,
   friendName: React.PropTypes.string,

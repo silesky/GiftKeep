@@ -1,5 +1,5 @@
 
-
+export * from './GiftEventCardFooter'
 export * from './AllFriendsBtn'
 export * from './BodyCreateEventModal'
 export * from './BodyCreateThingModalFooterBtn'
