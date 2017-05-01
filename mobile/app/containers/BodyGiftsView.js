@@ -50,10 +50,11 @@ class BodyGiftsView extends Component {
           />}
 
         { gifts.map(({ giftDesc, giftId }) => {
+          const { friendName } = getFriendByGiftId(giftId)
           return (
             <GiftCard
               footerIsVisible={footerIsVisible}
-              friendName={getFriendByGiftId(giftId).friendName}
+              friendName={friendName}
               isSelected={selectedGiftId === giftId}
               onGiftInputFocus={() => this.onGiftInputFocus(giftId)}
               deleteGift={() => this.onGiftDelete(selectedFriendId, giftId)}
