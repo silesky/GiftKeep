@@ -48,6 +48,7 @@ export const hydrateAll = ({ user, visible, friendForm }) => {
     dispatch({ type: 'HYDRATE_USER', payload: user })
     dispatch({ type: 'HYDRATE_VISIBLE', payload: visible })
     dispatch({ type: 'HYDRATE_FRIEND_FORM', payload: friendForm })
+    dispatch(_selectFirstFriend())
   }
 }
 
