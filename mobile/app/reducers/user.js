@@ -37,9 +37,13 @@ const initialState = {
     `Mother's Day`,
   ],
 }
+
 export const user = (state = initialState, action) => {
-  const _getGiftArrByFriendId = friendId =>
-    state.data.find(el => el.friendId === friendId).gifts
+  const _getGiftArrByFriendId = friendId => {
+    const friendObj = state.data.find(el => el.friendId === friendId)
+    const gifts = friendObj && friendObj.gifts
+    return gifts || []
+  }
   switch (action.type) {
     case 'EVENT_NAME_ADD': {
       const eventName = action.payload
@@ -162,6 +166,7 @@ export const user = (state = initialState, action) => {
       return { data: [] }
     }
     case 'UPDATE_GIFT_TITLE': {
+      console.log(action.payload)
       let friendId = action.payload.friendId
       let giftTitle = action.payload.giftTitle
       let giftId = action.payload.giftId
@@ -200,9 +205,7 @@ export const user = (state = initialState, action) => {
     }
 
     case 'UPDATE_GIFT_DESC': {
-      let friendId = action.payload.friendId
-      let giftDesc = action.payload.giftDesc
-      let giftId = action.payload.giftId
+      const { friendId, giftDesc, giftId } = action.payload
       let newGiftArr = _getGiftArrByFriendId(friendId).map(el => {
         if (el.giftId === giftId) el.giftDesc = giftDesc
         return el

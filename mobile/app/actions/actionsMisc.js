@@ -77,13 +77,17 @@ export const selectTab = tabNum => {
 }
 
 export const updateGiftDesc = (friendId, giftId, giftDesc) => {
-  return {
-    type: 'UPDATE_GIFT_DESC',
-    payload: {
-      friendId,
-      giftId,
-      giftDesc,
-    },
+  return (dispatch, getState) => {
+    if (!friendId) {
+      // in case all friends is selected
+      friendId = Utils.getFriendByGiftId(getState(), giftId).friendId
+    }
+    dispatch({
+      type: 'UPDATE_GIFT_DESC',
+      payload: {
+        friendId, giftId, giftDesc,
+      },
+    })
   }
 }
 
@@ -97,14 +101,19 @@ export const updateGiftTitle = (friendId, giftId, giftTitle) => {
     },
   }
 }
-
 export const deleteGift = (friendId, giftId) => {
-  return {
-    type: 'DELETE_GIFT',
-    payload: {
-      friendId,
-      giftId,
-    },
+  return (dispatch, getState) => {
+    if (!friendId) {
+      // in case all friends is selected
+      friendId = Utils.getFriendByGiftId(getState(), giftId).friendId
+    }
+    dispatch({
+      type: 'DELETE_GIFT',
+      payload: {
+        friendId,
+        giftId,
+      },
+    })
   }
 }
 
@@ -189,7 +198,6 @@ export const testClick = () => {
 }
 
 export const clear = () => ({ type: 'CLEAR' })
-
 
 export const authTokenAndTryToGetUser = token => {
   console.log(token)
