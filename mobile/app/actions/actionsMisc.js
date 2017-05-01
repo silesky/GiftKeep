@@ -48,7 +48,12 @@ export const hydrateAll = ({ user, visible, friendForm }) => {
     dispatch({ type: 'HYDRATE_USER', payload: user })
     dispatch({ type: 'HYDRATE_VISIBLE', payload: visible })
     dispatch({ type: 'HYDRATE_FRIEND_FORM', payload: friendForm })
-    dispatch(_selectFirstFriend())
+    const allFriendsIsNotSelected = !visible.selectedFriendId && !visible.allFriendsVisibility
+    const hasFriends = !!user.data.length
+    if (allFriendsIsNotSelected && hasFriends) {
+      // unless there's no friends, it should 'select something'
+      dispatch(_selectFirstFriend())
+    }
   }
 }
 

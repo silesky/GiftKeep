@@ -33,7 +33,10 @@ export const visible = (state = initialState, action) => {
       return { ...state, selectedTab: action.payload.selectedTab }
     }
     case 'HYDRATE_VISIBLE': {
-      return { ...state, selectedFriendId: action.payload.selectedFriendId } // only save selectedFriendId
+      return { ...state,
+        selectedFriendId: action.payload.selectedFriendId,
+        allFriendsVisibility: action.payload.allFriendsVisibility,
+      } // only save selectedFriendId
     }
     case 'SELECT_FRIEND': {
       return {
