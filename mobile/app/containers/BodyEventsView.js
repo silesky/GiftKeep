@@ -25,19 +25,17 @@ class BodyEventsView extends Component {
     this.props.actions.friendEventDelete(eventId)
   }
   render () {
-    const { bday, hasEvents, hasFriends, friendName } = this.props
-
+    const { hasEvents, hasFriends } = this.props
     return (
       <Container>
         <Content>
           {!hasFriends &&
             <NoFriendsAlert
               addFriendBtnClick={this.props.actions.friendFormVisibilityToggle}
-              friendName={friendName}
-              bday={bday}
+              friendName={this.props.friendName}
+              bday={this.props.bday}
             />}
-
-          {hasFriends &&
+          { hasFriends &&
             !hasEvents &&
             <NoEventsAlert
               addEventBtnClick={this.props.actions.createEventModalVisibilityTrue.bind(
@@ -45,12 +43,8 @@ class BodyEventsView extends Component {
                 this.props.selectedFriendId
               )}
             />}
-
           {this.props.events
-            .sort((a, b) => {
-              // if firstDate is larger aka farther in the future than the secondDate, first date wins (sorted to a larger index aka goes later)
-              return a.eventDate > b.eventDate ? 1 : -1
-            })
+            .sort((a, b) => (a.eventDate > b.eventDate ? 1 : -1)) // sort by date -> ascending (loser goes first)
             .map(({ eventName, eventDate, eventId }, index, arr) => {
               const { friendName } = this.props.getFriendByEventId(eventId)
               return (

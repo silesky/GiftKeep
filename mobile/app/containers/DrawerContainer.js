@@ -52,13 +52,13 @@ class DrawerContainer extends Component {
               onBtnPress={setallFriendsVisibility.bind(this, true)}
               isSelected={this.props.allFriendsVisibility}
             />
-            {this.props.data.map((el, index) => (
+            {this.props.data.map(({ friendId, friendName }, index) => (
               <FriendListItem
-                isSelected={this.props.selectedFriendId === el.friendId}
-                onSwipeUpdate={friendFormUpdateActivate.bind(this, el.friendId)}
-                onSwipeDelete={() => this.onSwipeDelete(el.friendId)}
-                selectFriend={selectFriend.bind(this, el.friendId)}
-                friendName={el.friendName}
+                isSelected={this.props.selectedFriendId === friendId}
+                onSwipeUpdate={friendFormUpdateActivate.bind(this, friendId)}
+                onSwipeDelete={() => this.onSwipeDelete(friendId)}
+                selectFriend={selectFriend.bind(this, friendId)}
+                friendName={friendName}
                 key={index}
               />
             ))}
