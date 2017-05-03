@@ -5,14 +5,14 @@ const { expect, request } = chai;
 const userCollectionJSON = require('./../../seeds/userCollection.json')
 const storage = require('./../../storage')
 const DB = require('./../../db');
-module.exports = () => {
-
-  describe('STORAGE', function () { // use function declaration so this.timeout works
+const { DB_STRING } = require('../test_config.json')
+module.exports = () => describe('STORAGE', function () { // use function declaration so this.timeout works
     let userCollection;
-    before(() => {
+    before((done) => {
   // broken because it's trying to connect to mongo and failing
       this.timeout(3000);
-      MongoClient.connect(process.env.DB_HOST, (err, db) => {
+      MongoClient.connect(DB_STRING, (err, db) => {
+        if (err) done(err)
         db.createCollection('userCollection')
         userCollection = db.collection('userCollection');
         userCollection().remove({});
@@ -22,7 +22,7 @@ module.exports = () => {
 
     describe('Database Connection -->', () => {
       it('should connect to gifter db', () => {
-        MongoClient.connect(process.env.DB_HOST, (err, db) => {
+        MongoClient.connect(DB_STRING, (err, db) => {
           expect(db).to.be.ok
         })
       })
@@ -49,4 +49,4 @@ module.exports = () => {
     });
 
   });
-}
+
