@@ -3,7 +3,7 @@ const MongoClient = require('mongodb').MongoClient
 const config = require('../test_config.json')
 const { DB_STRING } = config;
 module.exports = {
-  connect: (done) => new Promise((response, reject) => {
+  getUserCollection: (done) => new Promise((response, reject) => {
   MongoClient.connect(DB_STRING, (err, db) => {
     if (err) reject(err)
     db.createCollection('userCollection').then(() => {

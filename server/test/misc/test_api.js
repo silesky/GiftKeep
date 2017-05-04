@@ -5,7 +5,6 @@ const { expect, request } = chai
 const serverUrl = 'https://localhost:3001'
 
 const FbTestUser = require('./../lib/FbTestUser')
-const { connect } = require('./bootstrap')
 
 module.exports = () =>
     describe('API', () => {

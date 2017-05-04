@@ -5,16 +5,13 @@ promiseConnect();
   getAllData: () => {
     return new Promise((resolve, reject) => {
       userCollection().find().toArray((err, docs) => {
-        if (docs) {
-          resolve(docs)
-        }
-        else if (err) {
+        if (err) {
           reject(err)
         } else {
-          reject('no data found')
+          resolve(docs)
         }
       })
-    })
+      })
   },
   // create user
   // temp? for debugging
@@ -121,8 +118,8 @@ promiseConnect();
   updateUserByAccessToken: (user) => {
     return new Promise((resolve, reject) => {
       let { fbAccessToken, fbId, userName, googleIdToken, data } = user;
-      userCollection().update({ fbAccessToken: fbAccessToken }, 
-      {$set: { 
+      userCollection().update({ fbAccessToken: fbAccessToken },
+      {$set: {
           username: userName,
           fbAccessToken: fbAccessToken,
           fbId: fbId,
@@ -144,8 +141,8 @@ promiseConnect();
       // should be replaced with findAndModify
       console.log('##############')
     return new Promise((resolve, reject) => {
-      userCollection().update({ fbAccessToken: oldT }, 
-      {$set: { 
+      userCollection().update({ fbAccessToken: oldT },
+      {$set: {
           fbAccessToken: newT,
       }
       }, (err, records) => {
@@ -162,8 +159,8 @@ promiseConnect();
    // I probably don't need this method anymore
     updateAccessTokenByFbId: (fbId, newT) => {
     return new Promise((resolve, reject) => {
-      userCollection().update({ fbId: `${fbId}` }, 
-      {$set: { 
+      userCollection().update({ fbId: `${fbId}` },
+      {$set: {
           fbAccessToken: newT,
       }
       }, (err, records) => {
