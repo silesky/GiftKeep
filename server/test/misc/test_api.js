@@ -7,21 +7,8 @@ const serverUrl = 'https://localhost:3001'
 const FbTestUser = require('./../lib/FbTestUser')
 const { connect } = require('./bootstrap')
 
-
 module.exports = () =>
-  describe('API -->', () => {
-    let userCollection
-    describe('DB', () => {
-      it('db should create User Collection', () => {
-      connect().then((collection, err) => {
-        if(collection) {
-          userCollection = collection
-          expect(userCollection).to.be.ok
-        }
-      })
-    })
-    })
-    describe('/api/ -->', () => {
+    describe('API', () => {
       describe('/api/user/ -->', () => {
         it('get: getUserByAccessToken should return existing user', (done) => {
           request(serverUrl)
@@ -126,6 +113,6 @@ module.exports = () =>
             })
         })
       })
-  })
+
 
     // check if user exists
