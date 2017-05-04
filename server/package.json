@@ -4,11 +4,13 @@
   "description": "Node back end",
   "main": "app.js",
   "scripts": {
+
     "test": "mocha --growl test",
     "testwatch": "mocha --watch --growl test",
     "post": "newman run Gifter.postman_test_run.json",
-    "watch": "nodemon --debug --nolazy ./*.js --delay 4",
+    "watch": "nodemon --debug=5959 --nolazy ./*.js --delay 4",
     "debug": "node-debug",
+    "debug-test": "node-debug test",
     "seed": "seed",
     "gulp": "gulp"
   },

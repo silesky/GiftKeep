@@ -9,7 +9,7 @@
       "stopOnEntry": true,
       "type": "node",
       "request": "attach",
-      "port": 5858, // run nodemon with --debug flag
+      "port": 5959, // run node on 5959 for I can run nodebug on 5858
       "restart": true //restart debugging session automatically when nodemon restarts
     },
     {
@@ -21,7 +21,7 @@
       // "cannot launch program user/local/bin/node"
       // nolazy makes sure it doesn't skip async calls
       "args": [
-        "--debug",
+        "--debug=5959",
         "--nolazy"
       ],
       "cwd": "${workspaceRoot}"
@@ -34,7 +34,7 @@
       // Automatically stop program after launch.
       "stopOnEntry": false,
       "args": [
-        "${workspaceRoot}/test/index.js", 
+        "${workspaceRoot}/test/index.js",
         "--no-timeouts"
       ],
       // Workspace relative or absolute path to the working directory of the program being debugged. Default is the current workspace.
