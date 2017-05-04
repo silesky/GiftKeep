@@ -2,15 +2,25 @@ const chai = require('chai')
 const chaiHttp = require('chai-http')
 chai.use(chaiHttp)
 const { expect, request } = chai
-const serverUrl = 'https://localhost:3001'
+const { SERVER_URL } = require('../test_config.json')
+const { getAndCreateUserCollection } = require('./bootstrap')
 
 const FbTestUser = require('./../lib/FbTestUser')
 
 module.exports = () =>
+
+    before((done) => {
+      getAndCreateUserCollection().then(() => done())
+    })
+    after((done) => {
+      getAndCreateUserCollection().then(() => done())
+    })
+
     describe('API', () => {
+      this.timeout = 500
       describe('/api/user/ -->', () => {
         it('get: getUserByAccessToken should return existing user', (done) => {
-          request(serverUrl)
+          request(SERVER_URL)
               .get(`/api/user/f1`)
               .end((err, res) => {
                 expect(res).to.have.status(200)
@@ -24,10 +34,10 @@ module.exports = () =>
                 expect(res.body.payload).to.be.an.array
                 done()
               })
-        })
+      })
       }),
           it('get: getUserByAccessToken should fail if an access token is bad', (done) => {
-            request(serverUrl)
+            request(SERVER_URL)
               .get(`/api/user/iNVALiDAXXToken`)
               .end((err, res) => {
                 expect(res).to.have.status(200)
@@ -41,7 +51,7 @@ module.exports = () =>
       describe('login --> /api/auth/fb POST --> ', () => {
         it('if user is new, should 1.) create user, 2.) return a user object (assuming token is ok).', (done) => {
           FbTestUser().getNewUserToken().then(newUserToken => {
-            request(serverUrl)
+            request(SERVER_URL)
               .post('/api/auth/fb')
               .send({ token: newUserToken })
               .end((err, res) => {
@@ -57,7 +67,7 @@ module.exports = () =>
         }),
         it('if the just created tries to log in again, it should say user exists', (done) => {
           FbTestUser().getNewUserToken().then(newUserToken => {
-            request(serverUrl)
+            request(SERVER_URL)
               .post('/api/auth/fb')
               .send({ token: newUserToken })
               .end((err, res) => {
@@ -69,7 +79,7 @@ module.exports = () =>
         }),
           it('if user is coming back, grab their data from the db (assuming token is ok)', (done) => {
             FbTestUser().getExistingUserToken().then(existingUserToken => {
-              request(serverUrl)
+              request(SERVER_URL)
                   .post('/api/auth/fb')
                   .send({ token: existingUserToken })
                   .end((err, res) => {
@@ -84,7 +94,7 @@ module.exports = () =>
           }),
 
           it('should fail if token is bad.', (done) => {
-            request(serverUrl)
+            request(SERVER_URL)
               .post('/api/auth/fb')
               .send({ token: 'fakeACCESSTOKEN' })
               .end((err, res) => {
@@ -99,7 +109,7 @@ module.exports = () =>
 
       describe('/api/user/ PUT --> update user data by fb access token', () => {
         it('should find and update the user with the given token', (done) => {
-          request(serverUrl)
+          request(SERVER_URL)
             // put might not work
             .put(`/api/user/`)
             .send({ 'user': { 'fbAccessToken': 'f1', 'name': 'updated!' } })

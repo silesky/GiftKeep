@@ -6,7 +6,7 @@ const { app } = require('./server');
 
 const { DB_PASS } = process.env
 // get all but
-app.get(`/api/${DB_PASS}`, (undefined, resCb, next) => {
+app.get(`/api/123`, (undefined, resCb, next) => {
   Storage.getAllData()
     .then(allData => {
       resCb.json({

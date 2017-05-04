@@ -51,7 +51,6 @@ const listen = () => {
     sslProdServer()
   } else if (NODE_ENV === 'development' && HTTPS_PORT) {
     sslDevServer()
-  } else {
     httpDevServer()
   }
 }
