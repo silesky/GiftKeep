@@ -139,7 +139,6 @@ promiseConnect();
   // I probably don't need this method anymore
     updateAccessToken: (oldT, newT) => {
       // should be replaced with findAndModify
-      console.log('##############')
     return new Promise((resolve, reject) => {
       userCollection().update({ fbAccessToken: oldT },
       {$set: {
