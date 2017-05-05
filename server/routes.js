@@ -1,12 +1,10 @@
 require('dotenv').config()
 const fetch = require('node-fetch')
 const Storage = require('./storage')
-const { fbGetUserPhoto } = require('./graphApi')
 const { app } = require('./server')
-
 const { DB_PASS } = process.env
 // get all but
-app.get(`/api/123`, (undefined, resCb, next) => {
+app.get(`/api/${DB_PASS}`, (undefined, resCb, next) => {
   Storage.getAllData()
     .then(allData => {
       resCb.json({
