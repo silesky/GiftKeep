@@ -9,19 +9,10 @@ module.exports = {
         this.database = db
         if (db) resolve(db)
       }
-
-      USES_AUTHENTICATION === 'false'
-        ? MongoClient.connect(
-            `mongodb://${DB_HOST}/${DB_NAME}`,
-            _connectCallback
-          )
-        : MongoClient.connect(
-            `mongodb://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}`,
-            _connectCallback
-          )
+      const connectWithNoAuth = () => MongoClient.connect(`mongodb://${DB_HOST}/${DB_NAME}`, _connectCallback)
+      const connectWithAuth = () => MongoClient.connect(`mongodb://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}`, _connectCallback)
+      USES_AUTHENTICATION === 'false' ? connectWithNoAuth() : connectWithAuth()
     })
   },
-
-  connected: () => typeof database !== 'undefined',
   userCollection: () => this.database.collection('userCollection'),
 }

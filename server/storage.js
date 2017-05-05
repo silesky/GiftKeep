@@ -1,5 +1,5 @@
 const { userCollection, promiseConnect } = require('./db')
-promiseConnect()
+promiseConnect() // connect to Datbase so userCollection is accessible. initializes this.database
 module.exports = {
   // get all
   getAllData: () => {
