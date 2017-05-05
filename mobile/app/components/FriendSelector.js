@@ -1,21 +1,16 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { StyleSheet, View, LayoutAnimation } from 'react-native'
-import {
-  Text,
-  List,
-  Button,
-  Card,
-  CardItem,
-  Icon,
- } from 'native-base'
+import { StyleSheet, View, LayoutAnimation, ScrollView } from 'react-native'
+import { Text, List, Button, Card, CardItem, Icon } from 'native-base'
 import * as actions from './../actions/'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 class FriendSelector extends React.Component {
   constructor (props) {
     super(props)
     this.toggleFriendSelectorVisibility = this.toggleFriendSelectorVisibility.bind(
-    this
+      this
     )
     this.state = {
       friendSelectorIsVisible: false,
@@ -32,52 +27,52 @@ class FriendSelector extends React.Component {
     setTimeout(this.toggleFriendSelectorVisibility, 100)
   }
   render () {
-    const { friendList, selectedFriendId, selectedFriendName } = this.props
-    const btnStyle = !!selectedFriendId
-    ? {backgroundColor: 'blue'}
-    : {backgroundColor: 'orange'}
+    const { friendList, selectedFriendId } = this.props
+    const btnStyle = selectedFriendId
+      ? { backgroundColor: 'blue' }
+      : { backgroundColor: 'orange' }
     return (
-      <View style={styles.wrapper}>
-        <Button style={btnStyle} onPress={() => this.toggleFriendSelectorVisibility()}>
-            <Icon
-            name='ios-person-add'
-            />
-        </Button>
-        {this.state.friendSelectorIsVisible &&
-          <View style={styles.container}>
-            <List style={styles.list}>
-              {friendList.map(({ friendId, friendName }) => {
-                const isSelected = friendId === selectedFriendId
-                const checkBox = isSelected
-                  ? <Icon name="ios-checkbox-outline"/>
-                  : <Icon name="ios-square-outline" />
-                return (
-                  <Card
-                    key={friendId}
-                    style={styles.listItem}
-                  >
-                  <CardItem button onPress={() => this.handleSelectFriend(friendId)}>
-                   { checkBox }
-                    <Text>{friendName}</Text>
-                  </CardItem>
-                  </Card>
-                )
-              })}
-            </List>
-          </View>}
-      </View>
+
+        <View style={styles.wrapper}>
+          <Button
+            style={btnStyle}
+            onPress={() => this.toggleFriendSelectorVisibility()}
+          >
+            <Icon name='ios-person-add' />
+          </Button>
+          {this.state.friendSelectorIsVisible &&
+            <KeyboardAwareScrollView style={styles.container}>
+              <List style={styles.list}>
+                {friendList.map(({ friendId, friendName }) => {
+                  const isSelected = friendId === selectedFriendId
+                  const checkBox = isSelected
+                    ? <Icon name='ios-checkbox-outline' />
+                    : <Icon name='ios-square-outline' />
+                  return (
+                    <Card key={friendId} style={styles.listItem}>
+                      <CardItem
+                        button
+                        onPress={() => this.handleSelectFriend(friendId)}
+                      >
+                        {checkBox}
+                        <Text>{friendName}</Text>
+                      </CardItem>
+                    </Card>
+                  )
+                })}
+              </List>
+            </KeyboardAwareScrollView>}
+        </View>
     )
   }
 }
 const styles = StyleSheet.create({
-  wrapper: {
-
-  },
+  wrapper: {},
   container: {
     position: 'absolute',
     zIndex: 999,
     width: 200,
-    left: -40,
+    left: -20,
   },
   list: {
     paddingRight: 2,
@@ -92,14 +87,8 @@ const mstp = state => {
     friendId: el.friendId,
     friendName: el.friendName,
   }))
-  const { selectedFriendId } = state.visible
-  const friendNameObj = friendList.find(
-    ({ friendId }) => friendId === selectedFriendId
-  )
-  const selectedFriendName = friendNameObj && friendNameObj.friendName
   return {
     selectedFriendId: state.visible.selectedFriendId,
-    selectedFriendName: selectedFriendName || 'Select a Friend!',
     friendList,
     friendSelectorIsVisible: state.visible.friendSelectorIsVisible,
   }
