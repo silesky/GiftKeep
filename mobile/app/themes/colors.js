@@ -11,7 +11,8 @@ module.exports = {
   darkgreen: '#5a8e0b',
   lightgreen: '#58b21c',
   coolblue: '#dccfec',
-  paleyellow: '#ffffe0',
+  paleyellow: '#ffffe0', // note color (not focused)
+  yellow: '#ffff94', // note color (focuses)
   soothingblue: '#b8c1dd',
   deepblue: '#0800ff',
   electricBlue: '#0892d0',

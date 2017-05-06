@@ -1,16 +1,26 @@
 import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
+
 import { bindActionCreators } from 'redux'
+
 import * as actions from './../actions/'
+
 import { Content, Card } from 'native-base'
+
 import { LightTheme } from './../themes/'
-import {BodyCreateGiftModal, NoFriendsAlert, NoGiftsAlert, GiftCard } from './../components/'
+
+import {
+  NoFriendsAlert,
+  NoGiftsAlert,
+  GiftCard,
+} from './../components/'
 
 import * as Utils from './../utils/utils'
-import { View, LayoutAnimation } from 'react-native'
-class BodyGiftsView extends Component {
 
+import { View, LayoutAnimation } from 'react-native'
+
+class BodyGiftsView extends Component {
   onGiftDelete (selectedFriendId, giftId) {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
     this.props.actions.deleteGift(selectedFriendId, giftId)
@@ -56,6 +66,7 @@ class BodyGiftsView extends Component {
               footerIsVisible={footerIsVisible}
               friendName={friendName}
               isSelected={selectedGiftId === giftId}
+              onGiftInputBlur={() => this.props.actions.giftInputFocus(null)}
               onGiftInputFocus={() => this.onGiftInputFocus(giftId)}
               deleteGift={() => this.onGiftDelete(selectedFriendId, giftId)}
               giftDesc={giftDesc}
