@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dimensions, View, LayoutAnimation } from 'react-native'
+import { Dimensions, View, LayoutAnimation, Keyboard } from 'react-native'
 import * as actions from './../actions/'
 
 import { IconCreator } from './../icons/'

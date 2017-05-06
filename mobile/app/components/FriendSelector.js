@@ -1,8 +1,15 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { StyleSheet, View, LayoutAnimation, ScrollView } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  LayoutAnimation,
+  ScrollView,
+  Keyboard,
+} from 'react-native'
 import { Text, List, Button, Card, CardItem, Icon } from 'native-base'
+
 import * as actions from './../actions/'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
@@ -17,6 +24,7 @@ class FriendSelector extends React.Component {
     }
   }
   toggleFriendSelectorVisibility () {
+    Keyboard.dismiss()
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
     this.setState({
       friendSelectorIsVisible: !this.state.friendSelectorIsVisible,
@@ -73,6 +81,7 @@ const styles = StyleSheet.create({
     zIndex: 999,
     width: 200,
     left: -20,
+    maxHeight: 350,
   },
   list: {
     paddingRight: 2,
