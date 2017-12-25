@@ -445,6 +445,7 @@
 				00E356EF1AD99517003FC87E /* GiftKeeperTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				CF41DF39DD9F4C10B90B2E0F /* Resources */,
+				8CBD4DB61FF18F8E004474E3 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -457,6 +458,16 @@
 				00E356EE1AD99517003FC87E /* GiftKeeperTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		8CBD4DB61FF18F8E004474E3 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				13FF5682A9994B2384418A8B /* libRNVectorIcons.a */,
+				AE38B87152DF4054AF4CEDD4 /* libRCTFBSDK.a */,
+				E31501E46BD243C9AAF34E4C /* libRNFetchBlob.a */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		CF41DF39DD9F4C10B90B2E0F /* Resources */ = {
@@ -939,6 +950,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = GHJ53R83MT;
@@ -960,7 +972,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sethsilesky.giftr.rn.mobile;
 				PRODUCT_NAME = GiftKeeper;
-				PROVISIONING_PROFILE = "be2e4885-c287-4561-b20f-0e57c08b387f";
+				PROVISIONING_PROFILE = "00dbc98b-d847-47de-a874-873f2c67c504";
 				PROVISIONING_PROFILE_SPECIFIER = "Giftr App Distrib Prof";
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -973,7 +985,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Seth Silesky (GHJ53R83MT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Seth Silesky (GHJ53R83MT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GHJ53R83MT;
 				FRAMEWORK_SEARCH_PATHS = "~/Documents/FacebookSDK/**";
@@ -994,7 +1007,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sethsilesky.giftr.rn.mobile;
 				PRODUCT_NAME = GiftKeeper;
-				PROVISIONING_PROFILE = "be2e4885-c287-4561-b20f-0e57c08b387f";
+				PROVISIONING_PROFILE = "00dbc98b-d847-47de-a874-873f2c67c504";
 				PROVISIONING_PROFILE_SPECIFIER = "Giftr App Distrib Prof";
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
