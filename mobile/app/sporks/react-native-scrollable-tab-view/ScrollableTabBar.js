@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 const ReactNative = require('react-native');
 const {
@@ -15,20 +16,20 @@ const WINDOW_WIDTH = Dimensions.get('window').width;
 
 const ScrollableTabBar = React.createClass({
   propTypes: {
-    goToPage: React.PropTypes.func,
-    activeTab: React.PropTypes.number,
-    tabs: React.PropTypes.array,
-    backgroundColor: React.PropTypes.string,
-    activeTextColor: React.PropTypes.string,
-    inactiveTextColor: React.PropTypes.string,
-    scrollOffset: React.PropTypes.number,
+    goToPage: PropTypes.func,
+    activeTab: PropTypes.number,
+    tabs: PropTypes.array,
+    backgroundColor: PropTypes.string,
+    activeTextColor: PropTypes.string,
+    inactiveTextColor: PropTypes.string,
+    scrollOffset: PropTypes.number,
     style: View.propTypes.style,
     tabStyle: View.propTypes.style,
     tabsContainerStyle: View.propTypes.style,
     textStyle: Text.propTypes.style,
-    renderTab: React.PropTypes.func,
+    renderTab: PropTypes.func,
     underlineStyle: View.propTypes.style,
-    onScroll:React.PropTypes.func,
+    onScroll: PropTypes.func,
   },
 
   getDefaultProps() {
@@ -94,11 +95,11 @@ const ScrollableTabBar = React.createClass({
     newScrollX = newScrollX >= 0 ? newScrollX : 0;
 
     if (Platform.OS === 'android') {
-      this._scrollView.scrollTo({x: newScrollX, y: 0, animated: false, });
+      this._scrollView.scrollTo({ x: newScrollX, y: 0, animated: false, });
     } else {
       const rightBoundScroll = this._tabContainerMeasurements.width - (this._containerMeasurements.width);
       newScrollX = newScrollX > rightBoundScroll ? rightBoundScroll : newScrollX;
-      this._scrollView.scrollTo({x: newScrollX, y: 0, animated: false, });
+      this._scrollView.scrollTo({ x: newScrollX, y: 0, animated: false, });
     }
 
   },
@@ -135,8 +136,8 @@ const ScrollableTabBar = React.createClass({
       onPress={() => onPressHandler(page)}
       onLayout={onLayoutHandler}
     >
-      <View style={[styles.tab, this.props.tabStyle, ]}>
-        <Text style={[{color: textColor, fontWeight, }, textStyle, ]}>
+      <View style={[ styles.tab, this.props.tabStyle, ]}>
+        <Text style={[ { color: textColor, fontWeight, }, textStyle, ]}>
           {name}
         </Text>
       </View>
@@ -145,8 +146,8 @@ const ScrollableTabBar = React.createClass({
 
   measureTab(page, event) {
     const { x, width, height, } = event.nativeEvent.layout;
-    this._tabsMeasurements[page] = {left: x, right: x + width, width, height, };
-    this.updateView({value: this.props.scrollValue._value, });
+    this._tabsMeasurements[page] = { left: x, right: x + width, width, height, };
+    this.updateView({ value: this.props.scrollValue._value, });
   },
 
   render() {
@@ -163,7 +164,7 @@ const ScrollableTabBar = React.createClass({
     };
 
     return <View
-      style={[styles.container, {backgroundColor: this.props.backgroundColor, }, this.props.style, ]}
+      style={[ styles.container, { backgroundColor: this.props.backgroundColor, }, this.props.style, ]}
       onLayout={this.onContainerLayout}
     >
       <ScrollView
@@ -178,7 +179,7 @@ const ScrollableTabBar = React.createClass({
         scrollsToTop={false}
       >
         <View
-          style={[styles.tabs, {width: this.state._containerWidth, }, this.props.tabsContainerStyle, ]}
+          style={[ styles.tabs, { width: this.state._containerWidth, }, this.props.tabsContainerStyle, ]}
           ref={'tabContainer'}
           onLayout={this.onTabContainerLayout}
         >
@@ -187,7 +188,7 @@ const ScrollableTabBar = React.createClass({
             const renderTab = this.props.renderTab || this.renderTab;
             return renderTab(name, page, isTabActive, this.props.goToPage, this.measureTab.bind(this, page));
           })}
-          <Animated.View style={[tabUnderlineStyle, dynamicTabUnderline, this.props.underlineStyle, ]} />
+          <Animated.View style={[ tabUnderlineStyle, dynamicTabUnderline, this.props.underlineStyle, ]} />
         </View>
       </ScrollView>
     </View>;
@@ -207,12 +208,12 @@ const ScrollableTabBar = React.createClass({
       width = WINDOW_WIDTH;
     }
     this.setState({ _containerWidth: width, });
-    this.updateView({value: this.props.scrollValue._value, });
+    this.updateView({ value: this.props.scrollValue._value, });
   },
 
   onContainerLayout(e) {
     this._containerMeasurements = e.nativeEvent.layout;
-    this.updateView({value: this.props.scrollValue._value, });
+    this.updateView({ value: this.props.scrollValue._value, });
   },
 });
 

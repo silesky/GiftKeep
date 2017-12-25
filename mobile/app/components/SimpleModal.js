@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 
 import {
   View,
@@ -76,7 +77,7 @@ class SimpleModal extends Component {
     }
   }
   render () {
-    const { opacity, open, scale, offset, children } = this.state
+    const { opacity, open, scale, offset } = this.state
     let containerStyles = [
       styles.absolute,
       styles.container,

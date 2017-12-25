@@ -1,10 +1,11 @@
+import PropTypes from 'prop-types'
 import React from 'react'
-import { Modal, StyleSheet, View } from 'react-native'
-import { Text, Container } from 'native-base'
+import { StyleSheet, View } from 'react-native'
+import { Text } from 'native-base'
 
 export const NotificationBottom = ({ notificationText }) => {
   NotificationBottom.PropTypes = {
-    notificationText: React.PropTypes.string,
+    notificationText: PropTypes.string,
   }
   return (
     <View style={Styles.view_container}>

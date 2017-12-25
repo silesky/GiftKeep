@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
 import { LayoutAnimation } from 'react-native'
@@ -8,7 +9,7 @@ import { bindActionCreators } from 'redux'
 
 import * as actions from './../actions/'
 
-import { Container, Content, Card, CardItem, Title, Text } from 'native-base'
+import { Container, Content } from 'native-base'
 
 import { EventCard, NoEventsAlert, NoFriendsAlert } from './../components/'
 
@@ -17,7 +18,7 @@ import * as Utils from './../utils/utils'
 // should get an array of all the gifts
 class BodyEventsView extends Component {
   static propTypes = {
-    isSelected: React.PropTypes.bool
+    isSelected: PropTypes.bool,
   }
 
   onFriendEventDelete (eventId) {
@@ -90,7 +91,7 @@ const mstp = state => {
     bday,
     friendName,
     hasFriends: !!state.user.data.length,
-    hasEvents: !!whichEvents.length
+    hasEvents: !!whichEvents.length,
   }
 }
 export default connect(mstp, mdtp)(BodyEventsView)

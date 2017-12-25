@@ -1,12 +1,12 @@
+import PropTypes from 'prop-types'
 import React from 'react'
-import { Dimensions, View, LayoutAnimation, Keyboard } from 'react-native'
+import { Dimensions, View, LayoutAnimation } from 'react-native'
 import * as actions from './../actions/'
 
 import { IconCreator } from './../icons/'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { BodyCreateThingModalFooterBtn, SimpleModalFormWrapper } from './../components/'
-import { getFriendByFriendId } from './../utils/'
 import { Input, List, ListItem, Title, InputGroup } from 'native-base'
 
 class BodyCreateGiftModal extends React.Component {
@@ -16,7 +16,7 @@ class BodyCreateGiftModal extends React.Component {
     this.onCreateGiftPress = this.onCreateGiftPress.bind(this)
   }
   static PropTypes = {
-    CreateGiftModalIsVisible: React.PropTypes.bool,
+    CreateGiftModalIsVisible: PropTypes.bool,
   }
 
   onCreateGiftPress () {
@@ -52,7 +52,7 @@ class BodyCreateGiftModal extends React.Component {
         >
           <List>
             <Title style={{ marginTop: 10, marginBottom: 10 }}>
-            { IconGift }
+              { IconGift }
               Create Gift
             </Title>
             <ListItem>
@@ -79,7 +79,6 @@ class BodyCreateGiftModal extends React.Component {
   }
 }
 const mstp = state => {
-  const { gifts } = getFriendByFriendId(state, state.visible.selectedFriendId)
   return {
     createGiftModalVisibility: state.visible.createGiftModalVisibility,
     selectedFriendId: state.visible.selectedFriendId,

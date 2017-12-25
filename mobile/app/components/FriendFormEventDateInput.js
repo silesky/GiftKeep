@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 import { View } from 'react-native'
 import Moment from 'moment'
@@ -48,11 +49,11 @@ export const FriendFormEventDateInput = ({
   )
 }
 FriendFormEventDateInput.PropTypes = {
-  eventWithFocus: React.PropTypes.object,
-  eventDate: React.PropTypes.string,
-  isVisible: React.PropTypes.bool,
-  onEventDateInputChange: React.PropTypes.func,
-  onEventDateInputBoxFocus: React.PropTypes.func,
-  onEventDateInputOk: React.PropTypes.func,
-  onCancel: React.PropTypes.func,
+  eventWithFocus: PropTypes.object,
+  eventDate: PropTypes.string,
+  isVisible: PropTypes.bool,
+  onEventDateInputChange: PropTypes.func,
+  onEventDateInputBoxFocus: PropTypes.func,
+  onEventDateInputOk: PropTypes.func,
+  onCancel: PropTypes.func,
 }

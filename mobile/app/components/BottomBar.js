@@ -1,7 +1,7 @@
+import PropTypes from 'prop-types'
 import React from 'react'
-import { Footer, FooterTab, Button, Icon, Text, Content } from 'native-base'
+import { Footer, FooterTab, Button, Icon, Text } from 'native-base'
 import { colors } from '../themes/'
-import { LightTheme } from '../themes/LightTheme'
 export const BottomBar = ({ addGift, addEvent, selectedTab }) => {
   const whichBtn = () => {
     let addBtn = {}
@@ -45,6 +45,6 @@ export const BottomBar = ({ addGift, addEvent, selectedTab }) => {
 }
 
 BottomBar.PropTypes = {
-  selectedTab: React.PropTypes.oneOf([ 'gifts', 'events', 'all gifts' ]),
-  addBtnHandler: React.PropTypes.obj,
+  selectedTab: PropTypes.oneOf([ 'gifts', 'events', 'all gifts' ]),
+  addBtnHandler: PropTypes.obj,
 }

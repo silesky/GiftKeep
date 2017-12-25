@@ -1,25 +1,22 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 import Moment from 'moment'
 import * as actions from './../actions/'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-
-import { Input } from 'native-base'
 import {
-  EventDatePicker,
   EventDateInputPicker,
   FriendFormEventNameInput,
-  FriendFormEventDateInput,
   SimpleModalFormWrapper,
   BodyCreateThingModalFooterBtn,
 } from './../components/'
-import { View, DatePickerIOS, Keyboard, LayoutAnimation } from 'react-native'
-import { List, ListItem, Title,  } from 'native-base'
+import { LayoutAnimation } from 'react-native'
+import { List, Title } from 'native-base'
 
 import { IconCreator } from './../icons'
 class BodyCreateEventModal extends React.Component {
   static PropTypes = {
-    isVisible: React.PropTypes.bool,
+    isVisible: PropTypes.bool,
   }
   static defaultProps = {
     date: Moment().add(1, 'day').toDate(),
@@ -59,8 +56,8 @@ class BodyCreateEventModal extends React.Component {
   }
   render () {
     const iconCalendar = IconCreator('FA', 'calendar', 30,
-     {fontSize: 20, marginRight: 10}, // fontSize needs to be larger than container
-     {marginTop: 5} // looks ok, but bring icon needs to same level as title
+      { fontSize: 20, marginRight: 10 }, // fontSize needs to be larger than container
+      { marginTop: 5 } // looks ok, but bring icon needs to same level as title
     )
     return (
       <SimpleModalFormWrapper

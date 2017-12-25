@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { StyleSheet } from 'react-native'
 import { colors } from './../themes/'
 import { Button, Card, CardItem, Icon, Content } from 'native-base'
@@ -25,8 +26,8 @@ export const GiftCard = ({
   // should take a name, birthday and text prop, along with being editable and so
   // forth
   const selectedCardStyles = isSelected
-  ? { backgroundColor: colors.yellow }
-  : { opacity: 0.5, backgroundColor: colors.paleyellow }
+    ? { backgroundColor: colors.yellow }
+    : { opacity: 0.5, backgroundColor: colors.paleyellow }
 
   return (
     <SwiperWrapper onSwipeDelete={() => deleteGift()}>
@@ -59,11 +60,10 @@ export const GiftCard = ({
   )
 }
 
-
 GiftCard.PropTypes = {
-  deleteGift: React.PropTypes.func,
-  friendName: React.PropTypes.string,
-  isVisible: React.PropTypes.bool,
-  updateGiftTitle: React.PropTypes.func,
-  updateGiftDesc: React.PropTypes.func,
+  deleteGift: PropTypes.func,
+  friendName: PropTypes.string,
+  isVisible: PropTypes.bool,
+  updateGiftTitle: PropTypes.func,
+  updateGiftDesc: PropTypes.func,
 }

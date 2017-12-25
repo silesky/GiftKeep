@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { SwiperWrapper, GiftEventCardFooter } from '../components/'
 import { Card, CardItem, Icon, Text } from 'native-base'
 // import * as Util  from './../utils/utils';
@@ -18,8 +19,8 @@ export const EventCard = ({
   const _howManySecondsTill = Moment(eventDateIso).diff(Moment(), 'seconds')
   const timeDisplayString = _isEventInTheFuture
     ? Moment.duration(_howManySecondsTill, 'seconds').format(
-        'M [months], D [days], h [hours], m [minutes]'
-      )
+      'M [months], D [days], h [hours], m [minutes]'
+    )
     : `${Moment(eventDateIso).format('dddd, MMMM Do, YYYY')} has passed.`
 
   return (
@@ -51,10 +52,10 @@ export const EventCard = ({
 }
 
 EventCard.PropTypes = {
-  onSelectEventsView: React.PropTypes.func,
-  onFriendEventDelete: React.PropTypes.func,
-  onFriendEventUpdate: React.PropTypes.func,
-  eventDateIso: React.PropTypes.string,
-  onSwipeDelete: React.PropTypes.string,
-  eventName: React.PropTypes.bool,
+  onSelectEventsView: PropTypes.func,
+  onFriendEventDelete: PropTypes.func,
+  onFriendEventUpdate: PropTypes.func,
+  eventDateIso: PropTypes.string,
+  onSwipeDelete: PropTypes.string,
+  eventName: PropTypes.bool,
 }
