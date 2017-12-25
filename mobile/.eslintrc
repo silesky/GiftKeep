@@ -1,0 +1,35 @@
+{
+  "plugins": ["react", "standard", "prefer-object-spread"],
+  "globals": {
+    "expect": true
+  },
+  "extends": ["standard", "plugin:react/recommended"],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 7,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "impliedStrict": true,
+      "jsx": true,
+      "classes": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "env": {
+    "jquery": true,
+    "node": true,
+    "es6": true,
+    "browser": true,
+    "jest": true
+  },
+  "rules": {
+    "prefer-object-spread/prefer-object-spread": 2,
+    "no-case-declarations": 0,
+    "array-bracket-spacing": [2, "always"], // space inside brackets
+    "object-curly-spacing": [2, "always"], // space inside braces
+    "comma-dangle": [2, "always-multiline"],
+    "react/prop-types": 0,
+    "react/no-find-dom-node": 1,
+    "react/react-in-jsx-scope": 2
+  }
+}
