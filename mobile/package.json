@@ -39,7 +39,7 @@
     "react-native-drawer": "^2.5.0",
     "react-native-fbsdk": "~0.6.0",
     "react-native-fetch-blob": "~0.10.0",
-    "react-native-scrollable-tab-view": "~0.7.2",
+    "react-native-scrollable-tab-view": "^0.7.4",
     "react-native-swipeout": "^2.3.3",
     "react-native-vector-icons": "^4.0.0",
     "react-redux": "^4.4.5",
