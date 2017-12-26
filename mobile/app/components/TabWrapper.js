@@ -1,5 +1,7 @@
 import React from 'react'
 import { colors } from './../themes/'
+import { ScrollableTab } from 'native-base'
+/*
 import ScrollableTabView, {
   DefaultTabBar,
 } from './../sporks/react-native-scrollable-tab-view'
@@ -17,7 +19,7 @@ export const TabWrapper = ({ children, handleChangeTab }) => (
           height: 60,
         }}
         underlineStyle={{ height: 100 }}
-        tabStyle={{ padding: 0 /* spacing between underline and bar */}}
+        tabStyle={{ padding: 0 }}
       />
     )}
     tabBarUnderlineStyle={{
@@ -32,4 +34,11 @@ export const TabWrapper = ({ children, handleChangeTab }) => (
   >
     {children}
   </ScrollableTabView>
+)
+*/
+export const TabWrapper = ({ children, handleChangeTab }) => (
+  <ScrollableTab>
+    { children }
+  </ScrollableTab>
+
 )
