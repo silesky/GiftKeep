@@ -14,7 +14,7 @@ import {
 
 import { hydrateAll } from './../actions'
 
-import { composeWithDevTools } from 'remote-redux-devtools'
+/*
 const composeEnhancers = composeWithDevTools({
   name: 'GiftKeep',
   port: 8080, // works in conjunction remotedev --hostname=localhost --port=8080
@@ -22,10 +22,11 @@ const composeEnhancers = composeWithDevTools({
   shouldRecordChanges: true, // need to manually click record changes, recording slows down app.
   actionsBlacklist: [ 'FRIEND_FORM_NAME_INPUT' ], // when I add a seccond item to this array, it doesn't work
 })
-
+*/
 export const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
+  applyMiddleware(thunk),
+  // composeEnhancers(applyMiddleware(thunk))
 )
 
 console.log('store created.')
@@ -51,6 +52,9 @@ export const hydrateFromAsyncStorage = () => {
   return getFromAsyncStorage('store').then(res => {
     const savedState = JSON.parse(res)
     store.dispatch(hydrateAll(savedState))
+  }).catch(e => {
+    console.log('async error caught', e)
+    store.dispatch(hydrateAll({}))
   })
 }
 
